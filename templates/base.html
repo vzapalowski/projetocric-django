@@ -1,0 +1,169 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>              
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1KVPSKL20C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1KVPSKL20C');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="{% static 'style/style-route.css'%}">
+
+  <link 
+    href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" 
+    rel="stylesheet"
+  >
+
+  <!-- MENU STYLES -->
+
+  <link 
+    rel="stylesheet" 
+    href="{% static 'style/menu/fonts/icomoon/style.css'%}"
+  >
+
+  <link 
+    rel="stylesheet" 
+    href="{% static 'style/menu/css/owl.carousel.min.css'%}"
+  >
+
+  <link 
+    rel="stylesheet" 
+    href="{% static 'style/menu/css/bootstrap.min.css'%}"
+  >
+
+  <link 
+    rel="stylesheet" 
+    href="{% static 'style/menu/css/style.css'%}"
+  >
+
+
+  <!-- BOOTSTRAP LINK -->
+
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" 
+    rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" 
+    crossorigin="anonymous"
+  >
+
+  <!-- INDEX STYLE  -->
+
+  <link 
+    rel="stylesheet" 
+    href="{% static 'style/style-index.css'%}"
+  >
+
+  <!-- LEAFLET LINK -->
+
+  <link
+    rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+    crossorigin="" 
+  >
+
+  <!-- IMPORT GOOGLEAPIS -->
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap");
+  </style>
+
+  <!-- FONTAWESOME SCRIPT -->
+
+  <script 
+    src="https://kit.fontawesome.com/d97d3ca1f3.js" 
+    crossorigin="anonymous"
+  ></script>
+
+  <!-- LEAFLET SCRIPT -->
+
+  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+    crossorigin=""
+  ></script>
+
+  <!-- MENU SCRIPTS -->
+
+  <script src="{% static 'style/menu/js/jquery-3.3.1.min.js'%}"></script>
+
+  <script src="{% static 'style/menu/js/popper.min.js'%}"></script>
+
+  <script src="{% static 'style/menu/js/bootstrap.min.js'%}"></script>
+
+  <script src="{% static 'style/menu/js/jquery.sticky.js'%}"></script>
+
+  <script src="{% static 'style/menu/js/main.js'%}"></script>
+
+  <script src="{% static 'js/routes/Polyline.encoded.js'%}"></script>
+
+  {%block 'styles'%}{%endblock%}
+
+  <title>Rota - CRIC</title>
+
+    </head>
+<body>
+
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+          <div class="site-mobile-menu-close mt-3">
+            <span class="icon-close2 js-menu-toggle"></span>
+          </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+      </div>
+    
+      <div class="site-navbar site-navbar-target js-sticky-header">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-2">
+              <h1 class="my-0 site-logo"><a href="index.html">CRIC</a></h1>
+            </div>
+            <div class="col-10">
+              <nav class="site-navigation text-right" role="navigation">
+                <div class="container">
+                  <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#"
+                      class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
+    
+                  <ul class="site-menu main-menu js-clone-nav d-none d-lg-block">
+    
+                    <li class="active">
+                      <a href="./themes/about.html" class="nav-link">Sobre</a>
+                    </li>
+    
+                    <li>
+                      <a href="./themes/security-manual.html" class="nav-link">Manual</a>
+                    </li>
+    
+                    <li>
+                      <a href="#cities" class="nav-link">Municípios</a>
+                    </li>
+    
+                    <li>
+                      <a href="./themes/contact.html" class="nav-link">Contato</a>
+                    </li>
+    
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    {%block 'conteudo'%}{%endblock%}
+
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
+    </script>
+</body>
+</html>

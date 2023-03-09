@@ -9,7 +9,7 @@ const dataRoutes = [
                 lng: -52.065229,
                 icon: markerIcons.shopping,
                 name: "Agropecuária GA",
-                image: "./../assets/images/photosMarkers/vale_verde/agropecuaria_ga.jpeg",
+                image: "../../static/images/photosMarkers/vale_verde/agropecuaria_ga.jpeg",
                 address: "RS244, Km 39 - Monte Alegre",
                 openingHours: "Seg à Sab: 07h às 12h e das 13h às 18h Dom: 07h às 11:45h",
                 phone: "(51) 998786480"
@@ -19,7 +19,7 @@ const dataRoutes = [
                 lng: -52.177155,
                 icon: markerIcons.hotel,
                 name: "Pousada Rural Recando Verde",
-                image: "./../assets/images/photosMarkers/vale_verde/pousada_rural_recando_verde.jpg",
+                image: "../../static/images/photosMarkers/vale_verde/pousada_rural_recando_verde.jpg",
                 address: "R. Arnaldo Roberto Seibert, 632 - Centro",
                 openingHours: "Horário mediante reserva",
                 phone: "(51) 98021-4471"
@@ -29,7 +29,7 @@ const dataRoutes = [
                 lng: -52.174603,
                 icon: markerIcons.food,
                 name: "Refeições da Leni",
-                image: "./../assets/images/photosMarkers/vale_verde/refeicoes_da_leni.jpg",
+                image: "../../static/images/photosMarkers/vale_verde/refeicoes_da_leni.jpg",
                 address: "R. Arnaldo Roberto Seibert, 1166 Centro",
                 openingHours: "Não informado",
                 phone: "(51) 9997-3225"
@@ -39,7 +39,7 @@ const dataRoutes = [
                 lng: -52.185406,
                 icon: markerIcons.hotel,
                 name: "Pousada e Restaurante do Alemão",
-                image: "./../assets/images/photosMarkers/vale_verde/pousada_e_restaurante_do_alemao.jpeg",
+                image: "../../static/images/photosMarkers/vale_verde/pousada_e_restaurante_do_alemao.jpeg",
                 address: "R. Assis Brasil, 237 - Centro",
                 openingHours: "Seg à Sab: 06h às 13:30 e das 18h às 19:30h",
                 phone: "(51) 3655-9032, (51) 99609-1100 ou (51) 99790-4165"
@@ -49,7 +49,7 @@ const dataRoutes = [
                 lng: -52.177448,
                 icon: markerIcons.shopping,
                 name: "Mais Saúde e Flor Casa de Produtos Naturais e Flores",
-                image: "./../assets/images/photosMarkers/vale_verde/mais_saude_e_flor.jpeg",
+                image: "../../static/images/photosMarkers/vale_verde/mais_saude_e_flor.jpeg",
                 address: "ERS 405 Km 01, 1732 - Centro",
                 openingHours: "Seg à sexta: 8h às 11:30h e das 14h às 18h Sab: 08h às 12h",
                 phone: "(51) 99870-9536"
@@ -59,7 +59,7 @@ const dataRoutes = [
                 lng: -52.187810,
                 icon: markerIcons.hotel,
                 name: "Refúgio Montevale",
-                image: "./../assets/images/photosMarkers/vale_verde/refugio_montevale.jpg",
+                image: "../../static/images/photosMarkers/vale_verde/refugio_montevale.jpg",
                 address: "Potreirinho - Interior",
                 openingHours: "Horário mediante reserva",
                 phone: "(51) 98114-5302"
@@ -69,7 +69,7 @@ const dataRoutes = [
                 lng: -52.186365,
                 icon: markerIcons.food,
                 name: "Lancheria e Choperia Complexo",
-                image: "./../assets/images/photosMarkers/vale_verde/lancheria_e_choperia_complexo.jpeg",
+                image: "../../static/images/photosMarkers/vale_verde/lancheria_e_choperia_complexo.jpeg",
                 address: "R. Assis Brasil, 358 - Centro",
                 openingHours: "Seg, Qua e Qui: 14h às 22h Ter: 18h às 22h Sex, Sab e Dom: 18h às 23h",
                 phone: "(51) 99712-1123 ou  (51) 99800-7874"
@@ -99,7 +99,7 @@ const dataRoutes = [
                 lng: -52.186899,
                 icon: markerIcons.food,
                 name: "Brut's Hamburgueria",
-                image: "./../assets/images/photosMarkers/vale_verde/brutus.jpeg",
+                image: "../../static/images/photosMarkers/vale_verde/brutus.jpeg",
                 address: "R. Assis Brasil, 216 - Centro",
                 openingHours: "Quar à Dom: 19h às 23h",
                 phone: "(51) 99574-6332"
@@ -109,7 +109,7 @@ const dataRoutes = [
                 lng: -52.184044,
                 icon: markerIcons.phamacy,
                 name: "Drogaria Mais Saúde",
-                image: "./../assets/images/photosMarkers/vale_verde/drogaria_mais_saude.jpeg",
+                image: "../../static/images/photosMarkers/vale_verde/drogaria_mais_saude.jpeg",
                 address: "R. Alfredo Kirst, 133 - Centro",
                 openingHours: "Seg à Sex: 8h às 12h e das 13:30h às 18h Sab: 8h às 12h",
                 phone: "(51) 99758-4082"

@@ -1,0 +1,134 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{%block 'styles'%}
+    <link rel="stylesheet" href="{% static 'cities/charqueadas/style/style-charqueadas.css'%}">
+{%endblock%}
+
+{%block 'conteudo'%}
+
+<div
+    id="carouselExampleFade"
+    class="carousel slide carousel-fade m-auto col-md-13"
+    data-bs-ride="carousel"
+  >
+    <div class="carousel-inner background1">
+      <div class="carousel-item active">
+        <div class="carousel-caption d-md-block">
+          <h5> Charqueadas </h5>
+        </div>
+      </div>
+
+      <div class="carousel-item background2">
+        <div class="carousel-caption d-md-block">
+          <h5> Charqueadas </h5>
+        </div>
+      </div>
+
+      <div class="carousel-item background3">
+        <div class="carousel-caption d-md-block">
+          <h5> Charqueadas </h5>
+        </div>
+      </div>
+    </div>
+
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleFade"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleFade"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <div class="container">
+    <div class="gridlayout">
+      <!-- grid -->
+      <div>
+        <section class="position">
+          <div id="map">
+          </div>
+        </section>
+      </div>
+
+      <div>
+        <span> dados da rota</span>
+        <ul>
+          <li>Quilometragem total: 8.5Km</li>
+          <li>Elevação total: 127m</li>
+          <li>Tipo de Percurso: Asfalto; Estrada de Chão;</li>
+          <li>Grau de dificuldade: 30-50%</li>
+          <li>Cidades interligadas: São Jerônimo, Arroio dos Ratos</li>
+        </ul>
+      </div>
+    </div>
+
+    <div
+      id="carouselExampleFade1"
+      class="carousel slide carousel-fade m-auto col-md-13"
+      data-bs-ride="carousel"
+      >
+      <div class="carousel-inner background1">
+        <div class="carousel-item active">
+          <div class="carousel-caption d-md-block">
+            <h5>Charqueadas</h5>
+          </div>
+        </div>
+
+        <div class="carousel-item background2">
+          <div class="carousel-caption d-md-block">
+            <h5>Charqueadas</h5>
+          </div>
+        </div>
+
+        <div class="carousel-item background3">
+          <div class="carousel-caption d-md-block">
+            <h5>Charqueadas</h5>
+          </div>
+        </div>
+      </div>
+
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleFade1"
+        data-bs-slide="prev"
+        >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleFade1"
+        data-bs-slide="next"
+        >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+
+    <script src="{% static 'js/routes/storage.js'%}"></script>
+    <script src="{% static 'js/routes/verify.js'%}"></script>
+    <script src="{% static 'js/routes/data.js'%}"></script>
+    <script src="{% static 'js/routes/routes.js'%}"></script>
+    <script src="{% static 'js/routes/map.js'%}"></script>
+    <script src="{% static 'js/routes/marker.js'%}"></script>
+    <script src="{% static 'js/routes/charqueadas/route.js'%}"></script>
+    <script src="{% static 'js/routes/main.js'%}"></script>
+
+{%endblock%}

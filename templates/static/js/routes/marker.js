@@ -1,13 +1,13 @@
 
 
 const markerIcons = {
-    food: "./../assets/iconsMarkers/restaurant.svg",
-    gas_station: "./../assets/iconsMarkers/gas_station.svg",
-    repair: "./../assets/iconsMarkers/repair.svg",
-    hotel: "./../assets/iconsMarkers/hotel.svg",
-    hospital: "./../assets/iconsMarkers/hospital.svg",
-    tourist_spots: "./../assets/iconsMarkers/tourist_spots.svg",
-    phamacy: "./../assets/iconsMarkers/pharmacy.svg",
-    shopping: "./../assets/iconsMarkers/shopping.svg",
-    drink: "./../assets/iconsMarkers/drink.svg"
+    food: "../../static/iconsMarkers/restaurant.svg",
+    gas_station: "../../static/iconsMarkers/gas_station.svg",
+    repair: "../../static/iconsMarkers/repair.svg",
+    hotel: "../../static/iconsMarkers/hotel.svg",
+    hospital: "../../static/iconsMarkers/hospital.svg",
+    tourist_spots: "../../static/iconsMarkers/tourist_spots.svg",
+    phamacy: "../../static/iconsMarkers/pharmacy.svg",
+    shopping: "../../static/iconsMarkers/shopping.svg",
+    drink: "../../static/iconsMarkers/drink.svg"
 }

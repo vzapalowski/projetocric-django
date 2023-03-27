@@ -6,10 +6,10 @@ import requests, json
 class Route(models.Model):
     name = models.CharField(max_length=250)
     id_route = models.CharField(max_length=50)
-    polilyne = models.CharField(max_length=200, blank=True, null=True)
+    polilyne = models.CharField(max_length=1000, blank=True, null=True)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.id_route
 
     def get_routes(self):
         data = Route.objects.all()
@@ -37,21 +37,22 @@ class Api:
         header = {'Authorization': 'Bearer ' + self.getAccessToken()}
         param = {'per_page': 200, 'page': 1}
         my_dataset = requests.get(self.route_url+idRoute, headers=header, params=param).json()
-        return my_dataset['id_str']
+        return my_dataset['map']['summary_polyline']
 
 
-api = Api()
-# print(api.getRoute('3007668662019916668'))
+""" THIS IS FOR TESTS """
 
-arr_polilyne = []
+# api = Api()
+# route = Route()
 
-route = Route()
+# # # print(api.getRoute('3007668662019916668'))
 
-print(route.get_routes())
-
-for route in route.get_routes():
-    apiResult = api.getRoute(route.id_route)
-    print(apiResult)
-    # route.polilyne = api.getRoute(route.id_route)
-    # route.save()
-    # print('Salvo')
+# # arr_polilyne = []
+# # print(route.get_routes())
+# # print(route.get_routes())
+# for route in route.get_routes():
+#     # print(route.polilyne)
+#     apiResult = api.getRoute(route.id_route)
+#     route.polilyne = api.getRoute(route.id_route)
+#     route.save()
+#     print('Salvo')

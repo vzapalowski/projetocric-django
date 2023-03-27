@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'cities.apps.CitiesConfig',
     'about.apps.AboutConfig',
     'manual.apps.ManualConfig',
-    'contact.apps.ContactConfig'
+    'contact.apps.ContactConfig',
+    'routes'
 ]
 
 MIDDLEWARE = [
@@ -81,8 +82,12 @@ WSGI_APPLICATION = 'projetocric.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'rotacric',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'USER': 'root',
+        'PASSWORD': 'hungrygames',
     }
 }
 

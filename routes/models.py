@@ -5,7 +5,7 @@ import requests, json
 
 class Route(models.Model):
     name = models.CharField(max_length=250)
-    id_route = models.CharField(max_length=50)
+    id_route = models.CharField(max_length=50, unique=True)
     polilyne = models.CharField(max_length=1000, blank=True, null=True)
 
     # def __str__(self):

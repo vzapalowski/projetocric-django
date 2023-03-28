@@ -15,6 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+from routes.api import viewsets as routeviewsets
+from .viewsets import RouteViewSet
+
+route = routers.DefaultRouter()
+
+route.register(r'route', RouteViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,5 +29,7 @@ urlpatterns = [
     path('cidades/', include('cities.urls')),
     path('sobre/', include('about.urls')),
     path('manual/', include('manual.urls')),
-    path('contato/', include('contact.urls'))
+    path('contato/', include('contact.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/', include(route.urls))
 ]

@@ -1,6 +1,6 @@
 from django.db import models
-from django.core.serializers.json import DjangoJSONEncoder
-import requests, json
+from django.core.exceptions import ValidationError
+import requests
 
 
 class Route(models.Model):
@@ -8,8 +8,9 @@ class Route(models.Model):
     id_route = models.CharField(max_length=50, unique=True)
     polilyne = models.CharField(max_length=1000, blank=True, null=True)
 
-    # def __str__(self):
-    #     return self.id_route
+    def clean(self):
+        if self.id_route:
+            raise ValidationError("Testando erdwdwadro")
 
     def get_routes(self):
         data = Route.objects.all()
@@ -48,10 +49,9 @@ class Api:
 # # # print(api.getRoute('3007668662019916668'))
 
 # # arr_polilyne = []
-# # print(route.get_routes())
-# # print(route.get_routes())
+# print(route.get_routes())
 # for route in route.get_routes():
-#     # print(route.polilyne)
+#     print(route.id)
 #     apiResult = api.getRoute(route.id_route)
 #     route.polilyne = api.getRoute(route.id_route)
 #     route.save()

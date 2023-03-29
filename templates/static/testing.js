@@ -4,8 +4,14 @@ const api = () => {
     fetch(url)
     .then(res => res.json())
     .then(rotas => {
-        console.log(rotas)
+        escrevendo(rotas)
     })
+}
+
+const escrevendo = (rotas) => {
+    rotas.forEach(e => {
+        console.log(e.id)
+    });
 }
 
 api()

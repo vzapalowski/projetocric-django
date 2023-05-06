@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link
+    rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+    crossorigin="" 
+  >
+
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+    crossorigin=""
+  ></script>
+
+    <title>Página de eventos</title>
+</head>
+<body>
+    <p>{{ event.description }}</p>
+    {% for route in event.routes.all %}
+        <p>{{ route }}</p>
+    {% endfor %}
+
+    {% for image in event.images.all %}
+        <img src=" {{ image.image.url }} " style="width: 300px; height: 300px;">
+    {% endfor %}
+
+
+    <div id="map" style="width: 600px; height: 900px;"></div>
+
+    {% comment %} <h1>Enrollment Form</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="full_name">Full Name:</label>
+        <input type="text" id="full_name" name="full_name"><br>
+
+        <label for="date_of_birth">Date of Birth:</label>
+        <input type="date" id="date_of_birth" name="date_of_birth"><br>
+
+        <label for="bond_choice">Bond:</label>
+        <select id="bond_choice" name="bond_choice">
+            {% for bond_choice in bond_choices %}
+                <option value="{{ bond_choice.id }}">{{ bond_choice.name }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="how_knew">How did you hear about us?:</label>
+        <input type="text" id="how_knew" name="how_knew"><br>
+
+        <label for="rg">RG:</label>
+        <input type="text" id="rg" name="rg"><br>
+
+        <label for="route">Route:</label>
+        <input type="text" id="route" name="route"><br>
+
+        <button type="submit">Submit</button>
+    </form>  {% endcomment %}
+
+    <h1>Enrollment Form</h1>
+    <form id="enrollment-form" method="POST" action="{% url 'events:enrollment' event_id=event.pk %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Enroll</button>
+    </form>
+
+
+    <script src="{% static 'js/events/data.js'%}" type="module" async></script>
+    <script src="{% static 'js/map/Polyline.encoded.js' %}"></script>
+    <script src="{% static 'js/Helpers/verify_form.js' %}"></script>
+</body>
+</html>

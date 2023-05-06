@@ -1,0 +1,145 @@
+{%extends 'base.html'%}
+{% load static %}
+
+
+{%block 'content'%}
+
+<section class="image-main">
+    <div class="back-img">
+      <h1>Rota CRIC</h1>
+      <p>O principal objetico deste projeto é fomentar o cicloturismo na região carbonífera através de meio de
+        comunicação modernos aumentando a visibilidade e utilização das rotas de Cicloturismo na Região Imperial
+        Carbonífera.</p>
+    </div>
+  </section>
+
+  <section class="container-map">
+    <div class="title">
+      <h1>Conheça a nossa rota!</h1>
+    </div>
+    <div id="map">
+    </div>
+  </section>
+
+  <section class="container-legend">
+    <div class="legend">
+      <ul>
+        <li>
+          <img src="{% static 'iconsMarkers/drink.svg'%}" alt="Ícone de uma bebida">
+          <span>Depósito de bebidas</span>
+        </li>
+        <li>
+          <img src="{% static 'iconsMarkers/gas_station.svg'%}" alt="Ícone de um posto de gasolina">
+          <span>Posto de gasolina</span>
+        </li>
+        <li>
+          <img src="{% static 'iconsMarkers/hospital.svg'%}" alt="Ícone de um hospital">
+          <span>Hospital/Posto de saúde</span>
+        </li>
+      </ul>
+
+      <ul>
+        <li>
+          <img src="{% static 'iconsMarkers/hotel.svg'%}" alt="Ícone de um hotel">
+          <span>Hospedagem</span>
+        </li>
+        <li>
+          <img src="{% static 'iconsMarkers/pharmacy.svg'%}" alt="Ícone de uma farmácia">
+          <span>Farmácia</span>
+        </li>
+        <li>
+          <img src="{% static 'iconsMarkers/repair.svg'%}" alt="Ícone de uma mecânica">
+          <span>Serviços de reparo</span>
+        </li>
+      </ul>
+
+      <ul>
+        <li>
+          <img src="{% static 'iconsMarkers/restaurant.svg'%}" alt="Ícone de um restaurante">
+          <span>Serviços de alimentação</span>
+        </li>
+        <li>
+          <img src="{% static 'iconsMarkers/shopping.svg'%}" alt="Ícone de uma loja">
+          <span>Serviços de mercados, lojas, etc</span>
+        </li>
+        <li>
+          <img src="{% static 'iconsMarkers/tourist_spots.svg'%}" alt="Ícone de ponto turístico">
+          <span>Pontos turísticos</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="container-cities" id="cities">
+    <div class="container-inside">
+
+    {% for city in homes %}
+      <div class="container-city" id="arroio-dos-ratos" style="background-image: url('{{ city.city.banner_image.url }}');">
+        <div class="content">
+          <img src="{% static 'images/images-cities/bike-cities-icon.png'%}" alt="Ícone de uma bicicleta" class="img-logo">
+
+          <div class="city-name">
+            {% for letter in city.city.name %}
+                <span>{{ letter }}</span>
+            {% endfor %}
+          </div>
+
+          <a href="#">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z"
+                stroke="white" stroke-width="2" stroke-miterlimit="10" />
+              <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="content-img">
+          <div class="img">
+          </div>
+        </div>
+
+        <div class="content-infos">
+
+          <ul>
+            <li>Info01</li>
+            <li>Info02</li>
+            <li>Info03</li>
+            <li>Info04</li>
+            <li>Info05</li>
+          </ul>
+
+          <p>Saiba mais
+            <a href="{% url 'city_detail' pk=city.city.id %}">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z"
+                  stroke="white" stroke-width="2" stroke-miterlimit="10" />
+                <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+
+            </a>
+          </p>
+        </div>
+      </div>
+
+    {% endfor %}
+    </div>
+  </section>
+
+  <script src="{% static 'js/home/data.js'%}" type="module" async></script>
+  <script src="{% static 'js/map/Polyline.encoded.js'%}"></script>
+
+  <!-- <script src="{% static 'testing.js'%}"></script>
+  <script src="{% static 'js/routes/storage.js'%}"></script>
+  <script src="{% static 'js/routes/verify.js'%}"></script>
+  <script src="{% static 'js/routes/data.js'%}"></script>
+  <script src="{% static 'js/routes/routes.js'%}"></script>
+  <script src="{% static 'js/routes/map.js'%}"></script>
+  <script src="{% static 'js/routes/marker.js'%}"></script>
+  <script src="{% static 'js/routes/index/route.js'%}"></script>
+  <script src="{% static 'js/routes/main.js'%}"></script> -->
+
+{%endblock%}

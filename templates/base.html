@@ -23,26 +23,9 @@
     rel="stylesheet"
   >
 
-  <!-- MENU STYLES -->
-
-  <link 
+  <link
     rel="stylesheet" 
-    href="{% static 'style/menu/fonts/icomoon/style.css'%}"
-  >
-
-  <link 
-    rel="stylesheet" 
-    href="{% static 'style/menu/css/owl.carousel.min.css'%}"
-  >
-
-  <link 
-    rel="stylesheet" 
-    href="{% static 'style/menu/css/bootstrap.min.css'%}"
-  >
-
-  <link 
-    rel="stylesheet" 
-    href="{% static 'style/menu/css/style.css'%}"
+    href="https://unpkg.com/aos@next/dist/aos.css"
   >
 
 
@@ -57,10 +40,20 @@
 
   <!-- INDEX STYLE  -->
 
+  {% comment %} Troquei o link do Index antigo para o index_r {% endcomment %}
+
   <link 
     rel="stylesheet" 
-    href="{% static 'style/style-index.css'%}"
+    href="{% static 'style/style-index-r.css'%}"
   >
+
+  <!-- No link abaixo, há inserido o css dos conteudos "sobre" e "manual" -->
+
+  <link 
+    rel="stylesheet" 
+    href="{% static 'manual/style/style-manual.css'%}"
+  > 
+
 
   <!-- LEAFLET LINK -->
 
@@ -90,17 +83,7 @@
     crossorigin=""
   ></script>
 
-  <!-- MENU SCRIPTS -->
-
-  <script src="{% static 'style/menu/js/jquery-3.3.1.min.js'%}"></script>
-
-  <script src="{% static 'style/menu/js/popper.min.js'%}"></script>
-
-  <script src="{% static 'style/menu/js/bootstrap.min.js'%}"></script>
-
-  <script src="{% static 'style/menu/js/jquery.sticky.js'%}"></script>
-
-  <script src="{% static 'style/menu/js/main.js'%}"></script>
+  <script src="{% static 'js/routes/Polyline.encoded.js'%}"></script>
 
 
   {%block 'styles'%}{%endblock%}
@@ -110,7 +93,7 @@
     </head>
 <body class="background">
 
-    <div class="site-mobile-menu site-navbar-target">
+    {% comment %} <div class="site-mobile-menu site-navbar-target">
         <div class="site-mobile-menu-header">
           <div class="site-mobile-menu-close mt-3">
             <span class="icon-close2 js-menu-toggle"></span>
@@ -157,7 +140,7 @@
         </div>
       </div>
 
-    {%block 'content'%}{%endblock%}
+    
 
     <footer>
       <div class="box01 box">
@@ -268,12 +251,18 @@
           </ul>
         </div>
       </div>
-    </footer>
+    </footer> {% endcomment %}
+
+    {%block 'content'%}{%endblock%}
 
 
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
+    </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
     </script>
 </body>
 </html>

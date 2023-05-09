@@ -1,4 +1,6 @@
+/*
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+
 
 * {
   margin: 0;
@@ -21,6 +23,8 @@
   font-size: 62.5%;
   font-family: "Josefin Sans", sans-serif;
 }
+*/
+
 
 /* nav ul li:nth-child(2) {
   border-bottom: 1px solid white;
@@ -38,7 +42,7 @@
     width: 1px;
     height: 16rem;
     border: 0;
-    border-left: 1px solid #b70000;
+    border-left: 1px solid #273273;
   }
 
   .rule1 {
@@ -51,8 +55,10 @@
   }
 
   .img-rule1 {
-    width: 14rem;
-    height: 14rem;
+    /* width: 14rem;
+    height: 14rem; */
+    width: 160px;
+    height: 160px;
     background-image: url(../../images/security-svg/trash.svg);
     background-repeat: no-repeat;
     background-position: center;
@@ -157,6 +163,41 @@
     font-size: medium;
     max-width: 500px;
     text-align: justify;
+  }
+
+  /*Pagina sobre*/
+
+  .logo-if {
+    margin-bottom: 1rem;
+    width: 160px;
+    height: 160px;
+    background-image: url(../../images/content-about/if.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10rem;
+  }
+
+  .img-corede {
+    /* margin-bottom: 3rem; */
+    width: 14rem;
+    height: 14rem;
+    background-image: url(../../images/content-about/corede2.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    /* background-size: 3.5rem; */
+  }
+
+  .logo-about {
+    width: 160px;
+    height: 160px;
+    background-image: url(../../images/content-about/icon-about.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 4rem;
+    background-color: var(--primary-color);
+    border-radius: 10rem;
   }
 }
 
@@ -168,7 +209,7 @@
     width: 1px;
     height: 14rem;
     border: 0;
-    border-left: 1px solid #b70000;
+    border-left: 1px solid #273273;
   }
 
   .rule1 {
@@ -287,6 +328,39 @@
     font-size: medium;
     max-width: 500px;
     text-align: justify;
+  }
+
+  .logo-if {
+    margin-bottom: 1rem;
+    width: 160px;
+    height: 160px;
+    background-image: url(../../images/content-about/if.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10rem;
+  }
+
+  .logo-about {
+    width: 160px;
+    height: 160px;
+    background-image: url(../../images/content-about/icon-about.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 4rem;
+    background-color: var(--primary-color);
+    border-radius: 10rem;
+  }
+
+  .img-corede {
+    /* margin-bottom: 3rem; */
+    width: 14rem;
+    height: 14rem;
+    background-image: url(../../images/content-about/corede2.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    /* background-size: 3.5rem; */
   }
 }
 
@@ -328,7 +402,7 @@
     margin-bottom: 2rem;
     width: 90%;
     border: 0;
-    border-top: 1px solid #b70000;
+    border-top: 1px solid #273273;
   }
 
   /***********************************/
@@ -416,6 +490,41 @@
     font-size: medium;
     max-width: 500px;
     text-align: center;
+  }
+
+  /* Parte sobre */
+
+  .logo-about {
+    width: 14rem;
+    height: 14rem;
+    background-image: url(../../images/content-about/icon-about.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 4rem;
+    background-color: var(--primary-color);
+    border-radius: 10rem;
+  }
+
+  .img-corede {
+    margin-bottom: 3rem;
+    width: 12rem;
+    height: 12rem;
+    background-image: url(../../images/content-about/corede2.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    /* background-size: 3.5rem; */
+  }
+
+  .logo-if {
+    margin-bottom: 1rem;
+    width: 14rem;
+    height: 14rem;
+    background-image: url(../../images/content-about/if.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10rem;
   }
 }
 
@@ -430,7 +539,7 @@
     margin-bottom: 2rem;
     width: 90%;
     border: 0;
-    border-top: 1px solid #b70000;
+    border-top: 1px solid #273273;
   }
 
   .rule1 {
@@ -545,6 +654,39 @@
     font-size: medium;
     max-width: 300px;
     text-align: center;
+  }
+
+  .logo-about {
+    width: 9rem;
+    height: 9rem;
+    background-image: url(../../images/content-about/icon-about.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 3.5rem;
+    background-color: var(--primary-color);
+    border-radius: 10rem;
+  }
+
+  .img-corede {
+    margin-bottom: 3rem;
+    width: 10rem;
+    height: 10rem;
+    background-image: url(../../images/content-about/corede2.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    /* background-size: 3.5rem; */
+  }
+
+  .logo-if {
+    margin-bottom: 1rem;
+    width: 10rem;
+    height: 10rem;
+    background-image: url(../../images/content-about/if.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10rem;
   }
 }
 
@@ -559,7 +701,7 @@
     margin-bottom: 2rem;
     width: 90%;
     border: 0;
-    border-top: 1px solid #b70000;
+    border-top: 1px solid #273273;
   }
 
   .rule1 {
@@ -674,5 +816,39 @@
     font-size: medium;
     max-width: 300px;
     text-align: center;
+  }
+
+  /* Parte da Parte Sobre */
+  
+  .logo-about {
+    width: 90px;
+    height: 90px;
+    background-image: url(../../images/content-about/icon-about.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 3.5rem;
+    background-color: var(--primary-color);
+    border-radius: 10rem;
+  }
+
+  .img-corede {
+    margin-bottom: 3rem;
+    width: 9rem;
+    height: 9rem;
+    background-image: url(../../images/content-about/corede2.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    /* background-size: 3.5rem; */
+  }
+  .logo-if {
+    margin-bottom: 1rem;
+    width: 10rem;
+    height: 10rem;
+    background-image: url(../../images/content-about/if.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10rem;
   }
 }

@@ -4,7 +4,7 @@ from home.models import CityManager
 from cities.models import City
 
 class PostHome(ListView):
-    template_name = 'home/index_r.html'
+    template_name = 'home/index.html'
     model = City
 
     def get_queryset(self):

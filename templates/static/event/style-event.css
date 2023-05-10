@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+/* body{
+    padding: 0%;
+} */
+
+.bg-image{
+    background-image: url(https://initiate.ahttps://initiate.alphacoders.com/images/125/cropped-1920-500-1257701.jpg?541lphacoders.com/images/125/cropped-1920-500-1257701.jpg?8646);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.title-event {
+    margin-top: 10rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-align: justify;
+}
+
+.description-event {
+    text-align: justify;
+    color: var(--neutral-black-100);
+}
+
+.img-event {
+    height: 20rem;
+    width: 20rem;
+    object-fit: cover;
+}
+
+.img-animation :hover{
+    opacity: 0.5;
+    transition: 0.8s;
+}

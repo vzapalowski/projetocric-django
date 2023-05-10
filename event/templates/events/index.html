@@ -4,7 +4,7 @@
 
 {%block 'content'%}
 
-<div class="bg-image" style="height: 25rem;">
+<div class="bg-image" style="height: 40rem;">
     
 </div>
 
@@ -76,16 +76,36 @@
 
         <!-- Images with Modal -->
 
-        <div class="col-10 m-auto row row-cols-1 row-cols-md-3 g-4 mt-1" style="margin-top: 5rem;"  data-aos="fade-up">
+        <div class="container mt-5">
+            <div class="row gx-2 gy-3 content-images">
+                {% for image in event.images.all %}
+                <div class="col-lg-4 col-md-3">
+                    <img src=" {{ image.image.url }} "
+                     class="rounded img-event" alt="...">
+                </div>
+                {% endfor %}
+                <!-- <div class="col-lg col-md">
+                    <p class="p-5 bg-primary">Mateus</p>
+                </div>
+                <div class="col-lg col-md">
+                    <p class="p-5 bg-warning">Regis</p>
+                </div>
+                <div class="col-lg col-md">
+                    <p class="p-5 bg-danger">Marcelo</p>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- <div class="col-10 m-auto row row-cols-1 row-cols-md-3 g-4 mt-1" style="margin-top: 5rem;"  data-aos="fade-up"> -->
             <!-- ---------------------- -->                   
             {% for image in event.images.all %}
-            <div class="col">
+            <!-- <div class="col">
                 <a href="#" class="img-animation" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     <img src=" {{ image.image.url }} "
                      class="rounded float-start img-event mt-3" alt="...">
-                </a>
+                </a> -->
                 <!-- Modal -->
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -99,10 +119,10 @@
                     </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             {% endfor %}
 
-        </div>
+        <!-- </div> -->
 
         <h2 id="map" class="mb-5 fw-bold topic-color" style="margin-top: 10rem;">Mapa das Rotas</h2>
 

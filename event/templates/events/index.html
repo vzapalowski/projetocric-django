@@ -4,17 +4,15 @@
 
 {%block 'content'%}
 
-<div class="bg-image" style="height: 40rem;">
-    
-</div>
+<div class="bg-image"></div>
 
-<div class="container-fluid text-center">
+<div class="container-fluid text-center background">
 
     <!-- Navigation -->
     
     <div class="d-flex align-items-center fixed-top col-lx-9 mx-auto mt-5 nav-bar-rotacric nav-t-5">
-        <div class="flex-shrink-0 col-lg-1 col-3 logo-rotacric rounded-circle ms-5">
-          <img class="img-fluid" src="{% static 'images/logos/4.png'%}" alt="...">
+        <div class="flex-shrink-0 col-lg-1 logo-rotacric rounded-circle ms-5">
+          <img class="img-fluid img-cric" src="{% static 'images/logos/4.png'%}" alt="...">
         </div>
         <div class="flex-grow-1 me-5 ms-3">
             <nav class="navbar navbar-expand-md mb-0 rounded-pill">
@@ -61,144 +59,133 @@
         </div>
     </div>
 
-    <div class="background text-center" style="height: 100rem;">
-        <div class="row justify-content-center">
+    <div class="row justify-content-center">
 
-        <!-- Title and Descripiton -->
+    <!-- Title and Descripiton -->
 
-            <div class="container col-10">
-                <h2 class="title-event"  data-aos="fade-up">Aventuras em Charqueadas com Minha Magrela</h2>
-                <p class="description-event fs-5 mt-5"  data-aos="fade-up">
-                    {{ event.description }}
-                </p>
-            </div>
+        <div class="container col-10">
+            <h2 class="title-event"  data-aos="fade-up">Aventuras em Charqueadas com Minha Magrela</h2>
+            <p class="description-event fs-5 mt-5"  data-aos="fade-up">
+                {{ event.description }}
+            </p>
         </div>
+    </div>
 
-        <!-- Images with Modal -->
+    <!-- Images with Modal -->
 
-        <div class="container mt-5">
-            <div class="row gx-2 gy-3 content-images">
-                {% for image in event.images.all %}
-                <div class="col-lg-4 col-md-3">
-                    <img src=" {{ image.image.url }} "
-                     class="rounded img-event" alt="...">
-                </div>
-                {% endfor %}
-                <!-- <div class="col-lg col-md">
-                    <p class="p-5 bg-primary">Mateus</p>
-                </div>
-                <div class="col-lg col-md">
-                    <p class="p-5 bg-warning">Regis</p>
-                </div>
-                <div class="col-lg col-md">
-                    <p class="p-5 bg-danger">Marcelo</p>
-                </div> -->
-            </div>
-        </div>
-
-        <!-- <div class="col-10 m-auto row row-cols-1 row-cols-md-3 g-4 mt-1" style="margin-top: 5rem;"  data-aos="fade-up"> -->
-            <!-- ---------------------- -->                   
+    <div class="container mt-5">
+        <div class="row gx-2 gy-3 content-images">
             {% for image in event.images.all %}
-            <!-- <div class="col">
+            <div class="col-lg-4 col-md-3">
                 <a href="#" class="img-animation" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     <img src=" {{ image.image.url }} "
-                     class="rounded float-start img-event mt-3" alt="...">
-                </a> -->
-                <!-- Modal -->
-                <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
+                    class="rounded img-event" alt="..." data-aos="fade-up" data-bs-target="#staticBackdrop">
+                </a> 
+
+            </div>
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Titulo da Foto</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <img src=" {{ image.image.url }} "
                              class="rounded img-fluid" alt="...">
                         </div>
                     </div>
-                    </div>
                 </div>
-            </div> -->
-            {% endfor %}
-
-        <!-- </div> -->
-
-        <h2 id="map" class="mb-5 fw-bold topic-color" style="margin-top: 10rem;">Mapa das Rotas</h2>
-
-        <div class="mt-3 bg-secondary" style="height: 25rem;" data-aos="fade-up"></div>
-
-        <!-- Formulario -->
-
-        <div class="container mx-auto mb-5 col-10 align-items-center">
-            <h2 class="title-event text-center"  data-aos="fade-up">Formulário para Inscrição ao Evento</h2>
-            <form class="bg-light px-5 py-5 col mt-5" method="post" data-aos="fade-up">
-                {% csrf_token %}
-                <div class="input-group mb-3">
-                    <!-- Name -->
-                    <input type="text" id="full_name" name="full_name" class="form-control" placeholder="Nome Completo" aria-label="Username" aria-describedby="basic-addon1">
-                  </div>
-                  <div class="input-group mb-3">
-                    <!-- RG -->
-                    <input type="text" id="rg" name="rg" class="form-control me-2" placeholder="Registro Geral" aria-label="RG">
-                    <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                    <!-- Date born -->
-                    <input type="date" id="date_of_birth" name="date_of_birth" class="form-control" placeholder="Data de Nascimento" aria-label="Data de nascimento">
-                  </div>
-                  <!-- Bond Choice -->
-                  <select class="form-select mb-3" aria-label="Default select example">
-                    <option selected>Bonde Choice</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                  <!-- Routes -->
-                  <select class="form-select mb-3" aria-label="Default select example">
-                    <option selected>Routes</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                  <!-- How Knew? -->
-                  <div class="input-group">
-                    <span type="text" id="how_knew" name="how_knew" class="input-group-text">Como soube do passeio?</span>
-                    <textarea class="form-control" aria-label="With textarea"></textarea>
-                  </div>
-                  <button class="btn-dark" type="submit">Submit</button>
-              </form>
-<!-- 
-              <h1>Enrollment Form</h1>
-              <form id="enrollment-form" method="POST" action="{% url 'events:enrollment'  event_id=event.pk %}">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Enroll</button>
-              </form> -->
+            </div>
+                {% endfor %}
         </div>
-
-        <!-- <footer class="bg-secondary mt-5" style="height: 40rem;">
-
-        </footer> -->
     </div>
 </div>
 
+        <!-- Mapa de Rotas do Evento -->
+
+<div class="text-center">
+    <h2 id="map" class="mb-5 fw-bold topic-color text-" style="margin-top: 10rem;" data-aos="fade-up">
+        Mapa das Rotas
+    </h2>
+
+    <div class="mt-3 bg-secondary" style="height: 25rem;" data-aos="fade-up"></div>
+</div>
+<div class="container-fluid text-center background">
+        
+        <!-- Formulario -->
+
+    <div class="container mx-auto mb-5 col-10 align-items-center">
+        <h2 class="title-event text-center"  data-aos="fade-up">Formulário para Inscrição ao Evento</h2>
+        <form class="bg-light px-5 py-5 col mt-5" method="post" data-aos="fade-up">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <!-- Name -->
+                <span class="input-group-text"><i class="fa-solid fa-user"></i></span>                  
+                <input type="text" id="full_name" name="full_name" class="form-control" placeholder="Nome Completo" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <!-- RG -->
+                <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>                  
+                <input type="text" id="rg" name="rg" class="form-control" placeholder="Registro Geral" aria-label="RG">
+            </div>
+            <div class="input-group mb-3">
+                <!-- Date born -->
+                <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>                  
+                <input type="date" id="date_of_birth" name="date_of_birth" class="form-control" placeholder="Data de Nascimento" aria-label="Data de nascimento">            
+            </div>
+                <!-- Bond Choice -->
+            <select class="form-select mb-3" aria-label="Default select example" placeholder="Categoria">
+                <option disabled selected>Categoria</option>
+                {% for bond_choice in bond_choices %}
+                <option selected>{{ bond_choice.name }}</option>
+                {% endfor %}
+            </select>
+                <!-- Routes -->
+                
+            <select class="form-select mb-3" aria-label="Default select example">
+                <option  disabled selected>Routes</option>
+                {% for bond_choice in bond_choices %}
+                <option selected>{{ bond_choice.name }}</option>
+                {% endfor %}
+            </select>
+                <!-- How Knew? -->
+            <select class="form-select mb-3" aria-label="Default select example">
+                <option disabled selected>Como soube?</option>
+                {% for bond_choice in bond_choices %}
+                <option selected>{{ bond_choice.name }}</option>
+                {% endfor %}
+            </select>
+            
+            <button type="submit" class="btn btn-dark mt-5">Enviar</button>
+              
+        </form>
+    </div>
+</div>
+
+<footer class="bg-secondary" style="height: 50rem;">
+
+</footer>
+
 <script>
     var navBar = document.querySelector(".nav-bar-rotacric");
-    var logoNavbar = document.querySelector(".logo-rotacric");
+    // var logoNavbar = document.querySelector(".logo-rotacric");
 
     window.addEventListener("scroll", function(){
         if(window.pageYOffset > 150){
             navBar.classList.add("nav-scroll-rotacric");
             navBar.classList.remove("mt-5", "col-lx-9", "nav-t-5");
-            logoNavbar.classList.remove("col-2", "col-lg-1");
-            logoNavbar.classList.add("col-3", "col-sm-1");
+            // logoNavbar.classList.remove("col-2", "col-lg-1");
+            // logoNavbar.classList.add("col-3", "col-sm-1");
         }else{
             navBar.classList.remove("nav-scroll-rotacric");
-            logoNavbar.classList.remove("col-2", "col-sm-1");
+            // logoNavbar.classList.remove("col-2", "col-sm-1");
             navBar.classList.add("mt-5", "col-lx-9", "nav-t-5");
-            logoNavbar.classList.add("col-3", "col-lg-1");
+            // logoNavbar.classList.add("col-3", "col-lg-1");
 
         }
     });
+
 </script>
 
 {%endblock%}

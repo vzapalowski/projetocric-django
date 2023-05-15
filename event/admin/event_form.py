@@ -8,5 +8,6 @@ class EventForm(forms.ModelForm):
         model = Event
         fields = '__all__'
         widgets = {
-            'routes': forms.CheckboxSelectMultiple,
+            'points': forms.CheckboxSelectMultiple,
+            'routes_data': forms.CheckboxSelectMultiple,
         }

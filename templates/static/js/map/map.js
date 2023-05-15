@@ -26,14 +26,16 @@ export class Map {
       var coordinates = L.Polyline.fromEncoded(
       e.polyline
     ).getLatLngs();
+
         
     L.polyline(coordinates, {
-      color: "red",
-      weight: 4,
+      color: e.color,
+      weight: 3,
       opacity: 1,
       lineJoin: "round",
     }).addTo(this.map);
     })
+
   }
 
   addPoints(points) {
@@ -64,4 +66,30 @@ export class Map {
         .addTo(this.map);
     });
   }
+
+  addPointsEvent(points) {
+    points.forEach(({ coordinates, title, description, iconUrl}) => {
+
+      const newIcon = new L.Icon({
+        iconUrl,
+        iconSize: [30, 40],
+        iconAnchor: [5, 30],
+        popupAnchor: [10, -20]
+      });
+
+      const popupContent = `
+        <h1>${title}</h1>
+        <p>Descrição: ${description}</p>
+      `;
+
+      L.marker([coordinates.lat, coordinates.lng], { icon: newIcon })
+        .bindPopup(popupContent, {
+          maxWidth: 150,
+          keepInView: true,
+          className: 'markerPopup'
+        })
+        .addTo(this.map);
+    });
+  }
+
 }

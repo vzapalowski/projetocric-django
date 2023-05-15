@@ -6,3 +6,5 @@ from .home import *
 from .category_point import *
 from .address_point import *
 from .event import *
+from .route_path import *
+from .anchor_points_event import *

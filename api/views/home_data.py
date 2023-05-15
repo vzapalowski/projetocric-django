@@ -21,6 +21,7 @@ class HomeData(generics.ListAPIView):
                     route_data = {
                         'id': route.id,
                         'name': route.name,
+                        'color': route.color,
                         'id_route': route.id_route,
                         'polyline': route.polyline,
                     }

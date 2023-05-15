@@ -9,7 +9,7 @@ from event.models import EnrollmentForm
 
 class EventView(DetailView):
     model = Event
-    template_name = 'events/index.html'
+    template_name = 'events/data.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

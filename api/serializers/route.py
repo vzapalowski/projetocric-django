@@ -5,4 +5,4 @@ from cities.models import Route
 class RouteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Route
-        fields = ('id', 'name', 'id_route', 'polyline')
+        fields = ('id', 'name', 'color', 'id_route', 'polyline')

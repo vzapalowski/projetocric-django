@@ -5,16 +5,23 @@ from event.models import Event
 
 from django.shortcuts import render, redirect
 from event.models import EnrollmentForm
+from event.models.enrollment import Bond
+from event.models.how_knew import HowKnew
+from event.models.route_path import RoutePath
+
 
 
 class EventView(DetailView):
     model = Event
-    template_name = 'events/data.html'
+    template_name = 'events/index.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['event'] = Event.objects.get(pk=self.kwargs['pk'])
         context['form'] = EnrollmentForm
+        context['bond'] = Bond.objects.all()
+        context['howKnew'] = HowKnew.objects.all()
+        context['routePath'] = RoutePath.objects.all()
         return context
 
 def enrollment(request, event_id):

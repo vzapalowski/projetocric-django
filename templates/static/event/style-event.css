@@ -30,9 +30,8 @@
 } */
 
 .img-animation :hover{
-    opacity: 0.5;
+    opacity: 0.8;
     transition: 0.8s;
-    background-color: aqua;
 }
 
 @media (max-width: 1500px) {

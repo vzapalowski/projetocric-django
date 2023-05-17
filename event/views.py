@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 
+from django.contrib import messages
+
 from event.models import Event
 
 from django.shortcuts import render, redirect
@@ -19,19 +21,19 @@ class EventView(DetailView):
         
         context['event'] = event
         context['form'] = lambda: EnrollmentForm(self.request.POST) if self.request.method == 'POST' else EnrollmentForm()
-        context['bond'] = lambda: Bond.objects.all()
-        context['howKnew'] = lambda: HowKnew.objects.all()
-        context['routePath'] = lambda: RoutePath.objects.all()
-        
+        context['bond'] = Bond.objects.all()
+        context['howKnew'] = HowKnew.objects.all()
+        context['routePath'] = RoutePath.objects.all()
+
         return context
 
 def enrollment(request, event_id):
     event = Event.objects.get(pk=event_id)
-    form = None
     if request.method == 'POST':
         form = EnrollmentForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Registration successful!')
             return redirect('events:event', pk=event.pk)
     else:
         form = EnrollmentForm()

@@ -1,7 +1,8 @@
 import { Map } from "../map/map.js";
 import { Urls } from "../helpers/urls.js";
 
-const eventId = window.location.href.match(/\/(\d+)\/?$/)[1];
+// const eventId = window.location.href.match(/\/(\d+)\/?$/)[1];
+const eventId = window.location.href.split("/")[4];
 const url_api = Urls.events + eventId;
 
 let arr = []

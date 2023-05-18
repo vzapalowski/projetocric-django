@@ -63,7 +63,194 @@
   margin-block: 1.6rem;
 }
 
+/* MUNICIPIOS */
+
+#arroio-dos-ratos {
+  background-image: url(../images/images-cities/arroio-dos-ratos.jpg);
+}
+
+#barao-do-triunfo {
+  background-image: url(../images/images-cities/barao-do-triunfo.jpg);
+}
+
+#butia {
+  background-image: url(../images/images-cities/butia.jpg);
+}
+
+#charqueadas {
+  background-image: url(../images/images-cities/charqueadas.jpg);
+}
+
+#general-camara {
+  background-image: url(../images/images-cities/general-camara.jpg);
+}
+
+#minas-do-leao {
+  background-image: url(../images/images-cities/minas-do-leao.jpg);
+}
+
+#sao-jeronimo {
+  background-image: url(../images/images-cities/sao-jeronimo.jpg);
+}
+
+#triunfo {
+  background-image: url(../images/images-cities/triunfo.jpg);
+}
+
+section.container-cities {
+  max-width: 100vw;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block: 2rem;
+}
+section.container-cities .container-inside {
+  min-width: 75%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+section.container-cities .container-inside .container-city {
+  width: 100%;
+  flex-basis: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: 100% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+}
+section.container-cities .container-inside .container-city .content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 0.9rem;
+}
+section.container-cities .container-inside .container-city .content img {
+  display: none;
+}
+section.container-cities .container-inside .container-city .content img .img-logo {
+  width: 3rem;
+  height: 3rem;
+}
+section.container-cities .container-inside .container-city .content .city-name {
+  display: none;
+}
+section.container-cities .container-inside .container-city .content .city-name-mobile span {
+  color: var(--neutral-white);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 15px;
+}
+section.container-cities .container-inside .container-city .content-img,
+section.container-cities .container-inside .container-city .content-infos {
+  display: none;
+}
+
+/* FOOTER */
+
+footer{
+  background-color: var(--secundary-color);
+}
+
+/* 
+.footer-mobile {
+  width: 100%;
+  height: auto;
+  background-color: var(--secundary-color);
+  display: flex;
+  flex-direction: column;
+  color: var(--neutral-white);
+}
+.footer-mobile h2 {
+  text-transform: uppercase;
+  font-weight: 400;
+  margin: 30px 0px 10px 30px;
+}
+.footer-mobile .divider-footer {
+  border: 1px solid white;
+  width: 125px;
+  margin: 10px 0px 10px 30px;
+}
+.footer-mobile .divider-footer2 {
+  border: 1px solid white;
+  width: 240px;
+  margin: 10px 0px 10px 30px;
+}
+.footer-mobile .divider-footer3 {
+  border: 1px solid white;
+  width: 200px;
+  margin: 10px 0px 10px 30px;
+}
+.footer-mobile .contact .content,
+.footer-mobile .faq .content,
+.footer-mobile .about .content {
+  display: flex;
+  flex-direction: column;
+}
+.footer-mobile .contact .content span,
+.footer-mobile .faq .content span,
+.footer-mobile .about .content span {
+  font-size: 15px;
+  margin-inline: 30px;
+  margin-block: 10px;
+  line-height: 1.5em;
+}
+.footer-mobile .rights {
+  margin-block: 12px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer-mobile .rights h4 {
+  text-transform: capitalize;
+  font-weight: 400;
+  color: var(--neutral-black-30);
+}
+
+.footer-desktop {
+  display: none;
+} */
+
+
 /* DESKTOP */
+
+@media (min-width: 19y40px) {
+  section.container-cities div.container-inside div.container-city {
+    flex: 0.1;
+    height: 65rem;
+  }
+  section.container-cities div.container-inside div.content-infos div.box header h1 {
+    font-size: 3.2rem;
+  }
+  section.container-cities div.container-inside div.container-city div.content div.city-name > span {
+    font-size: 2rem;
+  }
+  section.container-cities div.container-inside div.content-infos div.box div.content ul li {
+    font-size: 2.4rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  section.container-cities div.container-inside div.container-city {
+    flex: 0.1;
+    height: 50rem;
+  }
+  section.container-cities div.container-inside {
+    min-width: 95%;
+  }
+  section.container-cities div.container-inside div.container-city div.content img.img-logo {
+    width: 4rem;
+    height: 4rem;
+  }
+}
 
 @media (min-width: 1025px) {
   .bg-image-h{
@@ -236,6 +423,7 @@
     background-color: var(--primary-color);
     border-radius: 10rem;
   }
+
 }
 
 /* LAPTOP */
@@ -413,6 +601,132 @@
 }
 
 @media (max-width: 968px) {
+  /* MUNICIPIOS */
+
+  section.container-cities {
+    min-height: 95vh;
+  }
+  section.container-cities .container-inside {
+    min-width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 0.3rem;
+  }
+  section.container-cities .container-inside .container-city {
+    flex: 0.1;
+    height: 55rem;
+    transition: 0.5s ease;
+    background-size: cover;
+    position: relative;
+  }
+  section.container-cities .container-inside .container-city .content {
+    width: 20%;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  section.container-cities .container-inside .container-city .content .city-name {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-block: 0.5rem;
+    padding-inline: 1rem;
+    gap: 0.6rem;
+  }
+  section.container-cities .container-inside .container-city .content .city-name > span {
+    color: var(--neutral-white);
+    font-size: 1.6rem;
+    font-weight: lighter;
+    transition: 0.3s ease;
+  }
+  section.container-cities .container-inside .container-city .content .city-name-mobile {
+    display: none;
+  }
+  section.container-cities .container-inside .container-city .content > a {
+    position: absolute;
+    bottom: 2%;
+  }
+  section.container-cities .container-inside .container-city .content img .img-logo {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  section.container-cities .container-inside .container-city .content svg {
+    width: 3rem;
+    height: 3rem;
+  }
+  section.container-cities .container-inside .container-city .content-img,
+  section.container-cities .container-inside .container-city .content-infos {
+    display: none;
+  }
+
+  /* FOOTER */
+/* 
+  .footer-mobile {
+    display: none;
+  }
+  .footer-desktop {
+    max-width: 100vw;
+    height: auto;
+    background-color: var(--secundary-color);
+    color: white;
+    font-size: 2rem;
+    display: grid;
+    grid-template-rows: 1fr 1fr 0.5fr;
+    grid-template-areas: "box01" "box02" "box03";
+  }
+  .footer-desktop .box {
+    min-height: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .footer-desktop .box .lineBox01 {
+    border-bottom: 2px solid white;
+  }
+  .footer-desktop .box .lineBox03 {
+    border-top: 2px solid white;
+  }
+  .footer-desktop .box .content {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem 0.5rem;
+  }
+  .footer-desktop .box .content > span {
+    font-size: 1.6rem;
+    text-align: justify;
+  }
+  .footer-desktop .box .content > img {
+    padding: 1rem;
+  }
+  .footer-desktop .box .content > ul {
+    display: flex;
+    gap: 1.6rem;
+  }
+  .footer-desktop .box .content ul li {
+    list-style: none;
+    transition: 0.5s;
+  }
+  .footer-desktop .box .content ul li svg {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+  .footer-desktop .box01 {
+    grid-area: box01;
+  }
+  .footer-desktop .box02 {
+    grid-area: box02;
+  }
+  .footer-desktop .box03 {
+    grid-area: box03;
+  } */
+
   .img-rule1 {
     width: 10rem;
     height: 10rem;
@@ -430,8 +744,11 @@
     background-repeat: no-repeat;
     background-size: 100%;
     height: 26rem;
-}  
+  }  
 
+  /* FOOTER */
+
+  
 }
 
 /* TALBLET */
@@ -605,6 +922,10 @@
     background-size: cover;
     border-radius: 10rem;
   }
+  
+  /* FOOTER */
+
+  
 }
 
 
@@ -614,11 +935,42 @@
     background-repeat: no-repeat;
     background-size: 100%;
     height: 21rem;
-}  
+  }
+/*   
+  .footer-desktop {
+    grid-template-rows: initial;
+    grid-template-columns: 2fr 3fr 2fr;
+    grid-template-areas: "box01 box02 box03";
+  }
+  .footer-desktop .box .lineBox01 {
+    border-right: 2px solid white;
+    border-bottom: initial;
+  }
+  .footer-desktop .box .lineBox03 {
+    border-left: 2px solid white;
+    border-top: initial;
+  }
+  .footer-desktop .box .content {
+    width: 100%;
+    height: 80%;
+    padding-inline: 3.2rem;
+  } */
 }
 /* MOBILE - L */
 
 @media (max-width: 575px) {
+  
+  /* MUNICIPIOS */
+  section.container-cities .container-inside .container-city .content .city-name {
+    display: none;
+  }
+  section.container-cities .container-inside .container-city .content .city-name-mobile span {
+    color: var(--text-white-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: var(--text-font-size);
+  }
+
   .divisor {
     display: none;
   }

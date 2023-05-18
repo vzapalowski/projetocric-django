@@ -63,12 +63,13 @@
 
   <!-- {% comment %} MAP {% endcomment %} -->
 
-<div class="text-center">
-  <h2 class="mb-5 fw-bold topic-color text-" style="margin-top: 10rem;" data-aos="fade-up">
-      Mapa das Rotas
-  </h2>
-  <div id="map" class="mt-3" style="height: 25rem;" data-aos="fade-up"></div>
+  <div class="text-center">
+    <h2 class="mb-5 fw-bold topic-color text-" style="margin-top: 10rem;" data-aos="fade-up">
+        Mapa das Rotas
+    </h2>
+    <div id="map" class="mt-3" style="height: 25rem;" data-aos="fade-up"> <!-- Mapa --> </div>
 </div>
+
 
 
 
@@ -127,9 +128,583 @@
 
   <div>
     <h2 class="mt-5 mb-5 fw-bold topic-color">Municipios</h2>
-    <div class="mt-3 bg-secondary" style="height: 15rem;" data-aos="fade-up"></div>
+    <!-- <div class="mt-3 bg-secondary" style="height: 15rem;" data-aos="fade-up"></div> -->
+
   </div>
-  
+  <section class="container-cities">
+    <div class="container-inside">
+        <div class="container-city" id="arroio-dos-ratos">
+          <div class="content">
+            <img src="./assets/images/images-cities/bike-cities-icon.png" alt="Ícone de uma bicicleta" class="img-logo">
+    
+
+            <svg width="32" height="32" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <rect x="0.375" width="24.024" height="25" fill="url(#pattern0)"/>
+              <defs>
+              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0_85_99" transform="matrix(0.0111111 0 0 0.0106773 0 0.0195195)"/>
+              </pattern>
+              <image id="image0_85_99" width="90" height="90" xlink:href="data:image/png;base64,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"/>
+              </defs>
+              </svg>
+              
+
+              <div class="city-name-mobile">
+                <span> arroio dos ratos </span>
+              </div>
+
+
+            <div class="city-name">
+              <span>A</span>
+              <span>R</span>
+              <span>R</span>
+              <span>O</span>
+              <span>I</span>
+              <span>O</span>
+              <span>-</span>
+              <span>D</span>
+              <span>O</span>
+              <span>S</span>
+              <span>-</span>
+              <span>R</span>
+              <span>A</span>
+              <span>T</span>
+              <span>O</span>
+              <span>S</span>
+            </div>
+    
+            <a href="#">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+                <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+          </div>
+
+          <div class="content-img">
+            <div class="img">
+              <img src="assets/images/images-cities/image-rota.jpeg" alt="">
+            </div>
+          </div>
+
+          <div class="content-infos">
+
+              <ul>
+                <li>Info01</li>
+                <li>Info02</li>
+                <li>Info03</li>
+                <li>Info04</li>
+                <li>Info05</li>
+              </ul>
+
+              <p>Saiba mais
+                <a href="#">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+                    <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                                
+                </a>
+              </p>
+          </div>
+        </div>
+
+        <div class="container-city" id="barao-do-triunfo">
+          <div class="content">
+            <img src="./assets/images/images-cities/bike-cities-icon.png" alt="Ícone de uma bicicleta" class="img-logo">
+    
+
+            <svg width="32" height="32" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <rect x="0.375" width="24.024" height="25" fill="url(#pattern0)"/>
+              <defs>
+              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0_85_99" transform="matrix(0.0111111 0 0 0.0106773 0 0.0195195)"/>
+              </pattern>
+              <image id="image0_85_99" width="90" height="90" xlink:href="data:image/png;base64,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"/>
+              </defs>
+              </svg>
+
+              <div class="city-name-mobile">
+                <span> barão do triunfo </span>
+              </div>
+
+
+            <div class="city-name">
+              <span>B</span>
+              <span>A</span>
+              <span>R</span>
+              <span>Ã</span>
+              <span>O</span>
+              <span>-</span>
+              <span>D</span>
+              <span>O</span>
+              <span>-</span>
+              <span>T</span>
+              <span>R</span>
+              <span>I</span>
+              <span>U</span>
+              <span>N</span>
+              <span>F</span>
+              <span>O</span>
+            </div>
+    
+            <a href="#">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+                <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+          </div>
+
+          <div class="content-img">
+            <div class="img">
+              <p>IMAGEM</p>
+            </div>
+          </div>
+
+          <div class="content-infos">
+
+              <ul>
+                <li>Info01</li>
+                <li>Info02</li>
+                <li>Info03</li>
+                <li>Info04</li>
+                <li>Info05</li>
+              </ul>
+
+              <p>Saiba mais
+                <a href="#">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+                    <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+              </p>
+          </div>
+        </div>
+
+        <div class="container-city" id="butia">
+          <div class="content">
+            <img src="./assets/images/images-cities/bike-cities-icon.png" alt="Ícone de uma bicicleta" class="img-logo">
+    
+
+            <svg width="32" height="32" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <rect x="0.375" width="24.024" height="25" fill="url(#pattern0)"/>
+              <defs>
+              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0_85_99" transform="matrix(0.0111111 0 0 0.0106773 0 0.0195195)"/>
+              </pattern>
+              <image id="image0_85_99" width="90" height="90" xlink:href="data:image/png;base64,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"/>
+              </defs>
+              </svg>
+
+              <div class="city-name-mobile">
+                <span> butiá </span>
+              </div>
+            
+
+            <div class="city-name">
+              <span>B</span>
+              <span>U</span>
+              <span>T</span>
+              <span>I</span>
+              <span>A</span>
+            </div>
+    
+          <a href="#">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+              <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+          </a>
+          </div>
+
+          <div class="content-img">
+            <div class="img">
+              <p>IMAGEM</p>
+            </div>
+      </div>
+
+      <div class="content-infos">
+
+        <ul>
+          <li>Info01</li>
+          <li>Info02</li>
+          <li>Info03</li>
+          <li>Info04</li>
+          <li>Info05</li>
+        </ul>
+
+        <p>Saiba mais
+          <a href="#">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+              <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+          </a>
+        </p>
+      </div>
+
+        </div>
+
+        <div class="container-city" id="charqueadas">
+          <div class="content">
+            <img src="./assets/images/images-cities/bike-cities-icon.png" alt="Ícone de uma bicicleta" class="img-logo">
+    
+
+            <svg width="32" height="32" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <rect x="0.375" width="24.024" height="25" fill="url(#pattern0)"/>
+              <defs>
+              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0_85_99" transform="matrix(0.0111111 0 0 0.0106773 0 0.0195195)"/>
+              </pattern>
+              <image id="image0_85_99" width="90" height="90" xlink:href="data:image/png;base64,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"/>
+              </defs>
+              </svg>
+
+              <div class="city-name-mobile">
+                <span> charqueadas </span>
+              </div>
+
+
+            <div class="city-name">
+              <span>C</span>
+              <span>H</span>
+              <span>A</span>
+              <span>R</span>
+              <span>Q</span>
+              <span>U</span>
+              <span>E</span>
+              <span>A</span>
+              <span>D</span>
+              <span>A</span>
+              <span>S</span>
+            </div>
+    
+            <a href="#">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+                <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+          </div>
+          
+          <div class="content-img">
+            <div class="img">
+              <p>IMAGEM</p>
+            </div>
+      </div>
+
+      <div class="content-infos">
+
+        <ul>
+          <li>Info01</li>
+          <li>Info02</li>
+          <li>Info03</li>
+          <li>Info04</li>
+          <li>Info05</li>
+        </ul>
+
+        <p>Saiba mais
+            <a href="#">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+                <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+          </a>
+        </p>
+      </div>
+        </div>
+
+        <div class="container-city" id="general-camara">
+          <div class="content">
+            <img src="./assets/images/images-cities/bike-cities-icon.png" alt="Ícone de uma bicicleta" class="img-logo">
+    
+
+            <svg width="32" height="32" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <rect x="0.375" width="24.024" height="25" fill="url(#pattern0)"/>
+              <defs>
+              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0_85_99" transform="matrix(0.0111111 0 0 0.0106773 0 0.0195195)"/>
+              </pattern>
+              <image id="image0_85_99" width="90" height="90" xlink:href="data:image/png;base64,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"/>
+              </defs>
+              </svg>
+
+              <div class="city-name-mobile">
+                <span> general-câmara </span>
+              </div>
+
+            <div class="city-name">
+              <span>G</span>
+              <span>E</span>
+              <span>N</span>
+              <span>E</span>
+              <span>R</span>
+              <span>A</span>
+              <span>L</span>
+              <span>-</span>
+              <span>C</span>
+              <span>Â</span>
+              <span>M</span>
+              <span>A</span>
+              <span>R</span>
+              <span>A</span>
+            </div>
+    
+            <a href="#">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+                <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+          </div>
+
+          <div class="content-img">
+            <div class="img">
+              <p>IMAGEM</p>
+            </div>
+      </div>
+
+      <div class="content-infos">
+
+        <ul>
+          <li>Info01</li>
+          <li>Info02</li>
+          <li>Info03</li>
+          <li>Info04</li>
+          <li>Info05</li>
+        </ul>
+
+        <p>Saiba mais
+          <a href="#">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+              <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+          </a>
+        </p>
+      </div>
+        </div>
+
+        <div class="container-city" id="minas-do-leao">
+          <div class="content">
+            <img src="./assets/images/images-cities/bike-cities-icon.png" alt="Ícone de uma bicicleta" class="img-logo">
+    
+
+            <svg width="32" height="32" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <rect x="0.375" width="24.024" height="25" fill="url(#pattern0)"/>
+              <defs>
+              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0_85_99" transform="matrix(0.0111111 0 0 0.0106773 0 0.0195195)"/>
+              </pattern>
+              <image id="image0_85_99" width="90" height="90" xlink:href="data:image/png;base64,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"/>
+              </defs>
+              </svg>
+
+              <div class="city-name-mobile">
+                <span> minas-do-leão </span>
+              </div>
+
+            <div class="city-name">
+              <span>M</span>
+              <span>I</span>
+              <span>N</span>
+              <span>A</span>
+              <span>S</span>
+              <span>-</span>
+              <span>D</span>
+              <span>O</span>
+              <span>-</span>
+              <span>L</span>
+              <span>E</span>
+              <span>Ã</span>
+              <span>O</span>
+            </div>
+    
+            <a href="#">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+                <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+          </div>
+
+          <div class="content-img">
+            <div class="img">
+              <p>IMAGEM</p>
+            </div>
+          </div>
+
+      <div class="content-infos">
+
+        <ul>
+          <li>Info01</li>
+          <li>Info02</li>
+          <li>Info03</li>
+          <li>Info04</li>
+          <li>Info05</li>
+        </ul>
+
+        <p>Saiba mais
+          <a href="#">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+              <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+          </a>
+        </p>
+      </div>
+    </div>
+
+        <div class="container-city" id="sao-jeronimo">
+          <div class="content">
+            <img src="./assets/images/images-cities/bike-cities-icon.png" alt="Ícone de uma bicicleta" class="img-logo">
+    
+
+            <svg width="32" height="32" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <rect x="0.375" width="24.024" height="25" fill="url(#pattern0)"/>
+              <defs>
+              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0_85_99" transform="matrix(0.0111111 0 0 0.0106773 0 0.0195195)"/>
+              </pattern>
+              <image id="image0_85_99" width="90" height="90" xlink:href="data:image/png;base64,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"/>
+              </defs>
+              </svg>
+
+              <div class="city-name-mobile">
+                <span> são jerônimo </span>
+              </div>
+
+            <div class="city-name">
+              <span>S</span>
+              <span>Ã</span>
+              <span>O</span>
+              <span>-</span>
+              <span>J</span>
+              <span>E</span>
+              <span>R</span>
+              <span>Ô</span>
+              <span>N</span>
+              <span>I</span>
+              <span>M</span>
+              <span>O</span>
+            </div>
+    
+            <a href="#">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+                <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+          </div>
+          <div class="content-img">
+            <div class="img">
+              <p>IMAGEM</p>
+            </div>
+      </div>
+
+      <div class="content-infos">
+
+        <ul>
+          <li>Info01</li>
+          <li>Info02</li>
+          <li>Info03</li>
+          <li>Info04</li>
+          <li>Info05</li>
+        </ul>
+
+        <p>Saiba mais
+          <a href="#">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+              <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+          </a>
+        </p>
+      </div>
+        </div>
+        
+        <div class="container-city" id="triunfo">
+          <div class="content">
+            <img src="./assets/images/images-cities/bike-cities-icon.png" alt="Ícone de uma bicicleta" class="img-logo">
+    
+
+            <svg width="32" height="32" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <rect x="0.375" width="24.024" height="25" fill="url(#pattern0)"/>
+              <defs>
+              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0_85_99" transform="matrix(0.0111111 0 0 0.0106773 0 0.0195195)"/>
+              </pattern>
+              <image id="image0_85_99" width="90" height="90" xlink:href="data:image/png;base64,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"/>
+              </defs>
+              </svg>
+
+              <div class="city-name-mobile">
+                <span> triunfo </span>
+              </div>
+
+            <div class="city-name">
+              <span>T</span>
+              <span>R</span>
+              <span>I</span>
+              <span>U</span>
+              <span>N</span>
+              <span>F</span>
+              <span>O</span>
+            </div>
+    
+            <a href="#">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+                <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>          
+          </div>
+          <div class="content-img">
+            <div class="img">
+              <p>IMAGEM</p>
+            </div>
+      </div>
+
+      <div class="content-infos">
+
+        <ul>
+          <li>Info01</li>
+          <li>Info02</li>
+          <li>Info03</li>
+          <li>Info04</li>
+          <li>Info05</li>
+        </ul>
+
+        <p>Saiba mais
+          <a href="#">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+              <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+          </a>
+        </p>
+      </div>
+        </div>
+    </div>
+  </section>
         <!-- {% comment %} Manual {% endcomment %} -->
 
   <div>
@@ -272,9 +847,58 @@
   
 </div>
 
-<footer class="bg-secondary" style="height: 50rem;">
+<footer class="text-white pt-5 pb-4 mt-5">
 
+  <div class="container text-center text-md-left">
+
+    <div class="row text-center text-md-left">
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3" style="height: 20rem;">
+        <img src="{% static 'images/footer/logo.png'%}" alt="">
+      </div>
+
+      <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold" style="color:#a5a5a5;">Informações</h5>
+        <p style="font-size: 0.98rem;">
+          O projeto ROTA CRIC é um oferecimento da Assossiação dos Municípios da Região Carbnífera (ASMURC) juntamente com o Conselho Regional de Desenvolvimento (COREDE), em parceria com o Instituto Federal (IFSUL) Cãmpus Charqueadas, elaborado através dos alunos bolsistas e dos coordenadores do projeto. Um agradecimento especial às secretarias de turismo de cada cidade participante, que forneceram parte do material utilizado no projeto.
+        </p>
+        
+      </div>
+      <hr class="mb-4">
+
+      <div class="col-md-7 col-lg-8">
+        <p>Copyright @2022 All rights reserved by:
+          <a href="#" style="text-decoration: none;">
+            <strong style="color: #686868;">Rota Cric</strong>
+          </a>
+        </p>
+      </div>
+
+      <div class="col-md-5 col-lg-4">
+        <div class="text-center text-md-right">
+          <ul class="list-unstyled list-inline">
+            <li class="list-inline-item">
+              <a href="#" class="btn-floating btn-sm text-white">
+                <i class="fas fa-envelope"></i> 
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" class="btn-floating btn-sm text-white"><i class="fab fa-instagram"></i> </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" class="btn-floating btn-sm text-white"><i class="fab fa-github"></i> </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+
+     </div>
+    </div>
+
+
+    
 </footer>
+
 
 
 

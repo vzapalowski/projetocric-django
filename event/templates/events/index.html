@@ -86,21 +86,8 @@
       <div class="row gx-2 gy-3 content-images">
         {% for image in event.images.all %}
         <div class="img-animation col-lg-4 col-md-3">
-            <img src="{{ image.image.url }}" class="rounded img-event" alt="..." data-aos="fade-up" data-bs-target="#{{ image.id }}">
+            <img src="{{ image.image.url }}" class="rounded img-event" alt="..." data-aos="fade-up">
           
-        </div>
-        <div class="modal fade" id="{{ image.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Titulo da Foto</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <img src="{{ image.image.url }}" class="rounded img-fluid" alt="...">
-              </div>
-            </div>
-          </div>
         </div>
         {% endfor %}
       </div>

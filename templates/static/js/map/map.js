@@ -109,7 +109,7 @@ export class Map {
   
   
   addPointsEvent(points) {
-    points.forEach(({ coordinates, title, description, iconUrl}) => {
+    points.forEach(({ coordinates, title, iconUrl}) => {
 
       const newIcon = new L.Icon({
         iconUrl,
@@ -120,7 +120,6 @@ export class Map {
 
       const popupContent = `
         <h1>${title}</h1>
-        <p>Descrição: ${description}</p>
       `;
 
       L.marker([coordinates.lat, coordinates.lng], { icon: newIcon })

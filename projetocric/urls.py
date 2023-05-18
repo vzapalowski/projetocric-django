@@ -10,10 +10,6 @@ urlpatterns = [
     path('cidades/', include('cities.urls')),
     path('eventos/', include('event.urls')),
 
-    path('sobre/', include('about.urls')),
-    path('manual/', include('manual.urls')),
-    path('contato/', include('contact.urls')),
-
     
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('api.urls'))

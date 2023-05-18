@@ -6,7 +6,7 @@ class AnchorPointEventSerializer(serializers.ModelSerializer):
     coordinates = serializers.SerializerMethodField()
     class Meta:
         model = AnchorPoint
-        fields = ('title', 'description', 'iconUrl', 'coordinates')
+        fields = ('title', 'iconUrl', 'coordinates')
 
     def get_coordinates(self, obj):
         return {'lat': obj.lat, 'lng': obj.lng}

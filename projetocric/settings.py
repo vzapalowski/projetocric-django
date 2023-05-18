@@ -40,13 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'cities.apps.CitiesConfig',
-    'about.apps.AboutConfig',
-    'manual.apps.ManualConfig',
-    'contact.apps.ContactConfig',
     'event.apps.EventConfig',
     'rest_framework',
     'multiupload',
-    'colorfield'
+    'colorfield',
 ]
 
 MIDDLEWARE = [

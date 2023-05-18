@@ -64,8 +64,9 @@
   <!-- {% comment %} MAP {% endcomment %} -->
 
     <h2 class="mt-5 mb-5 fw-bold topic-color">Mapa das Rotas</h2>
-    <div class="mt-3 align-items-center" style="height: 50rem;" data-aos="fade-up" id="map"></div>
 </div>
+
+<div class="mt-3 align-items-center" style="height: 50rem;" data-aos="fade-up" id="map"></div>
 
 
 
@@ -891,21 +892,13 @@
 
      </div>
     </div>
-
-
-    
 </footer>
 
-
-
+<script src="{% static 'js/home/data.js'%}" type="module" async></script>
+<script src="{% static 'js/map/Polyline.encoded.js'%}"></script>
 
 <script>
         var navBar = document.querySelector(".nav-bar-rotacric");
-    // var logoNavbar = document.querySelector(".logo-rotacric");
-
-
-
-
     window.addEventListener("scroll", function(){
         if(window.pageYOffset > 150){
             navBar.classList.add("nav-scroll-rotacric");

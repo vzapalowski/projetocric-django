@@ -58,44 +58,10 @@
   width: 15rem;
 }
 
-
 .conteudo {
   margin-block: 1.6rem;
 }
 
-/* MUNICIPIOS */
-
-#arroio-dos-ratos {
-  background-image: url(../images/images-cities/arroio-dos-ratos.jpg);
-}
-
-#barao-do-triunfo {
-  background-image: url(../images/images-cities/barao-do-triunfo.jpg);
-}
-
-#butia {
-  background-image: url(../images/images-cities/butia.jpg);
-}
-
-#charqueadas {
-  background-image: url(../images/images-cities/charqueadas.jpg);
-}
-
-#general-camara {
-  background-image: url(../images/images-cities/general-camara.jpg);
-}
-
-#minas-do-leao {
-  background-image: url(../images/images-cities/minas-do-leao.jpg);
-}
-
-#sao-jeronimo {
-  background-image: url(../images/images-cities/sao-jeronimo.jpg);
-}
-
-#triunfo {
-  background-image: url(../images/images-cities/triunfo.jpg);
-}
 
 section.container-cities {
   max-width: 100vw;
@@ -222,7 +188,7 @@ footer{
 
 /* DESKTOP */
 
-@media (min-width: 19y40px) {
+@media (min-width: 1940px) {
   section.container-cities div.container-inside div.container-city {
     flex: 0.1;
     height: 65rem;
@@ -231,6 +197,7 @@ footer{
     font-size: 3.2rem;
   }
   section.container-cities div.container-inside div.container-city div.content div.city-name > span {
+    text-transform: uppercase;
     font-size: 2rem;
   }
   section.container-cities div.container-inside div.content-infos div.box div.content ul li {
@@ -638,6 +605,7 @@ footer{
   }
   section.container-cities .container-inside .container-city .content .city-name > span {
     color: var(--neutral-white);
+    text-transform: uppercase;
     font-size: 1.6rem;
     font-weight: lighter;
     transition: 0.3s ease;

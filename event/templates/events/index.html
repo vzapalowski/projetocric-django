@@ -102,6 +102,11 @@
         Mapa das Rotas
     </h2>
     <div id="map" class="mt-3" style="height: 25rem;" data-aos="fade-up"> <!-- Mapa --> </div>
+
+    {% for e in event.routes_data.all %}
+      <button data-route="{{ e.route.id_route }}" class="btnOpacity" style="background-color: '{{ e.route.color }}';">{{ e }}</button>
+    {% endfor %}
+
 </div>
 
         <!-- Formulario -->

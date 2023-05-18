@@ -6,7 +6,7 @@ from django.contrib import messages
 from event.models import Event
 
 from django.shortcuts import render, redirect
-from event.models import EnrollmentForm
+from event.models import EnrollmentForm, Event
 from event.models.enrollment import Bond
 from event.models.how_knew import HowKnew
 from event.models.route_path import RoutePath
@@ -24,6 +24,7 @@ class EventView(DetailView):
         context['bond'] = Bond.objects.all()
         context['howKnew'] = HowKnew.objects.all()
         context['routePath'] = RoutePath.objects.all()
+        context['events'] = Event.objects.all()
 
         return context
 

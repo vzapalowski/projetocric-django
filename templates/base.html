@@ -92,8 +92,110 @@
     </head>
 <body class="background">
 
+  <div class="container-fluid text-center">
+  
+    <!-- {% comment %} NAVIGATION {% endcomment %} -->
+    
+    <div class="d-flex align-items-center fixed-top col-lx-9 mx-auto mt-5 nav-bar-rotacric nav-t-5">
+      <div class="flex-shrink-0 col-lg-1 logo-rotacric rounded-circle ms-5">
+        <img class="img-fluid img-cric" src="{% static 'images/logos/4.png'%}" alt="...">
+      </div>
+      <div class="flex-grow-1 me-5 ms-3">
+          <nav class="navbar navbar-expand-md mb-0 rounded-pill">
+              <div class="container text-center">
+                          <a class="navbar-brand" href="#"></a>
+                          <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                              <span class="navbar-toggler-icon"></span>
+                          </button>
+                      <div class="offcanvas offcanvas-end text-center" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                          <div class="offcanvas-header">
+                              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">RotaCric</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                          </div>
+                          <div class="offcanvas-body">
+                              <ul class="navbar-nav d-flex justify-content-around text-center flex-grow-1 pe-3">
+                                  <li class="nav-item">
+                                      <a class="nav-link" aria-current="page" href="#">Home</a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a class="nav-link" href="#">Municipios</a>
+                                  </li>
+                                  <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                      Eventos
+                                    </a>
+                                    <ul class="dropdown-menu text-center">
+                                      {% for event in events %}
+                                        <li><a class="dropdown-item" href="{% url 'events:event' pk=event.id %}">{{ event.name }}</a></li>
+                                      {% endfor %}
+                                    </ul>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a class="nav-link" href="#">Manual</a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a class="nav-link" href="#">Sobre</a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+              </div>
+          </nav>
+      </div>
+    </div>
+  </div>
   
     {%block 'content'%}{%endblock%}
+
+
+    <footer class="text-white pt-5 pb-4 mt-5">
+
+      <div class="container text-center text-md-left">
+    
+        <div class="row text-center text-md-left">
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3" style="height: 20rem;">
+            <img src="{% static 'images/footer/logo.png'%}" alt="">
+          </div>
+    
+          <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
+            <h5 class="text-uppercase mb-4 font-weight-bold" style="color:#a5a5a5;">Informações</h5>
+            <p style="font-size: 0.98rem;">
+              O projeto ROTA CRIC é um oferecimento da Assossiação dos Municípios da Região Carbnífera (ASMURC) juntamente com o Conselho Regional de Desenvolvimento (COREDE), em parceria com o Instituto Federal (IFSUL) Cãmpus Charqueadas, elaborado através dos alunos bolsistas e dos coordenadores do projeto. Um agradecimento especial às secretarias de turismo de cada cidade participante, que forneceram parte do material utilizado no projeto.
+            </p>
+            
+          </div>
+          <hr class="mb-4">
+    
+          <div class="col-md-7 col-lg-8">
+            <p>Copyright @2022 All rights reserved by:
+              <a href="#" style="text-decoration: none;">
+                <strong style="color: #686868;">Rota Cric</strong>
+              </a>
+            </p>
+          </div>
+    
+          <div class="col-md-5 col-lg-4">
+            <div class="text-center text-md-right">
+              <ul class="list-unstyled list-inline">
+                <li class="list-inline-item">
+                  <a href="#" class="btn-floating btn-sm text-white">
+                    <i class="fas fa-envelope"></i> 
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="btn-floating btn-sm text-white"><i class="fab fa-instagram"></i> </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="btn-floating btn-sm text-white"><i class="fab fa-github"></i> </a>
+                </li>
+              </ul>
+    
+            </div>
+          </div>
+    
+         </div>
+        </div>
+    </footer>
 
 
     <!-- <script src="https://unpkg.com/scrollreveal"></script> -->

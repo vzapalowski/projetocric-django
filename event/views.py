@@ -34,7 +34,7 @@ def enrollment(request, event_id):
         form = EnrollmentForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Registration successful!')
+            messages.success(request, 'Cadastro feito com Sucesso!')
             return redirect('events:event', pk=event.pk)
     else:
         form = EnrollmentForm()

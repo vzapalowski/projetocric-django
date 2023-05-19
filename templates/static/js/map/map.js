@@ -113,7 +113,7 @@ export class Map {
 
       const newIcon = new L.Icon({
         iconUrl,
-        iconSize: [30, 40],
+        iconSize: [50, 25],
         iconAnchor: [5, 30],
         popupAnchor: [10, -20]
       });

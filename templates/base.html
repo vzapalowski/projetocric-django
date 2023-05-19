@@ -114,12 +114,13 @@
                           </div>
                           <div class="offcanvas-body">
                               <ul class="navbar-nav d-flex justify-content-around text-center flex-grow-1 pe-3">
+
+
+
                                   <li class="nav-item">
-                                      <a class="nav-link" aria-current="page" href="#">Home</a>
+                                      <a class="nav-link" aria-current="page" href="{% url 'home:home'  %}">Home</a>
                                   </li>
-                                  <li class="nav-item">
-                                      <a class="nav-link" href="#">Municipios</a>
-                                  </li>
+                                  
                                   <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                       Eventos
@@ -130,12 +131,11 @@
                                       {% endfor %}
                                     </ul>
                                   </li>
-                                  <li class="nav-item">
-                                      <a class="nav-link" href="#">Manual</a>
-                                  </li>
-                                  <li class="nav-item">
-                                      <a class="nav-link" href="#">Sobre</a>
-                                  </li>
+
+                                  {% block 'navigation' %}
+                                  {% endblock %}
+
+                                  
                               </ul>
                           </div>
                       </div>

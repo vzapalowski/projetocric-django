@@ -53,6 +53,10 @@
   color: var(--primary-color);
 }
 
+.border-card{
+  border:#131A40 solid 1.5px ;
+}
+
 .btn-collapse{
   background-color: var(--primary-light);
   width: 15rem;
@@ -121,7 +125,7 @@ section.container-cities .container-inside .container-city .content-infos {
 
 /* FOOTER */
 
-footer{
+.background-footer{
   background-color: var(--secundary-color);
 }
 
@@ -221,7 +225,7 @@ footer{
 
 @media (min-width: 1025px) {
   .bg-image-h{
-    background-image: url(../images/events/img-top-event-1.jpg);
+    background-image: url(../images/top-page/img-top-page-2.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
     height: 40rem;

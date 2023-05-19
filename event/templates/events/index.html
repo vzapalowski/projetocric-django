@@ -9,7 +9,7 @@
 <div class="container-fluid text-center background">
 
 
-    <div class="row justify-content-center">
+    <div class="row ">
 
     <!-- Title and Descripiton -->
 
@@ -18,15 +18,24 @@
             <p class="description-event fs-5 mt-5"  data-aos="fade-up">
                 {{ event.description }}
             </p>
-            {% for e in event.routes_data.all %}
-            <p>{{ e.departure_location }}</p>
-            <p>{{ e.time }}</p>
-            <p>{{ e }}</p>
-          {% endfor %}
+            <div class="row mt-5" data-aos="fade-up">
+                {% for e in event.routes_data.all %}
+                <div class="col-sm-4 mb-3 mb-sm-0">
+                  <div class="card border-card">
+                    <div class="card-body">
+                      <h5 class="card-title border-bottom border-dark-subtle topic-color">{{ e.departure_location }}</h5>
+                      <!-- <p class="card-text"></p> -->
+                      <p></p>
+                      <p class="card-text"><small class="text-body-secondary">{{ e }} - {{ e.time }}</small></p>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
-    <!-- Images with Modal -->
+    <!-- Images -->
 
     <div class="container mt-5">
       <div class="row gx-2 gy-3 content-images">
@@ -48,21 +57,22 @@
         <!-- Mapa de Rotas do Evento -->
 
 <div class="text-center">
-    <h2 class="mb-5 fw-bold topic-color text-" style="margin-top: 10rem;" data-aos="fade-up">
+    <h2 class="mb-5 fw-bold topic-color" style="margin-top: 10rem;">
         Mapa das Rotas
     </h2>
     <div id="map" class="mt-3" style="height: 25rem;" data-aos="fade-up"> <!-- Mapa --> </div>
-
-    {% for e in event.routes_data.all %}
-      <button data-route="{{ e.route.id_route }}" class="btnOpacity" style="background-color: '{{ e.route.color }}';">{{ e }}</button>
+    <div class="btn-group mt-3 col-10">
+      {% for e in event.routes_data.all %}
+      <button data-route="{{ e.route.id_route }}" class="btn btn-outline-dark btnOpacity" style="background-color: '{{ e.route.color }}';">{{ e }}</button>
     {% endfor %}
+    </div>
 
 </div>
 
         <!-- Formulario -->
 
 <div class="container mx-auto mb-5 col-10 align-items-center">
-  <h2 class="title-event text-center"  data-aos="fade-up">Formulário para Inscrição ao Evento</h2>
+  <h2 class="title-event text-center">Formulário para Inscrição ao Evento</h2>
   <form class="bg-light px-5 py-5 col mt-5" id="enrollment-form" method="POST" action="/eventos/1/enrollment/" data-aos="fade-up">
     {% csrf_token %}
     <!-- INPUT NAME -->

@@ -148,24 +148,30 @@
     {%block 'content'%}{%endblock%}
 
 
-    <footer class="text-white pt-5 pb-4 mt-5">
+    <footer class="text-white pt-5 pb-4 mt-5 background-footer">
 
       <div class="container text-center text-md-left">
-    
+  
         <div class="row text-center text-md-left">
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3" style="height: 20rem;">
-            <img src="{% static 'images/footer/logo.png'%}" alt="">
+  
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+            <img class="img-fluid img-cric" src="{% static 'images/logos/4.png'%}" alt="..." style="border-radius: 15rem;">
           </div>
-    
-          <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
-            <h5 class="text-uppercase mb-4 font-weight-bold" style="color:#a5a5a5;">Informações</h5>
+  
+          <div class="col-md-6 col-lg-8 col-xl-5 mx-auto mt-3">
+            <!-- <h5 class="text-uppercase mb-4 font-weight-bold" style="color:#a5a5a5;"></h5> -->
             <p style="font-size: 0.98rem;">
               O projeto ROTA CRIC é um oferecimento da Assossiação dos Municípios da Região Carbnífera (ASMURC) juntamente com o Conselho Regional de Desenvolvimento (COREDE), em parceria com o Instituto Federal (IFSUL) Cãmpus Charqueadas, elaborado através dos alunos bolsistas e dos coordenadores do projeto. Um agradecimento especial às secretarias de turismo de cada cidade participante, que forneceram parte do material utilizado no projeto.
             </p>
-            
+          </div>
+  
+  
+          <div class="col-md-4 col-lg-2 mx-auto mt-3">
+            <img class="img-fluid img-cric mb-5" src="{% static 'images/arms/brasao.png'%}" alt="...">
+
           </div>
           <hr class="mb-4">
-    
+  
           <div class="col-md-7 col-lg-8">
             <p>Copyright @2022 All rights reserved by:
               <a href="#" style="text-decoration: none;">
@@ -173,32 +179,32 @@
               </a>
             </p>
           </div>
-    
+  
           <div class="col-md-5 col-lg-4">
             <div class="text-center text-md-right">
               <ul class="list-unstyled list-inline">
                 <li class="list-inline-item">
                   <a href="#" class="btn-floating btn-sm text-white">
-                    <i class="fas fa-envelope"></i> 
+                    <i class="fas fa-envelope fs-3"></i> 
                   </a>
                 </li>
                 <li class="list-inline-item">
-                  <a href="#" class="btn-floating btn-sm text-white"><i class="fab fa-instagram"></i> </a>
+                  <a href="#" class="btn-floating btn-sm text-white">
+                    <i class="fab fa-instagram fs-3"></i> 
+                  </a>
                 </li>
                 <li class="list-inline-item">
-                  <a href="#" class="btn-floating btn-sm text-white"><i class="fab fa-github"></i> </a>
+                  <a href="#" class="btn-floating text-white" style="height: 5rem;">
+                    <i class="fab fa-github fs-3"></i> 
+                  </a>
                 </li>
               </ul>
-    
             </div>
           </div>
-    
          </div>
-        </div>
+        </div>        
     </footer>
 
-
-    <!-- <script src="https://unpkg.com/scrollreveal"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
     </script>

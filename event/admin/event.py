@@ -9,8 +9,8 @@ from event.models.route_path import RoutePath
 class EventAdmin(admin.ModelAdmin):
     form = EventForm
     inlines = [ImageAdmin]
-    list_display = ('id',)
-    list_display_links = ('id',)
+    list_display = ('id', 'name')
+    list_display_links = ('id', 'name')
 
     class Meta:
         model = Event

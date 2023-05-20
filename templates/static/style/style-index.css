@@ -409,7 +409,7 @@ section.container-cities .container-inside .container-city .content-infos {
   }
 
   .bg-image-h{
-    background-image: url(../images/events/img-top-event-1.jpg);
+    background-image: url(../images/top-page/img-top-page-2.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
     height: 33rem;
@@ -712,7 +712,7 @@ section.container-cities .container-inside .container-city .content-infos {
   }
 
   .bg-image-h{
-    background-image: url(../images/events/img-top-event-1.jpg);
+    background-image: url(../images/top-page/img-top-page-2.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
     height: 26rem;
@@ -731,7 +731,7 @@ section.container-cities .container-inside .container-city .content-infos {
   }
 
   .bg-image-h{
-    background-image: url(../images/events/img-top-event-1.jpg);
+    background-image: url(../images/top-page/img-top-page-2.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
     height: 24rem;
@@ -903,7 +903,7 @@ section.container-cities .container-inside .container-city .content-infos {
 
 @media (max-width : 780px) {
   .bg-image-h{
-    background-image: url(../images/events/img-top-event-1.jpg);
+    background-image: url(../images/top-page/img-top-page-2.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
     height: 21rem;
@@ -948,7 +948,7 @@ section.container-cities .container-inside .container-city .content-infos {
   }
 
   .bg-image-h{
-    background-image: url(../images/events/img-top-event-1.jpg);
+    background-image: url(../images/top-page/img-top-page-2.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
     height: 15rem;
@@ -1120,7 +1120,7 @@ section.container-cities .container-inside .container-city .content-infos {
     display: none;
   }
   .bg-image-h{
-    background-image: url(../images/events/img-top-event-1.jpg);
+    background-image: url(../images/top-page/img-top-page-2.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
     height: 14rem;

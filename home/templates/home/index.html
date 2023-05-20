@@ -53,7 +53,7 @@
       {% for city in homes %}
         <div class="container-city" style="background-image: url('{{ city.city.banner_image.url }}')">
           <div class="content">
-            <img src="./assets/images/images-cities/bike-cities-icon.png" alt="Ícone de uma bicicleta" class="img-logo">
+            <img src="{% static 'images/images-cities/bike-cities-icon.png'%}" alt="Ícone de uma bicicleta" class="img-logo">
     
 
             <svg width="32" height="32" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -85,12 +85,6 @@
                 <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </a>
-          </div>
-
-          <div class="content-img">
-            <div class="img">
-              <img src="assets/images/images-cities/image-rota.jpeg" alt="">
-            </div>
           </div>
 
           <div class="content-infos">

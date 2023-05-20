@@ -43,12 +43,45 @@
   </div>
 
         <!-- {% comment %} Municipios {% endcomment %} -->
-  <div>
+  <div class="container text-center">
     <h2 class="mt-5 mb-5 fw-bold topic-color" id="cities">Municipios</h2>
     <!-- <div class="mt-3 bg-secondary" style="height: 15rem;" data-aos="fade-up"></div> -->
-
+    <div class="row justify-content-center">
+      {% for city in homes %}
+      <div class="col-lg-4 col-xl-3 col-md-5 cities-adjust gy-3 rounded">
+          <div style="background-image: url('{{ city.city.banner_image.url }}')" class="z-0 banner-adjust rounded" alt="Indisponível">
+            <div class="z-3 banner-opacity rounded">
+                <a class="py-5 z-3 city-name-banner" type="button" data-bs-toggle="modal" data-bs-target="#emBreve">
+                  {{ city.city.name }}
+                </a>
+                <!-- Modal -->
+                <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Conteúdo Indisponivel</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Obrigado por seu interesse! Estamos trabalhando diligentemente para trazer o conteúdo que você procura. Em breve,
+                         estará disponível para sua apreciação.Agradecemos sua paciência e prometemos que valerá a pena esperar. Fique
+                          atento para mais atualizações em breve!
+                     </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
+      {% endfor %}
+    </div>
   </div>
-  <section class="container-cities">
+
+
+  <!-- <section class="container-cities">
     <div class="container-inside">
       {% for city in homes %}
         <div class="container-city" style="background-image: url('{{ city.city.banner_image.url }}')">
@@ -117,7 +150,7 @@
         </div>
       {% endfor %}
     </div>
-  </section>
+  </section> -->
         <!-- {% comment %} Manual {% endcomment %} -->
 
   <div>

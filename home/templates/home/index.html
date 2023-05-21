@@ -43,77 +43,46 @@
   </div>
 
         <!-- {% comment %} Municipios {% endcomment %} -->
-  <div>
+
+        <div class="container text-center">
     <h2 class="mt-5 mb-5 fw-bold topic-color" id="cities">Municipios</h2>
     <!-- <div class="mt-3 bg-secondary" style="height: 15rem;" data-aos="fade-up"></div> -->
-
-  </div>
-  <section class="container-cities">
-    <div class="container-inside">
+    <div class="row justify-content-center">
       {% for city in homes %}
-        <div class="container-city" style="background-image: url('{{ city.city.banner_image.url }}')">
-          <div class="content">
-            <img src="{% static 'images/images-cities/bike-cities-icon.png'%}" alt="Ícone de uma bicicleta" class="img-logo">
-    
-
-            <svg width="32" height="32" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <rect x="0.375" width="24.024" height="25" fill="url(#pattern0)"/>
-              <defs>
-              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-              <use xlink:href="#image0_85_99" transform="matrix(0.0111111 0 0 0.0106773 0 0.0195195)"/>
-              </pattern>
-              <image id="image0_85_99" width="90" height="90" xlink:href="data:image/png;base64,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"/>
-              </defs>
-              </svg>
-              
-
-              <div class="city-name-mobile">
-                <span> {{ city.city }} </span>
-              </div>
-
-
-            <div class="city-name">
-              {% for letter in city.city.name %}
-                <span>{{ letter }}</span>
-              {% endfor %}
-            </div>
-    
-            <a href="#">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
-                <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </a>
-          </div>
-
-          <div class="content-infos">
-
-              <ul>
-                <li>Info01</li>
-                <li>Info02</li>
-                <li>Info03</li>
-                <li>Info04</li>
-                <li>Info05</li>
-              </ul>
-
-              <p>Saiba mais
-                <a href="#">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
-                    <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                                
+      <div class="col-lg-4 col-xl-3 col-md-5 cities-adjust gy-3 rounded">
+          <div style="background-image: url('{{ city.city.banner_image.url }}')" class="z-0 banner-adjust rounded" alt="Indisponível">
+            <div class="z-3 banner-opacity rounded">
+                <a class="py-5 z-3 city-name-banner" type="button" data-bs-toggle="modal" data-bs-target="#emBreve">
+                  {{ city.city.name }}
                 </a>
-              </p>
+                <!-- Modal -->
+                <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Conteúdo Indisponivel</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Obrigado por seu interesse! Estamos trabalhando diligentemente para trazer o conteúdo que você procura. Em breve,
+                         estará disponível para sua apreciação.Agradecemos sua paciência e prometemos que valerá a pena esperar. Fique
+                          atento para mais atualizações em breve!
+                     </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
           </div>
-        </div>
+      </div>
       {% endfor %}
     </div>
-  </section>
-        <!-- {% comment %} Manual {% endcomment %} -->
+  </div>
 
+  
+        <!-- {% comment %} Manual {% endcomment %} -->
   <div>
     <h2 class="mt-5 mb-5 fw-bold topic-color" id="manual">Manual</h2>
     <div class="conteudo">

@@ -18,3 +18,4 @@ class PostHome(ListView):
         context['categories_points'] = Category.objects.all()
         context['events'] = Event.objects.all()
         return context
+    

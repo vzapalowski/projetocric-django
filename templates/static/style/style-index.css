@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
 
 * {
   margin: 0;
@@ -64,6 +65,27 @@
 
 .conteudo {
   margin-block: 1.6rem;
+}
+
+.banner-adjust{
+  background-position: center center;
+  background-size: 300px 200px;
+}
+
+div .banner-opacity{
+  background-color: rgba(0, 0, 0, 0.247);
+}
+
+.city-name-banner{
+  font-family: Open Sans;
+  font-size: 1.7rem;
+  color: rgb(255, 255, 255);
+  -webkit-text-stroke: 1px #000000;
+  text-decoration: none;
+}
+
+.cities-adjust{
+  object-fit: cover;
 }
 
 
@@ -574,6 +596,11 @@ section.container-cities .container-inside .container-city .content-infos {
 @media (max-width: 968px) {
   /* MUNICIPIOS */
 
+  .banner-adjust{
+    background-position: center center;
+    background-size: 300px 200px;
+  }
+
   section.container-cities {
     min-height: 95vh;
   }
@@ -717,10 +744,6 @@ section.container-cities .container-inside .container-city .content-infos {
     background-size: 100%;
     height: 26rem;
   }  
-
-  /* FOOTER */
-
-  
 }
 
 /* TALBLET */
@@ -908,6 +931,12 @@ section.container-cities .container-inside .container-city .content-infos {
     background-size: 100%;
     height: 21rem;
   }
+
+  .banner-adjust{
+    background-position: center center;
+    background-size: 550px 400px;
+  }
+
 /*   
   .footer-desktop {
     grid-template-rows: initial;

@@ -98,7 +98,7 @@
     <!-- INPUT DATE OF BIRTH -->
     <div class="input-group mb-3">
       <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>   
-      <input class="form-control" type="date" name="date_of_birth" placeholder="Data de Nascimento" required="" id="id_date_of_birth" value="{{ form.date_of_birth.value|default_if_none:''  }}">
+      <input placeholder="Data de nascimento" required="" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="date_of_birth" id="date" value="{{ form.date_of_birth.value|default_if_none:''  }}" id="id_date_of_birth">
     </div>
 
    <!-- SELECT BOND CHOICE -->

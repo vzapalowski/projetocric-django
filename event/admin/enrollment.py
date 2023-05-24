@@ -1,6 +1,6 @@
 from django.contrib import admin
 from event.models import Enrollment, Bond
-from .enrollmentform import EnrollmentForm
+from ..models.enrollmentform import EnrollmentForm
 
 from event.models.route_path import RoutePath
 

@@ -67,26 +67,33 @@
 </div>
 
 
-<div class="container-fluid text-center background">
-  <div class="row ">
-    <!-- Title and Descripiton -->
-      <div class="container col-10">
-            <div class="text-center"><h2 class="mb-5 fw-bold topic-color" data-aos="fade-up" style="margin-top: 5rem;">AVISOS</h2></div>
-            <div class="row mt-5" data-aos="fade-up">
-                {% for warning in event.warnings.all %}
-                <div class="col-sm-4 mb-3 mb-sm-0">
-                  <div class="card border-card">
-                    <div class="card-body">
-                      <h5 class="card-title border-bottom border-dark-subtle topic-color">{{ warning.title }}</h5>
-                      <p class="card-text"><small class="text-body-secondary">{{ warning.content }}</small></p>
+{% if event.warnings.all %}
+  <div class="container-fluid text-center background">
+    <div class="row ">
+      <!-- Title and Descripiton -->
+        <div class="container col-10">
+              <div class="text-center">
+                <h2 class="mb-5 fw-bold topic-color" data-aos="fade-up" style="margin-top: 5rem;">
+                  AVISOS
+                </h2>
+              </div>
+              <div class="row mt-5" data-aos="fade-up">
+                  {% for warning in event.warnings.all %}
+                  <div class="col-sm-12 mb-3">
+                    <div class="card border-card">
+                      <div class="card-body">
+                        <h5 class="card-title border-bottom border-dark-subtle topic-color">{{ warning.title }}</h5>
+                        <p class="card-text"><small class="text-body-secondary">{{ warning.content }}</small></p>
+                        <p class="card-text border-top"><small class="text-body-terciary">Postado em: {{ warning.created_date }}</small></p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                {% endfor %}
-            </div>
-      </div>
+                  {% endfor %}
+              </div>
+        </div>
+    </div>
   </div>
-</div>
+{% endif %}
 
 
 

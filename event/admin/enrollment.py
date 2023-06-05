@@ -10,7 +10,7 @@ class BondAdmin(admin.ModelAdmin):
 
 class EnrollmentAdmin(admin.ModelAdmin):
     form = EnrollmentForm
-    list_display = ('full_name', 'date_of_birth', 'how_knew', 'rg',)
+    list_display = ('full_name', 'date_of_birth', 'how_knew', 'rg', 'route_path')
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "route_path":

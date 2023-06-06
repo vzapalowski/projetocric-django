@@ -93,7 +93,7 @@
     <!-- INPUT DATE OF BIRTH -->
     <div class="input-group mb-3">
       <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>   
-      <input class="form-control" type="date" name="date_of_birth" placeholder="Data de Nascimento" required="" id="id_date_of_birth" value="{{ form.date_of_birth.value|default_if_none:''  }}">
+      <input class="form-control" type="date" name="date_of_birth" placeholder="Data de Nascimento" required="" id="datepicker" value="{{ form.date_of_birth.value|default_if_none:''  }}">
     </div>
 
    <!-- SELECT BOND CHOICE -->
@@ -184,5 +184,11 @@
 <script src="{% static 'js/events/data.js'%}" type="module" async></script>
 <script src="{% static 'js/map/Polyline.encoded.js' %}"></script>
 <script src="{% static 'js/Helpers/verify_form.js' %}"></script>
+
+<script type="text/javascript">
+  $(function(){
+    $('#datepicker').datepicker();
+  })
+</script>
 
 {%endblock%}

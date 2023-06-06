@@ -45,7 +45,6 @@
         <!-- {% comment %} Municipios {% endcomment %} -->
   <div class="container text-center">
     <h2 class="mt-5 mb-5 fw-bold topic-color" id="cities">Municipios</h2>
-    <!-- <div class="mt-3 bg-secondary" style="height: 15rem;" data-aos="fade-up"></div> -->
     <div class="row justify-content-center">
       {% for city in homes %}
       <div class="col-lg-4 col-xl-3 col-md-5 cities-adjust gy-3 rounded">
@@ -54,7 +53,7 @@
                 <a class="py-5 z-3 city-name-banner" type="button" data-bs-toggle="modal" data-bs-target="#emBreve">
                   {{ city.city.name }}
                 </a>
-                <!-- Modal -->
+                
                 <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
@@ -79,7 +78,65 @@
       {% endfor %}
     </div>
   </div>
+<!-- 
+  <section class="container-cities" id="cities">
+    <div class="container-insides">
 
+    {% for city in homes %}
+      <div class="container-city" style="background-image: url('{{ city.city.banner_image.url }}');">
+        <div class="content">
+          <img src="{% static 'images/images-cities/bike-cities-icon.png'%}" alt="Ícone de uma bicicleta" class="img-logo">
+
+          <div class="city-name">
+            {% for letter in city.city.name %}
+                <span>{{ letter }}</span>
+            {% endfor %}
+          </div>
+
+          <a href="#">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z"
+                stroke="white" stroke-width="2" stroke-miterlimit="10" />
+              <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="content-img">
+          <div class="img">
+          </div>
+        </div>
+
+        <div class="content-infos">
+
+          <ul>
+            <li>Info01</li>
+            <li>Info02</li>
+            <li>Info03</li>
+            <li>Info04</li>
+            <li>Info05</li>
+          </ul>
+
+          <p>Saiba mais
+            <a href="{% url 'city_detail' pk=city.city.id %}">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z"
+                  stroke="white" stroke-width="2" stroke-miterlimit="10" />
+                <path d="M11 16H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M16 11V21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+
+            </a>
+          </p>
+        </div>
+      </div>
+
+    {% endfor %}
+    </div>
+  </section> -->
 
   <!-- <section class="container-cities">
     <div class="container-inside">

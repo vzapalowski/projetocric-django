@@ -63,10 +63,11 @@ def logout(request):
     auth.logout(request)
     return redirect('users:login')
 
-@login_required(redirect_field_name='login')
+@login_required(login_url='users:login')
 def profile(request):
-    email = request.user.email
+    username = request.user.username
 
+    email = request.user.email
     enrollments = Enrollment.objects.filter(email=email)
 
-    return render(request,'users/profile.html', {'email': email, 'enrollments': enrollments})
+    return render(request,'users/profile.html', {'username': username, 'enrollments': enrollments})

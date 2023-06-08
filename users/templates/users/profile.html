@@ -27,7 +27,7 @@
     </style>    
 </head>
 <body>
-    <h1>Welcome, {{ request.user.email }}!</h1>
+    <h1>Welcome, {{ request.user.username }}!</h1>
     <a href="{% url 'users:logout' %}">Logout</a>
     
     <table>

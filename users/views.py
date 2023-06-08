@@ -3,6 +3,7 @@ from django.contrib import messages, auth
 from django.core.validators import validate_email
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from event.models import Enrollment
 
 
 def register(request):
@@ -64,5 +65,8 @@ def logout(request):
 
 @login_required(redirect_field_name='login')
 def profile(request):
-    username = request.user.username
-    return render(request,'users/profile.html', {'username': username})
+    email = request.user.email
+
+    enrollments = Enrollment.objects.filter(email=email)
+
+    return render(request,'users/profile.html', {'email': email, 'enrollments': enrollments})

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <div class="container" style="width: 10vw;">
+        <form id="frm-login" method="POST" action="{% url 'users:login' %}">
+            {% csrf_token %}
+            <input type="text" placeholder="email" name="email" style="margin-bottom: 1vh;">
+            <input type="text" placeholder="senha" name="password" style="margin-bottom: 1vh;">
+            <button type="submit">Login</button>
+        </form>
+        
+        <a href="{% url 'users:register' %}">Registro</a>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

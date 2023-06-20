@@ -1,10 +1,12 @@
 from django.contrib import admin
 from cities.models import Route, City, AnchorPoint
 from .city_form import CityAdminForm
+from cities.admin.city_image import CityImageAdmin
 
 
 class CityAdmin(admin.ModelAdmin):
     form = CityAdminForm
+    inlines = [CityImageAdmin]
     list_display = ('id', 'name', 'visible')
     list_display_links = ('id', 'name')
     list

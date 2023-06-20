@@ -1,34 +1,78 @@
+{%extends 'base.html'%}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-    rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-    crossorigin="" 
-  >
-  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
-    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-    crossorigin=""
-  ></script>
-    <title>Document</title>
-</head>
-<body>
-    <p>{{ city.id }}</p>
-    <p>{{ city.name }}</p>
-    {% for route in city.routes.all %}
-        <p>{{ route }}</p>
-    {% endfor %}
 
-    <div id="map" style="width: 600px; height: 900px;">
+{%block 'content'%}
+
+<div class="bg-image d-flex col justify-content-center align-items-center">
+    <p class="h1 text-white">{{ city.name }}</p>
+</div>
+
+<div class="container">
+  <div class="tittle text-center">
+    <h1 class="text-uppercase my-5">Placeholder
+    </h1>
+  </div>
+  {% for image, tittle, text, is_even in images %}
+  <div class="mb-5 mt-5">
+    <div class="row">
+      {% if is_even %}
+        <div class="col-md-8">
+          <div class="card-body">
+            <h3 class="card-title">{{ tittle }}</h3>
+            <p class="card-text">{{ text }}</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <img src="{{ image }}" class="img-fluid rounded-start">
+        </div>
+      {% else %}
+        <div class="col-md-4">
+          <img src="{{ image }}" class="img-fluid rounded-start">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h3 class="card-title">{{ tittle }}</h3>
+            <p class="card-text">{{ text }}</p>
+          </div>
+        </div>
+      {% endif %}
     </div>
+  </div>
+  {% endfor %}
+</div>
 
-    <script src="{% static 'js/cities/data.js'%}" type="module" async></script>
-    <script src="{% static 'js/map/Polyline.encoded.js'%}"></script>
+<div id="map" class="mt-5 mb-5" style="height: 30rem;" data-aos="fade-up">
+  <!-- Mapa --> 
+</div>
 
-</body>
-</html>
+<div class="container text-center background mt-5 mb-5">
+  <p class="h1">{{ city.bottom_text_tittle }}</p>
+  <p>{{ city.bottom_text }}</p>
+</div>
+
+
+<script src="{% static 'js/cities/data.js'%}" type="module" async></script>
+<script src="{% static 'js/map/Polyline.encoded.js'%}"></script>
+
+
+<script>
+  var navBar = document.querySelector(".nav-bar-rotacric");
+window.addEventListener("scroll", function(){
+  if(window.pageYOffset > 150){
+      navBar.classList.add("nav-scroll-rotacric");
+      navBar.classList.remove("mt-5", "col-lx-9", "nav-t-5");
+      // logoNavbar.classList.remove("col-2", "col-lg-1");
+      // logoNavbar.classList.add("col-3", "col-sm-1");
+  }else{
+      navBar.classList.remove("nav-scroll-rotacric");
+      // logoNavbar.classList.remove("col-2", "col-sm-1");
+      navBar.classList.add("mt-5", "col-lx-9", "nav-t-5");
+      // logoNavbar.classList.add("col-3", "col-lg-1");
+
+  }
+});
+
+</script>
+
+{%endblock%}

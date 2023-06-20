@@ -12,6 +12,8 @@ class City(models.Model):
     routes = models.ManyToManyField(Route, blank=True, null=True, verbose_name='Rotas')
     points = models.ManyToManyField(AnchorPoint, blank=True, null=True, verbose_name='Pontos de apoio')
     visible = models.BooleanField(default=False, verbose_name='Visível')
+    bottom_text_tittle = models.CharField(max_length=100, verbose_name="bottom_text_tittle")
+    bottom_text = models.CharField(max_length=800, verbose_name="bottom_text")
 
     def __str__(self):
         return self.name

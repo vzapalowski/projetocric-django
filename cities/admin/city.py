@@ -1,7 +1,7 @@
 from django.contrib import admin
-
 from cities.models import Route, City, AnchorPoint
 from .city_form import CityAdminForm
+
 
 class CityAdmin(admin.ModelAdmin):
     form = CityAdminForm

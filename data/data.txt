@@ -1,0 +1,292 @@
+DADOS ROTAS DAS CIDADES
+    Charqueadas --> São Jerônimo | 3007668662019916668
+    Santo Amaro do Sul --> General Camara | 3007667420057044860
+    São Jerônimo --> General Camara | 3007668506003092348
+    Santo Amaro do Sul --> Vale Verde | 3007668224216829820
+    General Câmara --> Triunfo | 3007668046252207866
+    Triunfo --> São Jerônimo | 3007667833274213244
+    São Jerônimo --> Arroio dos Ratos | 3024729101863555016
+    Butiá --> São Jerônimo | 3024728961245899346
+    Butiá --> Minas do Leão | 3024728289614917202
+    Arroio dos Ratos --> Butiá | 3024728126930025042
+    Charqueadas --> Arroio dos Ratos | 3024727868187306952
+
+DADOS ROTAS DOS EVENTOS
+    Passeio Curto IFSUL | 3091026573680411058
+    Passeio Médio IFSUL | 3091028109947812882
+    Passeio Longo IFSUL | 3091032995765002258
+
+DADOS PONTOS DE INTERESSE
+    CHARQUEADAS
+        lat: -29.957687103462153
+        lng: -51.62773814677592
+        name: BG Hotel e Restaurante
+        address: Av Dr José Athanásio - 293, Centro
+        hours: 11h às 15h
+        phone: (51) 3658-1720
+        category: Hotel
+        -----------------------------------------
+        lat: -29.955289118853706
+        lng: -51.62571347302185
+        name: Hotel Ouro Verde
+        address: Av. Bento Gonçalves, 740 - Centro
+        hours: 08h às 00:00h
+        phone: (51) 3658-1111
+        category: Hotel
+        -----------------------------------------
+        lat: -29.954837291597133
+        lng: -51.62507423540608
+        name: Hotel Atlanta
+        address: Av. Bento Gonçalves, 691 - Centro
+        hours: 08h às 00:00h
+        phone: (51) 3658-7773
+        category: Hotel
+        -----------------------------------------
+        lat: -29.960059326926494
+        lng: -51.62413805721184
+        name: Supermercados Macropan
+        address: Av. Primeiro de Maio, 660 - Centro
+        hours: 08:30h às 20:00h
+        phone: (51) 3658-2992
+        category: Shopping
+        -----------------------------------------
+        lat: -29.960333545165863
+        lng: -51.6236841204011
+        name: Farmácias Agafarma
+        address: Av. Primeiro de Maio, 1000 - Centro
+        hours: 8h às 20h
+        phone: (51) 98595-3976
+        category: Pharmacy
+        -----------------------------------------
+        lat: -29.96081264887375
+        lng: -51.62376324155656
+        name: Empório Pasteis
+        address: Av. Getúlio Vargas, 36 - Centro
+        hours: 17:30h às 00:30h
+        phone: (51) 98458-2942
+        category: Food
+        -----------------------------------------
+        lat: -29.96102708090075
+        lng: -51.62267933000616
+        name: Camarote Food & Music
+        address: Av. Getúlio Vargas, 54 - Centro
+        hours: 15h às 02:00h
+        phone: (51) 99606-5551
+        category: Food
+        -----------------------------------------
+        lat: -29.9610719495622
+        lng: -51.622468299681884
+        name: Depósito do Parkão
+        address: Av. Getúlio Vargas, 110 - Centro
+        hours: 9h às 02:30h
+        phone: (51) 99680-5930
+        category: drink
+        -----------------------------------------
+        lat: -29.961310594171046
+        lng: -51.62250016495766
+        name: Depósito do Quadrado
+        address: Av. Getúlio Vargas, 138 - Centro
+        hours: 10h às 05:00h
+        phone: (51) 98158-7736
+        category: drink
+        -----------------------------------------
+        lat: -29.966924388457688
+        lng: -51.627666595256656
+        name: Gastão Borracharia
+        address: R. Agice José Ramos, 49 - Centro
+        hours: 8h às 20:00h
+        phone: Não possui telefone para contato!
+        category: Repair
+        -----------------------------------------
+        lat: -29.966991392189758
+        lng: -51.628719609123024
+        name: Manu's Bar
+        address: RS-401, 1003 - Centro
+        hours: 10h às 00:00h
+        phone: (51) 3080-1029
+        category: Food
+        -----------------------------------------
+        lat: -29.96809621993717
+        lng: -51.62817761663346
+        name: Desco Atacado
+        address: Rua Silmar Berbigier, 11 - COHAB
+        hours: 8h às 21h
+        phone: (51) 3658-3538
+        category: Shopping
+        -----------------------------------------
+        lat: -29.9679442410388
+        lng: -51.62917599334668
+        name: Pneumax
+        address: R. Orvalino Prates Dornelles, 947
+        hours: 07:30h às 18:30h
+        phone: (51) 3658-6272
+        category: Repair
+        -----------------------------------------
+        lat: -29.961014219833803
+        lng: -51.623017683027776
+        name: Duzeca Pizzaria
+        address: Av. Getúlio Vargas, 24 - Centro
+        hours: 19h às 23h
+        phone: (51) 3080-2121
+        category: Food
+        -----------------------------------------
+        lat: -29.97088463653178
+        lng: -51.62870001821727
+        name: Padaria Yung
+        address: Av. Silmar Berbigier, 101 - Sul America
+        hours: 8h às 20h
+        phone: (51) 3658-4593
+        category: Food
+        -----------------------------------------
+        lat: -29.973761269796345
+        lng: -51.628932049954464
+        name: Parada Obrigatória
+        address: R. Silmar Berbiguer, 695 - Sul America
+        hours: 10h às 22h
+        phone: (51) 98612-9103
+        category: Food
+        -----------------------------------------
+        lat: -29.95883882508328
+        lng: -51.62392364381867
+        name: Frubel o Ponto do Confeiteteiro
+        address: Av. Primeiro de Maio, 864 - Centro
+        hours: 9h às 18:30h
+        phone: (51) 99662-9059
+        category: Food
+        -----------------------------------------
+    VALE VERDE
+        lat: -29.887630
+        lng: -52.065229
+        name: Agropecuária GA
+        address: RS244, Km 39 - Monte Alegre
+        hours: Seg à Sab: 07h às 12h e das 13h às 18h Dom: 07h às 11:45h
+        phone: (51) 99878-6480
+        category: Shopping
+        -----------------------------------------
+        lat: -29.788217
+        lng: -52.177155
+        name: Pousada Rural Recando Verde
+        address: R. Arnaldo Roberto Seibert, 632 - Centro
+        hours: Horário mediante reserva
+        phone: (51) 98021-4471
+        category: Hotel
+        -----------------------------------------
+        lat: -29.788095
+        lng: -52.174603
+        name: Refeições da Leni
+        address: R. Arnaldo Roberto Seibert, 1166 Centro
+        hours: Não informado
+        phone: (51) 9997-3225
+        category: Food
+        -----------------------------------------
+        lat: -29.784305
+        lng: -52.185406
+        name: Pousada e Restaurante do Alemão
+        address: R. Assis Brasil, 237 - Centro
+        hours: Seg à Sab: 06h às 13:30 e das 18h às 19:30h
+        phone: (51) 3655-9032, (51) 99609-1100 ou (51) 99790-4165
+        category: Hotel
+        -----------------------------------------
+        lat: -29.774513
+        lng: -52.177448
+        name: Mais Saúde e Flor Casa de Produtos Naturais e Flores
+        address: ERS 405 Km 01, 1732 - Centro
+        hours: Seg à sexta: 8h às 11:30h e das 14h às 18h Sab: 08h às 12h
+        phone: (51) 99870-9536
+        category: Shopping
+        -----------------------------------------
+        lat: -29.820942
+        lng: -52.187810
+        name: Refúgio Montevale
+        address: Potreirinho - Interior
+        hours: Horário mediante reserva
+        phone: (51) 98114-5302
+        category: Hotel
+        -----------------------------------------
+        lat: -29.782419
+        lng: -52.186365
+        name: Lancheria e Choperia Complexo
+        address: R. Assis Brasil, 358 - Centro
+        hours: Seg, Qua e Qui: 14h às 22h Ter: 18h às 22h Sex, Sab e Dom: 18h às 23h
+        phone: (51) 99712-1123 ou  (51) 99800-7874
+        category: Food
+        -----------------------------------------
+        lat: -29.782778
+        lng: -52.186173
+        name: Restaurante do Vale
+        address: R. Assis Brasil, 422 - Centro
+        hours: Seg à Sex: 11h às 14h
+        phone: (51) 3655- 9056, (51) 99601-1184 ou (51) 99903-3024
+        category: Food
+        -----------------------------------------
+        lat: -29.781422
+        lng: -52.186899
+        name: Padaria e Confeitaria Pães & Cia
+        address: R. Alfredo Kirst, 72 - Centro
+        hours: 07h às 12h e das 14h às 19h
+        phone: (51) 99541-0883
+        category: Shopping
+        -----------------------------------------
+        lat: -29.781422
+        lng: -52.186899
+        name: Brut's Hamburgueria
+        address: R. Assis Brasil, 216 - Centro
+        hours: Quar à Dom: 19h às 23h
+        phone: (51) 99574-6332
+        category: Shopping
+        -----------------------------------------
+        lat: -29.783661
+        lng: -52.184044
+        name: Drogaria Mais Saúde
+        address: R. Alfredo Kirst, 133 - Centro
+        hours: Seg à Sex: 8h às 12h e das 13:30h às 18h Sab: 8h às 12h
+        phone: (51) 99758-4082
+        category: Shopping
+
+CATEGORIAS PONTOS DE INTERESSE 
+    Depósitos de Bebidas
+    Hotel
+    Alimentação
+    Posto de Gasolina
+    Farmácia
+    Lojas, Mercados
+    Hospital
+    Reparo
+    Pontos Turísticos
+
+BONDS
+    INF-1AM
+    INF-1AT
+    INF-2AM
+    INF-2AT
+    INF-3AM
+    INF-3AT
+    INF-4AM
+    INF-4AT
+    MCT-1AM
+    MCT-1AT
+    MCT-2AM
+    MCT-2AT
+    MCT-3AM
+    MCT-3AT
+    MCT-4AM
+    MCT-4AT
+HOWKNEW
+    Redes sociais
+    Amigos
+    Professores
+    Familiares
+
+DADOS PONTOS DE APOIO EVENTO IFSUL CHARQUEADAS
+    -----> LAT E LNG <-----
+        ---> ROTA CURTA
+            --> -29.950374, -51.621797 | Beira Rio
+            --> -29.947938, -51.616897 | Cais
+            --> -29.950166, -51.626262 | Corsan
+            --> -29.950911, -51.628862 | Bar Charqueadas
+            --> -29.963989, -51.625364 | IFSul Charqueadas
+        ---> ROTA MÉDIA <---
+            --> -29.968651, -51.618393 | Capão da Roça
+            --> -29.981007, -51.609259 | Zona Rural
+            --> -30.023507, -51.626796 | Divisão trajeto médio/longo
+            --> -30.022521, -51.629205 | Assentamento

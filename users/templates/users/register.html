@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            text-align: center;
+        }
+    
+        form {
+            margin-bottom: 1vh;
+        }
+    
+        input[type="text"],
+        input[type="password"] {
+            margin-bottom: 1vh;
+            padding: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+    
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.5em 1em;
+            border: none;
+            cursor: pointer;
+        }
+
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 1em;
+        }
+    
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+            margin-top: 1vh;
+        }
+    
+        .messages {
+            list-style-type: none;
+            padding-left: 0;
+        }
+    
+        .messages li {
+            margin-top: 1vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registro</h1>
+        <form id="frm-register" method="POST" action="">
+            {% csrf_token %}
+            <input type="text" placeholder="Username" name="username">
+            <input type="text" placeholder="Primeiro Nome" name="first_name">
+            <input type="text" placeholder="Sobrenome" name="last_name">
+            <input type="text" placeholder="Email" name="email">
+            <input type="password" placeholder="Senha" name="password">
+            <input type="password" placeholder="Confirmar Senha" name="password_confirm">
+        
+            <button type="submit">Registrar</button>
+        </form>
+        
+        <a href="{% url 'users:login' %}">Login</a>
+    
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>    
+</body>
+</html>

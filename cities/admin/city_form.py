@@ -1,6 +1,6 @@
 from django import forms
-
 from cities.models import City
+
 
 class CityAdminForm(forms.ModelForm):
     class Meta:
@@ -10,3 +10,4 @@ class CityAdminForm(forms.ModelForm):
             'routes': forms.CheckboxSelectMultiple,
             'points': forms.CheckboxSelectMultiple
         }
+        

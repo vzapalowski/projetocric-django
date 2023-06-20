@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <style>
+      h1 {
+          color: #4CAF50;
+          margin-bottom: 1em;
+      }
+  
+      a {
+          text-decoration: none;
+          color: #4CAF50;
+          margin-bottom: 1em;
+      }
+  
+      table {
+          border-collapse: collapse;
+          width: 100%;
+      }
+  
+      th, td {
+          border: 1px solid #ddd;
+          padding: 12px;
+          text-align: left;
+      }
+  
+      th {
+          background-color: #f2f2f2;
+      }
+  
+      tr:nth-child(even) {
+          background-color: #f9f9f9;
+      }
+  
+      a.edit-link {
+          text-decoration: none;
+          color: #4CAF50;
+      }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ request.user.username }}!</h1>
+    <a href="{% url 'users:logout' %}">Logout</a>
+    
+    <table>
+        <thead>
+          <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Social Network</th>
+            <th>Date of Birth</th>
+            <th>Bond Choice</th>
+            <th>How Knew</th>
+            <th>RG</th>
+            <th>Route Path</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for enrollment in enrollments %}
+          <tr>
+            <td>{{ enrollment.full_name }}</td>
+            <td>{{ enrollment.email }}</td>
+            <td>{{ enrollment.social_network }}</td>
+            <td>{{ enrollment.date_of_birth }}</td>
+            <td>{{ enrollment.bond_choice }}</td>
+            <td>{{ enrollment.how_knew }}</td>
+            <td>{{ enrollment.rg }}</td>
+            <td>{{ enrollment.route_path }}</td>
+            <td>
+              <a href="{% url 'users:edit_enrollment' enrollment.id %}">Edit</a>
+            </td>            
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>  
+</body>
+</html>

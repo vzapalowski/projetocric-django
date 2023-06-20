@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
-
 from cities.models import City
+
 
 class CityDetail(DetailView):
     model = City
@@ -11,3 +11,4 @@ class CityDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['city'] = City.objects.get(pk=self.kwargs['pk'])
         return context
+    

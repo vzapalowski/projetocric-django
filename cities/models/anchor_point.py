@@ -2,6 +2,7 @@ from django.db import models
 from cities.models.address_point import Address
 from cities.models.category_point import Category
 
+
 class AnchorPoint(models.Model):
     PATH_IMAGES_ANCHOR_POINTS = 'cities/anchor_points/photos/%Y/%m/%d'
     name = models.CharField(max_length=100, verbose_name='Nome')

@@ -52,7 +52,8 @@
       <div class="col-lg-4 col-xl-3 col-md-5 cities-adjust gy-3 rounded">
           <div style="background-image: url('{{ city.city.banner_image.url }}')" class="z-0 banner-adjust rounded" alt="Indisponível">
             <div class="z-3 banner-opacity rounded">
-                <a class="py-5 z-3 city-name-banner" type="button" data-bs-toggle="modal" data-bs-target="#emBreve">
+                <!-- <a class="py-5 z-3 city-name-banner" type="button" data-bs-toggle="modal" data-bs-target="#emBreve"> -->
+                <a class="py-5 z-3 city-name-banner" type="button" href="{% url 'cities:city_detail' pk=city.city.id %}">
                   {{ city.city.name }}
                 </a>
                 <!-- Modal -->

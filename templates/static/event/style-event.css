@@ -99,7 +99,7 @@
 
 
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .img-cric{
         height: 5rem;
     }
@@ -113,6 +113,18 @@
     .bg-image{
         height: 23rem;
     }
+
+    .col-mobile-order {
+        flex-direction: column;
+      }
+  
+      .col-mobile-order .col-md-4 {
+        order: 1;
+      }
+  
+      .col-mobile-order .col-md-8 {
+        order: 2;
+      }
 }
 
 @media (max-width: 576px) {

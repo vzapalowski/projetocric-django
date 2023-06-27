@@ -35,8 +35,6 @@
 }
 
 .img-event{
-    height: 20rem;
-    width: 20rem;
     object-fit: cover;
     column-gap: 1rem;
 }

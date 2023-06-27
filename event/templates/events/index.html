@@ -17,24 +17,32 @@
             <p class="description-event fs-5 mt-5"  data-aos="fade-up">
                 {{ event.description }}
             </p>
-            <div class="row mt-5" data-aos="fade-up">
-                {% for e in event.routes_data.all %}
-                <div class="col-sm-4 mb-3 mb-sm-0">
-                  <div class="card border-card">
-                    <div class="card-body">
-                      <h5 class="card-title border-bottom border-dark-subtle topic-color">{{ e }}</h5>
-                      <!-- <p class="card-text"></p> -->
-                      <p></p>
-                      <p class="card-text"><small class="text-body-secondary">Local de sáida: {{ e.departure_location }}</small></p>
-                      <p class="card-text"><small class="text-body-secondary">Horário de Concentração: {{ e.concentration }}</small></p>
-                      <p class="card-text"><small class="text-body-secondary">Horário de saída: {{ e.time }}</small></p>
-                    </div>
-                  </div>
-                </div>
-                {% endfor %}
-            </div>
       </div>
+    </div>
+<div class="container col">
+  {% for e in event.routes_data.all %}
+  <div class="row mt-5" data-aos="fade-up">
+  <div class="col-12 mb-3 mb-sm-0">
+    <div class="card border-card">
+      <div class="card-body">
+        <h5 class="card-title border-bottom border-dark-subtle topic-color">{{ e }}</h5>
+        <!-- <p class="card-text"></p> -->
+        <p></p>
+        <p class="card-text"><small class="text-body-secondary">Local de sáida: {{ e.departure_location }}</small></p>
+        <p class="card-text"><small class="text-body-secondary">Horário de Concentração: {{ e.concentration }}</small></p>
+        <p class="card-text"><small class="text-body-secondary">Horário de saída: {{ e.time }}</small></p>
+      </div>
+    </div>
   </div>
+</div> 
+  {% endfor %}
+
+</div>
+
+
+
+    
+
 
     <!-- Images -->
   <div class="container mt-5">
@@ -46,6 +54,25 @@
       {% endfor %}
   </div>
 </div>
+<!-- <div id="carouselExample" class="carousel bg-cric" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    {% for image in event.images.all %}
+      <div class="carousel-item active">
+          <div class="card">
+              <div class="img-wrapper"><img src="{{ image.image.url }}" class="d-block w-100" alt="..."> </div>
+          </div>
+      </div>
+      {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+  </button>
+</div> -->
 </div>
         <!-- Mapa de Rotas do Evento -->
 
@@ -181,25 +208,39 @@
 </div>
 
 <script>
-    var navBar = document.querySelector(".nav-bar-rotacric");
-    // var logoNavbar = document.querySelector(".logo-rotacric");
-
-    window.addEventListener("scroll", function(){
-        if(window.pageYOffset > 150){
-            navBar.classList.add("nav-scroll-rotacric");
-            navBar.classList.remove("mt-5", "col-lx-9", "nav-t-5");
-            // logoNavbar.classList.remove("col-2", "col-lg-1");
-            // logoNavbar.classList.add("col-3", "col-sm-1");
-        }else{
-            navBar.classList.remove("nav-scroll-rotacric");
-            // logoNavbar.classList.remove("col-2", "col-sm-1");
-            navBar.classList.add("mt-5", "col-lx-9", "nav-t-5");
-            // logoNavbar.classList.add("col-3", "col-lg-1");
-
-        }
-    });
-
+      // var multipleCardCarousel = document.querySelector(
+      //   "#carouselExample"
+      // );
+      // if (window.matchMedia("(min-width: 768px)").matches) {
+      //   var carousel = new bootstrap.Carousel(multipleCardCarousel, {
+      //     interval: false,
+      //   });
+      //   var carouselWidth = $(".carousel-inner")[0].scrollWidth;
+      //   var cardWidth = $(".carousel-item").width();
+      //   var scrollPosition = 0;
+      //   $("#carouselExample .carousel-control-next").on("click", function () {
+      //     if (scrollPosition < carouselWidth - cardWidth * 4) {
+      //       scrollPosition += cardWidth;
+      //       $("#carouselExample .carousel-inner").animate(
+      //         { scrollLeft: scrollPosition },
+      //         600
+      //       );
+      //     }
+      //   });
+      //   $("#carouselExample .carousel-control-prev").on("click", function () {
+      //     if (scrollPosition > 0) {
+      //       scrollPosition -= cardWidth;
+      //       $("#carouselExample .carousel-inner").animate(
+      //         { scrollLeft: scrollPosition },
+      //         600
+      //       );
+      //     }
+      //   });
+      // } else {
+      //   $(multipleCardCarousel).addClass("slide");
+      // }
 </script>
+
 
 <script src="{% static 'js/events/data.js'%}" type="module" async></script>
 <script src="{% static 'js/map/Polyline.encoded.js' %}"></script>

@@ -6,6 +6,9 @@
     <a class="nav-link" href="#cities">Municipios</a>
   </li>
   <li class="nav-item">
+    <a class="nav-link bg-primary" aria-current="page" href="{% url 'home:home'  %}">Entrar</a>
+  </li>
+  <li class="nav-item">
       <a class="nav-link" href="#manual">Manual</a>
   </li>
   <li class="nav-item">
@@ -220,7 +223,7 @@
 <script src="{% static 'js/home/data.js'%}" type="module" async></script>
 <script src="{% static 'js/map/Polyline.encoded.js'%}"></script>
 
-<script>
+<!-- <script>
         var navBar = document.querySelector(".nav-bar-rotacric");
     window.addEventListener("scroll", function(){
         if(window.pageYOffset > 150){
@@ -236,7 +239,7 @@
 
         }
     });
-    
+     -->
 </script>
 
 

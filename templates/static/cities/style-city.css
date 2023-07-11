@@ -1,8 +1,23 @@
-/* @media (max-width: 375px) {
-    .even-card {
-        margin-top: 2vh;
-    }
-} */
+.fab-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    height: fit-content;
+    width: fit-content;
+    z-index: 9999;
+    border-radius: 100%;
+    border: none;
+}
+
+#fab-button {
+    border: none;
+    background-color: rgb(100, 100, 100);
+    height: 4rem;
+    width: 4rem;
+    border-radius: 100%;
+}
+
+
 
 @media (max-width: 475px) {
     .even-card {
@@ -15,5 +30,11 @@
 
     .card {
         margin: 0 0 0 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .city-name {
+        display: none;
     }
 }

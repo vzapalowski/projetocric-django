@@ -1,0 +1,19 @@
+/* @media (max-width: 375px) {
+    .even-card {
+        margin-top: 2vh;
+    }
+} */
+
+@media (max-width: 475px) {
+    .even-card {
+        margin-top: 1vh;
+    }
+
+    .odd-card {
+        margin-top: 1vh;
+    }
+
+    .card {
+        margin: 0 0 0 0;
+    }
+}

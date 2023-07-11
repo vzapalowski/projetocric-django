@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from cities.models import City
+from event.models import Event
 
 
 class CityDetail(DetailView):
@@ -16,6 +17,7 @@ class CityDetail(DetailView):
             is_even = (index % 2 == 0)
             images.append((image.image.url, image.tittle, image.subtitle, is_even))
         context['images'] = images
+        context['events'] = Event.objects.all()
 
         return context
     

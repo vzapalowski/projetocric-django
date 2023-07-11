@@ -1,7 +1,6 @@
 {%extends 'base.html'%}
 {% load static %}
 
-
 {%block 'content'%}
 
 <!-- <div class="bg-image d-flex col justify-content-center align-items-center" style="background-image: url('../../media/{{ city.banner_image }}');"> -->
@@ -10,17 +9,19 @@
 </div>
 
 <div class="container">
-  <div class="tittle text-center">
+  <div class="title text-center">
     <h1 class="text-uppercase my-5">Placeholder</h1>
   </div>
-  {% for image, tittle, text, is_even in images %}
+  {% for image, title, text, is_even in images %}
   <div class="mb-5 mt-5" data-aos="fade-up">
     <div class="row col-mobile-order">
       {% if is_even %}
-        <div class="col-md-8 card">
-          <div class="card-body">
-            <h3 class="card-title mt-3">{{ tittle }}</h3>
-            <p class="card-text">{{ text }}</p>
+        <div class="col-md-8 even-card">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title mt-3">{{ title }}</h3>
+              <p class="card-text">{{ text }}</p>
+            </div>
           </div>
         </div>
         <div class="col-md-4">
@@ -30,10 +31,12 @@
         <div class="col-md-4">
           <img src="{{ image }}" class="img-fluid rounded-start">
         </div>
-        <div class="col-md-8 card">
-          <div class="card-body">
-            <h3 class="card-title mt-3">{{ tittle }}</h3>
-            <p class="card-text">{{ text }}</p>
+        <div class="col-md-8 odd-card">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title mt-3">{{ title }}</h3>
+              <p class="card-text">{{ text }}</p>
+            </div>
           </div>
         </div>
       {% endif %}
@@ -57,12 +60,12 @@
 </div>
 
 
-<div class="card mx-auto mt-5 mb-5" style="width: 80vw;" data-aos="fade-up">
+<!-- <div class="card mx-auto mt-5 mb-5" style="width: 80vw;">
   <div class="card-body">
     <h5 class="card-title text-center">{{ city.bottom_text_tittle }}</h5>
     <p class="card-text text-center">{{ city.bottom_text }}</p>
   </div>
-</div>
+</div> -->
 
 
 

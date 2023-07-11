@@ -5,7 +5,7 @@
 
 <!-- <div class="bg-image d-flex col justify-content-center align-items-center" style="background-image: url('../../media/{{ city.banner_image }}');"> -->
 <div class="bg-image d-flex col justify-content-center align-items-center">
-    <p class="h1 text-white">{{ city.name }}</p>
+    <p class="h1 text-white city-name">{{ city.name }}</p>
 </div>
 
 <div class="container">
@@ -67,7 +67,11 @@
   </div>
 </div> -->
 
-
+<div class="fab-container">
+  <button class="btn btn-primary" id="fab-button">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+</div>
 
 <script src="{% static 'js/cities/data.js'%}" type="module" async></script>
 <script src="{% static 'js/map/Polyline.encoded.js'%}"></script>
@@ -92,4 +96,12 @@ window.addEventListener("scroll", function(){
 
 </script>
 
+<script>
+  document.querySelector('#fab-button').addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+</script>
 {%endblock%}

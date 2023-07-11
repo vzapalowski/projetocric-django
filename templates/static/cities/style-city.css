@@ -17,9 +17,7 @@
     border-radius: 100%;
 }
 
-
-
-@media (max-width: 475px) {
+@media (max-width: 765px) {
     .even-card {
         margin-top: 1vh;
     }

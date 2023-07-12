@@ -24,7 +24,6 @@
     --neutral-black-12: #D9D9D9;
     --neutral-black-1: #F1F1F1;
     --neutral-white: #FFFFFF;
-    
 }
 
 .background {
@@ -40,6 +39,17 @@
 .logo-rotacric img{
   border-radius: 15rem;
 }
+
+.btn-hover-cric{
+  background-color: #ffffff;
+  border-radius: 15rem;
+}
+
+.btn-hover-cric:hover{
+  background-color: #d3d3d3;
+}
+
+
 .nav-t-5{
   transition: 0.5s;
 }

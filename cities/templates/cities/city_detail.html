@@ -8,31 +8,32 @@
     <p class="h1 text-white city-name">{{ city.name }}</p>
 </div>
 
-<div class="container">
+<div class="container-lg">
   <div class="title text-center">
     <h1 class="text-uppercase my-5">Placeholder</h1>
   </div>
   {% for image, title, text, is_even in images %}
+  
   <div class="mb-5 mt-5" data-aos="fade-up">
     <div class="row col-mobile-order">
       {% if is_even %}
-        <div class="col-md-8 even-card">
-          <div class="card">
+        <div class="col-md-8 col-lg-8 even-card">
+          <div class="card" style="height: 100%;">
             <div class="card-body">
               <h3 class="card-title mt-3">{{ title }}</h3>
               <p class="card-text">{{ text }}</p>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <img src="{{ image }}" class="img-fluid rounded-start">
+        <div class="col-md-4 col-lg-4">
+          <img src="{{ image }}" class="img-fluid rounded-end">
         </div>
       {% else %}
-        <div class="col-md-4">
+        <div class="col-md-4 col-lg-4">
           <img src="{{ image }}" class="img-fluid rounded-start">
         </div>
-        <div class="col-md-8 odd-card">
-          <div class="card">
+        <div class="col-md-8 col-lg-8 odd-card">
+          <div class="card" style="height: 100%;">
             <div class="card-body">
               <h3 class="card-title mt-3">{{ title }}</h3>
               <p class="card-text">{{ text }}</p>
@@ -76,25 +77,6 @@
 <script src="{% static 'js/cities/data.js'%}" type="module" async></script>
 <script src="{% static 'js/map/Polyline.encoded.js'%}"></script>
 
-
-<script>
-  var navBar = document.querySelector(".nav-bar-rotacric");
-window.addEventListener("scroll", function(){
-  if(window.pageYOffset > 150){
-      navBar.classList.add("nav-scroll-rotacric");
-      navBar.classList.remove("mt-5", "col-lx-9", "nav-t-5");
-      // logoNavbar.classList.remove("col-2", "col-lg-1");
-      // logoNavbar.classList.add("col-3", "col-sm-1");
-  }else{
-      navBar.classList.remove("nav-scroll-rotacric");
-      // logoNavbar.classList.remove("col-2", "col-sm-1");
-      navBar.classList.add("mt-5", "col-lx-9", "nav-t-5");
-      // logoNavbar.classList.add("col-3", "col-lg-1");
-
-  }
-});
-
-</script>
 
 <script>
   document.querySelector('#fab-button').addEventListener('click', () => {

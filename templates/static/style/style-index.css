@@ -30,10 +30,34 @@
   background-color: var(--neutral-black-12);
 }
 
+/* FAB */
+.fab-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  height: fit-content;
+  width: fit-content;
+  z-index: 9999;
+  border-radius: 100%;
+  border: none;
+}
+
+#fab-button {
+  border: none;
+  background-color: rgb(100, 100, 100);
+  height: 4rem;
+  width: 4rem;
+  border-radius: 100%;
+}
+
 /* NAVIGATION */
 
 .navbar {
     background-color:var(--neutral-white);
+}
+
+.logo-container:hover {
+  cursor: pointer;
 }
 
 .logo-rotacric img{

@@ -28,8 +28,20 @@
 }
 
 body{
-    background-color: var(--neutral-black-30) !important;
+background-color: var(--neutral-black-30);
 }
+
+.bg-top-image{
+    /* background-image: url(https://images.unsplash.com/photo-1524100880052-104a85d5ab82?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80); */
+    background-size: cover;
+    background-color: #101633;
+    background-repeat: no-repeat;
+    height: 25rem;
+}
+
+.logo-rotacric img{
+    border-radius: 15rem;
+  }
 
 .container {
     display: flex;

@@ -44,207 +44,49 @@
 
         <!-- {% comment %} Municipios {% endcomment %} -->
 
-        <div class="container mt-5">
-          <div class="row g-2">
-            <a href="{% url 'users:login' %}" class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3">
-              <!-- Responsividade para Desktop -->
-              <div>
-                <img class="d-none d-xl-block mb-5" src="{% static 'cities/icons/cycling.svg'%}" alt="">
-                <span class="d-none d-xl-block city-name-banner">C</span>
-                <span class="d-none d-xl-block city-name-banner">H</span>
-                <span class="d-none d-xl-block city-name-banner">A</span>
-                <span class="d-none d-xl-block city-name-banner">R</span>
-                <span class="d-none d-xl-block city-name-banner">Q</span>
-                <span class="d-none d-xl-block city-name-banner">U</span>
-                <span class="d-none d-xl-block city-name-banner">E</span>
-                <span class="d-none d-xl-block city-name-banner">A</span>
-                <span class="d-none d-xl-block city-name-banner">D</span>              
-                <span class="d-none d-xl-block city-name-banner">A</span>  
-                <span class="d-none d-xl-block city-name-banner">S</span>  
-                <img class="d-none d-xl-block mt-5" src="{% static 'cities/icons/plus.svg'%}" alt="">
-            <!-- Responsividade para Mobile -->
-            <div class="d-inline d-xl-none">
-              <img src="{% static 'cities/icons/cycling.svg'%}">
-              <span class="city-name-banner">CHARQUEADAS</span>
-              <img class="" src="{% static 'cities/icons/plus.svg'%}">
-            </div> 
-              </div>
-            </a>
-            <a href="{% url 'users:login' %}" class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3">
-              <!-- Responsividade para Desktop -->
-              <div>
-                <img class="d-none d-xl-block mb-5" src="{% static 'cities/icons/cycling.svg'%}" alt="">
-                <span class="d-none d-xl-block city-name-banner">A</span>
-                <span class="d-none d-xl-block city-name-banner">R</span>
-                <span class="d-none d-xl-block city-name-banner">R</span>
-                <span class="d-none d-xl-block city-name-banner">O</span>
-                <span class="d-none d-xl-block city-name-banner">I</span>
-                <span class="d-none d-xl-block city-name-banner">O</span>
-                <span class="d-none d-xl-block city-name-banner">-</span>
-                <span class="d-none d-xl-block city-name-banner">D</span>
-                <span class="d-none d-xl-block city-name-banner">O</span>              
-                <span class="d-none d-xl-block city-name-banner">S</span>  
-                <span class="d-none d-xl-block city-name-banner">-</span>  
-                <span class="d-none d-xl-block city-name-banner">R</span>
-                <span class="d-none d-xl-block city-name-banner">A</span>
-                <span class="d-none d-xl-block city-name-banner">T</span>  
-                <span class="d-none d-xl-block city-name-banner">O</span>  
-                <span class="d-none d-xl-block city-name-banner">S</span>      
-                <img class="d-none d-xl-block mt-5" src="{% static 'cities/icons/plus.svg'%}" alt="">
-            <!-- Responsividade para Mobile -->
-            <div class="d-inline d-xl-none">
-              <img src="{% static 'cities/icons/cycling.svg'%}">
-              <span class="city-name-banner">ARROIO-DOS-RATOS</span>
-              <img class="" src="{% static 'cities/icons/plus.svg'%}">
-            </div> 
-              </div>
+  <div class="container mt-5">
+    <div class="row g-2">
 
-            </a>
-            <a href="{% url 'users:login' %}" class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3">
-              <!-- Responsividade para Desktop -->
-              <div>
-                <img class="d-none d-xl-block mb-5" src="{% static 'cities/icons/cycling.svg'%}" alt="">
-                <span class="d-none d-xl-block city-name-banner align-self-center">B</span>
-                <span class="d-none d-xl-block city-name-banner align-self-center">U</span>
-                <span class="d-none d-xl-block city-name-banner align-self-center">T</span>
-                <span class="d-none d-xl-block city-name-banner align-self-center">I</span>
-                <span class="d-none d-xl-block city-name-banner align-self-center">A</span> 
-                <img class="d-none d-xl-block mt-5" src="{% static 'cities/icons/plus.svg'%}" alt="">
+      {% for city in homes %}
+        {% if city.city.active %}
+          <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" style="background-image: url('{{ city.city.banner_image.url }}')">
+        {% else %}
+          <a class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" type="button" style="background-image: url('{{ city.city.banner_image.url }}')" data-bs-toggle="modal" data-bs-target="#emBreve" >
+        {% endif %}
+          <!-- Responsividade para Desktop -->
+          <div>
+            <img class="d-none d-xl-block mb-5" src="{% static 'cities/icons/cycling.svg'%}" alt="">
+            {% for letter in city.city.name %}
+              <span class="d-none d-xl-block city-name-banner">{{ letter }}</span>
+            {% endfor %}  
+            <img class="d-none d-xl-block mt-5" src="{% static 'cities/icons/plus.svg'%}" alt="">
             <!-- Responsividade para Mobile -->
             <div class="d-inline d-xl-none">
               <img src="{% static 'cities/icons/cycling.svg'%}">
-              <span class="city-name-banner">BUTIA</span>
+              <span class="city-name-banner">{{ city.city.name }}</span>
               <img class="" src="{% static 'cities/icons/plus.svg'%}">
             </div> 
-              </div>
-            </a>
-            <a href="{% url 'users:login' %}" class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3">
-              <!-- Responsividade para Desktop -->
-              <div>
-                <img class="d-none d-xl-block mb-5" src="{% static 'cities/icons/cycling.svg'%}" alt="">
-                <span class="d-none d-xl-block city-name-banner">B</span>
-                <span class="d-none d-xl-block city-name-banner">A</span>
-                <span class="d-none d-xl-block city-name-banner">R</span>
-                <span class="d-none d-xl-block city-name-banner">Ã</span>
-                <span class="d-none d-xl-block city-name-banner">O</span>
-                <span class="d-none d-xl-block city-name-banner">-</span>
-                <span class="d-none d-xl-block city-name-banner">D</span>
-                <span class="d-none d-xl-block city-name-banner">O</span>
-                <span class="d-none d-xl-block city-name-banner">-</span>              
-                <span class="d-none d-xl-block city-name-banner">T</span>  
-                <span class="d-none d-xl-block city-name-banner">R</span>  
-                <span class="d-none d-xl-block city-name-banner">I</span> 
-                <span class="d-none d-xl-block city-name-banner">U</span> 
-                <span class="d-none d-xl-block city-name-banner">N</span> 
-                <span class="d-none d-xl-block city-name-banner">F</span> 
-                <span class="d-none d-xl-block city-name-banner">O</span> 
-                <img class="d-none d-xl-block mt-5" src="{% static 'cities/icons/plus.svg'%}" alt="">
-            <!-- Responsividade para Mobile -->
-            <div class="d-inline d-xl-none">
-              <img src="{% static 'cities/icons/cycling.svg'%}">
-              <span class="city-name-banner">BARÃO-DO-TRIUNFO</span>
-              <img class="" src="{% static 'cities/icons/plus.svg'%}">
-            </div> 
-              </div>
-            </a>
-            <a href="{% url 'users:login' %}" class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3">
-              <!-- Responsividade para Desktop -->
-              <div>
-                <img class="d-none d-xl-block mb-5" src="{% static 'cities/icons/cycling.svg'%}" alt="">
-                <span class="d-none d-xl-block city-name-banner">S</span>
-                <span class="d-none d-xl-block city-name-banner">Ã</span>
-                <span class="d-none d-xl-block city-name-banner">O</span>
-                <span class="d-none d-xl-block city-name-banner">-</span>
-                <span class="d-none d-xl-block city-name-banner">J</span>
-                <span class="d-none d-xl-block city-name-banner">E</span>
-                <span class="d-none d-xl-block city-name-banner">R</span>
-                <span class="d-none d-xl-block city-name-banner">O</span>
-                <span class="d-none d-xl-block city-name-banner">N</span>              
-                <span class="d-none d-xl-block city-name-banner">I</span>  
-                <span class="d-none d-xl-block city-name-banner">M</span>
-                <span class="d-none d-xl-block city-name-banner">O</span>   
-                <img class="d-none d-xl-block mt-5" src="{% static 'cities/icons/plus.svg'%}" alt="">
-            <!-- Responsividade para Mobile -->
-            <div class="d-inline d-xl-none">
-              <img src="{% static 'cities/icons/cycling.svg'%}">
-              <span class="city-name-banner">SÃO-JERONIMO</span>
-              <img class="" src="{% static 'cities/icons/plus.svg'%}">
-            </div> 
-              </div>
-            </a>
-            <a href="{% url 'users:login' %}" class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3">
-              <!-- Responsividade para Desktop -->
-              <div>
-                <img class="d-none d-xl-block mb-5" src="{% static 'cities/icons/cycling.svg'%}" alt="">
-                <span class="d-none d-xl-block city-name-banner">T</span>
-                <span class="d-none d-xl-block city-name-banner">R</span>
-                <span class="d-none d-xl-block city-name-banner">I</span>
-                <span class="d-none d-xl-block city-name-banner">U</span>
-                <span class="d-none d-xl-block city-name-banner">N</span>
-                <span class="d-none d-xl-block city-name-banner">F</span>
-                <span class="d-none d-xl-block city-name-banner">O</span> 
-                <img class="d-none d-xl-block mt-5" src="{% static 'cities/icons/plus.svg'%}" alt="">
-            <!-- Responsividade para Mobile -->
-            <div class="d-inline d-xl-none">
-              <img src="{% static 'cities/icons/cycling.svg'%}">
-              <span class="city-name-banner">TRIUNFO</span>
-              <img class="" src="{% static 'cities/icons/plus.svg'%}">
-            </div>               </div>
-            </a>
-            <a href="{% url 'users:login' %}" class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3">
-              <!-- Responsividade para Desktop -->
-              <div>
-                <img class="d-none d-xl-block mb-5" src="{% static 'cities/icons/cycling.svg'%}" alt="">
-                <span class="d-none d-xl-block city-name-banner">G</span>
-                <span class="d-none d-xl-block city-name-banner">E</span>
-                <span class="d-none d-xl-block city-name-banner">N</span>
-                <span class="d-none d-xl-block city-name-banner">E</span>
-                <span class="d-none d-xl-block city-name-banner">R</span>
-                <span class="d-none d-xl-block city-name-banner">A</span>
-                <span class="d-none d-xl-block city-name-banner">L</span>
-                <span class="d-none d-xl-block city-name-banner">-</span>
-                <span class="d-none d-xl-block city-name-banner">C</span>              
-                <span class="d-none d-xl-block city-name-banner">A</span>  
-                <span class="d-none d-xl-block city-name-banner">M</span>
-                <span class="d-none d-xl-block city-name-banner">A</span>  
-                <span class="d-none d-xl-block city-name-banner">R</span>  
-                <span class="d-none d-xl-block city-name-banner">A</span>  
-                <img class="d-none d-xl-block mt-5" src="{% static 'cities/icons/plus.svg'%}" alt="">
-            <!-- Responsividade para Mobile -->
-            <div class="d-inline d-xl-none">
-              <img src="{% static 'cities/icons/cycling.svg'%}">
-              <span class="city-name-banner">GENERAL CAMARA</span>
-              <img class="" src="{% static 'cities/icons/plus.svg'%}">
-            </div>               </div>
-            </a>
-            <a href="{% url 'users:login' %}" class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3">
-              <!-- Responsividade para Desktop -->
-              <div>
-                <img class="d-none d-xl-block mb-5" src="{% static 'cities/icons/cycling.svg'%}" alt="">
-                <span class="d-none d-xl-block city-name-banner">M</span>
-                <span class="d-none d-xl-block city-name-banner">I</span>
-                <span class="d-none d-xl-block city-name-banner">N</span>
-                <span class="d-none d-xl-block city-name-banner">A</span>
-                <span class="d-none d-xl-block city-name-banner">S</span>
-                <span class="d-none d-xl-block city-name-banner">-</span>
-                <span class="d-none d-xl-block city-name-banner">D</span>
-                <span class="d-none d-xl-block city-name-banner">O</span>
-                <span class="d-none d-xl-block city-name-banner">-</span>              
-                <span class="d-none d-xl-block city-name-banner">L</span>  
-                <span class="d-none d-xl-block city-name-banner">E</span>
-                <span class="d-none d-xl-block city-name-banner">Ã</span>
-                <span class="d-none d-xl-block city-name-banner">O</span>
-                <img class="d-none d-xl-block mt-5" src="{% static 'cities/icons/plus.svg'%}" alt="">
-            <!-- Responsividade para Mobile -->
-                <div class="d-inline d-xl-none">
-                  <img src="{% static 'cities/icons/cycling.svg'%}">
-                  <span class="city-name-banner">MINAS-DO-LEÃO</span>
-                  <img class="" src="{% static 'cities/icons/plus.svg'%}">
-                </div> 
-              </div>
-            </a>      
+          </div>
+        </a>
+      {% endfor %}
+      <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Conteúdo Indisponível</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Obrigado pelo seu interesse! Estamos trabalhando arduamente para trazer o conteúdo que você procura. Em breve, estará disponível para você aproveitar. Agradecemos sua paciência e prometemos que valerá a pena esperar. Fique atento para mais atualizações em breve!
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
          
         
 

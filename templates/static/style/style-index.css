@@ -50,11 +50,17 @@
 }
 
 #fab-button {
-  border: none;
-  background-color: rgb(100, 100, 100);
+  border: 2px solid var(--secundary-dark);
+  background-color: var(--secundary-dark);
   height: 4rem;
   width: 4rem;
   border-radius: 100%;
+  transition: 0.5s;
+}
+
+#fab-button:hover{
+  background-color: var(--primary-color);
+  transition: 0.5s;
 }
 
 /* NAVIGATION */

@@ -60,9 +60,9 @@
           </div>
         </form>
   </div>
-<div class="container">
+<div class="container position-fixed top-100 start-50 translate-middle mb-5">
   {% if messages %}
-  <ul class="position-absolute start-50 end-50 translate-middle-x col-11 col-sm-8 ps-0 adjust-message">
+  <ul class="col-11 col-sm-8 ps-0 adjust-message mb-5">
     {% for message in messages %}
     <li {% if message.tags %} class="{{ message.tags }} card message"{% endif %}>
     <p class="card-body mb-0">

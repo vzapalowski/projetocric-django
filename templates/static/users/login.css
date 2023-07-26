@@ -128,6 +128,16 @@ footer{
     }
 }
 
+/* MESSAGE CARD FX */
+.message-container {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.message-container.hide {
+    opacity: 0;
+}
+
 /* 
 h1 {
     color: #232e23;

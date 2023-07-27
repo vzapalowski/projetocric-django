@@ -3,7 +3,12 @@
 
 {%block 'content'%}
 
-<div class="bg-image d-flex col justify-content-center align-items-center" style="background-image: url('../../media/{{ city.banner_image }}');">
+<div class="bg-image d-flex col justify-content-center align-items-center" style="
+  background-image: url('../../media/{{ city.banner_image }}');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  ">
 <!-- <div class="bg-image d-flex col justify-content-center align-items-center"> -->
 
 </div>

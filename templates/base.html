@@ -119,7 +119,7 @@
           <nav class="navbar navbar-expand-lg mb-0 rounded-pill">
               <div class="container text-center">
                           <a class="navbar-brand" href="#"></a>
-                          <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                          <button class="navbar-toggler border-0" id="btn-open-offcanvas" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                               <span class="navbar-toggler-icon"></span>
                           </button>
                       <div class="offcanvas offcanvas-end text-center" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -133,7 +133,8 @@
                                       <a class="nav-link btn-hover-cric px-4" aria-current="page" href="{% url 'home:home' %}"><i class="fa-solid fa-house me-3 text-primary-emphasis"></i> Home</a>
                                   </li>
                                   <li class="nav-item">
-                                    <a class="nav-link btn-hover-cric px-4" aria-current="page" href="{% url 'users:login' %}"><i class="fa-solid fa-user me-3 text-primary-emphasis" style="color: #233e6c;"></i>Entrar</a>
+                                    <!-- <a class="nav-link btn-hover-cric px-4" aria-current="page" href="{% url 'users:login' %}"><i class="fa-solid fa-user me-3 text-primary-emphasis" style="color: #233e6c;"></i>Entrar</a> -->
+                                    <a class="nav-link btn-hover-cric px-4" aria-current="page" href="#"><i class="fa-solid fa-user me-3 text-primary-emphasis" style="color: #233e6c;"></i>Entrar</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                   <a class="nav-link dropdown-toggle btn-hover-cric px-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

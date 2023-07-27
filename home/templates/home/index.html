@@ -2,14 +2,14 @@
 {% load static %}
 
 {% block 'navigation' %}
-  <li class="nav-item">
-    <a class="nav-link btn-hover-cric px-4 text-primary-emphasis" href="#cities"><i class="fa-solid fa-city me-2"></i> Municipios</a>
+  <li class="nav-item" data-bs-dismiss="offcanvas">
+    <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#cities"><i class="fa-solid fa-city me-2"></i> Municipios</a>
   </li>
-  <li class="nav-item">
-      <a class="nav-link btn-hover-cric px-4 text-primary-emphasis" href="#manual"><i class="fa-solid fa-book me-2"></i> Manual</a>
+  <li class="nav-item" data-bs-dismiss="offcanvas">
+      <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#manual"><i class="fa-solid fa-book me-2"></i> Manual</a>
   </li>
-  <li class="nav-item">
-      <a class="nav-link btn-hover-cric px-4 text-primary-emphasis" href="#about"><i class="fa-solid fa-circle-info me-2"></i> Sobre</a>
+  <li class="nav-item" data-bs-dismiss="offcanvas">
+      <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#about"><i class="fa-solid fa-circle-info me-2"></i> Sobre</a>
   </li>
 {% endblock %}
 
@@ -227,5 +227,15 @@
 </div>
 <script src="{% static 'js/home/data.js'%}" type="module" async></script>
 <script src="{% static 'js/map/Polyline.encoded.js'%}"></script>
+
+<script>
+  document.querySelectorAll('.page-nav-item').forEach(e => {
+    e.addEventListener('click', () => {
+      setTimeout(() => {
+        document.querySelector(e.getAttribute('href')).scrollIntoView();
+      }, 500);
+    });
+  });
+</script>
 
 {%endblock%}

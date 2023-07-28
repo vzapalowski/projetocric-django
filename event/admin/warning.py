@@ -1,6 +1,6 @@
 from django.contrib import admin
-
 from event.models.warning import Warning
+
 
 class WarningAdmin(admin.ModelAdmin):
     list_display = ('title', 'content')

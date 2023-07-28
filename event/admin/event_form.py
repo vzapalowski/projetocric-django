@@ -1,6 +1,7 @@
 from django import forms
-
 from event.models import Event
+from django.contrib.auth.models import User
+
 
 class EventForm(forms.ModelForm):
 
@@ -12,3 +13,9 @@ class EventForm(forms.ModelForm):
             'routes_data': forms.CheckboxSelectMultiple,
             'warnings': forms.CheckboxSelectMultiple,
         }
+        
+    users = forms.ModelMultipleChoiceField(
+        queryset=User.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )

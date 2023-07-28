@@ -1,6 +1,6 @@
 from django.contrib import admin
-
 from cities.models import Route
+
 
 class RouteAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'id_route', 'active', 'polyline')

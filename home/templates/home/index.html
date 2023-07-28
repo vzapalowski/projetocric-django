@@ -2,23 +2,23 @@
 {% load static %}
 
 {% block 'navigation' %}
-  <li class="nav-item">
-    <a class="nav-link" href="#cities">Municipios</a>
+  <li class="nav-item" data-bs-dismiss="offcanvas">
+    <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#cities"><i class="fa-solid fa-city me-2"></i> Municipios</a>
   </li>
-  <li class="nav-item">
-      <a class="nav-link" href="#manual">Manual</a>
+  <li class="nav-item" data-bs-dismiss="offcanvas">
+      <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#manual"><i class="fa-solid fa-book me-2"></i> Manual</a>
   </li>
-  <li class="nav-item">
-      <a class="nav-link" href="#about">Sobre</a>
+  <li class="nav-item" data-bs-dismiss="offcanvas">
+      <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#about"><i class="fa-solid fa-circle-info me-2"></i> Sobre</a>
   </li>
 {% endblock %}
 
 {%block 'content'%}
 
-<div class="bg-image-h"></div>
+<div class="bg-image-h" data-aos="fade-up"></div>
 
     <h2 class="mt-5 mb-5 fw-bold topic-color text-center">Mapa das Rotas</h2>
-    <div id="map" class="mt-3" style="height: 30rem;" data-aos="fade-up"> <!-- Mapa --> </div>
+    <div id="map" class="mt-3 border border-dark border-start-0 border-end-0 border-1" style="height: 30rem;"> <!-- Mapa --> </div>
 
 </div>
 
@@ -44,41 +44,50 @@
 
         <!-- {% comment %} Municipios {% endcomment %} -->
 
-        <div class="container text-center">
-    <h2 class="mt-5 mb-5 fw-bold topic-color" id="cities">Municipios</h2>
-    <!-- <div class="mt-3 bg-secondary" style="height: 15rem;" data-aos="fade-up"></div> -->
-    <div class="row justify-content-center">
+  <div class="container mt-5">
+    <h2 class="mt-5 mb-5 fw-bold topic-color" id="cities">Municipios da Região Carnonífera</h2>
+    <div class="row g-2">
+
       {% for city in homes %}
-      <div class="col-lg-4 col-xl-3 col-md-5 cities-adjust gy-3 rounded">
-          <div style="background-image: url('{{ city.city.banner_image.url }}')" class="z-0 banner-adjust rounded" alt="Indisponível">
-            <div class="z-3 banner-opacity rounded">
-                <a class="py-5 z-3 city-name-banner" type="button" data-bs-toggle="modal" data-bs-target="#emBreve">
-                  {{ city.city.name }}
-                </a>
-                <!-- Modal -->
-                <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Conteúdo Indisponível</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        Obrigado pelo seu interesse! Estamos trabalhando arduamente para trazer o conteúdo que você procura. Em breve, estará disponível para você aproveitar. Agradecemos sua paciência e prometemos que valerá a pena esperar. Fique atento para mais atualizações em breve!
-                     </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+        {% if city.city.active %}
+          <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" style="background-image: url('{{ city.city.banner_image.url }}')">
+        {% else %}
+          <a class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" type="button" style="background-image: url('{{ city.city.banner_image.url }}')" data-bs-toggle="modal" data-bs-target="#emBreve" >
+        {% endif %}
+          <!-- Responsividade para Desktop -->
+          <div>
+            <img class="d-none d-xl-block mb-5" src="{% static 'cities/icons/cycling.svg'%}" alt="">
+            {% for letter in city.city.name %}
+              <span class="d-none d-xl-block city-name-banner">{{ letter }}</span>
+            {% endfor %}  
+            <img class="d-none d-xl-block mt-5" src="{% static 'cities/icons/plus.svg'%}" alt="">
+            <!-- Responsividade para Mobile -->
+            <div class="d-inline d-xl-none">
+              <img src="{% static 'cities/icons/cycling.svg'%}">
+              <span class="city-name-banner">{{ city.city.name }}</span>
+              <img class="" src="{% static 'cities/icons/plus.svg'%}">
+            </div> 
+          </div>
+        </a>
+      {% endfor %}
+      <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Conteúdo Indisponível</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Obrigado pelo seu interesse! Estamos trabalhando arduamente para trazer o conteúdo que você procura. Em breve, estará disponível para você aproveitar. Agradecemos sua paciência e prometemos que valerá a pena esperar. Fique atento para mais atualizações em breve!
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
             </div>
           </div>
+        </div>
       </div>
-      {% endfor %}
     </div>
   </div>
-
   
         <!-- {% comment %} Manual {% endcomment %} -->
   <div>
@@ -220,23 +229,13 @@
 <script src="{% static 'js/map/Polyline.encoded.js'%}"></script>
 
 <script>
-        var navBar = document.querySelector(".nav-bar-rotacric");
-    window.addEventListener("scroll", function(){
-        if(window.pageYOffset > 150){
-            navBar.classList.add("nav-scroll-rotacric");
-            navBar.classList.remove("mt-5", "col-lx-9", "nav-t-5");
-            // logoNavbar.classList.remove("col-2", "col-lg-1");
-            // logoNavbar.classList.add("col-3", "col-sm-1");
-        }else{
-            navBar.classList.remove("nav-scroll-rotacric");
-            // logoNavbar.classList.remove("col-2", "col-sm-1");
-            navBar.classList.add("mt-5", "col-lx-9", "nav-t-5");
-            // logoNavbar.classList.add("col-3", "col-lg-1");
-
-        }
+  document.querySelectorAll('.page-nav-item').forEach(e => {
+    e.addEventListener('click', () => {
+      setTimeout(() => {
+        document.querySelector(e.getAttribute('href')).scrollIntoView();
+      }, 500);
     });
-    
+  });
 </script>
-
 
 {%endblock%}

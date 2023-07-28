@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Enrolment</title>
+    <style>
+        .enrollment-form {
+          max-width: 500px;
+          margin: 0 auto;
+        }
+      
+        .enrollment-form h2 {
+          font-size: 24px;
+          margin-bottom: 20px;
+        }
+      
+        .enrollment-form label {
+          font-weight: bold;
+          margin-bottom: 5px;
+          display: block;
+        }
+      
+        .enrollment-form input,
+        .enrollment-form select {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+        }
+      
+        .enrollment-form button {
+          padding: 10px 20px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+      
+        .enrollment-form button:hover {
+          background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="enrollment-form">
+        <h2>Formulário para Inscrição ao Evento</h2>
+        <form id="enrollment-form" method="POST" action="{% url 'users:edit_enrollment' enrollment.id %}" data-aos="fade-up">
+          {% csrf_token %}
+          <!-- INPUT NAME -->
+          <div>
+            <label for="full_name">Full Name:</label>
+            <input type="text" name="full_name" placeholder="Nome Completo" maxlength="100" required="" id="id_full_name" value="{{ enrollment.full_name }}">
+          </div>
+          <!-- INPUT EMAIL -->
+          <div>
+            <label for="email">Email:</label>
+            <input type="email" name="email" placeholder="Email" maxlength="30" required="" id="id_email" value="{{ enrollment.email }}">
+          </div>
+          <!-- INPUT SOCIAL NETWORK -->
+          <div>
+            <label for="social_network">Social Network:</label>
+            <input type="text" name="social_network" placeholder="Instagram" maxlength="30" id="id_social_network" value="{{ enrollment.social_network }}">
+          </div>
+          <!-- INPUT DATE OF BIRTH -->
+          <div>
+            <label for="date_of_birth">Date of Birth:</label>
+            <input type="date" name="date_of_birth" value="{{ enrollment.date_of_birth }}" id="datepicker">
+          </div>
+      
+         <!-- SELECT BOND CHOICE -->
+        <select name="bond_choice" required id="id_bond_choice">
+          <option value="" disabled>Sobre Você</option>
+          {% for bond_obj in bond %}
+            <option value="{{ bond_obj.id }}" {% if bond_obj.id == enrollment.bond_choice %}selected{% endif %}>{{ bond_obj }}</option>
+          {% endfor %}
+        </select>
+      
+        <!-- SELECT HOW KNEW -->
+        <select name="how_knew" required id="id_how_knew">
+          <option value="" disabled>Como soube?</option>
+          {% for howKnew_obj in howKnew %}
+            <option value="{{ howKnew_obj.id }}" {% if howKnew_obj.id == enrollment.how_knew %}selected{% endif %}>{{ howKnew_obj }}</option>
+          {% endfor %}
+        </select>
+      
+        <!-- SELECT ROUTE PATH -->
+        <select name="route_path" id="id_route_path" required>
+          <option value="" disabled>Caminho da Rota</option>
+          {% for routePath_obj in routePath %}
+            <option value="{{ routePath_obj.id }}" {% if routePath_obj.id == enrollment.route_path %}selected{% endif %}>{{ routePath_obj }}</option>
+          {% endfor %}
+        </select>
+      
+          <!-- INPUT RG -->
+          <div>
+            <label for="rg">RG:</label>
+            <input type="text" name="rg" placeholder="RG" maxlength="10" required="" id="id_rg" value="{{ enrollment.rg }}">
+          </div>
+          <div>
+            <button type="submit">Concluir Inscrição</button>
+          </div>
+        </form>
+      </div>
+</body>
+</html>

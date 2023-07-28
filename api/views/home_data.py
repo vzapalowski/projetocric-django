@@ -1,8 +1,8 @@
 from rest_framework import generics
-
 from api.serializers import HomeSerializer
 from home.models import Home
 from cities.models import City
+
 
 class HomeData(generics.ListAPIView):
     queryset = Home.objects.all()

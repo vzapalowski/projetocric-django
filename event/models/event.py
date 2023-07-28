@@ -1,7 +1,8 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 from event.models.anchor_point import AnchorPoint
 from event.models.route_path import RoutePath
+
 
 class Event(models.Model):
     name = models.CharField(max_length=50, verbose_name='Nome do Evento')
@@ -11,7 +12,7 @@ class Event(models.Model):
     routes_data = models.ManyToManyField(RoutePath, blank=True, null=True, verbose_name='Rotas do Evento')
     points = models.ManyToManyField(AnchorPoint, blank=True, null=True, verbose_name='Pontos do Evento')
     warnings = models.ManyToManyField('event.Warning', blank=True, null=True, verbose_name='Avisos')
-
+    users = models.ManyToManyField(User, related_name='events', blank=True)
 
     def __str__(self) -> str:
-        return self.description
+        return self.name

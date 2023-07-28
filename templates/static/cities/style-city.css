@@ -1,0 +1,30 @@
+@media (max-width: 767px) {
+    .even-card {
+        margin-top: 1vh;
+    }
+
+    .odd-card {
+        margin-top: 1vh;
+    }
+
+    .card {
+        margin: 0 0 0 0;
+        max-width: 40rem;
+    }
+
+    .card-image-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .card-container{
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .city-name {
+        display: none;
+    }
+}

@@ -1,6 +1,10 @@
 {%extends 'base.html'%}
 {% load static %}
 
+{% block 'navigation' %}
+
+
+{% endblock %}
 
 {%block 'content'%}
 
@@ -17,24 +21,32 @@
             <p class="description-event fs-5 mt-5"  data-aos="fade-up">
                 {{ event.description }}
             </p>
-            <div class="row mt-5" data-aos="fade-up">
-                {% for e in event.routes_data.all %}
-                <div class="col-sm-4 mb-3 mb-sm-3">
-                  <div class="card border-card">
-                    <div class="card-body">
-                      <h5 class="card-title border-bottom border-dark-subtle topic-color">{{ e }}</h5>
-                      <!-- <p class="card-text"></p> -->
-                      <p></p>
-                      <p class="card-text"><small class="text-body-secondary">Local de sáida: {{ e.departure_location }}</small></p>
-                      <p class="card-text"><small class="text-body-secondary">Horário de Concentração: {{ e.concentration }}</small></p>
-                      <p class="card-text"><small class="text-body-secondary">Horário de saída: {{ e.time }}</small></p>
-                    </div>
-                  </div>
-                </div>
-                {% endfor %}
-            </div>
       </div>
+    </div>
+<div class="container col">
+  {% for e in event.routes_data.all %}
+  <div class="row mt-5" data-aos="fade-up">
+  <div class="col-12 mb-3 mb-sm-0">
+    <div class="card border-card">
+      <div class="card-body">
+        <h5 class="card-title border-bottom border-dark-subtle topic-color">{{ e }}</h5>
+        <!-- <p class="card-text"></p> -->
+        <p></p>
+        <p class="card-text"><small class="text-body-secondary">Local de sáida: {{ e.departure_location }}</small></p>
+        <p class="card-text"><small class="text-body-secondary">Horário de Concentração: {{ e.concentration }}</small></p>
+        <p class="card-text"><small class="text-body-secondary">Horário de saída: {{ e.time }}</small></p>
+      </div>
+    </div>
   </div>
+</div> 
+  {% endfor %}
+
+</div>
+
+
+
+    
+
 
     <!-- Images -->
   <div class="container mt-5">
@@ -46,7 +58,26 @@
       {% endfor %}
   </div>
 </div>
-
+<!-- <div id="carouselExample" class="carousel bg-cric" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    {% for image in event.images.all %}
+      <div class="carousel-item active">
+          <div class="card">
+              <div class="img-wrapper"><img src="{{ image.image.url }}" class="d-block w-100" alt="..."> </div>
+          </div>
+      </div>
+      {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+  </button>
+</div> -->
+</div>
         <!-- Mapa de Rotas do Evento -->
 
 <div class="text-center">
@@ -57,15 +88,46 @@
 
     
 
-    <div class="container mt-5">
-      <div class="row">
-        {% for e in event.routes_data.all %}
-          <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
-            <button data-route="{{ e.route.id_route }}" class="btn btn-outline-dark btnOpacity mt-2 p-3" style="background-color: '{{ e.route.color }}';">{{ e }}</button>
-          </div>
-        {% endfor %}
+  <div class="container mt-5">
+    <div class="row justify-content-center flex-wrap">
+      {% for e in event.routes_data.all %}
+        <div class="col-6 col-md-4 col-lg-3">
+          <button data-route="{{ e.route.id_route }}" class="btn btn-outline-dark btnOpacity mt-2 p-3" style="background-color: '{{ e.route.color }}'; width: 100%;">{{ e }}</button>
+        </div>
+      {% endfor %}
     </div>
-</div>
+  </div>
+
+
+{% if event.warnings.all %}
+  <div class="container-fluid text-center background">
+    <div class="row ">
+      <!-- Title and Descripiton -->
+        <div class="container col-10">
+              <div class="text-center">
+                <h2 class="mb-5 fw-bold topic-color" data-aos="fade-up" style="margin-top: 5rem;">
+                  AVISOS
+                </h2>
+              </div>
+              <div class="row mt-5" data-aos="fade-up">
+                  {% for warning in event.warnings.all %}
+                  <div class="col-sm-12 mb-3">
+                    <div class="card border-card">
+                      <div class="card-body">
+                        <h5 class="card-title border-bottom border-dark-subtle topic-color">{{ warning.title }}</h5>
+                        <p class="card-text"><small class="text-body-secondary">{{ warning.content }}</small></p>
+                        <p class="card-text border-top"><small class="text-body-terciary">Postado em: {{ warning.created_date }}</small></p>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+              </div>
+        </div>
+    </div>
+  </div>
+{% endif %}
+
+
 
 
 {% if event.warnings.all %}
@@ -102,7 +164,7 @@
 
 <div class="container mx-auto mb-5 col-10 align-items-center">
   <h2 class="title-event text-center">Formulário para Inscrição ao Evento</h2>
-  <form class="bg-light px-5 py-5 col mt-5" id="enrollment-form" method="POST" action="/eventos/1/enrollment/" data-aos="fade-up">
+  <form class="bg-light px-5 py-5 col mt-5" id="enrollment-form" method="POST" action="" data-aos="fade-up">
     {% csrf_token %}
     <!-- INPUT NAME -->
     <div class="input-group mb-3">
@@ -133,14 +195,6 @@
     {% endfor %}
   </select>
 
-  <!-- SELECT BOND CHOICE -->
-  {% comment %} <select class="form-select mb-3" name="bond_choice" required id="id_bond_choice">
-    <option value="" {% if not form.bond_choice.value %}selected{% endif %} disabled>Sobre Você</option>
-    {% for bond in bond %}
-      <option value="{{ bond.id }}" {% if form.bond_choice.value == bond.id %}selected{% endif %}>{{ bond }}</option>
-    {% endfor %}
-  </select> {% endcomment %}
-
   <!-- SELECT HOW KNEW -->
   <select class="form-select mb-3" name="how_knew" required id="id_how_knew">
     <option value selected disabled>Como soube?</option>
@@ -164,7 +218,6 @@
     </div>
 <div class="text-center">
   <button class="btn btn-dark mt-5" type="submit">Concluir Inscrição</button>
-
 </div>
 {% if form.is_bound and form.errors %}
   <!-- Display form errors -->
@@ -190,25 +243,39 @@
 </div>
 
 <script>
-    var navBar = document.querySelector(".nav-bar-rotacric");
-    // var logoNavbar = document.querySelector(".logo-rotacric");
-
-    window.addEventListener("scroll", function(){
-        if(window.pageYOffset > 150){
-            navBar.classList.add("nav-scroll-rotacric");
-            navBar.classList.remove("mt-5", "col-lx-9", "nav-t-5");
-            // logoNavbar.classList.remove("col-2", "col-lg-1");
-            // logoNavbar.classList.add("col-3", "col-sm-1");
-        }else{
-            navBar.classList.remove("nav-scroll-rotacric");
-            // logoNavbar.classList.remove("col-2", "col-sm-1");
-            navBar.classList.add("mt-5", "col-lx-9", "nav-t-5");
-            // logoNavbar.classList.add("col-3", "col-lg-1");
-
-        }
-    });
-
+      // var multipleCardCarousel = document.querySelector(
+      //   "#carouselExample"
+      // );
+      // if (window.matchMedia("(min-width: 768px)").matches) {
+      //   var carousel = new bootstrap.Carousel(multipleCardCarousel, {
+      //     interval: false,
+      //   });
+      //   var carouselWidth = $(".carousel-inner")[0].scrollWidth;
+      //   var cardWidth = $(".carousel-item").width();
+      //   var scrollPosition = 0;
+      //   $("#carouselExample .carousel-control-next").on("click", function () {
+      //     if (scrollPosition < carouselWidth - cardWidth * 4) {
+      //       scrollPosition += cardWidth;
+      //       $("#carouselExample .carousel-inner").animate(
+      //         { scrollLeft: scrollPosition },
+      //         600
+      //       );
+      //     }
+      //   });
+      //   $("#carouselExample .carousel-control-prev").on("click", function () {
+      //     if (scrollPosition > 0) {
+      //       scrollPosition -= cardWidth;
+      //       $("#carouselExample .carousel-inner").animate(
+      //         { scrollLeft: scrollPosition },
+      //         600
+      //       );
+      //     }
+      //   });
+      // } else {
+      //   $(multipleCardCarousel).addClass("slide");
+      // }
 </script>
+
 
 <script src="{% static 'js/events/data.js'%}" type="module" async></script>
 <script src="{% static 'js/map/Polyline.encoded.js' %}"></script>

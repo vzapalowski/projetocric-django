@@ -65,6 +65,10 @@
 
 /* NAVIGATION */
 
+.nav-bar-container {
+  z-index: 9999;
+}
+
 .navbar {
     background-color:var(--neutral-white);
 }

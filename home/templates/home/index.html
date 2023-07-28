@@ -50,9 +50,18 @@
 
       {% for city in homes %}
         {% if city.city.active %}
-          <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" style="background-image: url('{{ city.city.banner_image.url }}')">
+          <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" style="
+          background-image: url('{{ city.city.banner_image.url }}');
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;">
         {% else %}
-          <a class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" type="button" style="background-image: url('{{ city.city.banner_image.url }}')" data-bs-toggle="modal" data-bs-target="#emBreve" >
+          <a class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" type="button" style="
+          background-image: url('{{ city.city.banner_image.url }}');
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          " data-bs-toggle="modal" data-bs-target="#emBreve" >
         {% endif %}
           <!-- Responsividade para Desktop -->
           <div>
@@ -69,6 +78,7 @@
             </div> 
           </div>
         </a>
+
       {% endfor %}
       <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">

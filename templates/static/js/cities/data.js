@@ -4,11 +4,18 @@ import { Urls } from "../helpers/urls.js";
 const cityId = window.location.href.split("/")[4];
 const url_api = Urls.cities + cityId;
 
+let arr = []
+
 fetch(url_api)
-  .then(res => res.json())
-  .then(data => {
+.then(res => res.json())
+.then(data => {
+
     let map = new Map();
-    map.setMap(data['coordinates'].lat, data['coordinates'].lng);
-    map.addRoutes(data.routes);
-    map.addPoints(data.points);
-});
+    map.setMap(data.coordinates.lat, data.coordinates.lng);
+    data.routes.forEach((e) => {
+        arr.push(e)
+    })
+    map.addRoutes(arr, 0)
+    map.addPointsEvent(data.points)
+    map.writeRoutes(arr);
+})

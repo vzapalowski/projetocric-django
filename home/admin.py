@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
-
 from .models import CityManager, Home
 from .models.anchor_points_manager import AnchorPointsManager
+
 
 class CityManagerAdmin(admin.ModelAdmin):
     list_display = ('id', 'city', 'edit_city_link')

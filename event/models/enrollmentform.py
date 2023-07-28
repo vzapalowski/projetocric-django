@@ -5,7 +5,7 @@ from projetocric.utilities import validate_field
 
 
 class EnrollmentForm(forms.ModelForm):
-    bond_choice = forms.ModelChoiceField(queryset=Bond.objects.all())
+    # bond_choice = forms.ModelChoiceField(queryset=Bond.objects.all(), widget=forms.Select, required=True)
 
     class Meta:
         model = Enrollment
@@ -14,6 +14,7 @@ class EnrollmentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['route_path'].queryset = RoutePath.objects.filter(active=True)
+        self.fields['bond_choice'].queryset = Bond.objects.all()
 
     class Meta:
         model = Enrollment

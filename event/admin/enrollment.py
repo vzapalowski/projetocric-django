@@ -4,14 +4,17 @@ from ..models.enrollmentform import EnrollmentForm
 from event.models.route_path import RoutePath
 import csv
 from django.http import HttpResponse
+from event.models.event import Event
 
 
 class BondAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    list_display_links = ('name',)
     ordering = ['name']
 
 class EnrollmentAdmin(admin.ModelAdmin):
     form = EnrollmentForm
-    list_display = ('full_name', 'date_of_birth', 'how_knew', 'rg', 'route_path')
+    list_display = ('full_name', 'date_of_birth', 'how_knew', 'rg', 'route_path', 'event')
     actions = ['export_enrollments_to_csv']
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
@@ -41,8 +44,13 @@ class EnrollmentAdmin(admin.ModelAdmin):
 
         return response
 
-    export_enrollments_to_csv.short_description = 'Export selected enrollments to CSV'
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if not request.user.is_superuser:
+            qs = qs.filter(event__users=request.user)
+        return qs
 
+    export_enrollments_to_csv.short_description = 'Export selected enrollments to CSV'
 
 admin.site.register(Bond, BondAdmin)
 admin.site.register(Enrollment, EnrollmentAdmin)

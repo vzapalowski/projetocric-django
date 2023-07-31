@@ -15,7 +15,8 @@ fetch(url_api)
     data.routes.forEach((e) => {
         arr.push(e)
     })
+
     map.addRoutes(arr, 0)
-    map.addPointsEvent(data.points)
+    map.addPoints(data.points)
     map.writeRoutes(arr);
 })

@@ -34,40 +34,54 @@
 }
 
 body{
-    background-color: var(--neutral-black-100);
+    background-color: var(--neutral-black-12) !important;
 }
 
-.d-user{
-    height: 25rem !important;
-    background-color: var(--secundary-light) !important;
-    border-radius: 15px;
+.bg-image-profile{
+    background-image: url(../../static/images/top-page/img-nature.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 30rem;
 }
 
-.img-cric{
-    height: 15rem !important;
-    width: 15rem !important;
-    margin-left: 5rem;
+.post-user{
+    background-size: cover !important;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    height: 10rem !important;
 }
 
-.logo-container:hover {
-    cursor: pointer;
+@media (min-width: 1500px) {
+
+    .bg-image-profile{
+        background-image: url(../images/top-page/img-nature.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        height: 30rem;
+    }    
+}
+
+@media (max-width: 1200px) {
+    .bg-image-profile{
+
+        height: 25rem;
+    } 
 }
 
 @media (max-width: 991px) {
-    .img-cric{
-        height: 17rem !important;
-        width: 17rem !important;
-        margin-left: 0;
-    }
-    .d-user{
-        height: 30rem !important;
+    .bg-image-profile{
+        height: 20rem;
     }
 }
 
-@media (max-width: 767px) {
-    .img-cric{
-        height: 15rem !important;
-        width: 15rem !important;
-        margin-left: 0;
+@media (max-width: 576px) {
+    .bg-image-profile{
+        height: 17rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .bg-image-profile{
+        height: 12rem;
     }
 }

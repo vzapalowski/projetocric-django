@@ -1,42 +1,249 @@
+{%extends 'base.html'%}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static 'users/profile.css'%}">
-    <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-    crossorigin="anonymous"
-    >
-</head>
-<body>
 
-  <div class="container">
-    <div class="d-flex align-items-center justify-content-lg-start justify-content-sm-center justify-content-center mx-auto mt-3 d-user">
-      <div class="flex-shrink-0 logo-rotacric rounded-circle logo-container">
-        <img class="img-fluid img-cric rounded-circle" src="{% static 'images/logos/4.png'%}" alt="...">
+{% block 'navigation' %}
+  <li class="nav-item" data-bs-dismiss="offcanvas">
+    <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#"><i class="fa-solid fa-right-from-bracket me-2"></i> Sair</a>
+  </li>
+{% endblock %}
+
+{%block 'content'%}
+
+  <div class="bg-image-profile"></div>
+      
+
+  <section>
+    <div class="container py-5">
+      {% for enrollment in enrollments %}
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="{% static 'images/content-about/user-avatar.png'%}" alt="foto do Usuario"
+                class="rounded-circle img-fluid" style="width: 150px;">
+              <h5 class="my-3">Nome de Usuario</h5>
+              <!-- <p class="text-muted mb-1">alguma coisa</p> -->
+              <!-- <p class="text-muted mb-4">alguma coisa</p> -->
+              <div class="d-flex justify-content-center mb-2">
+                <a href="{% url 'users:edit_enrollment' enrollment.id %}" type="button" class="btn btn-outline-dark ms-1">Editar Perfil</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Nome Completo</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ enrollment.full_name }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ enrollment.email }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Rede Social</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ enrollment.social_network }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Data de Nascimento</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ enrollment.date_of_birth }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">RG</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ enrollment.rg }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Identificação</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ enrollment.bond_choice }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Como soube?</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ enrollment.how_knew }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3 class="topic-color text-center mt-5">Postangens do Usuario</h3>
+          <div class="row">
+            <div class="col-md-6 mt-3">
+              <div class="card mb-4 mb-md-0">
+                <div class="card-body">
+                  <p class="mb-2 topic-color fs-5">Exemplo de Postagem</p>
+
+                  <img src="{% static 'images/images-cities/charqueadas-trevo.jpeg'%}" class="post-user w-100" alt="...">
+
+                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
+                    <span class="fw-bolder">
+                      Local: 
+                    </span> Charqueadas
+                  </p>
+
+                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
+                    <span class="fw-bolder">
+                      Data da Postagem: 
+                    </span> 03/08/2023
+                  </p>                 
+                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
+                    <span class="fw-bolder">
+                      Ultima modificação: 
+                    </span> 03/08/2023
+                  </p>                
+
+                  <a href="#" type="button" class="btn btn-outline-secondary w-100">Abrir</a>
+                  <a href="#" type="button" class="btn btn-outline-dark w-100 mt-2">Editar</a>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mt-3">
+              <div class="card mb-4 mb-md-0">
+                <div class="card-body">
+                  <p class="mb-2 topic-color fs-5">Exemplo de Postagem</p>
+
+                  <img src="{% static 'images/images-cities/charqueadas.jpg'%}" class="post-user w-100" alt="...">
+
+                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
+                    <span class="fw-bolder">
+                      Local: 
+                    </span> Charqueadas
+                  </p>
+
+                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
+                    <span class="fw-bolder">
+                      Data da Postagem: 
+                    </span> 03/08/2023
+                  </p>                 
+                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
+                    <span class="fw-bolder">
+                      Ultima modificação: 
+                    </span> 03/08/2023
+                  </p>                
+
+                  <a href="#" type="button" class="btn btn-outline-secondary w-100">Abrir</a>
+                  <a href="#" type="button" class="btn btn-outline-dark w-100 mt-2">Editar</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mt-3">
+              <div class="card mb-4 mb-md-0">
+                <div class="card-body">
+                  <p class="mb-2 topic-color fs-5">Exemplo de Postagem 2</p>
+
+                  <img src="{% static 'images/images-cities/butia.jpg'%}" class="post-user w-100" alt="...">
+
+                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
+                    <span class="fw-bolder">
+                      Local: 
+                    </span> Butia
+                  </p>
+
+                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
+                    <span class="fw-bolder">
+                      Data da Postagem: 
+                    </span> 03/08/2023
+                  </p>                 
+                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
+                    <span class="fw-bolder">
+                      Ultima modificação: 
+                    </span> 03/08/2023
+                  </p>                
+
+                  <a href="#" type="button" class="btn btn-outline-secondary w-100">Abrir</a>
+                  <a href="#" type="button" class="btn btn-outline-dark w-100 mt-2">Editar</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mt-3">
+              <div class="card mb-4 mb-md-0">
+                <div class="card-body">
+                  <p class="mb-2 topic-color fs-5">Exemplo de Postagem</p>
+
+                  <img src="{% static 'images/images-cities/triunfo.jpg'%}" class="post-user w-100" alt="...">
+
+                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
+                    <span class="fw-bolder">
+                      Local: 
+                    </span> Triunfo
+                  </p>
+
+                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
+                    <span class="fw-bolder">
+                      Data da Postagem: 
+                    </span> 03/08/2023
+                  </p>                 
+                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
+                    <span class="fw-bolder">
+                      Ultima modificação: 
+                    </span> 03/08/2023
+                  </p>                
+
+                  <a href="#" type="button" class="btn btn-outline-secondary w-100">Abrir</a>
+                  <a href="#" type="button" class="btn btn-outline-dark w-100 mt-2">Editar</a>
+
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
       </div>
-      <div class="container bg-primary d-none d-lg-block">
-        <h2>Rotacric</h2>
-        <h4 class="rounded-pill">
-          NOmee
-        </h4>
-      </div>
+      {% endfor %}
     </div>
+  </section>
+      <!-- <th>Full Name</th>
+      <th>Email</th>
+      <th>Social Network</th>
+      <th>Date of Birth</th>
+      <th>Bond Choice</th>
+      <th>How Knew</th>
+      <th>RG</th>
+      <th>Route Path</th>
+      <th> </th> -->
+
+
     <!-- Postagens do Usuario -->
-    <div class="col-12 bg-warning mt-3" style="height: 30rem;">
+    <!-- <div class="col-12 bg-warning mt-3" style="height: 30rem;">
       <div class="row mt-5" data-aos="fade-up">
         <div class="col-12 mb-3 mb-sm-0">
           <div class="card border-card">
             <div class="card-body">
               <h5 class="card-title border-bottom border-dark-subtle topic-color">asdadas</h5>
-              <!-- <p class="card-text"></p> -->
               <p></p>
               <p class="card-text"><small class="text-body-secondary">Local de sáida: </small></p>
               <p class="card-text"><small class="text-body-secondary">Horário de Concentração: </small></p>
@@ -50,7 +257,6 @@
           <div class="card border-card">
             <div class="card-body">
               <h5 class="card-title border-bottom border-dark-subtle topic-color">asdadas</h5>
-              <!-- <p class="card-text"></p> -->
               <p></p>
               <p class="card-text"><small class="text-body-secondary">Local de sáida: </small></p>
               <p class="card-text"><small class="text-body-secondary">Horário de Concentração: </small></p>
@@ -64,7 +270,6 @@
           <div class="card border-card">
             <div class="card-body">
               <h5 class="card-title border-bottom border-dark-subtle topic-color">asdadas</h5>
-              <!-- <p class="card-text"></p> -->
               <p></p>
               <p class="card-text"><small class="text-body-secondary">Local de sáida: </small></p>
               <p class="card-text"><small class="text-body-secondary">Horário de Concentração: </small></p>
@@ -73,8 +278,7 @@
           </div>
         </div>
       </div>  
-    </div>
-  </div>
+    </div> -->
 
 
 
@@ -114,11 +318,4 @@
           {% endfor %}
         </tbody>
       </table>   -->
-
-      <script 
-      src="https://kit.fontawesome.com/d97d3ca1f3.js" 
-      crossorigin="anonymous"
-      ></script>
-    
-</body>
-</html>
+      {%endblock%}

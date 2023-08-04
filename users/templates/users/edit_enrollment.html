@@ -22,30 +22,30 @@
         class="col col-lg-5 col-md-8 col-sm-11 col-xs-12 bg-primary p-5 position-absolute" style="top: 20%;">
         {% csrf_token %}
   
-            <h1 class="topic-color">Atualizar Informações</h1>
-            
-            <!-- Input Primeiro Nome -->
-            <!-- <div class="input-group input-group-lg mt-4">
-                <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-solid fa-user icon-cric"></i></span>
-                <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-            </div> -->
+            <h1 class="topic-color">Atualizar Inscrição</h1>
 
             <!-- Input Nome Completo -->
             <div class="input-group input-group-lg mt-4">
-                <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-regular fa-user icon-cric"></i></span>
+                <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-solid fa-user icon-cric"></i></span>
                 <input type="text" name="full_name" placeholder="Nome Completo" maxlength="100" required="" id="id_full_name" value="{{ enrollment.full_name }}" class="form-control" placeholder="Primeiro Nome" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
             </div>
-            
-            <!-- Input Sobrenome -->
-            <!-- <div class="input-group input-group-lg mt-4">
-                <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-regular fa-user icon-cric"></i></span>
-                <input type="text" name="last_name" class="form-control" placeholder="Sobrenome" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-              </div> -->
             
             <!-- Input Email -->
             <div class="input-group input-group-lg mt-4">
               <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-solid fa-envelope icon-cric"></i></span>
               <input  type="email" name="email" placeholder="Email" maxlength="30" required="" id="id_email" value="{{ enrollment.email }}" class="form-control" placeholder="Email" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            </div>
+
+            <!-- Input RG -->
+            <div class="input-group input-group-lg mt-4">
+              <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-solid fa-address-card icon-cric"></i></span>
+              <input type="text" name="rg" placeholder="RG" maxlength="10" required="" id="id_rg" value="{{ enrollment.rg }}" class="form-control" placeholder="Rede Social" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            </div>
+
+            <!-- Input Data de Nascimento -->
+            <div class="input-group input-group-lg mt-4">
+              <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-solid fa-calendar-days icon-cric"></i></span>
+              <input type="text" name="date_of_birth" value="{{ enrollment.date_of_birth }}" id="datepicker" class="form-control" placeholder="Senha" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
             </div>
             
             <!-- Input Rede Social -->
@@ -54,39 +54,34 @@
               <input  type="text" name="social_network" placeholder="Instagram" maxlength="30" id="id_social_network" value="{{ enrollment.social_network }}"class="form-control" placeholder="Rede Social" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
             </div>
 
-            <!-- Input Data de Nascimento -->
-            <div class="input-group input-group-lg mt-4">
-              <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-solid fa-key icon-cric"></i></span>
-              <input type="date" name="date_of_birth" value="{{ enrollment.date_of_birth }}" id="datepicker" class="form-control" placeholder="Senha" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-            </div>
-
             <!-- Select Bond Choice -->
             <select class="form-select mt-4" name="bond_choice" required id="id_bond_choice">
-              <option value selected disabled>Sobre Você</option>
+              <option value="" disabled>Sobre Você</option>
               {% for bond_obj in bond %}
-              <option value="{{ bond_obj.id }}" {% if bond_obj.id == enrollment.bond_choice %}selected{% endif %}>{{ bond_obj }}</option>
-            {% endfor %}
+                <option value="{{ bond_obj.id }}" {% if bond_obj.id == enrollment.bond_choice %}selected{% endif %}>{{ bond_obj }}</option>
+              {% endfor %}
+            </select>
+
+            <!-- Select How New -->
+            <select class="form-select mt-4" name="how_knew" required id="id_how_knew">
+              <option value="" disabled>Como soube?</option>
+              {% for howKnew_obj in howKnew %}
+                <option value="{{ howKnew_obj.id }}" {% if howKnew_obj.id == enrollment.how_knew %}selected{% endif %}>{{ howKnew_obj }}</option>
+              {% endfor %}
+            </select>
+
+            <!-- Select Route -->
+            <select class="form-select mt-4" name="route_path" id="id_route_path" required>
+              <option value="" disabled>Caminho da Rota</option>
+              {% for routePath_obj in routePath %}
+                <option value="{{ routePath_obj.id }}" {% if routePath_obj.id == enrollment.route_path %}selected{% endif %}>{{ routePath_obj }}</option>
+              {% endfor %}
             </select>
 
             <div class="d-grid gap-2">
               <button type="submit" class="btn btn-cric btn-lg mt-4 rounded-pill">Atualizar</button>
             </div>
           </form>
-    </div>
-    
-    <!-- MESSAGE CARD -->
-    <div class="container position-fixed start-50 translate-middle message-container" style="top: 93vh">
-      {% if messages %}
-      <ul class="col-11 col-sm-8 ps-0 adjust-message">
-        {% for message in messages %}
-        <li {% if message.tags %} class="{{ message.tags }} card message"{% endif %}>
-        <p class="card-body mb-0">
-          {{ message }}
-        </p>
-        </li>
-        {% endfor %}
-      </ul>
-      {% endif %}
     </div>
 
     <footer class="text-white pt-5 pb-4">

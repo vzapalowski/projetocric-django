@@ -11,19 +11,14 @@ document.querySelector('.logo-container').addEventListener('click', () => {
 
 const isHome = window.location.href.split('/')[3];
 
-if (!isHome == '' || !isHome[0] == '#') {
-    document.querySelectorAll('.page-nav-item').forEach(e => {
-        e.addEventListener('click', () => {
+document.querySelectorAll('.page-nav-item').forEach(e => {
+    e.addEventListener('click', () => {
+        if (!isHome == '' || !isHome[0] == '#') {
             window.location = homeUrl + e.getAttribute('href');
-            // document.querySelector(isHome).scrollIntoView();
-        });
+        } else {
+            setTimeout(() => {
+                document.querySelector(e.getAttribute('href')).scrollIntoView();
+            }, 500);
+        }
     });
-} else {
-    document.querySelectorAll('.page-nav-item').forEach(e => {
-        e.addEventListener('click', () => {
-          setTimeout(() => {
-            document.querySelector(e.getAttribute('href')).scrollIntoView();
-          }, 500);
-        });
-    });
-}
+});

@@ -112,11 +112,67 @@
     </head>
 <body class="background">
 
-  <div class="container-fluid text-center position-absolute">
-  
-    <!-- {% comment %} NAVIGATION {% endcomment %} -->
+  <div class="container-fluid text-center bg-light d-lg-none">
+
+    <!-- {% comment %} NAVIGATION FOR MOBILE {% endcomment %} -->
     
-    <div class="d-flex align-items-center col-lx-9 mx-auto mt-5 nav-bar-rotacric nav-t-5">
+    <nav class="navbar bg-body-tertiary fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          Rota<span class="topic-color fw-bold">Cric</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Rota<span class="topic-color fw-bold">Cric</span></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav d-flex justify-content-around text-center flex-grow-1 pe-3">
+                <li class="nav-item">
+                    <a class="nav-link btn-hover-cric px-4" aria-current="page" href="{% url 'home:home' %}"><i class="fa-solid fa-house me-3 text-primary-emphasis"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                  <!-- <a class="nav-link btn-hover-cric px-4" aria-current="page" href="{% url 'users:login' %}"><i class="fa-solid fa-user me-3 text-primary-emphasis" style="color: #233e6c;"></i>Entrar</a> -->
+                  <a class="nav-link btn-hover-cric px-4" aria-current="page" href="#"><i class="fa-solid fa-user me-3 text-primary-emphasis" style="color: #233e6c;"></i>Entrar</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle btn-hover-cric px-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa-solid fa-calendar-days text-primary-emphasis"></i> Eventos
+                </a>
+                <ul class="dropdown-menu text-center">
+                  {% for event in events %}
+                    <li><a class="dropdown-item border-0" href="{% url 'events:event' pk=event.id %}"><i class="fa-solid fa-road me-2 text-primary-emphasis"></i> {{ event.name }}</a></li>
+                  {% endfor %}
+                </ul>
+              </li>
+              <li class="nav-item" data-bs-dismiss="offcanvas">
+                <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#cities"><i class="fa-solid fa-city me-2"></i> Municipios</a>
+              </li>
+              <li class="nav-item" data-bs-dismiss="offcanvas">
+                  <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#manual"><i class="fa-solid fa-book me-2"></i> Manual</a>
+              </li>
+              <li class="nav-item" data-bs-dismiss="offcanvas">
+                  <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#about"><i class="fa-solid fa-circle-info me-2"></i> Sobre</a>
+              </li>
+
+                {% block 'navigation-mobile' %}
+                {% endblock %}
+
+                
+            </ul>
+        </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container-fluid text-center position-absolute d-none d-lg-flex">
+  
+    <!-- {% comment %} NAVIGATION FOR DESKTOP {% endcomment %} -->
+    
+    <div class="d-flex align-items-center col-lx-9 mx-auto mt-5 nav-t-5">
       <div class="flex-shrink-0 col-lg-1 logo-rotacric rounded-circle ms-5 logo-container">
         <img class="img-fluid img-cric" src="{% static 'images/logos/4.png'%}" alt="...">
       </div>
@@ -151,6 +207,16 @@
                                     {% endfor %}
                                   </ul>
                                 </li>
+                                <li class="nav-item" data-bs-dismiss="offcanvas">
+                                  <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#cities"><i class="fa-solid fa-city me-2"></i> Municipios</a>
+                                </li>
+                                <li class="nav-item" data-bs-dismiss="offcanvas">
+                                    <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#manual"><i class="fa-solid fa-book me-2"></i> Manual</a>
+                                </li>
+                                <li class="nav-item" data-bs-dismiss="offcanvas">
+                                    <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#about"><i class="fa-solid fa-circle-info me-2"></i> Sobre</a>
+                                </li>
+                  
                                   {% block 'navigation' %}
                                   {% endblock %}
 
@@ -165,7 +231,6 @@
   </div>
   
     {%block 'content'%}{%endblock%}
-
 
   <footer class="text-white pt-5 pb-4 mt-5 background-footer">
 

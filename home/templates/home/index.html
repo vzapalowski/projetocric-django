@@ -5,6 +5,16 @@
 
 {%block 'content'%}
 
+<style>
+  .banner-item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+</style>
+
 <div class="bg-image-h" data-aos="fade-up"></div>
 
     <h2 class="mt-5 mb-5 fw-bold topic-color text-center">Mapa das Rotas</h2>
@@ -54,19 +64,23 @@
           " data-bs-toggle="modal" data-bs-target="#emBreve" >
         {% endif %}
           <!-- Responsividade para Desktop -->
-          <div>
-            <img class="d-none d-xl-block mb-5" src="{% static 'cities/icons/cycling.svg'%}" alt="">
-            {% for letter in city.city.name %}
-              <span class="d-none d-xl-block city-name-banner">{{ letter }}</span>
-            {% endfor %}  
-            <img class="d-none d-xl-block mt-5" src="{% static 'cities/icons/plus.svg'%}" alt="">
+          <div class="banner-item-container">
+            <img class="d-none d-xl-block" src="{% static 'cities/icons/cycling.svg' %}" alt="">
+            <div class="middle-content">
+              {% for letter in city.city.name %}
+                <span class="d-none d-xl-block city-name-banner">{{ letter }}</span>
+              {% endfor %}
+            </div>
+            <img class="d-none d-xl-block" src="{% static 'cities/icons/plus.svg' %}" alt="">
             <!-- Responsividade para Mobile -->
-            <div class="d-inline d-xl-none">
-              <img src="{% static 'cities/icons/cycling.svg'%}">
-              <span class="city-name-banner">{{ city.city.name }}</span>
-              <img class="" src="{% static 'cities/icons/plus.svg'%}">
-            </div> 
-          </div>
+            <div class="d-flex justify-content-between align-items-center" >
+              <div class="d-inline d-xl-none b-item-mobie">
+                <img src="{% static 'cities/icons/cycling.svg'%}">
+                <span class="city-name-banner">{{ city.city.name }}</span>
+                <img class="" src="{% static 'cities/icons/plus.svg'%}">
+              </div>
+            </div>
+          </div>          
         </a>
 
       {% endfor %}

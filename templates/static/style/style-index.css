@@ -65,6 +65,10 @@
 
 /* NAVIGATION */
 
+.nav-bar-container {
+  z-index: 9999;
+}
+
 .navbar {
     background-color:var(--neutral-white);
 }
@@ -129,6 +133,22 @@
 /* DESKTOP */
 
 @media (min-width: 1200px) {
+  .banner-item-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 70vh; 
+  }
+
+  .middle-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+  }
+
   .h-banner{
     transition: 0.2s;
   }

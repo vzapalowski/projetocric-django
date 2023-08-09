@@ -96,6 +96,10 @@
         height: 35em;
     }
     
+    .content-images{
+        justify-content: center;
+        column-gap: 5rem;
+    }
 }
 
 @media (max-width: 991px) {

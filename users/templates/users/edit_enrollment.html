@@ -31,10 +31,11 @@
             </div>
             
             <!-- Input Email -->
-            <div class="input-group input-group-lg mt-4">
+            <input  type="hidden" name="email" placeholder="Email" maxlength="30" required="" id="id_email" value="{{ enrollment.email }}" class="form-control" placeholder="Email" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            <!-- <div class="input-group input-group-lg mt-4">
               <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-solid fa-envelope icon-cric"></i></span>
               <input  type="email" name="email" placeholder="Email" maxlength="30" required="" id="id_email" value="{{ enrollment.email }}" class="form-control" placeholder="Email" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-            </div>
+            </div> -->
 
             <!-- Input RG -->
             <div class="input-group input-group-lg mt-4">
@@ -45,7 +46,7 @@
             <!-- Input Data de Nascimento -->
             <div class="input-group input-group-lg mt-4">
               <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-solid fa-calendar-days icon-cric"></i></span>
-              <input type="text" name="date_of_birth" value="{{ enrollment.date_of_birth }}" id="datepicker" class="form-control" placeholder="Senha" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+              <input type="text" name="date_of_birth" value="{{ enrollment.date_of_birth|date:"d/m/Y" }}" id="datepicker" class="form-control" placeholder="Senha" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
             </div>
             
             <!-- Input Rede Social -->

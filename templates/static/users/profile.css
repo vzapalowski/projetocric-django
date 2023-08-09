@@ -51,6 +51,15 @@ body{
     height: 10rem !important;
 }
 
+
+.card-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 21.3rem;
+}
+
 @media (min-width: 1500px) {
 
     .bg-image-profile{
@@ -62,6 +71,10 @@ body{
 }
 
 @media (max-width: 1200px) {
+    .card-user {
+        height: 22.82rem;
+    }
+
     .bg-image-profile{
 
         height: 25rem;

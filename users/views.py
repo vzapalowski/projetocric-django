@@ -4,6 +4,7 @@ from django.core.validators import validate_email
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from event.models import Enrollment, Bond, HowKnew, RoutePath
+from datetime import datetime
 
 
 def register(request):
@@ -86,7 +87,9 @@ def edit_enrollment(request, enrollment_id):
         enrollment.full_name = request.POST.get('full_name')
         enrollment.email = request.POST.get('email')
         enrollment.social_network = request.POST.get('social_network')
-        enrollment.date_of_birth = request.POST.get('date_of_birth')
+        
+        date_of_birth_str = request.POST.get('date_of_birth')
+        enrollment.date_of_birth = datetime.strptime(date_of_birth_str, '%d/%m/%Y').date()
 
         bond_choice_id = request.POST.get('bond_choice')
         enrollment.bond_choice = get_object_or_404(Bond, id=bond_choice_id)  # Retrieve the Bond instance

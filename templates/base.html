@@ -131,14 +131,14 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav d-flex justify-content-around text-center flex-grow-1 pe-3">
                 <li class="nav-item">
-                    <a class="nav-link btn-hover-cric px-4" aria-current="page" href="{% url 'home:home' %}"><i class="fa-solid fa-house me-3 text-primary-emphasis"></i> Home</a>
+                    <a class="nav-link btn-hover-cric px-4 text-primary-emphasis" aria-current="page" href="{% url 'home:home' %}"><i class="fa-solid fa-house me-3 text-primary-emphasis"></i> Home</a>
                 </li>
                 <li class="nav-item">
                   <!-- <a class="nav-link btn-hover-cric px-4" aria-current="page" href="{% url 'users:login' %}"><i class="fa-solid fa-user me-3 text-primary-emphasis" style="color: #233e6c;"></i>Entrar</a> -->
-                  <a class="nav-link btn-hover-cric px-4" aria-current="page" href="#"><i class="fa-solid fa-user me-3 text-primary-emphasis" style="color: #233e6c;"></i>Entrar</a>
+                  <a class="nav-link btn-hover-cric px-4 text-primary-emphasis" aria-current="page" href="#"><i class="fa-solid fa-user me-3 text-primary-emphasis" style="color: #233e6c;"></i>Entrar</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle btn-hover-cric px-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle btn-hover-cric px-4 text-primary-emphasis" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="fa-solid fa-calendar-days text-primary-emphasis"></i> Eventos
                 </a>
                 <ul class="dropdown-menu text-center">
@@ -191,36 +191,35 @@
                           <div class="offcanvas-body">
                               <ul class="navbar-nav d-flex justify-content-around text-center flex-grow-1 pe-3">
                                   <li class="nav-item">
-                                      <a class="nav-link btn-hover-cric px-4" aria-current="page" href="{% url 'home:home' %}"><i class="fa-solid fa-house me-3 text-primary-emphasis"></i> Home</a>
+                                    <a class="nav-link btn-hover-cric px-4 size-text" aria-current="page" href="{% url 'home:home' %}"><i class="fa-solid fa-house me-3 text-primary-emphasis"></i> Home</a>
                                   </li>
                                   <li class="nav-item">
-                                    <!-- <a class="nav-link btn-hover-cric px-4" aria-current="page" href="{% url 'users:login' %}"><i class="fa-solid fa-user me-3 text-primary-emphasis" style="color: #233e6c;"></i>Entrar</a> -->
                                     <a class="nav-link btn-hover-cric px-4" aria-current="page" href="#"><i class="fa-solid fa-user me-3 text-primary-emphasis" style="color: #233e6c;"></i>Entrar</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                   <a class="nav-link dropdown-toggle btn-hover-cric px-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa-solid fa-calendar-days text-primary-emphasis"></i> Eventos
+                                    <i class="fa-solid fa-calendar-days text-primary-emphasis"></i>Eventos
                                   </a>
                                   <ul class="dropdown-menu text-center">
                                     {% for event in events %}
-                                      <li><a class="dropdown-item border-0" href="{% url 'events:event' pk=event.id %}"><i class="fa-solid fa-road me-2 text-primary-emphasis"></i> {{ event.name }}</a></li>
+                                      <li>
+                                        <a class="dropdown-item border-0" href="{% url 'events:event' pk=event.id %}"><i class="fa-solid fa-road me-2 text-primary-emphasis"></i> {{ event.name }}</a>
+                                      </li>
                                     {% endfor %}
                                   </ul>
                                 </li>
                                 <li class="nav-item" data-bs-dismiss="offcanvas">
-                                  <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#cities"><i class="fa-solid fa-city me-2"></i> Municipios</a>
+                                  <a class="nav-link btn-hover-cric px-4 page-nav-item" href="#cities"><i class="fa-solid fa-city me-2 text-primary-emphasis"></i> Municipios</a>
                                 </li>
                                 <li class="nav-item" data-bs-dismiss="offcanvas">
-                                    <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#manual"><i class="fa-solid fa-book me-2"></i> Manual</a>
+                                  <a class="nav-link btn-hover-cric px-4 page-nav-item" href="#manual"><i class="fa-solid fa-book me-2 text-primary-emphasis"></i> Manual</a>
                                 </li>
                                 <li class="nav-item" data-bs-dismiss="offcanvas">
-                                    <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#about"><i class="fa-solid fa-circle-info me-2"></i> Sobre</a>
+                                  <a class="nav-link btn-hover-cric px-4 page-nav-item" href="#about"><i class="fa-solid fa-circle-info me-2 text-primary-emphasis"></i> Sobre</a>
                                 </li>
-                  
+
                                   {% block 'navigation' %}
                                   {% endblock %}
-
-                                  
                               </ul>
                           </div>
                       </div>

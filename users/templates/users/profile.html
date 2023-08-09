@@ -297,7 +297,6 @@
             <th>How Knew</th>
             <th>RG</th>
             <th>Route Path</th>
-            <th> </th>
           </tr>
         </thead>
         <tbody>
@@ -311,11 +310,12 @@
             <td>{{ enrollment.how_knew }}</td>
             <td>{{ enrollment.rg }}</td>
             <td>{{ enrollment.route_path }}</td>
-            <td>
-              <a href="{% url 'users:edit_enrollment' enrollment.id %}">Edit</a>
-            </td>            
           </tr>
           {% endfor %}
         </tbody>
+
       </table>   -->
       {%endblock%}
+      </table>  
+</body>
+</html>

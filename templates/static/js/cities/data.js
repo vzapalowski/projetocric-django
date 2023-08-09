@@ -11,11 +11,12 @@ fetch(url_api)
 .then(data => {
 
     let map = new Map();
-    map.setMap(data.coordinates.lat, data.coordinates.lng);
+    map.setMap(data.coordinates.lat, data.coordinates.lng, 13);
     data.routes.forEach((e) => {
         arr.push(e)
     })
+
     map.addRoutes(arr, 0)
-    map.addPointsEvent(data.points)
+    map.addPoints(data.points)
     map.writeRoutes(arr);
 })

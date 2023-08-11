@@ -11,7 +11,7 @@ class HomeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Home
-        fields = ('id', 'name', 'coordinates', 'routes', 'points')
+        fields = ('id', 'name', 'coordinates', 'zoom', 'routes', 'points')
 
     def get_coordinates(self, obj):
         return {'lat': obj.lat, 'lng': obj.lng}

@@ -11,7 +11,7 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
-        fields = ('id','name', 'description', 'coordinates', 'routes_data', 'points')
+        fields = ('id','name', 'description', 'coordinates', 'zoom', 'routes_data', 'points')
 
     def get_coordinates(self, obj):
         return {'lat': obj.lat, 'lng': obj.lng}

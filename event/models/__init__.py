@@ -6,4 +6,3 @@ from .route_path import RoutePath
 from .warning import *
 from .anchor_point import *
 from .enrollmentform import *
-from .personal_data import *

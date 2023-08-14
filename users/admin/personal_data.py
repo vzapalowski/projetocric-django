@@ -1,5 +1,5 @@
 from django.contrib import admin
-from event.models.personal_data import PersonalData
+from users.models.personal_data import PersonalData
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 

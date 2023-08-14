@@ -14,18 +14,17 @@
 
   <section>
     <div class="container py-5">
-      {% for enrollment in enrollments %}
       <div class="row">
         <div class="col-lg-4">
           <div class="card mb-4">
             <div class="card-body text-center card-user">
               <img src="{% static 'images/content-about/user-avatar.png'%}" alt="foto do Usuario"
                 class="rounded-circle img-fluid" style="width: 150px;">
-              <h5 class="my-3">Nome de Usuario</h5>
+              <h5 class="my-3">{{ user.username }}</h5>
               <!-- <p class="text-muted mb-1">alguma coisa</p> -->
               <!-- <p class="text-muted mb-4">alguma coisa</p> -->
               <div class="d-flex justify-content-center mb-2">
-                <a href="{% url 'users:edit_enrollment' enrollment.id %}" type="button" class="btn btn-outline-dark ms-1">Editar Inscrição para Eventos</a>
+                <a href="{% url 'users:edit_user' user.id %}" type="button" class="btn btn-outline-dark ms-1">Editar informações pessoais</a>
               </div>
             </div>
           </div>
@@ -38,7 +37,7 @@
                   <p class="mb-0">Nome Completo</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ enrollment.full_name }}</p>
+                  <p class="text-muted mb-0">{{ user.first_name|default:"--" }} {{ user.last_name|default:"--" }}</p>
                 </div>
               </div>
               <hr>
@@ -47,7 +46,7 @@
                   <p class="mb-0">Email</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ enrollment.email }}</p>
+                  <p class="text-muted mb-0">{{ user.email|default:"--"  }}</p>
                 </div>
               </div>
               <hr>
@@ -56,7 +55,7 @@
                   <p class="mb-0">Rede Social</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ enrollment.social_network }}</p>
+                  <p class="text-muted mb-0">{{ user.personaldata.social_network|default:"--"  }}</p>
                 </div>
               </div>
               <hr>
@@ -65,7 +64,7 @@
                   <p class="mb-0">Data de Nascimento</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ enrollment.date_of_birth|date:"d/m/Y" }}</p>
+                  <p class="text-muted mb-0">{{ user.personaldata.date_of_birth|date:"d/m/Y"|default:"--"  }}</p>
                 </div>
               </div>
               <hr>
@@ -74,7 +73,7 @@
                   <p class="mb-0">RG</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ enrollment.rg }}</p>
+                  <p class="text-muted mb-0">{{ user.personaldata.rg|default:"--"  }}</p>
                 </div>
               </div>
               <hr>
@@ -83,7 +82,7 @@
                   <p class="mb-0">Identificação</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ enrollment.bond_choice }}</p>
+                  <p class="text-muted mb-0">{{ user.personaldata.bond_choice|default:"--"  }}</p>
                 </div>
               </div>
               <!-- <hr> -->
@@ -92,7 +91,7 @@
                   <p class="mb-0">Como soube?</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{ enrollment.how_knew }}</p>
+                  <p class="text-muted mb-0">{{ user.personaldata.how_knew }}</p>
                 </div>
               </div> -->
             </div>
@@ -223,7 +222,6 @@
           </div>
         </div>
       </div>
-      {% endfor %}
     </div>
   </section>
       <!-- <th>Full Name</th>

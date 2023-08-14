@@ -5,9 +5,14 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from event.models import Enrollment, Bond, HowKnew, RoutePath
 from datetime import datetime
+from django.db import transaction
+from .models import PersonalData
 
 
 def register(request):
+    if request.session.get('user_id'):
+        return redirect('users:profile')
+
     if request.method != 'POST':
         return render(request, 'users/register.html')
     
@@ -36,15 +41,24 @@ def register(request):
         messages.error(request, 'Username já cadastrado')
         return render(request, 'users/register.html')
 
-        
-    messages.success(request, 'Usuario cadastrado com sucesso!')
-
     user = User.objects.create_user(username=username, email=email, password=password, first_name=first_name, last_name=last_name)
     user.save()
+
+    messages.success(request, 'Usuario cadastrado com sucesso!')
+
+    user = auth.authenticate(request, email=email, password=password)
     
-    return render(request, 'users/register.html')
+    if not user:
+        return render(request, 'users/register.html')
+    else:
+        auth.login(request, user)
+        request.session['user_id'] = user.id
+        return redirect('users:edit_user', user_id=user.id)
 
 def login(request):
+    if request.session.get('user_id'):
+        return redirect('users:profile')
+
     if request.method != 'POST':
         return render(request, 'users/login.html')
     
@@ -58,6 +72,7 @@ def login(request):
         return render(request, 'users/login.html')
     else:
         auth.login(request, user)
+        request.session['user_id'] = user.id
         return redirect('users:profile')
 
 def logout(request):
@@ -66,42 +81,45 @@ def logout(request):
 
 @login_required(login_url='users:login')
 def profile(request):
-    username = request.user.username
 
     email = request.user.email
     enrollments = Enrollment.objects.filter(email=email)
 
-    return render(request,'users/profile.html', {'username': username, 'enrollments': enrollments})
+    user = User.objects.get(id=request.session.get('user_id'))
+
+    return render(request,'users/profile.html', {'user': user, 'enrollments': enrollments})
 
 @login_required(login_url='users:login')
-def edit_enrollment(request, enrollment_id):
-    enrollment = get_object_or_404(Enrollment, id=enrollment_id)
-    
+def edit_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+
+    if request.session.get('user_id') != user_id:
+        return redirect('users:profile')
+
     if request.method != 'POST':
         bond = Bond.objects.all()
-        howKnew = HowKnew.objects.all()
-        routePath = RoutePath.objects.all()
-        return render(request, 'users/edit_enrollment.html', {'enrollment': enrollment, 'bond': bond, 'howKnew': howKnew, 'routePath': routePath})
+        return render(request, 'users/edit_user.html', {'user': user, 'bond': bond})
 
     if request.method == 'POST':
-        enrollment.full_name = request.POST.get('full_name')
-        enrollment.email = request.POST.get('email')
-        enrollment.social_network = request.POST.get('social_network')
+        user.username = request.POST.get('username')
+        user.first_name = request.POST.get('name')
+        user.last_name = request.POST.get('last_name')
+        user.email = request.POST.get('email')
         
-        date_of_birth_str = request.POST.get('date_of_birth')
-        enrollment.date_of_birth = datetime.strptime(date_of_birth_str, '%d/%m/%Y').date()
+        if not hasattr(user, 'personaldata') or user.personaldata is None:
+            personal_data = PersonalData()
+            personal_data.user = user
+            personal_data.save()
+        
+        user.personaldata.social_network = request.POST.get('social_network')
+        user.personaldata.date_of_birth = datetime.strptime(request.POST.get('date_of_birth'), '%d/%m/%Y').date()
 
         bond_choice_id = request.POST.get('bond_choice')
-        enrollment.bond_choice = get_object_or_404(Bond, id=bond_choice_id)  # Retrieve the Bond instance
+        user.personaldata.bond_choice = get_object_or_404(Bond, id=bond_choice_id) 
 
-        how_knew_id = request.POST.get('how_knew')
-        enrollment.how_knew = HowKnew.objects.get(id=how_knew_id)  # Retrieve the HowKnew instance
-
-        route_path_id = request.POST.get('route_path')
-        enrollment.route_path = RoutePath.objects.get(id=route_path_id)  # Retrieve the RoutePath instance
+        user.personaldata.rg = request.POST.get('rg')
         
-        enrollment.rg = request.POST.get('rg')
+        user.personaldata.save()
 
-        enrollment.save()
-
+        user.save()
         return redirect('users:profile')

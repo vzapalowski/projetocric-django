@@ -22,9 +22,9 @@
     --primary-light: #020303;
     --primary-dark: #131A40;
 
-    --secundary-color: #2B2F4D;
-    --secundary-light: #4E64A6;
-    --secundary-dark: #101633;
+    --secondary-color: #2B2F4D;
+    --secondary-light: #4E64A6;
+    --secondary-dark: #101633;
 
     --neutral-black-100: #000000;
     --neutral-black-30: #565656;
@@ -50,8 +50,8 @@
 }
 
 #fab-button {
-  border: 2px solid var(--secundary-dark);
-  background-color: var(--secundary-dark);
+  border: 2px solid var(--secondary-dark);
+  background-color: var(--secondary-dark);
   height: 4rem;
   width: 4rem;
   border-radius: 100%;
@@ -81,6 +81,10 @@
   border-radius: 15rem;
 }
 
+.btn-cric{
+  background-color: var(--primary-dark) !important;
+}
+
 .btn-hover-cric{
   background-color: #ffffff;
   border-radius: 15rem;
@@ -101,9 +105,43 @@
   transition: 0.5s;
 }
 
+.img-event-card{
+  height: 6rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+}
+
 .topic-color{
   color: var(--primary-color);
 }
+
+.topic-color-light{
+  background-color: var(--secondary-light) !important;
+}
+
+.btn-outline-cric{
+  color: var(--primary-color) !important;
+  border: 1px solid var(--primary-color) !important;
+}
+
+.btn-outline-cric:hover{
+  color: var(--neutral-white) !important;
+  border: 1px solid var(--primary-color) !important;
+  background-color: var(--primary-color) !important;
+}
+
+.btn-secondary-cric{
+  color: var(--secondary-color) !important;
+  border: 1px solid var(--secondary-color) !important;
+}
+
+.btn-secondary-cric:hover{
+  color: var(--neutral-white) !important;
+  border: 1px solid var(--secondary-color) !important;
+  background-color: var(--secondary-color) !important;
+}
+
 
 .h-banner{
   
@@ -126,7 +164,7 @@
 /* FOOTER */
 
 .background-footer{
-  background-color: var(--secundary-color);
+  background-color: var(--secondary-color);
 }
 
 
@@ -600,7 +638,7 @@
   .footer-desktop {
     max-width: 100vw;
     height: auto;
-    background-color: var(--secundary-color);
+    background-color: var(--secondary-color);
     color: white;
     font-size: 2rem;
     display: grid;

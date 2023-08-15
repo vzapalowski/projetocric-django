@@ -25,18 +25,19 @@
 
 <div class="container-fluid text-center mt-5 mb-5">
         <!-- {% comment %} INFO POINTS {% endcomment %} -->
-  <div>
-    <button class="btn btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-      Ver Detalhes
+  
+    <!-- <div> -->
+    <button class="btn btn-outline-dark btn-secondary-cric btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      Vizualizar Pontos do Mapa
     </button>
     <div class="collapse mt-2 " id="collapseExample">
       <div class="container aling-items-center">
-          <div class="row text-start">
+          <div class="row">
             {% for category in categories_points %}
-              <div class="col-6 col-sm-4 mt-3">
-                  <img id="Toast" class="img-fluid" src="{{ category.image.url }}" alt="..." style="height: 4rem;">
-                  {{ category.name }}
-              </div>
+            <div class="col-6 col-sm-4 mt-3 d-flex">
+              <img id="Toast" class="img-fluid" src="{{ category.image.url }}" alt="..." style="height: 4rem;">
+              <h5>{{ category.name }}</h5>
+            </div>
             {% endfor %}
         </div>
     </div> 
@@ -102,10 +103,89 @@
       </div>
     </div>
   </div>
-  
+
+        <!-- {% comment %} Eventos {% endcomment %} -->
+        
+  <div class="container">
+    <h2 class="mt-5 mb-5 fw-bold topic-color" id="eventos">Eventos</h2>
+      <!-- Exemplo de Evento Em Andamento -->
+      <div class="col-sm-12 col-lg-12 mt-4">
+        <div class="card mb-4 mb-md-0">
+          <div class="card-body">  
+            <img src="{% static 'images/images-cities/triunfo.jpg'%}" class="post-user w-100 rounded-top" alt="...">
+            <h4 class="mb-2 mt-3 fw-medium p-3 topic-color-light text-white rounded">3º Passeio Ciclístico do IFSul Butia</h4>
+            <div class="row mx-2">
+              <div class="col-sm-6 text-start">
+                <p class="mt-4 mb-1" style="font-size: 18px;">
+                  <span class="fw-bolder">
+                    Local onde irá ocorrer: 
+                  </span> Butia
+                </p>
+                <p class="mt-4 mb-1" style="font-size: 18px;">
+                  <span class="fw-bolder">
+                    Numero de Trajetos: 
+                  </span> 6
+                </p>   
+              </div>
+              <div class="col-sm-6 text-start">
+                <p class="mt-4 mb-1" style="font-size: 18px;">
+                  <span class="fw-bolder">
+                    Iniciado em:
+                  </span> 05/08/2023
+                </p>  
+                <p class="mt-4 mb-1" style="font-size: 18px;">
+                  <span class="fw-bolder">
+                    Situação do Evento: 
+                  </span> Em Andamento
+                </p>   
+              </div>
+            </div>
+            <a href="#" type="button" class="btn btn-outline-primary btn-outline-cric w-100 mt-3 fs-5">Inscrever-se</a>
+            <a href="#" type="button" class="btn btn-outline-dark w-100 mt-3 btn-secondary-cric fs-5">Vizualizar Evento</a>
+        </div>
+      </div>
+    </div>
+      <!-- Exemplo de Evento Finalizado -->
+      <div class="col-sm-12 col-lg-12 mt-4">
+        <div class="card mb-4 mb-md-0">
+          <div class="card-body">  
+            <img src="{% static 'images/images-cities/charqueadas.jpg'%}" class="post-user w-100 rounded-top" alt="...">
+              <h4 class="mb-2 mt-3 fw-medium p-3 topic-color-light text-white rounded">2º Passeio Ciclístico do IFSul Charqueadas</h4>
+              <div class="row mx-2">
+                <div class="col-sm-6 text-start">
+                  <p class="mt-4 mb-1 fs-5">
+                    <span class="fw-bolder">
+                      Local onde irá ocorrer: 
+                    </span> Triunfo
+                  </p>
+                  <p class="mt-4 mb-1" style="font-size: 18px;">
+                    <span class="fw-bolder">
+                      Numero de Trajetos: 
+                    </span> 4
+                  </p>   
+                </div>
+                <div class="col-sm-6 text-start">
+                  <p class="mt-4 mb-1" style="font-size: 18px;">
+                    <span class="fw-bolder">
+                      Iniciado em:
+                    </span> 03/08/2022
+                  </p>  
+                  <p class="mt-4 mb-1" style="font-size: 18px;">
+                    <span class="fw-bolder">
+                      Situação do Evento: 
+                    </span> Finalizado
+                  </p>   
+                </div>
+              </div>
+              <a href="#" type="button" class="btn btn-outline-dark w-100 mt-3 btn-secondary-cric fs-5">Vizualizar Evento</a>
+            </div>
+          </div>
+        </div>
+  </div>
+
         <!-- {% comment %} Manual {% endcomment %} -->
   <div>
-    <h2 class="mt-5 mb-5 fw-bold topic-color" id="manual">Manual</h2>
+    <h2 class="mb-5 fw-bold topic-color" id="manual" style="margin-top: 7rem;">Manual</h2>
     <div class="conteudo">
       <div class="rule1">
         <div class="img-rule1" data-aos="fade-up"></div>
@@ -237,7 +317,7 @@
     </div>
   </div>
   
-</div>
+<!-- </div> -->
 </div>
 <script src="{% static 'js/home/data.js'%}" type="module" async></script>
 <script src="{% static 'js/map/Polyline.encoded.js'%}"></script>

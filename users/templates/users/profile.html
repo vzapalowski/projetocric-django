@@ -96,219 +96,45 @@
               </div> -->
             </div>
           </div>
-          <h3 class="topic-color text-center mt-5">Eventos em que Participou:</h3>
+          <h3 class="topic-color text-center mt-5">Inscrinções</h3>
           <div class="row">
-            <div class="col-md-6 mt-3">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-2 topic-color fs-5">Exemplo de Evento em Andamento</p>
+            {% for enrollment in enrollments %}
+              <div class="col-md-6 mt-3">
+                <div class="card mb-4 mb-md-0">
+                  <div class="card-body">
+                    <p class="mb-2 topic-color fs-5">{{ enrollment.event.name }}</p>
 
-                  <img src="{% static 'images/images-cities/charqueadas-trevo.jpeg'%}" class="post-user w-100" alt="...">
+                    <img src="{% static 'images/images-cities/charqueadas-trevo.jpeg'%}" class="post-user w-100" alt="...">
 
-                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
-                    <span class="fw-bolder">
-                      Local: 
-                    </span> Charqueadas
-                  </p>
+                    <p class="mt-3 mb-1 fs-6" style="font-size: .77rem;">
+                      <span class="fw-bolder">
+                        Local: 
+                      </span> {{ enrollment.route_path.departure_location }}
+                    </p>
 
-                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
-                    <span class="fw-bolder">
-                      Inicio do Evento: 
-                    </span> 03/08/2023
-                  </p>                 
-                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
-                    <span class="fw-bolder">
-                      Quantidade de Trajetos: 
-                    </span> 6
-                  </p>                
+                    <p class="mt-3 mb-1 fs-6" style="font-size: .77rem;">
+                      <span class="fw-bolder">
+                        Inicio do Evento: 
+                      </span> {{ enrollment.route_path.concentration }}
+                    </p>
 
-                  <a href="#" type="button" class="btn btn-outline-secondary w-100">Acompanhar Evento</a>
+                    <p class="mt-3 mb-1 fs-6" style="font-size: .77rem;">
+                      <span class="fw-bolder">
+                        Nome do inscrito: 
+                      </span> {{ enrollment.full_name }}
+                    </p>                
 
+                    <a href="{% url 'events:event' pk=enrollment.event.id %}" type="button" class="btn btn-outline-secondary w-100">Acompanhar Evento</a>
+
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-6 mt-3">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-2 topic-color fs-5">Exemplo de Evento Passado</p>
-
-                  <img src="{% static 'images/images-cities/charqueadas.jpg'%}" class="post-user w-100" alt="...">
-
-                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
-                    <span class="fw-bolder">
-                      Local: 
-                    </span> Charqueadas
-                  </p>
-
-                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
-                    <span class="fw-bolder">
-                      Inicio do Evento: 
-                    </span> 03/08/2023
-                  </p>                 
-                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
-                    <span class="fw-bolder">
-                      Quantidade de Trajetos: 
-                    </span> 3
-                  </p>                
-
-                  <a href="#" type="button" class="btn btn-outline-secondary w-100">Vizualizar</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 mt-3">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-2 topic-color fs-5">Exemplo de Postagem 2</p>
-
-                  <img src="{% static 'images/images-cities/butia.jpg'%}" class="post-user w-100" alt="...">
-
-                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
-                    <span class="fw-bolder">
-                      Local: 
-                    </span> Butia
-                  </p>
-
-                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
-                    <span class="fw-bolder">
-                      Inicio do Evento: 
-                    </span> 03/08/2023
-                  </p>                 
-                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
-                    <span class="fw-bolder">
-                      Quantidade de Trajetos: 
-                    </span> 4
-                  </p>                
-
-                  <a href="#" type="button" class="btn btn-outline-secondary w-100">Vizualizar</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 mt-3">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-2 topic-color fs-5">Exemplo de Postagem</p>
-
-                  <img src="{% static 'images/images-cities/triunfo.jpg'%}" class="post-user w-100" alt="...">
-
-                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
-                    <span class="fw-bolder">
-                      Local: 
-                    </span> Triunfo
-                  </p>
-
-                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
-                    <span class="fw-bolder">
-                      Inicio do Evento: 
-                    </span> 03/08/2023
-                  </p>                 
-                  <p class="mt-4 mb-1 fs-6" style="font-size: .77rem;">
-                    <span class="fw-bolder">
-                      Quantidade de Trajetos: 
-                    </span> 2
-                  </p>                
-
-                  <a href="#" type="button" class="btn btn-outline-secondary w-100">Vizualizar</a>
-                </div>
-              </div>
-            </div>
-            
+            {% endfor %}
           </div>
         </div>
       </div>
     </div>
-  </section>
-      <!-- <th>Full Name</th>
-      <th>Email</th>
-      <th>Social Network</th>
-      <th>Date of Birth</th>
-      <th>Bond Choice</th>
-      <th>How Knew</th>
-      <th>RG</th>
-      <th>Route Path</th>
-      <th> </th> -->
-
-
-    <!-- Postagens do Usuario -->
-    <!-- <div class="col-12 bg-warning mt-3" style="height: 30rem;">
-      <div class="row mt-5" data-aos="fade-up">
-        <div class="col-12 mb-3 mb-sm-0">
-          <div class="card border-card">
-            <div class="card-body">
-              <h5 class="card-title border-bottom border-dark-subtle topic-color">asdadas</h5>
-              <p></p>
-              <p class="card-text"><small class="text-body-secondary">Local de sáida: </small></p>
-              <p class="card-text"><small class="text-body-secondary">Horário de Concentração: </small></p>
-              <p class="card-text"><small class="text-body-secondary">Horário de saída</small></p>
-            </div>
-          </div>
-        </div>
-      </div> 
-      <div class="row mt-5" data-aos="fade-up">
-        <div class="col-12 mb-3 mb-sm-0">
-          <div class="card border-card">
-            <div class="card-body">
-              <h5 class="card-title border-bottom border-dark-subtle topic-color">asdadas</h5>
-              <p></p>
-              <p class="card-text"><small class="text-body-secondary">Local de sáida: </small></p>
-              <p class="card-text"><small class="text-body-secondary">Horário de Concentração: </small></p>
-              <p class="card-text"><small class="text-body-secondary">Horário de saída</small></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row mt-5" data-aos="fade-up">
-        <div class="col-12 mb-3 mb-sm-0">
-          <div class="card border-card">
-            <div class="card-body">
-              <h5 class="card-title border-bottom border-dark-subtle topic-color">asdadas</h5>
-              <p></p>
-              <p class="card-text"><small class="text-body-secondary">Local de sáida: </small></p>
-              <p class="card-text"><small class="text-body-secondary">Horário de Concentração: </small></p>
-              <p class="card-text"><small class="text-body-secondary">Horário de saída</small></p>
-            </div>
-          </div>
-        </div>
-      </div>  
-    </div> -->
-
-
-
-
-    <!-- <h1>Welcome, {{ request.user.username }}!</h1>
-    <a href="{% url 'users:logout' %}">Logout</a>
-    
-    <table>
-        <thead>
-          <tr>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Social Network</th>
-            <th>Date of Birth</th>
-            <th>Bond Choice</th>
-            <th>How Knew</th>
-            <th>RG</th>
-            <th>Route Path</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for enrollment in enrollments %}
-          <tr>
-            <td>{{ enrollment.full_name }}</td>
-            <td>{{ enrollment.email }}</td>
-            <td>{{ enrollment.social_network }}</td>
-            <td>{{ enrollment.date_of_birth }}</td>
-            <td>{{ enrollment.bond_choice }}</td>
-            <td>{{ enrollment.how_knew }}</td>
-            <td>{{ enrollment.rg }}</td>
-            <td>{{ enrollment.route_path }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-
-      </table>   -->
-      {%endblock%}
-      </table>  
+  </section>    
+  {%endblock%}
 </body>
 </html>

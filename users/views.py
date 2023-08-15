@@ -81,11 +81,11 @@ def logout(request):
 
 @login_required(login_url='users:login')
 def profile(request):
-
-    email = request.user.email
-    enrollments = Enrollment.objects.filter(email=email)
-
+    
     user = User.objects.get(id=request.session.get('user_id'))
+
+    email = user.email
+    enrollments = Enrollment.objects.filter(email=email)
 
     return render(request,'users/profile.html', {'user': user, 'enrollments': enrollments})
 

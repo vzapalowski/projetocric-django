@@ -16,6 +16,9 @@ class PostHome(ListView):
         context = super().get_context_data(**kwargs)
         context['homes'] = CityManager.objects.all()
         context['categories_points'] = Category.objects.all()
-        context['events'] = Event.objects.all()
+        events = Event.objects.all()
+        for event in events:
+            event.number_of_routes = event.routes_data.count()
+        context['events'] = events
         return context
     

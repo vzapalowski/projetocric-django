@@ -104,12 +104,51 @@
     </div>
   </div>
 
-        <!-- {% comment %} Eventos {% endcomment %} -->
-        
+  <!-- {% comment %} Eventos {% endcomment %} -->
+
+  <!-- Exemplo de Evento Finalizado -->
   <div class="container">
     <h2 class="mt-5 mb-5 fw-bold topic-color" id="eventos">Eventos</h2>
-      <!-- Exemplo de Evento Em Andamento -->
+    {% for event in events %}
       <div class="col-sm-12 col-lg-12 mt-4">
+        <div class="card mb-4 mb-md-0">
+          <div class="card-body">  
+            <img src="{% static 'images/images-cities/charqueadas.jpg'%}" class="post-user w-100 rounded-top" alt="...">
+              <h4 class="mb-2 mt-3 fw-medium p-3 topic-color-light text-white rounded">{{ event.name }}</h4>
+              <div class="row mx-2">
+                <div class="col-sm-6 text-start">
+                  <p class="mt-4 mb-1 fs-5">
+                    <span class="fw-bolder">
+                      Local onde irá ocorrer: 
+                    </span> {{ event.location }}
+                  </p>
+                  <p class="mt-4 mb-1" style="font-size: 18px;">
+                    <span class="fw-bolder">
+                      Numero de Trajetos: 
+                    </span> {{ event.number_of_routes }}
+                  </p>   
+                </div>
+                <div class="col-sm-6 text-start">
+                  <p class="mt-4 mb-1" style="font-size: 18px;">
+                    <span class="fw-bolder">
+                      Iniciado em:
+                    </span> {{ event.date }}
+                  </p>  
+                  <p class="mt-4 mb-1" style="font-size: 18px;">
+                    <span class="fw-bolder">
+                      Situação do Evento: 
+                    </span> {{ event.status }}
+                  </p>   
+                </div>
+              </div>
+              <a href="{% url 'events:event' pk=event.id %}" type="button" class="btn btn-outline-dark w-100 mt-3 btn-secondary-cric fs-5">Vizualizar Evento</a>
+            </div>
+          </div>
+      </div>
+    {% endfor %}
+
+      <!-- Exemplo de Evento Em Andamento -->
+      <!-- <div class="col-sm-12 col-lg-12 mt-4">
         <div class="card mb-4 mb-md-0">
           <div class="card-body">  
             <img src="{% static 'images/images-cities/triunfo.jpg'%}" class="post-user w-100 rounded-top" alt="...">
@@ -144,43 +183,8 @@
             <a href="#" type="button" class="btn btn-outline-dark w-100 mt-3 btn-secondary-cric fs-5">Vizualizar Evento</a>
         </div>
       </div>
-    </div>
-      <!-- Exemplo de Evento Finalizado -->
-      <div class="col-sm-12 col-lg-12 mt-4">
-        <div class="card mb-4 mb-md-0">
-          <div class="card-body">  
-            <img src="{% static 'images/images-cities/charqueadas.jpg'%}" class="post-user w-100 rounded-top" alt="...">
-              <h4 class="mb-2 mt-3 fw-medium p-3 topic-color-light text-white rounded">2º Passeio Ciclístico do IFSul Charqueadas</h4>
-              <div class="row mx-2">
-                <div class="col-sm-6 text-start">
-                  <p class="mt-4 mb-1 fs-5">
-                    <span class="fw-bolder">
-                      Local onde irá ocorrer: 
-                    </span> Triunfo
-                  </p>
-                  <p class="mt-4 mb-1" style="font-size: 18px;">
-                    <span class="fw-bolder">
-                      Numero de Trajetos: 
-                    </span> 4
-                  </p>   
-                </div>
-                <div class="col-sm-6 text-start">
-                  <p class="mt-4 mb-1" style="font-size: 18px;">
-                    <span class="fw-bolder">
-                      Iniciado em:
-                    </span> 03/08/2022
-                  </p>  
-                  <p class="mt-4 mb-1" style="font-size: 18px;">
-                    <span class="fw-bolder">
-                      Situação do Evento: 
-                    </span> Finalizado
-                  </p>   
-                </div>
-              </div>
-              <a href="#" type="button" class="btn btn-outline-dark w-100 mt-3 btn-secondary-cric fs-5">Vizualizar Evento</a>
-            </div>
-          </div>
-        </div>
+    </div> -->
+      
   </div>
 
         <!-- {% comment %} Manual {% endcomment %} -->

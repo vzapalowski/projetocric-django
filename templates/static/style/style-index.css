@@ -48,6 +48,9 @@
   border-radius: 100%;
   border: none;
 }
+.offcanvas-cric{
+    width: 275px !important;
+}
 
 #fab-button {
   border: 2px solid var(--secondary-dark);

@@ -27,16 +27,22 @@
   
   <!-- {% comment %} INFO POINTS {% endcomment %} -->
 
-    <button class="btn btn-outline-dark btn-secondary-cric btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-      Vizualizar Pontos do Mapa
-    </button>
+  
+  <div class="container mt-5">
+    <div class="row justify-content-center flex-wrap">
+      <button class="btn btn-outline-dark btnOpacity mt-2 p-3 w-25 btn-view-points" style="height: 100%;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Vizualizar Pontos do Mapa
+      </button>
+      </div>
+    </div>
+
     <div class="collapse mt-2 " id="collapseExample">
       <div class="container aling-items-center">
           <div class="row">
             {% for category in categories_points %}
             <div class="col-6 col-sm-4 mt-3 d-flex">
-              <img id="Toast" class="img-fluid" src="{{ category.image.url }}" alt="..." style="height: 4rem;">
-              <h5>{{ category.name }}</h5>
+              <img id="Toast" class="img-fluid" src="{{ category.image.url }}" alt="..." style="height: 4rem;" title="Test">
+              <h5 class="d-flex justify-content-center align-items-center" style="margin-bottom: 0;">{{ category.name }}</h5>
             </div>
             {% endfor %}
         </div>
@@ -46,7 +52,7 @@
   <!-- {% comment %} Municipios {% endcomment %} -->
 
   <div class="container mt-5">
-    <h2 class="mt-5 mb-5 fw-bold topic-color" id="cities">Municipios da Região Carnonífera</h2>
+    <h2 class="mb-5 fw-bold topic-color" id="cities" style="margin-top: 3.4rem;">Municipios da Região Carnonífera</h2>
     <div class="row g-2">
 
       {% for city in homes %}
@@ -104,6 +110,10 @@
     </div>
   </div>
 
+  <div class="container">
+    <hr style="margin-top: 5rem;">
+  </div>
+
   <!-- {% comment %} Eventos {% endcomment %} -->
 
   <div class="container">
@@ -115,7 +125,7 @@
             <img src="{% static 'images/images-cities/charqueadas.jpg'%}" class="post-user w-100 rounded-top" alt="...">
               <h4 class="mb-2 mt-3 fw-medium p-3 topic-color-light text-white rounded">{{ event.name }}</h4>
               <div class="row mx-2">
-                <div class="col-sm-6 text-start">
+                <div class="col-sm-4 text-start">
                   <p class="mt-4 mb-1 fs-5">
                     <span class="fw-bolder">
                       Local onde irá ocorrer: 
@@ -127,7 +137,7 @@
                     </span> {{ event.date }}
                   </p>   
                 </div>
-                <div class="col-sm-6 text-start">
+                <div class="col-sm-4 text-start">
                   <p class="mt-4 mb-1" style="font-size: 18px;">
                     <span class="fw-bolder">
                     Quantidade de Trajetos: 
@@ -136,6 +146,18 @@
                   <p class="mt-4 mb-1" style="font-size: 18px;">
                     <span class="fw-bolder">
                       Quilometragem do Trajeto:
+                    </span> None
+                  </p>   
+                </div>
+                <div class="col-sm-4 text-start">
+                  <p class="mt-4 mb-1" style="font-size: 18px;">
+                    <span class="fw-bolder">
+                    Situação: 
+                  </span> {{ event.status }}
+                  </p>  
+                  <p class="mt-4 mb-1" style="font-size: 18px;">
+                    <span class="fw-bolder">
+                      Participantes:
                     </span> None
                   </p>   
                 </div>
@@ -178,12 +200,16 @@
                 </p>   
               </div>
             </div>
-            <a href="#" type="button" class="btn btn-outline-primary btn-outline-cric w-100 mt-3 fs-5">Inscrever-se</a>
+            <a href="#" type="button" class="btn btn-outline-primary btn-outline-cric w-100 mt-3 fs-5">Participar</a>
             <a href="#" type="button" class="btn btn-outline-dark w-100 mt-3 btn-secondary-cric fs-5">Vizualizar Evento</a>
         </div>
       </div>
     </div> -->
       
+  </div>
+
+  <div class="container">
+    <hr style="margin-top: 5rem;">
   </div>
 
   <!-- {% comment %} Manual {% endcomment %} -->

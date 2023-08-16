@@ -96,7 +96,9 @@
               </div> -->
             </div>
           </div>
-          <h3 class="topic-color text-center mt-5">Inscrinções</h3>
+          {% if enrollments %}
+            <h3 class="topic-color text-center mt-5">Inscrições</h3>
+          {% endif %}
           <div class="row">
             {% for enrollment in enrollments %}
               <div class="col-md-6 mt-3">

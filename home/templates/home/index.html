@@ -24,9 +24,9 @@
 </div>
 
 <div class="container-fluid text-center mt-5 mb-5">
-        <!-- {% comment %} INFO POINTS {% endcomment %} -->
   
-    <!-- <div> -->
+  <!-- {% comment %} INFO POINTS {% endcomment %} -->
+
     <button class="btn btn-outline-dark btn-secondary-cric btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
       Vizualizar Pontos do Mapa
     </button>
@@ -43,7 +43,7 @@
     </div> 
   </div>
 
-        <!-- {% comment %} Municipios {% endcomment %} -->
+  <!-- {% comment %} Municipios {% endcomment %} -->
 
   <div class="container mt-5">
     <h2 class="mt-5 mb-5 fw-bold topic-color" id="cities">Municipios da Região Carnonífera</h2>
@@ -106,9 +106,8 @@
 
   <!-- {% comment %} Eventos {% endcomment %} -->
 
-  <!-- Exemplo de Evento Finalizado -->
   <div class="container">
-    <h2 class="mt-5 mb-5 fw-bold topic-color" id="eventos">Eventos</h2>
+    <h2 class="mt-5 mb-5 fw-bold topic-color" id="events">Eventos</h2>
     {% for event in events %}
       <div class="col-sm-12 col-lg-12 mt-4">
         <div class="card mb-4 mb-md-0">
@@ -187,7 +186,7 @@
       
   </div>
 
-        <!-- {% comment %} Manual {% endcomment %} -->
+  <!-- {% comment %} Manual {% endcomment %} -->
   <div>
     <h2 class="mb-5 fw-bold topic-color" id="manual" style="margin-top: 7rem;">Manual</h2>
     <div class="conteudo">
@@ -236,7 +235,7 @@
     </div>  
   </div>
 
-        <!-- {% comment %} Sobre {% endcomment %} -->
+  <!-- {% comment %} Sobre {% endcomment %} -->
 
   <div>
     <h2 class="mt-5 mb-5 fw-bold topic-color" id="about">Sobre o Projeto</h2>
@@ -321,7 +320,6 @@
     </div>
   </div>
   
-<!-- </div> -->
 </div>
 <script src="{% static 'js/home/data.js'%}" type="module" async></script>
 <script src="{% static 'js/map/Polyline.encoded.js'%}"></script>

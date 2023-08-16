@@ -112,10 +112,10 @@
     </head>
 <body class="background">
 
-  <div class="container-fluid text-center bg-light d-lg-none">
+  <div class="container-fluid text-center bg-light d-lg-none ">
 
     <!-- {% comment %} NAVIGATION FOR MOBILE {% endcomment %} -->
-    
+     
     <nav class="navbar bg-body-tertiary fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
@@ -171,7 +171,7 @@
     </nav>
   </div>
 
-  <div class="container-fluid text-center position-absolute d-none d-lg-flex">
+  <div class="container-fluid text-center position-absolute d-none d-lg-flex nav-bar-container">
   
     <!-- {% comment %} NAVIGATION FOR DESKTOP {% endcomment %} -->
     
@@ -197,7 +197,7 @@
                                     <a class="nav-link btn-hover-cric px-4 size-text" aria-current="page" href="{% url 'home:home' %}"><i class="fa-solid fa-house me-3 text-primary-emphasis"></i> Home</a>
                                   </li>
                                   <li class="nav-item">
-                                    <a class="nav-link btn-hover-cric px-4" aria-current="page" href="#"><i class="fa-solid fa-user me-3 text-primary-emphasis" style="color: #233e6c;"></i>Entrar</a>
+                                    <a class="nav-link btn-hover-cric px-4" aria-current="page" href="{% url 'users:login' %}"><i class="fa-solid fa-user me-3 text-primary-emphasis" style="color: #233e6c;"></i>Entrar</a>
                                 </li>
                                 <li class="nav-item" data-bs-dismiss="offcanvas">
                                   <a class="nav-link btn-hover-cric px-4 page-nav-item" href="#events"><i class="fa-solid fa-road me-2 text-primary-emphasis"></i> Eventos</a>

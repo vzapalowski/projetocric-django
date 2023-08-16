@@ -6,7 +6,9 @@
     top: 0;
     left: 0;
     opacity: 20%;
+    z-index: 1;
 }
+
 
 @media (max-width: 767px) {
     .even-card {

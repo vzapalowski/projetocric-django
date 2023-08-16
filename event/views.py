@@ -32,6 +32,9 @@ class EventView(DetailView):
 def enrollment(request, event_id):
     event = Event.objects.get(pk=event_id)
     if request.method == 'POST':
+        if not request.session.get('user_id'):
+            return redirect('users:login')
+
         form = EnrollmentForm(request.POST)
         if form.is_valid():
             form.save()

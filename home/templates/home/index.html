@@ -123,20 +123,20 @@
                   </p>
                   <p class="mt-4 mb-1" style="font-size: 18px;">
                     <span class="fw-bolder">
-                      Numero de Trajetos: 
-                    </span> {{ event.number_of_routes }}
+                      Data:
+                    </span> {{ event.date }}
                   </p>   
                 </div>
                 <div class="col-sm-6 text-start">
                   <p class="mt-4 mb-1" style="font-size: 18px;">
                     <span class="fw-bolder">
-                      Iniciado em:
-                    </span> {{ event.date }}
+                    Quantidade de Trajetos: 
+                  </span> {{ event.number_of_routes }}
                   </p>  
                   <p class="mt-4 mb-1" style="font-size: 18px;">
                     <span class="fw-bolder">
-                      Situação do Evento: 
-                    </span> {{ event.status }}
+                      Quilometragem do Trajeto:
+                    </span> None
                   </p>   
                 </div>
               </div>
@@ -319,7 +319,7 @@
       </div>
     </div>
   </div>
-  
+
 </div>
 <script src="{% static 'js/home/data.js'%}" type="module" async></script>
 <script src="{% static 'js/map/Polyline.encoded.js'%}"></script>

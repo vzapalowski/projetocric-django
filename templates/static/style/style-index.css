@@ -561,8 +561,10 @@
 
 }
 
-@media (min-width: 992px) { 
-
+@media (max-width: 992px) { 
+  .btn-view-points {
+    width: 50% !important;
+  }
 }
 
 @media (max-width: 968px) {
@@ -894,7 +896,12 @@
 
   
 }
-
+ 
+@media (max-width: 767px) {
+  .btn-view-points{
+    width: 97% !important;
+  }
+}
 
 @media (max-width : 780px) {
   .bg-image-h{
@@ -932,7 +939,10 @@
 /* MOBILE - L */
 
 @media (max-width: 575px) {
-  
+  .btn-view-points {
+    width: 95% !important;
+  }
+
   /* MUNICIPIOS */
   section.container-cities .container-inside .container-city .content .city-name {
     display: none;

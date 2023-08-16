@@ -34,11 +34,15 @@ def register(request):
         return render(request, 'users/register.html')
     
     if password != password_confirm:
-        messages.error(request, 'As senhas informadas são diferentes')
+        messages.error(request, 'As senhas informadas são diferentes!')
+        return render(request, 'users/register.html')
+
+    if len(password) < 8:
+        messages.error(request, 'As senhas devem conter mais que 8 caracteres!')
         return render(request, 'users/register.html')
 
     if User.objects.filter(username=username).exists():
-        messages.error(request, 'Username já cadastrado')
+        messages.error(request, 'Username já cadastrado!')
         return render(request, 'users/register.html')
 
     user = User.objects.create_user(username=username, email=email, password=password, first_name=first_name, last_name=last_name)

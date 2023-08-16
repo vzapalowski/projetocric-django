@@ -65,7 +65,7 @@
   {% if messages %}
   <ul class="col-11 col-sm-8 ps-0 adjust-message">
     {% for message in messages %}
-    <li {% if message.tags %} class="{{ message.tags }} card message"{% endif %}>
+    <li {% if message.tags %} class="{{ message.tags }}-message card message"{% endif %}>
     <p class="card-body mb-0">
       {{ message }}
     </p>

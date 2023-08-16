@@ -72,7 +72,7 @@ def login(request):
     user = auth.authenticate(request, email=email, password=password)
 
     if not user:
-        messages.error(request, 'Credenciais inválidas')
+        messages.error(request, 'Senha ou email inválido')
         return render(request, 'users/login.html')
     else:
         auth.login(request, user)

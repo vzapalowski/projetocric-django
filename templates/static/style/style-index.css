@@ -162,7 +162,21 @@
 }
 
 
+/* MESSAGE CARD */
 
+.error-message{
+  border: 2px solid #be1e1e !important;
+  color: #be1e1e  !important;
+  font-size: 20px;
+  font-weight: bolder !important;
+}
+
+.success-message{
+  border: 2px solid #3fa132 !important;
+  color: #3fa132  !important;
+  font-size: 20px;
+  font-weight: bolder !important;
+}
 
 /* FOOTER */
 

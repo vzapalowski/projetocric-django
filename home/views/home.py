@@ -4,6 +4,8 @@ from home.models import CityManager
 from cities.models import City
 from cities.models import Category
 from event.models import Event
+from event.models import Enrollment
+
 
 class PostHome(ListView):
     template_name = 'home/index.html'
@@ -17,8 +19,12 @@ class PostHome(ListView):
         context['homes'] = CityManager.objects.all()
         context['categories_points'] = Category.objects.all()
         events = Event.objects.all()
+    
         for event in events:
             event.number_of_routes = event.routes_data.count()
+            event.participants = Enrollment.objects.filter(event=event).count()
+
         context['events'] = events
+    
         return context
     

@@ -7,6 +7,52 @@
 {%block 'content'%}
 
 
+<style>
+  .form-container {
+    position: relative;
+    /* Add any other styling for the container */
+
+    /* Set the background image of the container to add the blur effect */
+    background: url('path_to_your_blurred_image.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allow clicks to reach the form elements */
+    z-index: 90;
+    flex-direction: column;
+  }
+
+  .overlay h2{
+    z-index: 91;
+  }
+
+  .overlay a {
+    z-index: 91;
+    pointer-events: auto;
+  }
+
+  .btn-container {
+    z-index: 91;
+  }
+.overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.205); /* Semi-transparent black background */
+    backdrop-filter: blur(10px); /* Adjust the blur intensity as needed */
+    pointer-events: auto; /* Prevent clicks from reaching elements underneath the overlay */
+}
+</style>
+
 <div class="bg-image"></div>
 
 <div class="container-fluid text-center">
@@ -36,15 +82,11 @@
       </div>
     </div>
   </div>
+  
 </div> 
   {% endfor %}
 
 </div>
-
-
-
-    
-
 
     <!-- Images -->
   <div class="container mt-5">
@@ -58,8 +100,7 @@
 </div>
 
 </div>
-        <!-- Mapa de Rotas do Evento -->
-
+  <!-- Mapa de Rotas do Evento -->
 <div class="text-center">
     <h2 class="mb-5 fw-bold topic-color" style="margin-top: 10rem;">
         Mapa das Rotas
@@ -107,40 +148,54 @@
   </div>
 {% endif %}
 
-  <!-- Formulario -->
+<!-- Formulario -->
 
 <div class="container mx-auto mb-5 col-10 align-items-center">
-  <h2 class="title-event text-center">Formulário para Inscrição ao Evento</h2>
-  <form class="bg-light px-5 py-5 col mt-5" id="enrollment-form" method="POST" action="{% url 'events:enrollment' event_id=event.id %}" data-aos="fade-up">
+  <h2 class="title-event text-center" id="form-h2">Formulário para Inscrição ao Evento</h2>
+  <form class="form-container bg-light px-5 py-5 col mt-5" id="enrollment-form" method="POST" action="{% url 'events:enrollment' event_id=event.id %}" data-aos="fade-up">
+    {% if not user.id %}
+      <div class="overlay container d-flex justify-content-center align-items-center">
+        <h2 class="h2">Faça login para se cadastrar no evento!</h2>
+        <a href="#" class="text-center btn-container btn-login">
+          <div class="btn btn-dark mt-1">Entrar</div>
+        </a>
+      </div>
+    {% endif %}
     {% csrf_token %}
+
     <!-- INPUT NAME -->
     <div class="input-group mb-3">
       <span class="input-group-text"><i class="fa-solid fa-user"></i></span>  
-      <input class="form-control" type="text" name="full_name" placeholder="Nome Completo" maxlength="100" required="" id="id_full_name" value="{{ form.full_name.value|default_if_none:''  }}">
+      <input class="form-control" type="text" name="full_name" placeholder="Nome Completo" maxlength="100" required="" id="id_full_name" value="{{ user.first_name|default_if_none:''  }}">
     </div>
     <!-- INPUT EMAIL -->
     <div class="input-group mb-3">
       <span class="input-group-text"><i class="fa-solid fa-user"></i></span>  
-      <input class="form-control" type="text" name="email" placeholder="Email" maxlength="30" required="" id="id_email" value="{{ form.email.value|default_if_none:''  }}">
+      <input class="form-control" type="text" name="email" placeholder="Email" maxlength="30" required="" id="id_email" value="{{ user.email|default_if_none:''  }}">
     </div>
     <!-- INPUT SOCIAL NETWORK -->
     <div class="input-group mb-3">
       <span class="input-group-text"><i class="fa-brands fa-instagram"></i></span>
-      <input class="form-control" type="text" name="social_network" placeholder="Instagram" maxlength="30" id="id_social_network" value="{{ form.social_network.value|default_if_none:''  }}">
+      <input class="form-control" type="text" name="social_network" placeholder="Instagram" maxlength="30" id="id_social_network" value="{{ user.personaldata.social_network|default_if_none:''  }}">
     </div>
     <!-- INPUT DATE OF BIRTH -->
     <div class="input-group mb-3">
       <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>   
-      <input placeholder="Data de nascimento" required="" class="datepicker form-control" type="text" name="date_of_birth" value="{{ form.date_of_birth.value|default_if_none:''  }}" id="datepicker">
+      <input placeholder="Data de nascimento" required="" class="datepicker form-control" type="text" name="date_of_birth" value="{{ user.personaldata.date_of_birth|date:'d/m/Y'  }}" id="datepicker">
     </div>
-
-   <!-- SELECT BOND CHOICE -->
-  <select class="form-select mb-3" name="bond_choice" required id="id_bond_choice">
-    <option value selected disabled>Sobre Você</option>
-    {% for bond in bond %}
-      <option value="{{ bond.id }}">{{ bond }}</option>
-    {% endfor %}
-  </select>
+    <!-- INPUT RG -->
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>  
+      <input class="form-control" type="text" name="rg" placeholder="RG" maxlength="10" required="" id="id_rg" value="{{ user.personaldata.rg|default_if_none:'' }}">
+    </div>
+    
+    <!-- SELECT BOND CHOICE -->
+    <select class="form-select mb-3" name="bond_choice" required id="id_bond_choice">
+      <option value selected disabled>Sobre Você</option>
+      {% for bond in bond %}
+        <option value="{{ bond.id }}" {% if user.personaldata.bond_choice.id == bond.id %}selected{% endif %}>{{ bond }}</option>
+      {% endfor %}
+    </select>
 
   <!-- SELECT HOW KNEW -->
   <select class="form-select mb-3" name="how_knew" required id="id_how_knew">
@@ -158,39 +213,44 @@
     {% endfor %}
   </select>
 
-    <!-- INPUT RG -->
-    <div class="input-group mb-3">
-      <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>  
-      <input class="form-control" type="text" name="rg" placeholder="RG" maxlength="10" required="" id="id_rg" value="{{ form.rg.value|default_if_none:'' }}">
-    </div>
-<div class="text-center">
-  <button class="btn btn-dark mt-5" type="submit">Concluir Inscrição</button>
-</div>
-{% if form.is_bound and form.errors %}
-  <!-- Display form errors -->
-  <ul>
-    {% for field in form %}
-      {% for error in field.errors %}
-        <li>{{ error }}</li>
-      {% endfor %}
-    {% endfor %}
-  </ul>
-{% endif %}
+  <!-- EVENT ID -->
+  <input  type="hidden" name="event" placeholder="event" value="{{ event.id }}" class="form-control" id="event">
 
-{% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-  </ul>
-{% endif %}
-
-</form>  
+  <div class="text-center">
+    <button class="btn btn-dark mt-5" type="submit">Concluir Inscrição</button>
+  </div>
+  </form>  
   </div>
 </div>
 
+<!-- MESSAGE CARD -->
+<div class="container d-flex align-items-center justify-content-center position-fixed start-50 translate-middle message-container " style="top: 93vh">
+  {% if messages %}
+  <ul class="col-11 col-sm-8 ps-0 adjust-message">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}-message card message"{% endif %}>
+    <p class="card-body mb-0 text-center">
+      {{ message }}
+    </p>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+
+<script src="{% static 'js/users/message_fx.js' %}" async></script>
 <script src="{% static 'js/events/data.js'%}" type="module" async></script>
 <script src="{% static 'js/map/Polyline.encoded.js' %}"></script>
+
+<script>
+  if (window.location.href.split('/')[5]) {
+    document.querySelector('#form-h2').scrollIntoView();
+  }
+
+  document.querySelector('.btn-login').addEventListener('click', () => {
+    window.location.href = "{% url 'users:login' %}"
+  });
+</script>
 
 <script type="text/javascript">
   $(function(){

@@ -68,6 +68,34 @@
   transform: translateY(-50%);
 }
 
+/* MESSAGE CARD FX */
+.message-container {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.message-container.hide {
+    opacity: 0;
+}
+
+.adjust-message{
+    top: 140%;
+}
+
+.error-message{
+    border: 2px solid #be1e1e !important;
+    color: #be1e1e  !important;
+    font-size: 20px;
+    font-weight: bolder !important;
+}
+
+.success-message{
+    border: 2px solid #3fa132 !important;
+    color: #3fa132  !important;
+    font-size: 20px;
+    font-weight: bolder !important;
+}
+
 @media (max-width: 1500px) {
     .img-event{
         height: 20rem;

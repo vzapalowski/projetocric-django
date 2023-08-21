@@ -1,16 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.detail import DetailView
 
 from django.contrib import messages
-
-from event.models import Event
+from django.utils.text import format_lazy
 
 from django.shortcuts import render, redirect
+
 from event.models import Event
 from event.models import EnrollmentForm
 from event.models.enrollment import Bond
 from event.models.how_knew import HowKnew
 from event.models.route_path import RoutePath
+from users.models import User
+
 
 class EventView(DetailView):
     model = Event
@@ -39,7 +41,13 @@ def enrollment(request, event_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Cadastro feito com Sucesso!')
-            return redirect('events:event', pk=event.pk)
+        else:
+            error_message = "\n".join(
+                f"{str(form.fields[field_name].label)}: {error}"
+                for field_name, error_list in form.errors.items()
+                for error in error_list
+            )
+            messages.error(request, error_message)
     else:
         form = EnrollmentForm()
     
@@ -49,6 +57,7 @@ def enrollment(request, event_id):
         'bond': Bond.objects.all(),
         'howKnew': HowKnew.objects.all(),
         'routePath': RoutePath.objects.all(),
+        'user': User.objects.get(id=request.session.get('user_id'))  
     }
     
     return render(request, 'events/index.html', context)

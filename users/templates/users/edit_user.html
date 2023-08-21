@@ -74,7 +74,7 @@
             <select class="form-select mt-4" name="bond_choice" required id="id_bond_choice">
               <option value="" disabled>Sobre Você</option>
               {% for bond_obj in bond %}
-                <option value="{{ bond_obj.id }}" {% if bond_obj == user.personaldata.bond_choice %}selected{% endif %}>{{ bond_obj }}</option>
+                <option value="{{ bond_obj.id }}" {% if bond_obj.id == user.personaldata.bond_choice.id %}selected{% endif %}>{{ bond_obj }}</option>
               {% endfor %}
             </select>
 

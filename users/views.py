@@ -77,6 +77,7 @@ def login(request):
     else:
         auth.login(request, user)
         request.session['user_id'] = user.id
+
         return redirect('users:profile')
 
 def logout(request):

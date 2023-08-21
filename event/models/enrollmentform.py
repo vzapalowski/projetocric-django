@@ -9,7 +9,7 @@ class EnrollmentForm(forms.ModelForm):
 
     class Meta:
         model = Enrollment
-        fields = ('full_name', 'date_of_birth', 'bond_choice', 'how_knew', 'rg', 'route')
+        fields = ('full_name', 'date_of_birth', 'bond_choice', 'how_knew', 'rg', 'route', 'event')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -21,7 +21,7 @@ class EnrollmentForm(forms.ModelForm):
         fields = '__all__'
 
     def clean_rg(self):
-        return validate_field(self, Enrollment, 'rg', 'RG já cadastrado!')
+        return validate_field(self, Enrollment, 'rg', 'Este RG já foi cadastrado!')
     
     # def clean_email(self):
     #     return validate_field(self, Enrollment, 'email', 'EMAIL já cadastrado!')

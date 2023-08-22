@@ -9,7 +9,7 @@ class EnrollmentForm(forms.ModelForm):
 
     class Meta:
         model = Enrollment
-        fields = ('full_name', 'date_of_birth', 'bond_choice', 'how_knew', 'rg', 'route', 'event')
+        fields = ('full_name', 'date_of_birth', 'bond_choice', 'how_knew', 'rg', 'route', 'event', 'user')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

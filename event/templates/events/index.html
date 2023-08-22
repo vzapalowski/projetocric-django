@@ -166,7 +166,7 @@
     <!-- INPUT NAME -->
     <div class="input-group mb-3">
       <span class="input-group-text"><i class="fa-solid fa-user"></i></span>  
-      <input class="form-control" type="text" name="full_name" placeholder="Nome Completo" maxlength="100" required="" id="id_full_name" value="{{ user.first_name|default_if_none:''  }}">
+      <input class="form-control" type="text" name="full_name" placeholder="Nome Completo" maxlength="100" required="" id="id_full_name" value="{{ user.first_name|default_if_none:''  }} {{ user.last_name|default_if_none:''  }}">
     </div>
     <!-- INPUT EMAIL -->
     <div class="input-group mb-3">
@@ -214,7 +214,10 @@
   </select>
 
   <!-- EVENT ID -->
-  <input  type="hidden" name="event" placeholder="event" value="{{ event.id }}" class="form-control" id="event">
+  <input  type="hidden" name="event" value="{{ event.id }}" id="event">
+
+  <!-- USER ID -->
+  <input type="hidden" name="user" value="{{ user.id }}" id="user">
 
   <div class="text-center">
     <button class="btn btn-dark mt-5" type="submit">Concluir Inscrição</button>

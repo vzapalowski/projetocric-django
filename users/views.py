@@ -66,10 +66,13 @@ def login(request):
     if request.method != 'POST':
         return render(request, 'users/login.html')
     
-    email = request.POST.get('email')
+    email_or_username = request.POST.get('email')
     password = request.POST.get('password')
 
-    user = auth.authenticate(request, email=email, password=password)
+    user = auth.authenticate(request, email=email_or_username, password=password)
+
+    if not user:
+        user = auth.authenticate(request, username=email_or_username, password=password)
 
     if not user:
         messages.error(request, 'Senha ou email inválido')
@@ -86,11 +89,8 @@ def logout(request):
 
 @login_required(login_url='users:login')
 def profile(request):
-    
     user = User.objects.get(id=request.session.get('user_id'))
-
-    email = user.email
-    enrollments = Enrollment.objects.filter(email=email)
+    enrollments = Enrollment.objects.filter(user=user)
 
     return render(request,'users/profile.html', {'user': user, 'enrollments': enrollments})
 

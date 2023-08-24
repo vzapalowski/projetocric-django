@@ -31,9 +31,12 @@
                   Alterar
                 </label>
                 <input type="file" id="file-upload" style="display: none;" accept="image/*" onchange="previewImage(event)">
-                <img src="/media/{{ user.personaldata.profile_picture }}" alt="foto do Usuario"
-                class="rounded-circle img-fluid profile-pic">
-              </div>
+                {% if user.personaldata.profile_picture %}
+                  <img src="/media/{{ user.personaldata.profile_picture }}" alt="foto do Usuario" class="rounded-circle img-fluid profile-pic">
+                {% else %}
+                  <img src="{% static 'images/prof_pic_default.jpg' %}" alt="foto do Usuario" class="rounded-circle img-fluid profile-pic">
+                {% endif %}
+                </div>
               
               <h5 class="my-3">{{ user.username }}</h5>
               <!-- <p class="text-muted mb-1">alguma coisa</p> -->

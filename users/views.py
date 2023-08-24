@@ -7,6 +7,9 @@ from event.models import Enrollment, Bond, HowKnew, RoutePath
 from datetime import datetime
 from django.db import transaction
 from .models import PersonalData
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
 
 
 def register(request):
@@ -128,3 +131,18 @@ def edit_user(request, user_id):
 
         user.save()
         return redirect('users:profile')
+
+@csrf_exempt
+def upload_image(request):
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id')
+        uploaded_image = request.FILES.get('image')
+
+        if user_id and uploaded_image:
+            user = User.objects.get(id=user_id)
+            user.personaldata.profile_picture = uploaded_image
+            user.personaldata.save()
+
+            return JsonResponse({'message': 'Image uploaded successfully.'})
+
+    return JsonResponse({'error': 'Invalid request.'}, status=400)

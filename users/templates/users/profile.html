@@ -9,8 +9,15 @@
 
 {%block 'content'%}
 
-  <div class="bg-image-profile"></div>
-      
+<div class="bg-image-profile d-flex"></div>
+
+  <div id="image-preview-container">
+    <img src="" alt="Image Preview" class="image-preview" id="image-preview">
+    <div class="btn-group">
+      <button class="btn-pv" onclick="cancelPreview()">Cancelar</button>
+      <button class="btn-pv" onclick="savePreview()">Salvar</button>
+    </div>
+  </div>
 
   <section>
     <div class="container py-5">
@@ -18,8 +25,16 @@
         <div class="col-lg-4">
           <div class="card mb-4">
             <div class="card-body text-center card-user">
-              <img src="{% static 'images/content-about/user-avatar.png'%}" alt="foto do Usuario"
-                class="rounded-circle img-fluid" style="width: 150px;">
+              
+              <div class="image-container position-relative d-flex justify-content-center align-items-center">
+                <label for="file-upload" class="text-center btn-alter d-flex justify-content-center align-items-center">
+                  Alterar
+                </label>
+                <input type="file" id="file-upload" style="display: none;" accept="image/*" onchange="previewImage(event)">
+                <img src="/media/{{ user.personaldata.profile_picture }}" alt="foto do Usuario"
+                class="rounded-circle img-fluid profile-pic">
+              </div>
+              
               <h5 class="my-3">{{ user.username }}</h5>
               <!-- <p class="text-muted mb-1">alguma coisa</p> -->
               <!-- <p class="text-muted mb-4">alguma coisa</p> -->
@@ -136,7 +151,12 @@
         </div>
       </div>
     </div>
-  </section>    
+  </section>  
+
+  <script>
+    const userId = '{{ user.id }}';
+    const uploadUrl = "{% url 'users:upload_image' %}"
+  </script>
+  <script src="{% static 'js/users/profile.js' %}" async></script>
+  
   {%endblock%}
-</body>
-</html>

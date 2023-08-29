@@ -4,8 +4,8 @@ export class Map {
     this.map = null;
   }
 
-  setMap(lat, lng, zoom) {
-    this.map = L.map('map', {scrollWheelZoom: false}).setView([lat, lng], zoom);
+  setMap(map, options, lat, lng, zoom) {
+    this.map = L.map(map, options).setView([lat, lng], zoom);
 
     this.startMap()
   }

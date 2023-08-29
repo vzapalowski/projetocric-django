@@ -8,6 +8,7 @@ class City(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
     lat = models.CharField(max_length=50, default='-29.95', verbose_name="Latitude")
     lng = models.CharField(max_length=50, default='-51.64', verbose_name="Longitude")
+    zoom = models.IntegerField(default=14, verbose_name='Zoom')
     banner_image = models.ImageField(upload_to=PATH_IMAGES_CITIES_BANNER, verbose_name="Imagem do Banner")
     routes = models.ManyToManyField(Route, blank=True, null=True, verbose_name='Rotas')
     points = models.ManyToManyField(AnchorPoint, blank=True, null=True, verbose_name='Pontos de apoio')

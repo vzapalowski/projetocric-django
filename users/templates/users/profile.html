@@ -11,13 +11,15 @@
 
 <div class="bg-image-profile d-flex"></div>
 
-  <div id="image-preview-container">
+<div id="image-preview-container">
+  <div id="crop-container">
     <img src="" alt="Image Preview" class="image-preview" id="image-preview">
-    <div class="btn-group">
-      <button class="btn-pv" onclick="cancelPreview()">Cancelar</button>
-      <button class="btn-pv" onclick="savePreview()">Salvar</button>
-    </div>
   </div>
+  <div class="btn-group">
+    <button class="btn btn-outline-dark" style="color: white !important;" onclick="cancelPreview()">Cancelar</button>
+    <button class="btn btn-dark" onclick="cropAndSave()">Salvar</button>
+  </div>
+</div>
 
   <section>
     <div class="container py-5">

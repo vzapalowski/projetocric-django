@@ -9,7 +9,6 @@ class CityAdmin(admin.ModelAdmin):
     inlines = [CityImageAdmin]
     list_display = ('id', 'name', 'visible')
     list_display_links = ('id', 'name')
-    list
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         if db_field.name == "routes":

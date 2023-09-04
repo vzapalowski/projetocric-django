@@ -11,7 +11,7 @@ fetch(url_api)
 .then(data => {
 
     let map = new Map();
-    map.setMap(data.coordinates.lat, data.coordinates.lng, 13);
+    map.setMap(data.coordinates.lat, data.coordinates.lng, data.zoom);
     data.routes.forEach((e) => {
         arr.push(e)
     })

@@ -27,13 +27,13 @@ function savePreview() {
         method: 'POST',
         body: formData,
       })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        cancelPreview();
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          cancelPreview();
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
     }
 }

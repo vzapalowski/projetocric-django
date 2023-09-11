@@ -140,6 +140,12 @@ def upload_image(request):
 
         if user_id and uploaded_image:
             user = User.objects.get(id=user_id)
+
+            if not hasattr(user, 'personaldata') or user.personaldata is None:
+                personal_data = PersonalData()
+                personal_data.user = user
+                personal_data.save()
+
             user.personaldata.profile_picture = uploaded_image
             user.personaldata.save()
 

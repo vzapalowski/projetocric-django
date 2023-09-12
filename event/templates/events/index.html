@@ -64,109 +64,52 @@
             </p>
       </div>
     </div>
-<div class="container col">
-  {% for e in event.routes_data.all %}
-  <div class="row mt-5" data-aos="fade-up">
-  <div class="col-12 mb-3 mb-sm-0">
-    <div class="card border-card">
-      <div class="card-body">
-        <h5 class="card-title border-bottom border-dark-subtle topic-color">{{ e }}</h5>
-        <!-- <p class="card-text"></p> -->
-        <p></p>
-        <p class="card-text"><small class="text-body-secondary">Local de sáida: {{ e.departure_location }}</small></p>
-        <p class="card-text"><small class="text-body-secondary">Horário de Concentração: {{ e.concentration }}</small></p>
-        <p class="card-text"><small class="text-body-secondary">Horário de saída: {{ e.time }}</small></p>
-      </div>
-    </div>
-  </div>
-  
-</div> 
+    <div class="container col">
+      {% for e in event.routes_data.all %}
+      <div class="row mt-5" data-aos="fade-up">
+        <div class="col-12 mb-3 mb-sm-0">
+          <div class="card border-card">
+            <div class="card-body">
+              <h5 class="card-title border-bottom border-dark-subtle topic-color">{{ e }}</h5>
+              <!-- <p class="card-text"></p> -->
+              <p></p>
+              <p class="card-text"><small class="text-body-secondary">Local de sáida: {{ e.departure_location }}</small></p>
+              <p class="card-text"><small class="text-body-secondary">Horário de Concentração: {{ e.concentration }}</small></p>
+              <p class="card-text"><small class="text-body-secondary">Horário de saída: {{ e.time }}</small></p>
+            </div>
+          </div>
+        </div>
+      </div> 
   {% endfor %}
 
 </div>
 
   <!-- Images -->
+
   <div class="container mt-5">
-    <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2 swiper-initialized swiper-horizontal swiper-backface-hidden">
-      <div class="swiper-wrapper" id="swiper-wrapper-c1f5b2437e73b6a5" aria-live="polite">
+    <div class="swiper mySwiper swiper-coverflow swiper-3d swiper-initialized swiper-horizontal swiper-watch-progress">
+      <div class="swiper-wrapper" id="swiper-wrapper-bc68103f7d29e4d42" aria-live="polite" style="cursor: grab; transition-duration: 0ms; transform: translate3d(-843px, 0px, 0px); transition-delay: 0ms;">
         {% for image in event.images.all %}
-        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 10" data-swiper-slide-index="0" style="width: 364px; margin-right: 10px;">
+        <div class="swiper-slide" role="group" aria-label="1 / 9" style="transition-duration: 0ms; transform: translate3d(0px, 0px, -300px) rotateX(0deg) rotateY(150deg) scale(1); z-index: -2;">
           <img src="{{ image.image.url }}">
-        </div>
-        
-        <!-- <div class="swiper-slide swiper-slide-next" role="group" data-swiper-slide-index="1" style="width: 364px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg">
-        </div>
-        <div class="swiper-slide" role="group"  data-swiper-slide-index="2" style="width: 364px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg">
-        </div>
-        <div class="swiper-slide" role="group" data-swiper-slide-index="3" style="width: 364px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg">
-        </div>
-        <div class="swiper-slide" role="group" aria-label="5 / 10" data-swiper-slide-index="4" style="width: 364px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg">
-        </div>
-        <div class="swiper-slide" role="group" aria-label="6 / 10" data-swiper-slide-index="5" style="width: 364px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-6.jpg">
-        </div>
-        <div class="swiper-slide" role="group" aria-label="7 / 10" data-swiper-slide-index="6" style="width: 364px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg">
-        </div>
-        <div class="swiper-slide" role="group" aria-label="8 / 10" data-swiper-slide-index="7" style="width: 364px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg">
-        </div>
-        <div class="swiper-slide" role="group" aria-label="9 / 10" data-swiper-slide-index="8" style="width: 364px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-9.jpg">
-        </div>
-        <div class="swiper-slide" role="group" aria-label="10 / 10" data-swiper-slide-index="9" style="width: 364px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-10.jpg">
-        </div> -->
+        <div class="swiper-slide-shadow-left swiper-slide-shadow-coverflow" style="opacity: 3; transition-duration: 0ms;"></div><div class="swiper-slide-shadow-right swiper-slide-shadow-coverflow" style="opacity: 0; transition-duration: 0ms;"></div></div>
         {% endfor %}
+      
+        <div class="swiper-slide-shadow-left swiper-slide-shadow-coverflow" style="opacity: 0; transition-duration: 0ms;"></div>
+        <div class="swiper-slide-shadow-right swiper-slide-shadow-coverflow" style="opacity: 5; transition-duration: 0ms;"></div>
       </div>
-      <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-c1f5b2437e73b6a5"></div>
-      <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-c1f5b2437e73b6a5"></div>
-    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-    <div thumbsslider="" class="swiper mySwiper swiper-initialized swiper-horizontal swiper-free-mode swiper-watch-progress swiper-backface-hidden swiper-thumbs">
-      <div class="swiper-wrapper" id="swiper-wrapper-38f575df409e9c92" aria-live="polite" style="transform: translate3d(0px, 0px, 0px);">
-        {% for image in event.images.all %}
-        <!-- Criar logica de pegar apenas a primeir imagem do banco para iniciar o slide adicionando o "active" nela e as demais, seguir o padrão -->
-        <!-- Ajustar o tamanho de ambas as imagens (as do topo e as miniaturas) para que fique com tamanho 100% usando object fit -->
-        <div class="swiper-slide swiper-slide-visible swiper-slide-active swiper-slide-thumb-active" role="group" aria-label="1 / 10" data-swiper-slide-index="0" style="width: 83.5px; margin-right: 10px;">
-          <img src="{{ image.image.url }}">
-        </div>
-        
-        <!-- <div class="swiper-slide swiper-slide-visible swiper-slide-next" role="group"  data-swiper-slide-index="1" style="width: 83.5px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg">
-        </div>
-        <div class="swiper-slide swiper-slide-visible" role="group"  data-swiper-slide-index="2" style="width: 83.5px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg">
-        </div>
-        <div class="swiper-slide swiper-slide-visible" role="group" aria-label="4 / 10" data-swiper-slide-index="3" style="width: 83.5px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg">
-        </div>
-        <div class="swiper-slide" role="group" aria-label="5 / 10" data-swiper-slide-index="4" style="width: 83.5px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg">
-        </div>
-        <div class="swiper-slide" role="group" aria-label="6 / 10" data-swiper-slide-index="5" style="width: 83.5px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-6.jpg">
-        </div>
-        <div class="swiper-slide" role="group" aria-label="7 / 10" data-swiper-slide-index="6" style="width: 83.5px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg">
-        </div>
-        <div class="swiper-slide" role="group" aria-label="8 / 10" data-swiper-slide-index="7" style="width: 83.5px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg">
-        </div>
-        <div class="swiper-slide" role="group" aria-label="9 / 10" data-swiper-slide-index="8" style="width: 83.5px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-9.jpg">
-        </div>
-        <div class="swiper-slide" role="group" aria-label="10 / 10" data-swiper-slide-index="9" style="width: 83.5px; margin-right: 10px;">
-          <img src="https://swiperjs.com/demos/images/nature-10.jpg">
-        </div> -->
-        {% endfor %}
       </div>
-    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-  
+      <div class="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal">
+        <span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet">
+        </span><span class="swiper-pagination-bullet"></span>
+        <span class="swiper-pagination-bullet swiper-pagination-bullet-active" aria-current="true"></span>
+        <span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span>
+        <span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span>
+        <span class="swiper-pagination-bullet"></span>
+      </div>
+    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
   </div>
+</div>
   <!-- <div class="container mt-5">
     <div class="row gx-2 gy-3 content-images">
       {% for image in event.images.all %}

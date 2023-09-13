@@ -45,43 +45,42 @@
   <!-- {% comment %} Municipios {% endcomment %} -->
   <div class="container mt-5">
     <h2 class="mb-5 fw-bold topic-color" id="cities" style="margin-top: 3.4rem;">Municipios da Região Carnonífera</h2>
-    <div class="row g-2">
-
+    <div class="row g-2 banner-container">
+      
       {% for city in homes %}
         {% if city.city.active %}
-          <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" style="
-          background-image: url('{{ city.city.banner_image.url }}');
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: cover;">
-        {% else %}
-          <a class="d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" type="button" style="
-          background-image: url('{{ city.city.banner_image.url }}');
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: cover;
-          " data-bs-toggle="modal" data-bs-target="#emBreve" >
-        {% endif %}
-          <!-- Responsividade para Desktop -->
-          <div class="banner-item-container">
-            <img class="d-none d-xl-block" src="{% static 'cities/icons/cycling.svg' %}" alt="">
-            <div class="middle-content">
-              {% for letter in city.city.name %}
-                <span class="d-none d-xl-block city-name-banner">{{ letter }}</span>
-              {% endfor %}
-            </div>
-            <img class="d-none d-xl-block" src="{% static 'cities/icons/plus.svg' %}" alt="">
-            <!-- Responsividade para Mobile -->
-            <div class="d-flex justify-content-between align-items-center" >
-              <div class="d-inline d-xl-none b-item-mobie">
-                <img src="{% static 'cities/icons/cycling.svg'%}">
-                <span class="city-name-banner">{{ city.city.name }}</span>
-                <img class="" src="{% static 'cities/icons/plus.svg'%}">
+          <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="cities-container d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" style="
+            background-image: url('{{ city.city.banner_image.url }}');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;">
+          {% else %}
+            <a class="cities-container d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" type="button" style="
+            background-image: url('{{ city.city.banner_image.url }}');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            " data-bs-toggle="modal" data-bs-target="#emBreve" >
+          {% endif %}
+            <!-- Responsividade para Desktop -->
+            <div class="banner-item-container">
+              <img class="d-none d-xl-block" src="{% static 'cities/icons/cycling.svg' %}" alt="">
+              <div class="middle-content">
+                {% for letter in city.city.name %}
+                  <span class="d-none d-xl-block city-name-banner">{{ letter }}</span>
+                {% endfor %}
               </div>
-            </div>
-          </div>          
-        </a>
-
+              <img class="d-none d-xl-block" src="{% static 'cities/icons/plus.svg' %}" alt="">
+              <!-- Responsividade para Mobile -->
+              <div class="d-flex justify-content-between align-items-center" >
+                <div class="d-inline d-xl-none b-item-mobie">
+                  <img src="{% static 'cities/icons/cycling.svg'%}">
+                  <span class="city-name-banner">{{ city.city.name }}</span>
+                  <img class="" src="{% static 'cities/icons/plus.svg'%}">
+                </div>
+              </div>
+            </div>          
+          </a>
       {% endfor %}
       <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -421,6 +420,7 @@
   </div>
 </div>
 
+<script src="{% static 'js/home/homefx.js' %}" async></script>
 <script src="{% static 'js/home/data.js'%}" type="module" async></script>
 <script src="{% static 'js/map/Polyline.encoded.js'%}"></script>
 {%endblock%}

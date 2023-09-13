@@ -37,6 +37,15 @@
   background-color: var(--neutral-white);
 }
 
+.dark-city {
+  filter: brightness(50%);
+}
+
+.light-city{
+  filter: brightness(100%);
+
+}
+
 /* FAB */
 .fab-container {
   position: fixed;

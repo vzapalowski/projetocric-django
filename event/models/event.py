@@ -16,6 +16,7 @@ class Event(models.Model):
     lng = models.CharField(max_length=20, null=True, blank=True, default='-51.64', verbose_name='Longitude do Mapa')
     zoom = models.IntegerField(default=13, verbose_name='Zoom')
     location = models.CharField(max_length=40, null=True, blank=True, verbose_name='Localidade')
+    banner_image = models.ImageField(upload_to='events/images/%Y/%m/%d', null=True, blank=True, verbose_name='Banner do evento')
     date = models.DateField(verbose_name='Data do evento', null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Em andamento', verbose_name='Situação')
     routes_data = models.ManyToManyField(RoutePath, blank=True, null=True, verbose_name='Rotas do Evento')
@@ -25,3 +26,4 @@ class Event(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    

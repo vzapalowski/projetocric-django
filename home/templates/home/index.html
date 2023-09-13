@@ -173,9 +173,15 @@
         <div class="col">
           <div class="card">
             <div class="card-img-top border border-0 rounded">
-              <div class="d-flex bg-card-event object-fit-cover w-100 justify-content-center align-items-center border border-0 rounded-top" 
-              style="height: 5rem; filter: brightness(50%);">
-              </div>
+              {% if event.banner_image %}
+                <div style="background-image: url('/media/{{ event.banner_image }}'); height: 5rem; filter: brightness(50%);" 
+                class="d-flex bg-card-event object-fit-cover w-100 justify-content-center align-items-center border border-0 rounded-top">
+                </div>
+              {% else %}
+                <div style="height: 5rem; filter: brightness(50%);" 
+                class="d-flex bg-card-event object-fit-cover w-100 justify-content-center align-items-center border border-0 rounded-top">
+                </div>
+              {% endif %}
               <span class="text-white fs-2 position-absolute adjust-positon-event translate-middle" style="top: 9% !important;">{{ event.location }}</span>   
             </div>
             <div class="card-body">

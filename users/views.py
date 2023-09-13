@@ -9,6 +9,9 @@ from django.db import transaction
 from .models import PersonalData
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from PIL import Image as PILImage
+from io import BytesIO
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 
 
@@ -140,8 +143,36 @@ def upload_image(request):
 
         if user_id and uploaded_image:
             user = User.objects.get(id=user_id)
-            user.personaldata.profile_picture = uploaded_image
-            user.personaldata.save()
+
+            if not hasattr(user, 'personaldata') or user.personaldata is None:
+                personal_data = PersonalData()
+                personal_data.user = user
+                personal_data.save()
+
+            user_profile = user.personaldata
+
+            img = PILImage.open(uploaded_image)
+
+            width, height = img.size
+            size = min(width, height)
+            left = (width - size) / 2
+            top = (height - size) / 2
+            right = (width + size) / 2
+            bottom = (height + size) / 2
+
+            img = img.crop((left, top, right, bottom))
+
+            img = img.resize((200, 200), PILImage.ANTIALIAS)
+
+            buffer = BytesIO()
+            img.save(buffer, format='JPEG')  
+            buffer.seek(0)
+            processed_image = SimpleUploadedFile(
+                user_profile.profile_picture.name, buffer.read(), content_type='image/jpeg'
+            )
+
+            user_profile.profile_picture = processed_image
+            user_profile.save()
 
             return JsonResponse({'message': 'Image uploaded successfully.'})
 

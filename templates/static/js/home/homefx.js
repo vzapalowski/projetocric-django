@@ -17,7 +17,7 @@ bannerItem.forEach(e => {
     e.addEventListener('mouseover', () => {
         setTimeout(() => {
             e.classList.remove("dark-city");
-            e.style.zIndex = 9999;
+            e.style.zIndex = 999;
         }, 50);
     });
 });

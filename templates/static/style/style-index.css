@@ -41,8 +41,9 @@
   filter: brightness(50%);
 }
 
-.light-city{
+.dark-city:hover {
   filter: brightness(100%);
+  z-index: 999;
 }
 
 /* FAB */

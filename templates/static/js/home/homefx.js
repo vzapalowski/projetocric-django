@@ -9,15 +9,5 @@ document.querySelector('.banner-container').addEventListener('mouseover', () => 
 document.querySelector('.banner-container').addEventListener('mouseout', () => {
     bannerItem.forEach(e => {
         e.classList.remove("dark-city");
-        e.style.zIndex = 1;
-    });
-});
-
-bannerItem.forEach(e => {
-    e.addEventListener('mouseover', () => {
-        setTimeout(() => {
-            e.classList.remove("dark-city");
-            e.style.zIndex = 999;
-        }, 50);
     });
 });

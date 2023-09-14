@@ -33,7 +33,7 @@ function savePreview() {
         cancelPreview();
       })
       .catch(error => {
-        console.error('Error:', error);
+        console.error('Error: ' + error);
       });
     }
 }

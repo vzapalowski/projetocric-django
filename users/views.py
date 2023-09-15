@@ -3,12 +3,15 @@ from django.contrib import messages, auth
 from django.core.validators import validate_email
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from event.models import Enrollment, Bond, HowKnew, RoutePath
+from django.utils import timezone 
+from event.models import Enrollment, Bond
 from datetime import datetime
-from django.db import transaction
 from .models import PersonalData
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from PIL import Image as PILImage
+from io import BytesIO
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 
 
@@ -132,6 +135,7 @@ def edit_user(request, user_id):
         user.save()
         return redirect('users:profile')
 
+@login_required(login_url='users:login')
 @csrf_exempt
 def upload_image(request):
     if request.method == 'POST':
@@ -146,8 +150,32 @@ def upload_image(request):
                 personal_data.user = user
                 personal_data.save()
 
-            user.personaldata.profile_picture = uploaded_image
-            user.personaldata.save()
+            user_profile = user.personaldata
+
+            img = PILImage.open(uploaded_image)
+
+            width, height = img.size
+            size = min(width, height)
+            left = (width - size) / 2
+            top = (height - size) / 2
+            right = (width + size) / 2
+            bottom = (height + size) / 2
+
+            img = img.crop((left, top, right, bottom))
+
+            img = img.resize((200, 200), PILImage.ANTIALIAS)
+
+            uploaded_image_name = f"profile_picture_{user.username}_{timezone.now().strftime('%Y%m%d%H%M%S')}.jpg"
+
+            buffer = BytesIO()
+            img.save(buffer, format='JPEG')  
+            buffer.seek(0)
+            processed_image = SimpleUploadedFile(
+                uploaded_image_name, buffer.read(), content_type='image/jpeg'
+            )
+
+            user_profile.profile_picture = processed_image
+            user_profile.save()
 
             return JsonResponse({'message': 'Image uploaded successfully.'})
 

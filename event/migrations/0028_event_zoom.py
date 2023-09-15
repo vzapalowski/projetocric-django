@@ -10,9 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='event',
-            name='zoom',
-            field=models.IntegerField(default=13, verbose_name='Zoom'),
-        ),
+        
     ]

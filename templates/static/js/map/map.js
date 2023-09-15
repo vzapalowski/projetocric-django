@@ -3,15 +3,18 @@ export class Map {
   constructor() {
     this.map = null;
     this.bounds = null; 
+    this.lastValidCenter = null;
   }
 
   setMap(map, options, lat, lng, zoom, bounds = null) {
     this.map = L.map(map, options).setView([lat, lng], zoom);
 
     if (bounds) {
+      this.bounds = bounds;
       this.map.setMaxBounds(bounds);
     }
 
+    this.lastValidCenter = this.map.getCenter();
     this.startMap()
   }
 
@@ -24,6 +27,18 @@ export class Map {
                   attribution:
                     '&copy; <strong>ROTACRIC</strong>',
     }).addTo(this.map);
+
+    this.map.on('drag', () => {
+      const currentCenter = this.map.getCenter();
+
+      if (this.bounds && !this.bounds.contains(currentCenter)) {
+        this.map.panTo(this.lastValidCenter);
+        window.scrollBy(0, +190);
+        this.lastValidCenter = currentCenter;
+      } else {
+        this.lastValidCenter = currentCenter;
+      }
+    });
   }
 
   addRoutes(routes, opacity=1) {

@@ -190,7 +190,7 @@
     <!-- INPUT RG -->
     <div class="input-group mb-3">
       <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>  
-      <input class="form-control" type="text" name="rg" placeholder="RG" maxlength="10" required="" id="id_rg" value="{{ user.personaldata.rg|default_if_none:'' }}">
+      <input class="form-control" inputmode="numeric" type="text" name="rg" placeholder="RG" maxlength="10" required="" id="id_rg" value="{{ user.personaldata.rg|default_if_none:'' }}" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
     </div>
     
     <!-- SELECT BOND CHOICE -->

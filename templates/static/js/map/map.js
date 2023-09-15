@@ -2,10 +2,15 @@ export class Map {
 
   constructor() {
     this.map = null;
+    this.bounds = null; 
   }
 
-  setMap(map, options, lat, lng, zoom) {
+  setMap(map, options, lat, lng, zoom, bounds = null) {
     this.map = L.map(map, options).setView([lat, lng], zoom);
+
+    if (bounds) {
+      this.map.setMaxBounds(bounds);
+    }
 
     this.startMap()
   }

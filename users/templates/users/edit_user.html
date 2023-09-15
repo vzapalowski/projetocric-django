@@ -55,7 +55,7 @@
             <!-- Input RG -->
             <div class="input-group input-group-lg mt-4">
               <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-solid fa-address-card icon-cric"></i></span>
-              <input type="text" name="rg" placeholder="RG" maxlength="10" required="" id="id_rg" value="{{ user.personaldata.rg }}" class="form-control" placeholder="Rede Social" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+              <input type="text" inputmode="numeric" name="rg" placeholder="RG" maxlength="10" required="" id="id_rg" value="{{ user.personaldata.rg }}" class="form-control" placeholder="Rede Social" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             </div>
 
             <!-- Input Data de Nascimento -->

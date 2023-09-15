@@ -44,7 +44,7 @@
 
   <!-- {% comment %} Municipios {% endcomment %} -->
   <div class="container mt-5">
-    <h2 class="mb-5 fw-bold topic-color" id="cities" style="margin-top: 3.4rem;">Municipios da Região Carnonífera</h2>
+    <h2 class="mb-5 fw-bold topic-color" id="cities" style="margin-top: 3.4rem;">Municipios da Região Carbonífera</h2>
     <div class="row g-2 banner-container">
       
       {% for city in homes %}
@@ -118,7 +118,7 @@
               <div class="d-flex bg-card-event object-fit-cover w-100 justify-content-center align-items-center border border-0 rounded-top" 
               style="height: 5rem; filter: brightness(50%);">
               </div>
-              <span class="text-white fs-2 position-absolute adjust-positon-event translate-middle">{{ event.location }}</span>   
+              <span class="text-white fs-2 position-absolute adjust-positon-event translate-middle mt-3">{{ event.location }}</span>   
             </div>
             <div class="card-body">
               <h5 class="card-title topic-color fw-bolder">{{ event.name }}</h5>
@@ -133,11 +133,13 @@
                     Data:
                   </span> {{ event.date }}
                 </p>
+                <p class="mt-3 mb-3 fs-6">
+                  <span class="fw-bolder">
+                    Participantes:
+                  </span> {{ event.participants }}
+                </p> 
               </div>
                 <a href="{% url 'events:event' pk=event.id %}" type="button" class="btn btn-outline-dark w-100 mt-3 btn-secondary-cric fs-6">Ir para a página</a>
-                <button class="btn btn-outline-dark btnOpacity mt-2 p-2 w-100" style="height: 100%;" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ event.id }}" aria-expanded="false" aria-controls="collapseExample">
-                  Mais informações
-                </button>
                 <div class="collapse mt-2 " id="collapse{{ event.id }}">
                   <div class="container aling-items-center">
                     <div class="col-sm-4 text-start">
@@ -146,16 +148,8 @@
                         Quantidade de Trajetos: 
                       </span> {{ event.number_of_routes }}
                       </p>  
-                      <p class="mt-2 mb-3 fs-6">
-                        <span class="fw-bolder">
-                          Participantes:
-                        </span> {{ event.participants }}
-                      </p> 
+                      
                     </div>
-                    <div class="row justify-content-center">
-                      <img src="{%static 'images/images-cities/image-rota.jpeg'%}" class="img-fluid border border-1 border-dark w-100 object-fit-cover" style="height: 12rem;">
-                    </div>
-                    
                 </div> 
               </div>
             </div>
@@ -182,7 +176,7 @@
                 class="d-flex bg-card-event object-fit-cover w-100 justify-content-center align-items-center border border-0 rounded-top">
                 </div>
               {% endif %}
-              <span class="text-white fs-2 position-absolute adjust-positon-event translate-middle" style="top: 9% !important;">{{ event.location }}</span>   
+              <span class="text-white fs-2 position-absolute adjust-positon-event translate-middle mt-2" style="top: 9% !important;">{{ event.location }}</span>   
             </div>
             <div class="card-body">
               <h5 class="card-title topic-color fw-bolder">{{ event.name }}</h5>
@@ -213,14 +207,9 @@
                 </div>
                 
                 <a href="{% url 'events:event' pk=event.id %}" type="button" class="btn btn-outline-dark w-100 mt-3 btn-secondary-cric fs-6">Ir para a página</a>
-                <button class="btn btn-outline-dark btnOpacity mt-2 p-2 w-100" style="height: 100%;" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ event.id }}" aria-expanded="false" aria-controls="collapseExample">
-                  Mais informações
-                </button>
+            
                 <div class="collapse mt-2 " id="collapse{{ event.id }}">
-                  <div class="container aling-items-center">
-                    
-                      <img src="{%static 'images/images-cities/image-rota.jpeg'%}" class="img-fluid object-fit-cover border border-1 border-dark map-event" style="height: 8rem; width: 100%;">
-                </div> 
+                  
               </div>
               </div>
             </div>
@@ -237,9 +226,15 @@
         <div class="col">
           <div class="card">
             <div class="card-img-top border border-0 rounded">
-              <div class="d-flex bg-card-event object-fit-cover w-100 justify-content-center align-items-center border border-0 rounded-top" 
-              style="height: 5rem; filter: brightness(50%);">
-              </div>
+              {% if event.banner_image %}
+                <div style="background-image: url('/media/{{ event.banner_image }}'); height: 5rem; filter: brightness(50%);" 
+                class="d-flex bg-card-event object-fit-cover w-100 justify-content-center align-items-center border border-0 rounded-top">
+                </div>
+              {% else %}
+                <div style="height: 5rem; filter: brightness(50%);" 
+                class="d-flex bg-card-event object-fit-cover w-100 justify-content-center align-items-center border border-0 rounded-top">
+                </div>
+              {% endif %}
               <span class="text-white fs-2 position-absolute adjust-positon-event translate-middle" style="top: 10% !important;">{{ event.location }}</span>   
             </div>
             <div class="card-body">

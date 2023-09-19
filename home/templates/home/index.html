@@ -45,59 +45,93 @@
   <!-- {% comment %} Municipios {% endcomment %} -->
   <div class="container mt-5">
     <h2 class="mb-5 fw-bold topic-color" id="cities" style="margin-top: 3.4rem;">Municipios da Região Carbonífera</h2>
-    <div class="row g-2 banner-container">
+    <!-- Desktop -->
+    <div class="d-none d-xl-block">
+      <div class="row g-2 banner-container">
       
-      {% for city in homes %}
-        {% if city.city.active %}
-          <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="cities-container d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" style="
-            background-image: url('{{ city.city.banner_image.url }}');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;">
-          {% else %}
-            <a class="cities-container d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" type="button" style="
-            background-image: url('{{ city.city.banner_image.url }}');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            " data-bs-toggle="modal" data-bs-target="#emBreve" >
-          {% endif %}
-            <!-- Responsividade para Desktop -->
-            <div class="banner-item-container">
-              <img class="d-none d-xl-block" src="{% static 'cities/icons/cycling.svg' %}" alt="">
-              <div class="middle-content">
-                {% for letter in city.city.name %}
-                  <span class="d-none d-xl-block city-name-banner">{{ letter }}</span>
-                {% endfor %}
-              </div>
-              <img class="d-none d-xl-block" src="{% static 'cities/icons/plus.svg' %}" alt="">
-              <!-- Responsividade para Mobile -->
-              <div class="d-flex justify-content-between align-items-center" >
-                <div class="d-inline d-xl-none b-item-mobie">
-                  <img src="{% static 'cities/icons/cycling.svg'%}">
-                  <span class="city-name-banner">{{ city.city.name }}</span>
-                  <img class="" src="{% static 'cities/icons/plus.svg'%}">
+        {% for city in homes %}
+          {% if city.city.active %}
+            <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="cities-container d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" style="
+              background-image: url('{{ city.city.banner_image.url }}');
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: cover;">
+            {% else %}
+              <a class="cities-container d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" type="button" style="
+              background-image: url('{{ city.city.banner_image.url }}');
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: cover;
+              " data-bs-toggle="modal" data-bs-target="#emBreve" >
+            {% endif %}
+              <!-- Responsividade para Desktop -->
+              <div class="banner-item-container">
+                <img class="d-none d-xl-block" src="{% static 'cities/icons/cycling.svg' %}" alt="">
+                <div class="middle-content">
+                  {% for letter in city.city.name %}
+                    <span class="d-none d-xl-block city-name-banner">{{ letter }}</span>
+                  {% endfor %}
                 </div>
+                <img class="d-none d-xl-block" src="{% static 'cities/icons/plus.svg' %}" alt="">
+                <!-- Responsividade para Mobile -->
+                <!-- <div class="d-flex justify-content-between align-items-center" >
+                  <div class="d-inline d-xl-none b-item-mobie">
+                    <img src="{% static 'cities/icons/cycling.svg'%}">
+                    <span class="city-name-banner">{{ city.city.name }}</span>
+                    <img class="" src="{% static 'cities/icons/plus.svg'%}">
+                  </div>
+                </div> -->
+              </div>          
+            </a>
+        {% endfor %}
+        <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Conteúdo Indisponível</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-            </div>          
-          </a>
-      {% endfor %}
-      <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Conteúdo Indisponível</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <div class="modal-body">
+                Obrigado pelo seu interesse! Estamos trabalhando arduamente para trazer o conteúdo que você procura. Em breve, estará disponível para você aproveitar. Agradecemos sua paciência e prometemos que valerá a pena esperar. Fique atento para mais atualizações em breve!
             </div>
-            <div class="modal-body">
-              Obrigado pelo seu interesse! Estamos trabalhando arduamente para trazer o conteúdo que você procura. Em breve, estará disponível para você aproveitar. Agradecemos sua paciência e prometemos que valerá a pena esperar. Fique atento para mais atualizações em breve!
-          </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <!-- Mobile -->
+    <div class="d-block d-xl-none">
+      <div class="swiper mySwiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+        <div class="swiper-wrapper" id="swiper-wrapper-7779f13b4087d224" aria-live="polite">
+          {% for city in homes %}
+          <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 9" 
+          style="width: 1600px; 
+          background-image: url('{{ city.city.banner_image.url }}');">
+          <div class="d-block text-center z-index">
+            <span class="d-block fs-1 text-light mt-5 mx-2">NOME DO MUNICIPIO</span>
+            <p class="d-block h6 text-light mx-3 mt-4"> Nossa região carbonífera nananannanana</p>
+            <button type="d-block button" class="btn btn-outline-light mt-5 border border-3 fw-bolder">Light</button>  
+          </div>
+
+          </div>
+          
+          {% endfor %}
+          
+          <!-- <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 9" style="width: 1600px;">Slide 2</div>
+          <div class="swiper-slide" role="group" aria-label="3 / 9" style="width: 1600px;">Slide 3</div>
+          <div class="swiper-slide" role="group" aria-label="4 / 9" style="width: 1600px;">Slide 4</div>
+          <div class="swiper-slide" role="group" aria-label="5 / 9" style="width: 1600px;">Slide 5</div>
+          <div class="swiper-slide" role="group" aria-label="6 / 9" style="width: 1600px;">Slide 6</div>
+          <div class="swiper-slide" role="group" aria-label="7 / 9" style="width: 1600px;">Slide 7</div>
+          <div class="swiper-slide" role="group" aria-label="8 / 9" style="width: 1600px;">Slide 8</div>
+          <div class="swiper-slide" role="group" aria-label="9 / 9" style="width: 1600px;">Slide 9</div> -->
+        </div>
+        <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-7779f13b4087d224"></div>
+        <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-7779f13b4087d224"></div>
+      <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
     </div>
   </div>
 
@@ -424,4 +458,6 @@
 <script src="{% static 'js/home/homefx.js' %}" async></script>
 <script src="{% static 'js/home/data.js'%}" type="module" async></script>
 <script src="{% static 'js/map/Polyline.encoded.js'%}"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script src="{% static 'js/home/slider.js' %}"></script>
 {%endblock%}

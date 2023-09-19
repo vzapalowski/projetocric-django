@@ -4,6 +4,7 @@ from event.admin.event_form import EventForm
 from event.admin.image import ImageAdmin
 from event.models.anchor_point import AnchorPoint
 from event.models.route_path import RoutePath
+from event.models.enrollment_field import EnrollmentField
 from django.db import models
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
@@ -27,6 +28,9 @@ class EventAdmin(admin.ModelAdmin):
         
         if db_field.name == "points":
             kwargs["queryset"] = AnchorPoint.objects.filter(active=True)
+
+        if db_field.name == "enrollment_fields":
+            kwargs["queryset"] = EnrollmentField.objects.all()
 
         return super().formfield_for_manytomany(db_field, request, **kwargs)
 

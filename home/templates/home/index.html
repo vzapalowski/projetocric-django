@@ -104,34 +104,11 @@
     </div>
     <!-- Mobile -->
     <div class="d-block d-xl-none">
-      <div class="swiper mySwiper swiper-initialized swiper-horizontal swiper-backface-hidden">
-        <div class="swiper-wrapper" id="swiper-wrapper-7779f13b4087d224" aria-live="polite">
-          {% for city in homes %}
-          <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 9" 
-          style="width: 1600px; 
-          background-image: url('{{ city.city.banner_image.url }}');">
-          <div class="d-block text-center z-index">
-            <span class="d-block fs-1 text-light mt-5 mx-2">NOME DO MUNICIPIO</span>
-            <p class="d-block h6 text-light mx-3 mt-4"> Nossa região carbonífera nananannanana</p>
-            <button type="d-block button" class="btn btn-outline-light mt-5 border border-3 fw-bolder">Light</button>  
-          </div>
-
-          </div>
-          
-          {% endfor %}
-          
-          <!-- <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 9" style="width: 1600px;">Slide 2</div>
-          <div class="swiper-slide" role="group" aria-label="3 / 9" style="width: 1600px;">Slide 3</div>
-          <div class="swiper-slide" role="group" aria-label="4 / 9" style="width: 1600px;">Slide 4</div>
-          <div class="swiper-slide" role="group" aria-label="5 / 9" style="width: 1600px;">Slide 5</div>
-          <div class="swiper-slide" role="group" aria-label="6 / 9" style="width: 1600px;">Slide 6</div>
-          <div class="swiper-slide" role="group" aria-label="7 / 9" style="width: 1600px;">Slide 7</div>
-          <div class="swiper-slide" role="group" aria-label="8 / 9" style="width: 1600px;">Slide 8</div>
-          <div class="swiper-slide" role="group" aria-label="9 / 9" style="width: 1600px;">Slide 9</div> -->
-        </div>
-        <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-7779f13b4087d224"></div>
-        <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-7779f13b4087d224"></div>
-      <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+      <div class="row row-cols-1 row-cols-sm-2">
+        {% for city in homes %}
+        <div class="col bg-warning" style="height: 10rem;">{{ city.city.name }}</div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 

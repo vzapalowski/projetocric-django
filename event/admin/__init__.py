@@ -6,3 +6,4 @@ from .how_knew import *
 from .route_path import *
 from .anchor_points import *
 from .warning import *
+from .enrollment_field import *

@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views.generic.detail import DetailView
-
 from django.contrib import messages
-from django.utils.text import format_lazy
-
-from django.shortcuts import render, redirect
+import ssl
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from jinja2 import Environment, FileSystemLoader
 
 from event.models import Event
 from event.models import EnrollmentForm
@@ -12,6 +13,7 @@ from event.models.enrollment import Bond
 from event.models.how_knew import HowKnew
 from event.models.route_path import RoutePath
 from users.models import User
+from event.credentials import *
 
 
 class EventView(DetailView):
@@ -34,13 +36,12 @@ class EventView(DetailView):
 def enrollment(request, event_id):
     event = Event.objects.get(pk=event_id)
     if request.method == 'POST':
-        if not request.session.get('user_id'):
-            return redirect('users:login')
-
         form = EnrollmentForm(request.POST)
         if form.is_valid():
+            sendEmail("John Doe")
             form.save()
             messages.success(request, 'Cadastro feito com Sucesso!')
+
         else:
             error_message = "\n".join(
                 f"{str(form.fields[field_name].label)}: {error}"
@@ -56,8 +57,38 @@ def enrollment(request, event_id):
         'form': form,
         'bond': Bond.objects.all(),
         'howKnew': HowKnew.objects.all(),
-        'routePath': RoutePath.objects.all(),
-        'user': User.objects.get(id=request.session.get('user_id'))  
+        'routePath': RoutePath.objects.all()
     }
     
     return render(request, 'events/index.html', context)
+
+def sendEmail(name):
+    email_sender = EMAIL
+    email_password = PASSWORD
+    email_reveiver = 'marcelooliveira.ch070@academico.ifsul.edu.br'
+
+    subject = 'Test'
+
+    env = Environment(loader=FileSystemLoader('.'))
+    template = env.get_template('/event/templates/events/email/mail.html')
+
+    template_params = {'name': name, 'last_name': 'Doe', 'from': 'IFSul'}
+
+    html_body = template.render(**template_params)
+
+    em = MIMEMultipart("alternative")
+    em['From'] = email_sender
+    em['To'] = email_reveiver
+    em['Cc'] = email_sender
+    em['Bcc'] = email_sender
+    em['Subject'] = subject
+
+
+    body = MIMEText(html_body, 'html')
+    em.attach(body)
+
+    context = ssl.create_default_context()
+
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+        smtp.login(email_sender, email_password)
+        smtp.sendmail(email_sender, email_reveiver, em.as_string())

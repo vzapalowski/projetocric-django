@@ -6,13 +6,14 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from jinja2 import Environment, FileSystemLoader
+from django.http import FileResponse
+from django.shortcuts import get_object_or_404
 
 from event.models import Event
 from event.models import EnrollmentForm
 from event.models.enrollment import Bond
 from event.models.how_knew import HowKnew
 from event.models.route_path import RoutePath
-from users.models import User
 from event.credentials import *
 
 
@@ -62,6 +63,15 @@ def enrollment(request, event_id):
     
     return render(request, 'events/index.html', context)
 
+def download_pdf(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    if event.pdf_file:
+        pdf_path = event.pdf_file.path
+        response = FileResponse(open(pdf_path, 'rb'))
+        return response
+    else:
+        return render(request, 'pdf_not_found.html', {'event': event})
+    
 def sendEmail(name):
     email_sender = EMAIL
     email_password = PASSWORD
@@ -92,3 +102,4 @@ def sendEmail(name):
     with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
         smtp.login(email_sender, email_password)
         smtp.sendmail(email_sender, email_reveiver, em.as_string())
+

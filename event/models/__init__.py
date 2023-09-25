@@ -6,3 +6,5 @@ from .route_path import RoutePath
 from .warning import *
 from .anchor_point import *
 from .enrollmentform import *
+from .enrollment_type2 import *
+from .form_type2 import *

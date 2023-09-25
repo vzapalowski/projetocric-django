@@ -6,4 +6,5 @@ app_name = 'events'
 urlpatterns = [
     path('<int:pk>/', views.EventView.as_view(), name='event'),
     path('<int:event_id>/enrollment/', views.enrollment, name='enrollment'),
+    path('<int:event_id>/download/', views.download_pdf, name='download_pdf')
 ]

@@ -67,7 +67,7 @@ def sendEmail(name):
     email_password = PASSWORD
     email_reveiver = 'marcelooliveira.ch070@academico.ifsul.edu.br'
 
-    subject = 'Test'
+    subject = 'Confirmação de Inscrição no Evento [Nome do Evento]'
 
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template('/event/templates/events/email/mail.html')

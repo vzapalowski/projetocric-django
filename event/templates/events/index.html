@@ -224,8 +224,10 @@
 
   {% elif event.form_type == 'Type-2' %}
 
-    <form class="form-container bg-light px-5 py-5 col mt-5" id="enrollment-form" method="POST" action="{% url 'events:enrollment' event_id=event.id %}" data-aos="fade-up">
+    <form class="form-container bg-light px-5 py-5 col mt-5" id="enrollment-form" method="POST" action="{% url 'events:enrollment2' event_id=event.id %}" enctype="multipart/form-data" data-aos="fade-up">
       {% csrf_token %}
+      <!-- EVENT ID -->
+      <input  type="hidden" name="event" value="{{ event.id }}" id="event">
 
       <!-- INPUT NAME -->
       <div class="input-group mb-3">
@@ -237,15 +239,16 @@
           <span class="input-group-text"><i class="fa-solid fa-user"></i></span>  
           <input class="form-control" type="text" name="email" placeholder="Email" maxlength="30" required="" id="id_email" value="{{ form.email.value|default:'' }}">
       </div>
-
-      <p>
-        Baixe o termo de inscrição <a href="{% url 'events:download_pdf' event_id=event.id %}">clicando aqui.</a> Imprima e mande uma foto do termo preenchido.
-      </p>
-
       
+      <!-- INPUT FORM PIC -->
+      <div class="input-group mb-3">
+        <p>
+          Baixe o formulário de inscrição <a href="{% url 'events:download_pdf' event_id=event.id %}">clicando aqui.</a> Imprima e mande uma foto do formulário preenchido.
+        </p>
+        <label for="iptn-file">Faça upload da foto clicando no botão abaixo:</label>
+        <input type="file" id="iptn-file" name="term_file" accept=".pdf, .jpeg, .jpg, .png">
+      </div>
 
-    <!-- EVENT ID -->
-    <input  type="hidden" name="event" value="{{ event.id }}" id="event">
 
     <div class="d-flex align-items-center justify-content-center flex-column">
       <button class="btn btn-dark mt-4" type="submit">Concluir Inscrição</button>

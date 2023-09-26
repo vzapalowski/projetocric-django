@@ -10,7 +10,7 @@ from django.http import FileResponse
 from django.shortcuts import get_object_or_404
 
 from event.models import Event
-from event.models import EnrollmentForm
+from event.models import EnrollmentForm, EnrollmentFormType2
 from event.models.enrollment import Bond
 from event.models.how_knew import HowKnew
 from event.models.route_path import RoutePath
@@ -27,6 +27,7 @@ class EventView(DetailView):
         
         context['event'] = event
         context['form'] = lambda: EnrollmentForm(self.request.POST) if self.request.method == 'POST' else EnrollmentForm()
+        context['form_2'] = lambda: EnrollmentFormType2(self.request.POST) if self.request.method == 'POST' else EnrollmentFormType2()
         context['bond'] = Bond.objects.all()
         context['howKnew'] = HowKnew.objects.all()
         context['routePath'] = RoutePath.objects.all()
@@ -62,6 +63,33 @@ def enrollment(request, event_id):
     }
     
     return render(request, 'events/index.html', context)
+
+def enrollment2(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    if request.method == 'POST':
+        form = EnrollmentFormType2(request.POST, request.FILES)
+        if form.is_valid():
+            # sendEmail("John Doe")
+            form.save()
+            messages.success(request, 'Cadastro feito com Sucesso!')
+
+        else:
+            error_message = "\n".join(
+                f"{str(form.fields[field_name].label)}: {error}"
+                for field_name, error_list in form.errors.items()
+                for error in error_list
+            )
+            messages.error(request, error_message)
+    else:
+        form = EnrollmentFormType2()
+    
+    context = {
+        'event': event,
+        'form_2': form
+    }
+    
+    return render(request, 'events/index.html', context)
+
 
 def download_pdf(request, event_id):
     event = get_object_or_404(Event, id=event_id)

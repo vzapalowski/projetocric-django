@@ -13,7 +13,7 @@ class Bond(models.Model):
     
 class Enrollment(models.Model):
     full_name = models.CharField(max_length=100, verbose_name='Nome Completo')
-    email = models.CharField(max_length=30, verbose_name='Email para contato')
+    email = models.CharField(max_length=70, verbose_name='Email para contato')
     social_network = models.CharField(max_length=30, verbose_name='Instagram', null=True, blank=True)
     date_of_birth = models.DateField(verbose_name='Data de Nascimento')
     bond_choice = models.ForeignKey(Bond, on_delete=models.CASCADE, verbose_name='Vínculo')

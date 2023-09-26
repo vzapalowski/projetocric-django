@@ -1,13 +1,19 @@
 from django.shortcuts import render, redirect
 from django.views.generic.detail import DetailView
 from django.contrib import messages
-import ssl
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from jinja2 import Environment, FileSystemLoader
 from django.http import FileResponse
 from django.shortcuts import get_object_or_404
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
+from jinja2 import Environment, FileSystemLoader
+
+import ssl
+import smtplib
+import jinja2
+import pdfkit
+import tempfile
+import os
 
 from event.models import Event
 from event.models import EnrollmentForm, EnrollmentFormType2
@@ -40,7 +46,7 @@ def enrollment(request, event_id):
     if request.method == 'POST':
         form = EnrollmentForm(request.POST)
         if form.is_valid():
-            sendEmail("John Doe")
+            # send_email("John Doe")
             form.save()
             messages.success(request, 'Cadastro feito com Sucesso!')
 
@@ -69,8 +75,9 @@ def enrollment2(request, event_id):
     if request.method == 'POST':
         form = EnrollmentFormType2(request.POST, request.FILES)
         if form.is_valid():
-            # sendEmail("John Doe")
-            form.save()
+            full_name = form.cleaned_data['full_name']  
+            email = form.cleaned_data['email']  
+            send_email(email, full_name, event)
             messages.success(request, 'Cadastro feito com Sucesso!')
 
         else:
@@ -100,34 +107,73 @@ def download_pdf(request, event_id):
     else:
         return render(request, 'pdf_not_found.html', {'event': event})
     
-def sendEmail(name):
+def send_email(email, name, event):
     email_sender = EMAIL
     email_password = PASSWORD
-    email_reveiver = 'marcelooliveira.ch070@academico.ifsul.edu.br'
+    email_receiver = email
 
-    subject = 'Confirmação de Inscrição no Evento [Nome do Evento]'
+    subject = f'Confirmação de Inscrição no Evento {event.name}'
 
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template('/event/templates/events/email/mail.html')
 
-    template_params = {'name': name, 'last_name': 'Doe', 'from': 'IFSul'}
+    template_params = {'name': name,'event': event.name}
 
     html_body = template.render(**template_params)
 
     em = MIMEMultipart("alternative")
     em['From'] = email_sender
-    em['To'] = email_reveiver
+    em['To'] = email_receiver
     em['Cc'] = email_sender
     em['Bcc'] = email_sender
     em['Subject'] = subject
 
-
     body = MIMEText(html_body, 'html')
     em.attach(body)
+
+    certificate_pdf = generate_certificate(name, event)
+
+    pdf_attachment = MIMEApplication(certificate_pdf, _subtype="pdf")
+    pdf_attachment.add_header('Content-Disposition', 'attachment', filename='certificate.pdf')
+    em.attach(pdf_attachment)
 
     context = ssl.create_default_context()
 
     with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
         smtp.login(email_sender, email_password)
-        smtp.sendmail(email_sender, email_reveiver, em.as_string())
+        smtp.sendmail(email_sender, email_receiver, em.as_string())
 
+def generate_certificate(name, event):
+    options = {
+        'page-size': 'A4',
+        'margin-top': '0',
+        'margin-right': '0',
+        'margin-bottom': '0',
+        'margin-left': '0',
+        'encoding': "UTF-8",
+        'no-outline': None,
+        'enable-local-file-access': True,
+        'allow': ['images']
+    }
+
+    context = {'name': name, 'event': event.name} 
+
+    temp_dir = tempfile.mkdtemp()
+    output_pdf = os.path.join(temp_dir, 'certificate.pdf')
+
+    template_loader = jinja2.FileSystemLoader('.')
+    template_env = jinja2.Environment(loader=template_loader)
+    html_template = 'event/templates/events/certificate.html'
+    template = template_env.get_template(html_template)
+    output_text = template.render(context)
+
+    config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
+    pdfkit.from_string(output_text, output_pdf, configuration=config, options=options)
+
+    with open(output_pdf, 'rb') as pdf_file:
+        pdf_content = pdf_file.read()
+
+    os.remove(output_pdf)
+    os.rmdir(temp_dir)
+
+    return pdf_content

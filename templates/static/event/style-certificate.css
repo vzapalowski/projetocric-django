@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,800&display=swap');
+
+html {
+    font-size: 16px; 
+    margin: 0 auto;
+    padding: 0;
+}
+body {
+    font-family: 'Open Sans';
+    width: 210mm; 
+    height: 297mm; 
+    border-top: 30px solid #273273;
+    border-left: 30px solid #131A40;
+    border-right: 30px solid #131A40;
+    border-bottom: 30px solid #273273;
+    margin: 0 auto;
+}
+.container {
+   margin: 0 auto;
+   text-align: center;
+}
+header{
+    display: flex;
+    justify-content: start;
+}
+header .box-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 190mm;
+    height: 10rem;
+    margin-top: 1rem;
+}
+header .box-title .rotacric{
+    display: flex;
+    align-items: center;
+
+}
+header .box-title .logo-cric{
+    height: 6rem;
+    width: 6rem;
+    margin-right: 1rem;
+    margin-left: 2rem;
+    border: 2px solid rgb(211, 211, 211);
+    border-radius: 60%;
+}
+header .box-title .medalha{
+    height: 6rem;
+    width: 6rem;
+    margin-right: 1rem;
+    margin-left: 2rem;
+}
+header .box-title h1{
+    color: black;
+    font-size: 25px;
+}
+
+header .box-title h1 span{
+    color: #273273;
+}
+main{
+    display: flex;
+    justify-content: center;
+}
+main .certificado{
+    display: block;
+    text-align: center;
+}
+main .certificado h1{
+    margin-top: 9rem;
+    color: #131A40;
+}
+main .certificado p{
+    font-size: 16px;
+    margin-top: 4rem;
+}
+
+main .certificado h2{
+    margin-top: 2rem;
+    font-weight: 700;
+}
+main .certificado .p-2{
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-top: 2rem;
+    line-height: 25px;
+}
+main .certificado .p-3{
+    margin-top: 8rem;
+}
+

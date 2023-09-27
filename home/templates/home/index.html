@@ -55,18 +55,19 @@
               background-image: url('{{ city.city.banner_image.url }}');
               background-repeat: no-repeat;
               background-position: center;
-              background-size: cover;">
+              background-size: cover;
+              filter: brightness(20%);">
             {% else %}
               <a class="cities-container d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" type="button" style="
               background-image: url('{{ city.city.banner_image.url }}');
               background-repeat: no-repeat;
               background-position: center;
               background-size: cover;
+              filter: brightness(20%);
               " data-bs-toggle="modal" data-bs-target="#emBreve" >
             {% endif %}
               <!-- Responsividade para Desktop -->
               <div class="banner-item-container">
-                <img class="d-none d-xl-block" src="{% static 'cities/icons/cycling.svg' %}" alt="">
                 <div class="middle-content">
                   {% for letter in city.city.name %}
                     <span class="d-none d-xl-block city-name-banner">{{ letter }}</span>
@@ -126,9 +127,15 @@
         <div class="col">
           <div class="card">
             <div class="card-img-top border border-0 rounded">
-              <div class="d-flex bg-card-event object-fit-cover w-100 justify-content-center align-items-center border border-0 rounded-top" 
-              style="height: 5rem; filter: brightness(50%);">
-              </div>
+              {% if event.banner_image %}
+                <div style="background-image: url('/media/{{ event.banner_image }}'); height: 5rem; filter: brightness(50%);" 
+                class="d-flex bg-card-event object-fit-cover w-100 justify-content-center align-items-center border border-0 rounded-top">
+                </div>
+              {% else %}
+                <div style="height: 5rem; filter: brightness(50%);" 
+                class="d-flex bg-card-event object-fit-cover w-100 justify-content-center align-items-center border border-0 rounded-top">
+                </div>
+              {% endif %}
               <span class="text-white fs-2 position-absolute adjust-positon-event translate-middle mt-3">{{ event.location }}</span>   
             </div>
             <div class="card-body">

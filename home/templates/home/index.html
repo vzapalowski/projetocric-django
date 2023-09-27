@@ -43,7 +43,7 @@
   </div>
 
   <!-- {% comment %} Municipios {% endcomment %} -->
-  <div class="container mt-5">
+  <div class="container mt-5 position-relative">
     <h2 class="mb-5 fw-bold topic-color" id="cities" style="margin-top: 3.4rem;">Municipios da Região Carbonífera</h2>
     <!-- Desktop -->
     <div class="d-none d-xl-block">
@@ -51,39 +51,33 @@
       
         {% for city in homes %}
           {% if city.city.active %}
-            <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="cities-container d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" style="
+            <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="cities-container position-relative d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3">
+          {% else %}
+            <a class="cities-container position-relative d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" type="button" data-bs-toggle="modal" data-bs-target="#emBreve" >
+          {% endif %}
+              <div class="city-image" style="
               background-image: url('{{ city.city.banner_image.url }}');
               background-repeat: no-repeat;
               background-position: center;
               background-size: cover;
-              filter: brightness(20%);">
-            {% else %}
-              <a class="cities-container d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" type="button" style="
-              background-image: url('{{ city.city.banner_image.url }}');
-              background-repeat: no-repeat;
-              background-position: center;
-              background-size: cover;
-              filter: brightness(20%);
-              " data-bs-toggle="modal" data-bs-target="#emBreve" >
-            {% endif %}
-              <!-- Responsividade para Desktop -->
-              <div class="banner-item-container">
-                <div class="middle-content">
-                  {% for letter in city.city.name %}
-                    <span class="d-none d-xl-block city-name-banner">{{ letter }}</span>
-                  {% endfor %}
-                </div>
-                <img class="d-none d-xl-block" src="{% static 'cities/icons/plus.svg' %}" alt="">
-                <!-- Responsividade para Mobile -->
-                <!-- <div class="d-flex justify-content-between align-items-center" >
-                  <div class="d-inline d-xl-none b-item-mobie">
-                    <img src="{% static 'cities/icons/cycling.svg'%}">
-                    <span class="city-name-banner">{{ city.city.name }}</span>
-                    <img class="" src="{% static 'cities/icons/plus.svg'%}">
-                  </div>
-                </div> -->
-              </div>          
-            </a>
+              position: absolute;
+              top: 0;
+              left: 0;
+              height: 100%;
+              width: 100%;
+              z-index: -1;
+              filter: brightness(70%);"></div>
+            <!-- Responsividade para Desktop -->
+            <div class="banner-item-container">
+              <img class="d-none d-xl-block" src="/static/cities/icons/cycling.svg" alt="">
+              <div class="middle-content">
+                {% for letter in city.city.name %}
+                  <span class="d-none d-xl-block city-name-banner"> {{ letter }}</span>
+                {% endfor %}
+              </div>
+              <img class="d-none d-xl-block" src="{% static 'cities/icons/plus.svg' %}" alt="">
+            </div>          
+          </a>
         {% endfor %}
         <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog">

@@ -149,6 +149,12 @@
     }
 }
 
+@media (min-width: 992px){
+    .container-lg-cric{
+        width: 668px;
+    }
+}
+
 @media (max-width: 991px) {
     .img-cric{
         height: 6rem;

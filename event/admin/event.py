@@ -28,6 +28,7 @@ class EventAdmin(admin.ModelAdmin):
         if db_field.name == "points":
             kwargs["queryset"] = AnchorPoint.objects.filter(active=True)
 
+
         return super().formfield_for_manytomany(db_field, request, **kwargs)
 
     def save_related(self, request, form, formsets, change):

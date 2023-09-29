@@ -11,7 +11,7 @@ class EventForm(forms.ModelForm):
         widgets = {
             'points': forms.CheckboxSelectMultiple,
             'routes_data': forms.CheckboxSelectMultiple,
-            'warnings': forms.CheckboxSelectMultiple,
+            'warnings': forms.CheckboxSelectMultiple
         }
         
     users = forms.ModelMultipleChoiceField(

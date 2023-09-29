@@ -1,2 +1,2 @@
-EMAIL = '3augustto3@gmail.com'
-PASSWORD = ''
+EMAIL = 'ch-coex-rotacric@ifsul.edu.br'
+PASSWORD = 'pjbh yztu tjpm tynr'

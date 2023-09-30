@@ -15,7 +15,7 @@ import pdfkit
 import tempfile
 import os
 import datetime
-import locale
+# import locale
 
 from event.models import Event
 from event.models import EnrollmentForm, EnrollmentFormType2
@@ -159,9 +159,9 @@ def generate_certificate(name, event):
         'user-style-sheet': 'http://rota-cric.charqueadas.ifsul.edu.br/static/event/style-certificate.css'
     }
 
-    locale.setlocale(locale.LC_TIME, 'pt_PT.utf8')
+    # locale.setlocale(locale.LC_TIME, 'pt_PT.utf8')
     current_date = datetime.date.today()
-    formatted_date = current_date.strftime('%d de %B de %Y')
+    formatted_date = current_date.strftime('%d/%m/%Y')
 
     context = {'name': name, 'event': event.name, 'date': formatted_date} 
 

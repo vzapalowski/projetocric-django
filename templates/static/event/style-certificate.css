@@ -62,12 +62,15 @@ main{
     display: flex;
     justify-content: center;
 }
+main .certificado img{
+    height: 15rem;
+    width: 15rem;
+}
 main .certificado{
     display: block;
     text-align: center;
 }
 main .certificado h1{
-    margin-top: 9rem;
     color: #131A40;
 }
 main .certificado p{
@@ -86,6 +89,15 @@ main .certificado .p-2{
     line-height: 25px;
 }
 main .certificado .p-3{
-    margin-top: 8rem;
+    margin-top: 5rem;
+}
+footer{
+    display: flex;
+    height: 23rem;
+}
+footer img{
+    margin-top: 9rem;
+    height: 7.4rem;
+    margin-left: 1rem;
 }
 

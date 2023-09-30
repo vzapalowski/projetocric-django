@@ -153,7 +153,8 @@ def generate_certificate(name, event):
         'encoding': "UTF-8",
         'no-outline': None,
         'enable-local-file-access': True,
-        'allow': ['images']
+        'allow': ['images'],
+        'user-style-sheet': 'http://rota-cric.charqueadas.ifsul.edu.br/static/event/style-certificate.css'
     }
 
     context = {'name': name, 'event': event.name} 

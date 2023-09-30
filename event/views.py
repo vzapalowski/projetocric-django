@@ -14,6 +14,8 @@ import jinja2
 import pdfkit
 import tempfile
 import os
+import datetime
+import locale
 
 from event.models import Event
 from event.models import EnrollmentForm, EnrollmentFormType2
@@ -157,7 +159,11 @@ def generate_certificate(name, event):
         'user-style-sheet': 'http://rota-cric.charqueadas.ifsul.edu.br/static/event/style-certificate.css'
     }
 
-    context = {'name': name, 'event': event.name} 
+    locale.setlocale(locale.LC_TIME, 'pt_PT.utf8')
+    current_date = datetime.date.today()
+    formatted_date = current_date.strftime('%d de %B de %Y')
+
+    context = {'name': name, 'event': event.name, 'date': formatted_date} 
 
     temp_dir = tempfile.mkdtemp()
     output_pdf = os.path.join(temp_dir, 'certificate.pdf')

@@ -23,6 +23,7 @@ class Event(models.Model):
     location = models.CharField(max_length=40, null=True, blank=True, verbose_name='Localidade')
     banner_image = models.ImageField(upload_to='events/images/%Y/%m/%d', null=True, blank=True, verbose_name='Banner do evento')
     date = models.DateField(verbose_name='Data do evento', null=True, blank=True)
+    secondary_date = models.DateField(verbose_name='Data secundária do evento', null=True, blank=True)
     form_type = models.CharField(max_length=30, choices=FORM_TYPE_CHOICES, default='Type-1', verbose_name='Tipo de formulário')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Em andamento', verbose_name='Situação')
     routes_data = models.ManyToManyField(RoutePath, blank=True, null=True, verbose_name='Rotas do Evento')

@@ -43,19 +43,18 @@
   </div>
 
   <!-- {% comment %} Municipios {% endcomment %} -->
-  <div class="container mt-5">
+  <div id="banner-cities" class="container mt-5">
     <h2 class="mb-5 fw-bold topic-color" id="cities" style="margin-top: 3.4rem;">Municipios da Região Carbonífera</h2>
-    <div class="row g-2 banner-container">
-      
+    <div class="row g-2 banner-container">  
       {% for city in homes %}
         {% if city.city.active %}
-          <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="cities-container d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" style="
+          <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="cities-container d-flex col-xl h-banner align-items-center justify-content-center nav-link py-3" style="
             background-image: url('{{ city.city.banner_image.url }}');
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;">
           {% else %}
-            <a class="cities-container d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" type="button" style="
+            <a class="cities-container d-flex col-xl h-banner align-items-center justify-content-center nav-link py-3" type="button" style="
             background-image: url('{{ city.city.banner_image.url }}');
             background-repeat: no-repeat;
             background-position: center;
@@ -71,16 +70,9 @@
                 {% endfor %}
               </div>
               <img class="d-none d-xl-block" src="{% static 'cities/icons/plus.svg' %}" alt="">
-              <!-- Responsividade para Mobile -->
-              <div class="d-flex justify-content-between align-items-center" >
-                <div class="d-inline d-xl-none b-item-mobie">
-                  <img src="{% static 'cities/icons/cycling.svg'%}">
-                  <span class="city-name-banner">{{ city.city.name }}</span>
-                  <img class="" src="{% static 'cities/icons/plus.svg'%}">
-                </div>
-              </div>
             </div>          
           </a>
+
       {% endfor %}
       <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -276,56 +268,6 @@
         {% endfor %}
       </div>
     </div>
-
-    <!-- {% for event in events %}
-      <div class="col-sm-12 col-lg-12 mt-4">
-        <div class="card mb-4 mb-md-0">
-          <div class="card-body">  
-            <img src="{% static 'images/images-cities/charqueadas.jpg'%}" class="post-user w-100 rounded-top" alt="...">
-              <h4 class="mb-2 mt-3 fw-medium p-3 topic-color-light text-white rounded">{{ event.name }}</h4>
-              <div class="row mx-2">
-                <div class="col-sm-4 text-start">
-                  <p class="mt-4 mb-1 fs-5">
-                    <span class="fw-bolder">
-                      Local onde irá ocorrer: 
-                    </span> {{ event.location }}
-                  </p>
-                  <p class="mt-4 mb-1" style="font-size: 18px;">
-                    <span class="fw-bolder">
-                      Data:
-                    </span> {{ event.date }}
-                  </p>   
-                </div>
-                <div class="col-sm-4 text-start">
-                  <p class="mt-4 mb-1" style="font-size: 18px;">
-                    <span class="fw-bolder">
-                    Quantidade de Trajetos: 
-                  </span> {{ event.number_of_routes }}
-                  </p>  
-                  <p class="mt-4 mb-1" style="font-size: 18px;">
-                    <span class="fw-bolder">
-                      Quilometragem do Trajeto:
-                    </span> None
-                  </p>   
-                </div>
-                <div class="col-sm-4 text-start">
-                  <p class="mt-4 mb-1" style="font-size: 18px;">
-                    <span class="fw-bolder">
-                    Situação: 
-                  </span> {{ event.status }}
-                  </p>  
-                  <p class="mt-4 mb-1" style="font-size: 18px;">
-                    <span class="fw-bolder">
-                      Participantes:
-                    </span> {{ event.participants }}
-                  </p>   
-                </div>
-              </div>
-              <a href="{% url 'events:event' pk=event.id %}" type="button" class="btn btn-outline-dark w-100 mt-3 btn-secondary-cric fs-5">Vizualizar Evento</a>
-            </div>
-          </div>
-      </div>
-    {% endfor %} -->
   </div>
 
   <div class="container">
@@ -424,4 +366,22 @@
 <script src="{% static 'js/home/homefx.js' %}" async></script>
 <script src="{% static 'js/home/data.js'%}" type="module" async></script>
 <script src="{% static 'js/map/Polyline.encoded.js'%}"></script>
+
+<script>
+  const containerCities = document.getElementById('banner-cities'); 
+  function myFunction(e) {
+    if (e.matches) {
+      containerCities.classList.add('d-none');
+    } else {
+      containerCities.classList.remove('d-none');
+    }
+  }
+
+  const mmObj = window.matchMedia("(max-width: 1199px)");
+
+  myFunction(mmObj);
+
+  mmObj.addListener(myFunction);
+</script>
+
 {%endblock%}

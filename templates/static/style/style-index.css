@@ -154,13 +154,13 @@
   background-color: var(--secondary-color) !important;
 }
 
-
+/* 
 .h-banner{
   
   background-image: url(https://images.unsplash.com/photo-1542684377-0b875fde9563?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1859&q=80);
   background-repeat: no-repeat;
   background-size: cover;
-}
+} */
 
 .city-name-banner{
   font-family: Open Sans;
@@ -242,7 +242,6 @@
     height: 3rem;
     transition: 0.5s;
   }
-  
 }
 
 @media (min-width: 1025px) {

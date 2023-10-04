@@ -61,7 +61,7 @@
     <div class="container col-10">
       <h2 class="title-event"  data-aos="fade-up">{{ event.name }}</h2>
       <p class="description-event fs-5 mt-5"  data-aos="fade-up">
-        {{ event.description }}
+        {{ event.description }}{% if event.pdf_file %} Acesse o regulamento <a href="{% url 'events:download_pdf' event_id=event.id %}" target="_blank">clicando aqui.</a>{% endif %}
       </p>
     </div>
   </div>

@@ -1,5 +1,9 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+/* Text-Family - Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
 
 
 /*!
@@ -32,6 +36,20 @@
     --neutral-black-1: #F1F1F1;
     --neutral-white: #FFFFFF;
 }
+
+/* Nova NavBar */
+
+.font-cric a{
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500;
+}
+
+div nav div .m-nav{
+  margin-left: 7rem;
+  transition: all 0.2s;
+}
+
+/* **************************** */
 
 .background {
   background-color: var(--neutral-white);
@@ -250,7 +268,7 @@
     background-image: url(../images/top-page/img-top-page-2.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
-    height: 40rem;
+    height: 45rem;
 }    
   .divisor {
     width: 1px;
@@ -693,6 +711,14 @@
 /* TALBLET */
 
 @media (max-width: 860px) {
+
+  /* Nova NavBar */
+
+  div nav div .m-nav{
+    margin-left: 3rem;
+    transition: all 0.2s;
+  }
+
   .divisor {
     display: none;
   }

@@ -16,7 +16,7 @@ class Event(models.Model):
     )
 
     name = models.CharField(max_length=50, verbose_name='Nome do Evento')
-    description = models.CharField(max_length=800, verbose_name="Descrição do evento", null=True)
+    description = models.TextField(max_length=1000, verbose_name="Descrição do evento", null=True)
     lat = models.CharField(max_length=20, null=True, blank=True, default='-29.95', verbose_name='Latitute de Mapa')
     lng = models.CharField(max_length=20, null=True, blank=True, default='-51.64', verbose_name='Longitude do Mapa')
     zoom = models.IntegerField(default=13, verbose_name='Zoom')

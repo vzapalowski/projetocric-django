@@ -2,6 +2,7 @@ from django.contrib import admin
 from event.models import Event, Image
 from event.admin.event_form import EventForm
 from event.admin.image import ImageAdmin
+from event.admin.extra_route_info import ExtraRouteInfoAdmin
 from event.models.anchor_point import AnchorPoint
 from event.models.route_path import RoutePath
 from django.db import models
@@ -14,7 +15,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 
 class EventAdmin(admin.ModelAdmin):
     form = EventForm
-    inlines = [ImageAdmin]
+    inlines = [ImageAdmin, ExtraRouteInfoAdmin]
     list_display = ('id', 'name')
     list_display_links = ('id', 'name')
 

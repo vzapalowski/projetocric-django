@@ -7,7 +7,7 @@ class RoutePath(models.Model):
     route = models.ForeignKey(Route, on_delete=models.CASCADE)
     concentration = models.CharField(max_length=100, default='----', verbose_name='Horário de concentração')
     time = models.CharField(max_length=100, verbose_name='Horário de Sáida')
-    departure_location = models.CharField(max_length=50, verbose_name='Local de Partida')
+    departure_location = models.CharField(max_length=100, verbose_name='Local de Partida')
     active = models.BooleanField(default=False, verbose_name='Estado da Rota')
 
     def __str__(self):

@@ -66,6 +66,7 @@
     </div>
   </div>
   <div class="container col">
+    <!-- ROUTE PATH INFO -->
     {% for e in event.routes_data.all %}
     <div class="row mt-5 aos-init aos-animate" data-aos="fade-up">
       <div class="col-12 mb-3 mb-sm-0">
@@ -82,6 +83,25 @@
       
     </div>
     {% endfor %}
+
+    <!-- EXTRA ROUTE PATH INFO -->
+    {% for e in event.extra_info.all %}
+    <div class="row mt-5 aos-init aos-animate" data-aos="fade-up">
+      <div class="col-12 mb-3 mb-sm-0">
+        <div class="card border-card">
+          <div class="card-body">
+            <h5 class="card-title border-bottom border-dark-subtle topic-color">{{ e }}</h5>
+            <p></p>
+            <p class="card-text"><small class="text-body-secondary">{{ e.field_one }}</small></p>
+            <p class="card-text"><small class="text-body-secondary">{{ e.field_two }}</small></p>
+            <p class="card-text"><small class="text-body-secondary">{{ e.field_three }}</small></p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    {% endfor %}
+
   </div>
 
   <!-- Images -->

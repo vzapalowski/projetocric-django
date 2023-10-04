@@ -42,22 +42,18 @@
 
   <!-- INDEX STYLE  -->
 
-  {% comment %} Troquei o link do Index antigo para o index_r {% endcomment %}
-
   <link 
     rel="stylesheet" 
     href="{% static 'style/style-index.css'%}"
   >
 
   <!-- SWIPER SLIDER -->
-
   <link
     rel="stylesheet" 
     href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
   >
 
   <!-- EVENT STYLE  -->
-
   <link 
     rel="stylesheet" 
     href="{% static 'event/style-event.css'%}"
@@ -69,14 +65,12 @@
 >
 
   <!-- CITY STYLE -->
-
   <link 
     rel="stylesheet" 
     href="{% static 'cities/style-city.css' %}"
     >
 
   <!-- LEAFLET LINK -->
-
   <link
     rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
     integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
@@ -91,10 +85,7 @@
 
   <!-- FONTAWESOME SCRIPT -->
 
-  <script 
-    src="https://kit.fontawesome.com/d97d3ca1f3.js" 
-    crossorigin="anonymous"
-  ></script>
+  <script src="https://kit.fontawesome.com/25f535c468.js" crossorigin="anonymous"></script>
 
   <!-- LEAFLET SCRIPT -->
 
@@ -119,15 +110,11 @@
     </head>
 <body class="background">
 
-  <!-- <div class="container-fluid text-center bg-light d-lg-none d-flex justify-content-center align-items-center"> -->
-
-    <!-- {% comment %} NAVIGATION FOR MOBILE {% endcomment %} -->
-<!--      
+  <div class="container-fluid d-block d-md-none text-center nav-bar-container p-0 font-cric">
     <nav class="navbar bg-body-tertiary fixed-top">
       <div class="container-fluid">
-        <a id="navbar-brand" class="navbar-brand" href="#">
-          Rota
-          <span class="topic-color fw-bold">Cric</span>
+        <a href="{% url 'home:home' %}" class="m-nav">
+          <img class="img-fluid" width="60" height="60" src="{% static 'images/logos/rotacric-sem-fundo.png'%}" alt="...">
         </a>
         <button id="btn-open" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" style="box-shadow: none;">
           <span class="navbar-toggler-icon"></span>
@@ -157,84 +144,43 @@
               <li class="nav-item" data-bs-dismiss="offcanvas">
                   <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#about"><i class="fa-solid fa-circle-info me-2"></i> Sobre</a>
               </li>
-
-                {% block 'navigation-mobile' %}
-                {% endblock %}
-
-                
             </ul>
         </div>
         </div>
       </div>
-    </nav> -->
-  <!-- </div> -->
+    </nav> 
+  </div>
 
-  <div class="container-fluid text-center nav-bar-container p-0 font-cric">
+
+
+  <div class="container-fluid d-none d-md-block text-center nav-bar-container p-0 font-cric">
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
-        <a href="#" class="m-nav">
-          <img class="img-fluid" width="80" height="80" src="{% static 'images/logos/4-nobg.png'%}" alt="...">
+        <a href="{% url 'home:home' %}" class="m-nav">
+          <img class="img-fluid" width="70" height="70" src="{% static 'images/logos/rotacric-subtitle-sem-fundo.png'%}" alt="...">
         </a>
         <form class="d-flex me-5">
-          <a href="" class="nav-link btn-hover-cric px-4 py-2 mx-1">Eventos</a>
-          <a href="" class="nav-link btn-hover-cric px-4 py-2 mx-1">Municípios</a>
-          <a href="" class="nav-link btn-hover-cric px-4 py-2 mx-1">Quem Somos?</a>
-          <a href="" class="nav-link btn-hover-cric px-4 py-2 mx-1">Entrar</a>
+          <li class="nav-link">
+            <a href="#events" class="nav-link btn-hover-cric px-4 py-2 mx-1">Eventos</a>
+          </li>
+          <li class="nav-link">
+            <a href="#cities" class="nav-link btn-hover-cric px-4 py-2 mx-1">Municípios</a>          
+          </li>
+          <li class="nav-link">
+            <a href="#about" class="nav-link btn-hover-cric px-4 py-2 mx-1">Quem Somos?</a>
+          </li>
+          <li class="nav-link">
+            <a href="" class="nav-link btn-hover-cric px-4 py-2 mx-1 fw-bolder fw-blue">Entrar</a>
+          </li>
+
+          {% block 'navigation-mobile' %}
+          {% endblock %}
+        
         </form>
       </div>
     </nav>
-
-    
-  
-    <!-- {% comment %} NAVIGATION FOR DESKTOP {% endcomment %} -->
-    
-    <!-- <div class="d-flex align-items-center col-lx-9 mx-auto mt-5 nav-t-5">
-      <div class="flex-shrink-0 col-lg-1 logo-rotacric rounded-circle ms-5 logo-container">
-        <img class="img-fluid img-cric" src="{% static 'images/logos/4.png'%}" alt="...">
-      </div>
-      <div class="flex-grow-1 me-5 ms-3">
-          <nav class="navbar navbar-expand-lg mb-0 rounded-pill">
-              <div class="container text-center">
-                          <a id="navbar-brand" class="navbar-brand" href="#"></a>
-                          <button class="navbar-toggler border-0" id="btn-open-offcanvas" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" style="box-shadow: none;">
-                              <span class="navbar-toggler-icon"></span>
-                          </button>
-                      <div class="offcanvas offcanvas-end text-center" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                          <div class="offcanvas-header">
-                              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">RotaCric</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                          </div>
-                          <div class="offcanvas-body">
-                              <ul class="navbar-nav d-flex justify-content-around text-start flex-grow-1 pe-3">
-                                  <li class="nav-item">
-                                    <a class="nav-link btn-hover-cric px-4 size-text" aria-current="page" href="{% url 'home:home' %}"><i class="fa-solid fa-house me-3 text-primary-emphasis"></i> Home</a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a class="nav-link btn-hover-cric px-4" aria-current="page" href="{% url 'users:login' %}"><i class="fa-solid fa-user me-3 text-primary-emphasis" style="color: #233e6c;"></i>Entrar</a>
-                                </li>
-                                <li class="nav-item" data-bs-dismiss="offcanvas">
-                                  <a class="nav-link btn-hover-cric px-4 page-nav-item" href="#events"><i class="fa-solid fa-road me-2 text-primary-emphasis"></i> Eventos</a>
-                                </li>
-                                <li class="nav-item" data-bs-dismiss="offcanvas">
-                                  <a class="nav-link btn-hover-cric px-4 page-nav-item" href="#cities"><i class="fa-solid fa-city me-2 text-primary-emphasis"></i> Municipios</a>
-                                </li>
-                                <li class="nav-item" data-bs-dismiss="offcanvas">
-                                  <a class="nav-link btn-hover-cric px-4 page-nav-item" href="#manual"><i class="fa-solid fa-book me-2 text-primary-emphasis"></i> Manual</a>
-                                </li>
-                                <li class="nav-item" data-bs-dismiss="offcanvas">
-                                  <a class="nav-link btn-hover-cric px-4 page-nav-item" href="#about"><i class="fa-solid fa-circle-info me-2 text-primary-emphasis"></i> Sobre</a>
-                                </li>
-
-                                  {% block 'navigation' %}
-                                  {% endblock %}
-                              </ul>
-                          </div>
-                      </div>
-              </div>
-          </nav>
-      </div>
-    </div> -->
   </div>
+  
   
     {%block 'content'%}{%endblock%}
 
@@ -314,16 +260,6 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
       AOS.init();
-    </script>
-    <script>
-      const navbarBrand = document.querySelector("#navbar-brand");
-
-      document.querySelector("#btn-open").addEventListener('click', () => {
-        navbarBrand.style.opacity = 0;
-      });
-      document.querySelector("#btn-close").addEventListener("click", () => {
-        navbarBrand.style.opacity = 1;
-      });
     </script>
 </body>
 </html>

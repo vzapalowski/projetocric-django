@@ -16,14 +16,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Josefin Sans", sans-serif;
+  font-family: 'Inter', sans-serif !important;
 }
 
 /* MAIN */
 
 :root{
     --primary-color: #273273;
-    --primary-light: #020303;
+    --primary-light: #E1EBFF;
     --primary-dark: #131A40;
 
     --secondary-color: #2B2F4D;
@@ -37,11 +37,15 @@
     --neutral-white: #FFFFFF;
 }
 
-/* Nova NavBar */
+/* Novo Css */
 
 .font-cric a{
   font-family: 'Inter', sans-serif !important;
   font-weight: 500;
+}
+
+div .bg-body-tertiary{
+  background-color: var(--neutral-white) !important;
 }
 
 div nav div .m-nav{
@@ -49,7 +53,18 @@ div nav div .m-nav{
   transition: all 0.2s;
 }
 
+div nav div form .fw-blue {
+  color: var(--primary-color);
+}
+
+.bg-primary-blue{
+  background-color: var(--primary-color) !important;
+  height: 55rem;
+  
+}
+
 /* **************************** */
+
 
 .background {
   background-color: var(--neutral-white);
@@ -172,16 +187,8 @@ div nav div .m-nav{
   background-color: var(--secondary-color) !important;
 }
 
-/* 
-.h-banner{
-  
-  background-image: url(https://images.unsplash.com/photo-1542684377-0b875fde9563?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1859&q=80);
-  background-repeat: no-repeat;
-  background-size: cover;
-} */
-
 .city-name-banner{
-  font-family: Open Sans;
+  font-family: Open Sans !important;
   font-size: 1rem;
   color: rgb(255, 255, 255);
   -webkit-text-stroke: 1px #000000;
@@ -265,7 +272,8 @@ div nav div .m-nav{
 @media (min-width: 1025px) {
 
   .bg-image-h{
-    background-image: url(../images/top-page/img-top-page-2.jpg);
+    /* background-image: url(../images/top-page/img-top-page-2.jpg); */
+    background-color: #aab7dd;
     background-repeat: no-repeat;
     background-size: 100%;
     height: 45rem;
@@ -449,7 +457,8 @@ div nav div .m-nav{
   }
 
   .bg-image-h{
-    background-image: url(../images/top-page/img-top-page-2.jpg);
+    /* background-image: url(../images/top-page/img-top-page-2.jpg); */
+    background-color: #aab7dd;
     background-repeat: no-repeat;
     background-size: 100%;
     height: 33rem;
@@ -701,7 +710,8 @@ div nav div .m-nav{
   }
 
   .bg-image-h{
-    background-image: url(../images/top-page/img-top-page-2.jpg);
+    /* background-image: url(../images/top-page/img-top-page-2.jpg); */
+    background-color: #aab7dd;
     background-repeat: no-repeat;
     background-size: 100%;
     height: 26rem;
@@ -724,7 +734,8 @@ div nav div .m-nav{
   }
 
   .bg-image-h{
-    background-image: url(../images/top-page/img-top-page-2.jpg);
+    /* background-image: url(../images/top-page/img-top-page-2.jpg); */
+    background-color: #aab7dd;
     background-repeat: no-repeat;
     background-size: 100%;
     height: 24rem;
@@ -901,7 +912,8 @@ div nav div .m-nav{
 
 @media (max-width : 780px) {
   .bg-image-h{
-    background-image: url(../images/top-page/img-top-page-2.jpg);
+    /* background-image: url(../images/top-page/img-top-page-2.jpg); */
+    background-color: #aab7dd;
     background-repeat: no-repeat;
     background-size: 100%;
     height: 21rem;
@@ -945,7 +957,8 @@ div nav div .m-nav{
   }
 
   .bg-image-h{
-    background-image: url(../images/top-page/img-top-page-2.jpg);
+    /* background-image: url(../images/top-page/img-top-page-2.jpg); */
+    background-color: #aab7dd;
     background-repeat: no-repeat;
     background-size: 100%;
     height: 15rem;
@@ -1117,7 +1130,8 @@ div nav div .m-nav{
     display: none;
   }
   .bg-image-h{
-    background-image: url(../images/top-page/img-top-page-2.jpg);
+    /* background-image: url(../images/top-page/img-top-page-2.jpg); */
+    background-color: #aab7dd;
     background-repeat: no-repeat;
     background-size: 100%;
     height: 14rem;

@@ -33,9 +33,9 @@
     --neutral-white: #FFFFFF;
 }
 
-body{
+/* body{
     background-color: var(--neutral-black-12) !important;
-}
+} */
 
 .bg-image-profile{
     background-image: url(../../static/images/top-page/img-nature.png);

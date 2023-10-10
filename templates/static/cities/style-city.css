@@ -1,37 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
-
-
-/*!
- * Bootstrap  v5.3.0 (https://getbootstrap.com/)
- * Copyright 2011-2023 The Bootstrap Authors
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Josefin Sans", sans-serif;
-}
-
-/* MAIN */
-
-:root{
-    --primary-color: #273273;
-    --primary-light: #020303;
-    --primary-dark: #131A40;
-
-    --secondary-color: #2B2F4D;
-    --secondary-light: #4E64A6;
-    --secondary-dark: #101633;
-
-    --neutral-black-100: #000000;
-    --neutral-black-30: #565656;
-    --neutral-black-12: #D9D9D9;
-    --neutral-black-1: #F1F1F1;
-    --neutral-white: #FFFFFF;
-}
 
 .darker-overlay {
     background-color: black;

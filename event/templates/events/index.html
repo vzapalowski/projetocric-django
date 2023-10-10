@@ -6,50 +6,6 @@
 
 {%block 'content'%}
 
-
-<style>
-  .form-container {
-    position: relative;
-    background: url('path_to_your_blurred_image.jpg') no-repeat center center fixed;
-    background-size: cover;
-}
-
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 90;
-    flex-direction: column;
-  }
-
-  .overlay h2{
-    z-index: 91;
-  }
-
-  .overlay a {
-    z-index: 91;
-    pointer-events: auto;
-  }
-
-  .btn-container {
-    z-index: 91;
-  }
-  .overlay::before {
-    position: absolute;
-    content: "";
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.205);
-    backdrop-filter: blur(10px);
-    pointer-events: auto; 
-  }
-</style>
-
 <div id="loading-spinner" class="d-none">
   <div class="spinner-border text-primary" role="status">
     <span class="visually-hidden">Loading...</span>
@@ -71,8 +27,30 @@
       </p>
     </div>
   </div>
-  <div class="container col">
-    {% for e in event.routes_data.all %}
+  <div class="container overflow-hidden mt-5 col col-sm-10 col-md-10 col-lg-10 col-xl-10">
+    <div class="row row-cols-1 row-cols-md-2 gx-5 gy-5 justify-content-center g-">
+      <div class="col">
+       <div class="p-3 rounded bg-primary-blue text-white" style="height: 14rem;">
+        <h6>
+          Trajeto Simples
+        </h6>
+        
+      </div>
+      </div>
+      <div class="col">
+        <div class="p-3 rounded bg-primary-blue text-white" style="height: 14rem;">Custom column padding</div>
+      </div>
+      <div class="col">
+        <div class="p-3 rounded bg-primary-blue text-white" style="height: 14rem;">Custom column padding</div>
+      </div>
+      <div class="col">
+        <div class="p-3 rounded bg-primary-blue text-white" style="height: 14rem;">Custom column padding</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="container col">
+    % for e in event.routes_data.all %}
     <div class="row mt-5 aos-init aos-animate" data-aos="fade-up">
       <div class="col-12 mb-3 mb-sm-0">
         <div class="card border-card">
@@ -87,8 +65,8 @@
       </div>
       
     </div>
-    {% endfor %}
-  </div>
+    % endfor %}
+  </div> -->
 
   <!-- Images -->
   <div class="container">

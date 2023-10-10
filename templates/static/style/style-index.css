@@ -35,6 +35,8 @@
     --neutral-black-12: #D9D9D9;
     --neutral-black-1: #F1F1F1;
     --neutral-white: #FFFFFF;
+
+    --light-light: #E1EBFF;
 }
 
 /* Novo Css */
@@ -57,12 +59,29 @@ div nav div form .fw-blue {
   color: var(--primary-color);
 }
 
-.bg-primary-blue{
+.bg-cities{
   background-color: var(--primary-color) !important;
   height: 55rem;
-  
 }
 
+
+.map-routes{
+  height: 30rem;
+}
+
+.banner-item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bg-light-light{
+  background-color: var(--light-light);
+}
+
+.bg-primary-blue{
+  background-color: var(--primary-color);
+}
 /* **************************** */
 
 

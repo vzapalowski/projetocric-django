@@ -12,6 +12,7 @@ fetch(Urls.home_cities)
     let bounds = L.latLngBounds(southWest, northEast);
     map.setMap('map', {
       scrollWheelZoom: false,
+      doubleClickZoom: false
     }, data[0]['coordinates'].lat, data[0]['coordinates'].lng, 10, bounds);
     map.addRoutes(data[0].routes);
     map.addPoints(data[0].points);

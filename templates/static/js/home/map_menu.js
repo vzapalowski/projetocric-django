@@ -4,6 +4,6 @@ document.querySelector('.btn-close-menu').addEventListener('click', () => {
     menu.style.display = 'none';
 });
 
-document.querySelector('.btn-map-menu').addEventListener('click', (e) => {
+document.querySelector('.btn-open-menu').addEventListener('click', (e) => {
     menu.style.display = 'flex';
 });

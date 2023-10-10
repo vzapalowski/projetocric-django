@@ -4,6 +4,7 @@ export class Map {
     this.map = null;
     this.bounds = null; 
     this.lastValidCenter = null;
+    this.pointLayerGroup = L.layerGroup();
   }
 
   setMap(map, options, lat, lng, zoom, bounds = null) {
@@ -81,7 +82,17 @@ export class Map {
           keepInView: true,
           className: 'markerPopup'
         })
-        .addTo(this.map);
+      .addTo(this.pointLayerGroup);
+    });
+  }
+
+  togglePointsLayer() {
+    document.querySelector('.btn-remove-points').addEventListener('click', () => {
+      if (this.map.hasLayer(this.pointLayerGroup)) {
+        this.map.removeLayer(this.pointLayerGroup);
+      } else {
+        this.map.addLayer(this.pointLayerGroup);
+      }
     });
   }
 

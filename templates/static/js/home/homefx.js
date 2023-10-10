@@ -11,3 +11,7 @@ document.querySelector('.banner-container').addEventListener('mouseout', () => {
         e.classList.remove("dark-city");
     });
 });
+
+document.querySelector('.btn-map-menu').addEventListener('click', (e) => {
+    document.querySelector('.map-menu').style.display = 'flex';
+});

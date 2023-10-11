@@ -18,7 +18,10 @@
   <div class="btn-open-menu"></div>
   <div class="map-menu">
     <button class="btn-menu btn-remove-points">Ativar/desativar pontos</button>
-    <button class="btn-menu">placeholder</button>
+    <button class="btn-menu btn-open-filter">Filtrar por rotas</button>
+    <div class="check-boxes-container" id="routeCheckboxes">
+      <!-- Rotas -->
+    </div>
     <button class="btn-menu">placeholder</button>
     <button class="btn-menu">placeholder</button>
     <button class="btn-menu btn-close-menu">Close</button>
@@ -359,10 +362,9 @@
   </div>
 </div>
 
-<script src="{% static 'js/home/map_menu.js' %}"></script>
 <script src="{% static 'js/home/homefx.js' %}" async></script>
 <script src="{% static 'js/home/data.js'%}" type="module" async></script>
-<script src="{% static 'js/map/Polyline.encoded.js'%}"></script>
+<script src="{% static 'js/home/map_menu.js' %}" type="module" async></script>
 
 <script>
   const containerCities = document.getElementById('banner-cities'); 

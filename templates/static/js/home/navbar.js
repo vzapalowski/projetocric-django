@@ -5,10 +5,6 @@ document.querySelector('#fab-button').addEventListener('click', () => {
     });
 });
 
-document.querySelector('.logo-container').addEventListener('click', () => {
-    window.location = homeUrl;
-});
-
 const isHome = window.location.href.split('/')[3];
 
 document.querySelectorAll('.page-nav-item').forEach(e => {

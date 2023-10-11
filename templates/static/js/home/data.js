@@ -2,11 +2,10 @@ import { Map } from "../map/map.js";
 import { Urls } from "../helpers/urls.js";
 
 
-
+export const map = new Map();
 fetch(Urls.home_cities)
   .then(res => res.json())
   .then(data => {
-    let map = new Map();
     let southWest = L.latLng(-30.1067259, -51.6932992);
     let northEast = L.latLng(-29.8827813, -51.9241475);
     let bounds = L.latLngBounds(southWest, northEast);
@@ -14,9 +13,12 @@ fetch(Urls.home_cities)
       scrollWheelZoom: false,
       doubleClickZoom: false
     }, data[0]['coordinates'].lat, data[0]['coordinates'].lng, 10, bounds);
+
+    
     map.addRoutes(data[0].routes);
     map.addPoints(data[0].points);
     map.togglePointsLayer();
+    map.createRouteCheckboxes(data[0].routes);
   });
 
 fetch(Urls.event_list)

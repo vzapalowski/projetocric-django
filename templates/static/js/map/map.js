@@ -84,6 +84,7 @@ export class Map {
         })
       .addTo(this.pointLayerGroup);
     });
+    this.map.addLayer(this.pointLayerGroup);
   }
 
   togglePointsLayer() {

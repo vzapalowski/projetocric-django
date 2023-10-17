@@ -19,6 +19,7 @@ fetch(Urls.home_cities)
     map.addPoints(data[0].points);
     map.togglePointsLayer();
     map.createRouteCheckboxes(data[0].routes);
+    map.filterPointsByCategory();
   });
 
 fetch(Urls.event_list)

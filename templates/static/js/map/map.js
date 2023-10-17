@@ -92,13 +92,15 @@ export class Map {
         <p>Contato: ${phone}</p>
       `;
 
-      L.marker([coordinates.lat, coordinates.lng], { icon: newIcon })
-        .bindPopup(popupContent, {
-          maxWidth: 150,
-          keepInView: true,
-          className: 'markerPopup'
-        })
-      .addTo(this.pointLayerGroup);
+      const marker = L.marker([coordinates.lat, coordinates.lng], { icon: newIcon });
+
+      marker.options.category = category.name;
+      
+      marker.bindPopup(popupContent, {
+        maxWidth: 150,
+        keepInView: true,
+        className: 'markerPopup'
+      }).addTo(this.pointLayerGroup);
     });
     this.map.addLayer(this.pointLayerGroup);
   }
@@ -106,11 +108,19 @@ export class Map {
   togglePointsLayer() {
     document.querySelector('.btn-remove-points').addEventListener('click', () => {
       if (this.map.hasLayer(this.pointLayerGroup)) {
-        this.map.removeLayer(this.pointLayerGroup);
+        this.hideAllPoints();
       } else {
-        this.map.addLayer(this.pointLayerGroup);
+        this.showAllPoints();
       }
     });
+  }
+
+  hideAllPoints() {
+    this.map.removeLayer(this.pointLayerGroup);
+  }
+
+  showAllPoints() {
+    this.map.addLayer(this.pointLayerGroup);
   }
 
   writeRoutes(routes) {
@@ -186,14 +196,14 @@ export class Map {
     routes.forEach((route) => {
       const checkboxHTML = `
         <div class="check-box-container">
-          <input type="checkbox" class="cb-iptn" data-route="${route.id_route}">
+          <input type="checkbox" class="r-cb-iptn" data-route="${route.id_route}">
           <span>${route.name}</span>
         </div>
       `;
-      document.querySelector('.check-boxes-container').insertAdjacentHTML('beforeend', checkboxHTML);
+      document.querySelector('#routeCheckboxes').insertAdjacentHTML('beforeend', checkboxHTML);
     });
 
-    document.querySelectorAll('.cb-iptn').forEach(checkbox => {
+    document.querySelectorAll('.r-cb-iptn').forEach(checkbox => {
       checkbox.addEventListener('change', () => {
         var routeId = checkbox.getAttribute('data-route');
         var checked = checkbox.checked;
@@ -209,4 +219,27 @@ export class Map {
       });
     });
   }
+
+  filterPointsByCategory() {
+    const checkboxes = document.querySelectorAll('.p-cb-iptn');
+    
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        const category = checkbox.getAttribute('data-category');
+        const markers = this.pointLayerGroup.getLayers();
+
+        markers.forEach(marker => {
+          const markerCategory = marker.options.category; 
+          if (markerCategory === category) {
+            if (checkbox.checked) {
+              marker.addTo(this.map);
+            } else {
+              this.map.removeLayer(marker);
+            }
+          }
+        });
+      });
+    });
+  }
+  
 }

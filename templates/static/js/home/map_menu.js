@@ -1,22 +1,39 @@
 import { map } from "./data.js";
 
 const menu = document.querySelector('.map-menu');
-const cboxContainer = document.querySelector('.check-boxes-container');
+const routeCheckboxes = document.querySelector('#routeCheckboxes');
+const pointsCheckboxes = document.querySelector('#pointsCheckboxes');
 
 document.querySelector('.btn-close-menu').addEventListener('click', () => {
-    menu.style.display = 'none';
+    menu.classList.add('hidden');
 });
 
 document.querySelector('.btn-open-menu').addEventListener('click', () => {
-    menu.style.display = 'flex';
+    menu.classList.remove('hidden');
 });
 
-document.querySelector('.btn-open-filter').addEventListener('click', () => {
-    if (cboxContainer.style.display == 'none') {
+document.querySelector('.btn-open-route-filter').addEventListener('click', () => {
+    if (routeCheckboxes.classList.contains('hidden')) {
         map.hideAllRoutes();
-        cboxContainer.style.display = 'grid';
+        routeCheckboxes.classList.remove('hidden');
     } else {
         map.showAllRoutes();
-        cboxContainer.style.display = 'none';
+        routeCheckboxes.classList.add('hidden');
+        document.querySelectorAll('.r-cb-iptn').forEach(e => {
+            e.checked = false;
+        })
+    }
+});
+
+document.querySelector('.btn-open-points-filter').addEventListener('click', () => {
+    if (pointsCheckboxes.classList.contains('hidden')) {
+        map.hideAllPoints();
+        pointsCheckboxes.classList.remove('hidden');
+    } else {
+        map.showAllPoints();
+        pointsCheckboxes.classList.add('hidden');
+        document.querySelectorAll('.p-cb-iptn').forEach(e => {
+            e.checked = false;
+        });
     }
 });

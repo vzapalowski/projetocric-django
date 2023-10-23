@@ -6,8 +6,8 @@ export const map = new Map();
 fetch(Urls.home_cities)
   .then(res => res.json())
   .then(data => {
-    let southWest = L.latLng(-30.1067259, -51.6932992);
-    let northEast = L.latLng(-29.8827813, -51.9241475);
+    let southWest = L.latLng(-30.140440, -51.493143);
+    let northEast = L.latLng(-29.769673, -52.224405);
     let bounds = L.latLngBounds(southWest, northEast);
     map.setMap('map', {
       scrollWheelZoom: false,

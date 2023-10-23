@@ -21,17 +21,28 @@
 
 <div id="map" class="mt-5 mb-5" style="height: 30rem;" data-aos="fade-up">
   <!-- Mapa --> 
+  <!-- MENU DO MAPA -->
+  <div class="btn-open-menu"></div>
+  <div class="map-menu hidden">
+    <button class="btn-menu btn-remove-points">Ativar/desativar pontos</button>
+    <button class="btn-menu btn-open-route-filter">Filtrar rotas</button>
+    <div class="check-boxes-container hidden" id="routeCheckboxes">
+      <!-- Rotas -->
+    </div>
+    <button class="btn-menu btn-open-points-filter">Filtrar pontos de apoio</button>
+    <div class="check-boxes-container hidden" id="pointsCheckboxes">
+      <!-- Pontos de apoio -->
+      {% for category in categories_points %}
+        <div class="check-box-container">
+          <input type="checkbox" class="p-cb-iptn" data-category="{{ category.name }}">
+          <span>{{ category.name }}</span>
+        </div>  
+      {% endfor %}
+    </div>
+    <button class="btn-menu btn-close-menu">Close</button>
+  </div> 
 </div>
 
-<div class="container mt-5">
-  <div class="row justify-content-center flex-wrap">
-    {% for e in city.routes.all %}
-        <div class="col-6 col-md-4 col-lg-3 mb-3">
-          <button data-route="{{ e.id_route }}" class="btn btn-outline-dark btnOpacity mt-2 p-3" style="background-color: '{{ e.color }}'; width: 100%; height: 100%;">{{ e }}</button>
-        </div>
-    {% endfor %}
-  </div>
-</div>
 
 
 <div class="container-lg mt-5 background-blue">
@@ -84,8 +95,9 @@
 </div> -->
 
 
+<script src="{% static 'js/cities/map_menu.js' %}" type="module" async></script>
 <script src="{% static 'js/cities/data.js'%}" type="module" async></script>
-<script src="{% static 'js/map/Polyline.encoded.js'%}"></script>
+
 
 
 

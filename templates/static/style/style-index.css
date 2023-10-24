@@ -74,23 +74,21 @@ div nav div form .fw-blue {
   top: 0; 
   right: 0; 
   margin: 0.5rem; 
-  height: 40px; 
-  width: 40px;
-  background-color: black; 
-  z-index: 9999;
+  background-color: var(--primary-color);
+  color: white; 
+  z-index: 992;
   cursor: pointer;
 }
 
-.map-menu {
-  position: absolute; 
-  top: 0; 
-  right: 0; 
-  margin: 0.5rem; 
-  height: 95%; 
-  width: 25%;
-  background-color: white; 
-  z-index: 9999;
-  cursor: pointer;
+.btn-open-menu:hover{
+  background-color: var(--secondary-dark);
+  color: white !important;
+}
+
+.map-menu { 
+  background-color: rgb(255, 255, 255); 
+  z-index: 9992;
+  cursor: default;
   display: flex;
   flex-direction: column;
 }

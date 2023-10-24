@@ -37,3 +37,17 @@ document.querySelector('.btn-open-points-filter').addEventListener('click', () =
         });
     }
 });
+
+function responsiveMenu(e) {
+  if (e.matches) {
+    menu.classList.add('text-primary');
+  } else {
+    menu.classList.remove('text-primary');
+  }
+}
+
+const resolution = window.matchMedia("(max-width: 575px)");
+
+responsiveMenu(resolution);
+
+resolution.addListener(responsiveMenu);

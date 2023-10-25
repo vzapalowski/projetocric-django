@@ -61,7 +61,7 @@ div nav div form .fw-blue {
 
 .bg-cities{
   background-color: var(--primary-color) !important;
-  height: 55rem;
+  padding-bottom: 5rem !important; 
 }
 
 

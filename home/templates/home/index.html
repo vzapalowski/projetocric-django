@@ -14,9 +14,29 @@
 
 <!-- Mapa --> 
 <div class="container-fluid d-flex p-0">
-  <div class="border border-dark border-start-0 border-end-0 border-1 w-75 bg-light-light" style="height: 30rem;"></div>
-  <div class="w-25 bg-primary-blue" style="height: 30rem;"></div>
+  <div id="map" class="border border-dark border-start-0 border-end-0 border-1 w-100" style="height: 30rem;"></div>
+  <!-- <div class="w-25 bg-primary-blue" style="height: 30rem;"></div> -->
 </div>
+  <!-- {% comment %} INFO POINTS {% endcomment %} -->
+  <div class="container mt-5">
+    <div class="row justify-content-center flex-wrap">
+      <button class="btn btn-outline-dark btnOpacity mt-2 p-3 w-25 btn-view-points btn-secondary-cric " style="height: 100%;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Visualizar Pontos do Mapa
+      </button>
+      </div>
+    </div>
+    <div class="collapse mt-2 " id="collapseExample">
+      <div class="container aling-items-center">
+          <div class="row">
+            {% for category in categories_points %}
+            <div class="col-6 col-sm-4 mt-3 d-flex">
+              <img id="Toast" class="img-fluid" src="{{ category.image.url }}" alt="..." style="height: 4rem;" title="Test">
+              <h5 class="d-flex justify-content-center align-items-center" style="margin-bottom: 0;">{{ category.name }}</h5>
+            </div>
+            {% endfor %}
+        </div>
+    </div> 
+  </div>
   <!-- MENU DO MAPA -->
   <!-- <div class="btn-open-menu btn">
     Filtragem de Rotas
@@ -128,34 +148,22 @@
 
     </div>
     <div class="container" id="banner-cities-mobile">
+      <h3 class="mb-5 fw-normal text-white" id="cities" style="padding-top: 5rem;">Municipios da Região Carbonífera</h3>
       <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-2">
+        {% for city in homes %}
         <div class="col">
-          <div class="bg-light-light rounded" style="height: 10rem;">Teste 1</div>
+          <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="cities-container d-flex col-xl h-banner rounded align-items-center justify-content-center nav-link py-3" style="
+              background-image: url('{{ city.city.banner_image.url }}');
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: cover;
+              height: 10rem;">
+              <span class="city-name-banner">
+                {{city.city.name}}
+              </span> 
+            </a>
         </div>
-        <div class="col">
-          <div class="bg-light-light rounded" style="height: 10rem;">Teste 1</div>
-        </div>
-        <div class="col">
-          <div class="bg-light-light rounded" style="height: 10rem;">Teste 1</div>
-        </div>
-        <div class="col">
-          <div class="bg-light-light rounded" style="height: 10rem;">Teste 1</div>
-        </div>
-        <div class="col">
-          <div class="bg-light-light rounded" style="height: 10rem;">Teste 1</div>
-        </div>
-        <div class="col">
-          <div class="bg-light-light rounded" style="height: 10rem;">Teste 1</div>
-        </div>
-        <div class="col">
-          <div class="bg-light-light rounded" style="height: 10rem;">Teste 1</div>
-        </div>
-        <div class="col">
-          <div class="bg-light-light rounded" style="height: 10rem;">Teste 1</div>
-        </div>
-        <div class="col">
-          <div class="bg-light-light rounded" style="height: 10rem;">Teste 1</div>
-        </div>
+        {% endfor %}
       </div>
 
       

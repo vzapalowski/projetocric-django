@@ -247,6 +247,7 @@ div nav div form .fw-blue {
 
 .btn-secondary-cric{
   color: var(--secondary-color) !important;
+  background-color: var(--primary-dark) !important;
   border: 1px solid var(--secondary-color) !important;
 }
 
@@ -254,14 +255,6 @@ div nav div form .fw-blue {
   color: var(--neutral-white) !important;
   border: 1px solid var(--secondary-color) !important;
   background-color: var(--secondary-color) !important;
-}
-
-.city-name-banner{
-  font-family: Open Sans !important;
-  font-size: 1rem;
-  color: rgb(255, 255, 255);
-  -webkit-text-stroke: 1px #000000;
-  text-decoration: none;
 }
 
 .bg-card-event{
@@ -298,6 +291,7 @@ div nav div form .fw-blue {
 /* DESKTOP */
 
 @media (min-width: 1200px) {
+  
   .banner-item-container {
     display: flex;
     flex-direction: column;
@@ -313,7 +307,13 @@ div nav div form .fw-blue {
     justify-content: center;
     flex-grow: 1;
   }
-
+  .city-name-banner{
+    font-family: Open Sans !important;
+    font-size: 1rem;
+    color: rgb(255, 255, 255);
+    -webkit-text-stroke: 1px #000000;
+    text-decoration: none;
+  }
   .h-banner{
     transition: 0.2s;
   }
@@ -336,12 +336,19 @@ div nav div form .fw-blue {
     height: 3rem;
     transition: 0.5s;
   }
+  .city-name-banner{
+    font-family: Open Sans !important;
+    font-size: 1.4rem;
+    color: rgb(255, 255, 255);
+    -webkit-text-stroke: 0.8px #000000;
+    text-decoration: none;
+  }
 }
 
 @media (min-width: 1025px) {
 
   .bg-image-h{
-    /* background-image: url(../images/top-page/img-top-page-2.jpg); */
+    background-image: url(../images/top-page/img-top-page-2.jpg);
     background-color: #aab7dd;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -370,7 +377,6 @@ div nav div form .fw-blue {
     height: 14rem; */
     width: 10rem;
     height: 10rem;
-    /* background-image: url(../images/security-svg/trash.svg); */
     background-image: url(../images/security-svg/trash.svg);
     background-repeat: no-repeat;
     background-position: center;
@@ -526,7 +532,7 @@ div nav div form .fw-blue {
   }
 
   .bg-image-h{
-    /* background-image: url(../images/top-page/img-top-page-2.jpg); */
+    background-image: url(../images/top-page/img-top-page-2.jpg);
     background-color: #aab7dd;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -779,7 +785,7 @@ div nav div form .fw-blue {
   }
 
   .bg-image-h{
-    /* background-image: url(../images/top-page/img-top-page-2.jpg); */
+    background-image: url(../images/top-page/img-top-page-2.jpg);
     background-color: #aab7dd;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -803,7 +809,7 @@ div nav div form .fw-blue {
   }
 
   .bg-image-h{
-    /* background-image: url(../images/top-page/img-top-page-2.jpg); */
+    background-image: url(../images/top-page/img-top-page-2.jpg);
     background-color: #aab7dd;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -981,7 +987,7 @@ div nav div form .fw-blue {
 
 @media (max-width : 780px) {
   .bg-image-h{
-    /* background-image: url(../images/top-page/img-top-page-2.jpg); */
+    background-image: url(../images/top-page/img-top-page-2.jpg);
     background-color: #aab7dd;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -1199,7 +1205,7 @@ div nav div form .fw-blue {
     display: none;
   }
   .bg-image-h{
-    /* background-image: url(../images/top-page/img-top-page-2.jpg); */
+    background-image: url(../images/top-page/img-top-page-2.jpg);
     background-color: #aab7dd;
     background-repeat: no-repeat;
     background-size: 100%;

@@ -6,49 +6,11 @@
 
 {%block 'content'%}
 
-
-<style>
-  .form-container {
-    position: relative;
-    background: url('path_to_your_blurred_image.jpg') no-repeat center center fixed;
-    background-size: cover;
-}
-
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 90;
-    flex-direction: column;
-  }
-
-  .overlay h2{
-    z-index: 91;
-  }
-
-  .overlay a {
-    z-index: 91;
-    pointer-events: auto;
-  }
-
-  .btn-container {
-    z-index: 91;
-  }
-  .overlay::before {
-    position: absolute;
-    content: "";
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.205);
-    backdrop-filter: blur(10px);
-    pointer-events: auto; 
-  }
-</style>
+<div id="loading-spinner" class="d-none">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
 
 {% if event.banner_image %}
   <div style="background-image: url('/media/{{ event.banner_image }}');" class="bg-image"></div>
@@ -56,8 +18,8 @@
   <div class="bg-image"></div>
 {% endif %}
 
-<div class="container-fluid text-center">
-  <div class="row ">
+<div class="container-fluid text-center p-0">
+  <div class="row me-0">
     <div class="container col-10">
       <h2 class="title-event"  data-aos="fade-up">{{ event.name }}</h2>
       <p class="description-event fs-5 mt-5"  data-aos="fade-up">
@@ -65,47 +27,26 @@
       </p>
     </div>
   </div>
-  <div class="container col">
-    <!-- ROUTE PATH INFO -->
-    {% for e in event.routes_data.all %}
-    <div class="row mt-5 aos-init aos-animate" data-aos="fade-up">
-      <div class="col-12 mb-3 mb-sm-0">
-        <div class="card border-card">
-          <div class="card-body">
-            <h5 class="card-title border-bottom border-dark-subtle topic-color">{{ e }}</h5>
-            <p></p>
-            <p class="card-text"><small class="text-body-secondary">{{ e.departure_location}}</small></p>
-            <p class="card-text"><small class="text-body-secondary">{{ e.concentration }}</small></p>
-            <p class="card-text"><small class="text-body-secondary">{{ e.time }}</small></p>
-          </div>
-        </div>
+  <div class="container overflow-hidden mt-5">
+    <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 gx-5 gy-5 justify-content-center">
+      {% for e in event.routes_data.all %}
+      <div class="col" data-aos="fade-up">
+       <div class="text-start py-4 px-3 rounded bg-primary-blue text-white" style="height: 14rem;">
+        <h5 class="px-4">{{ e }}</h5>
+        <p class="card-text px-4 mt-2"><small class="text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="color: white;" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"/><circle cx="12" cy="9" r="2.5" fill="currentColor"/></svg>
+          {{ e.departure_location}}
+        </small></p>
+        <p class="card-text px-5">Início: {{e.concentration}}</p>
+        <p class="card-text px-5">Fim: {{e.time}}</p>
       </div>
-      
-    </div>
-    {% endfor %}
-
-    <!-- EXTRA ROUTE PATH INFO -->
-    {% for e in event.extra_info.all %}
-    <div class="row mt-5 aos-init aos-animate" data-aos="fade-up">
-      <div class="col-12 mb-3 mb-sm-0">
-        <div class="card border-card">
-          <div class="card-body">
-            <h5 class="card-title border-bottom border-dark-subtle topic-color">{{ e }}</h5>
-            <p></p>
-            <p class="card-text"><small class="text-body-secondary">{{ e.field_one }}</small></p>
-            <p class="card-text"><small class="text-body-secondary">{{ e.field_two }}</small></p>
-            <p class="card-text"><small class="text-body-secondary">{{ e.field_three }}</small></p>
-          </div>
-        </div>
       </div>
-      
+      {% endfor %}
     </div>
-    {% endfor %}
-
   </div>
 
   <!-- Images -->
-  <div class="container">
+  <div class="container-fluid mt-5 bg-primary-blue" style="background-color: #131A40;">
 
     <div class="swiper mySwiper swiper-coverflow swiper-3d swiper-initialized swiper-horizontal swiper-watch-progress">
       <div class="swiper-wrapper" id="swiper-wrapper-bc68103f7d29e4d42" aria-live="polite" style="cursor: grab; transition-duration: 0ms; transform: translate3d(-843px, 0px, 0px); transition-delay: 0ms;">
@@ -131,11 +72,11 @@
     <h2 class="mb-5 fw-bold topic-color" style="margin-top: 5rem;">
         Mapa das Rotas
     </h2>
-    <div id="map" class="mt-3" style="height: 25rem;" data-aos="fade-up"> <!-- Mapa --> </div>
+    <div id="map" class="mt-3" style="height: 25rem;"> <!-- Mapa --> </div>
 
     
 
-  <div class="container mt-5">
+  <div class="container mt-5" style="margin-bottom: 5rem;">
     <div class="row justify-content-center flex-wrap">
       {% for e in event.routes_data.all %}
         <div class="col-6 col-md-4 col-lg-3 mb-3">
@@ -147,24 +88,27 @@
 
 
 {% if event.warnings.all %}
-  <div class="container-fluid text-center">
+  <div class="container-fluid text-center bg-light-light pb-5" style="padding-top: 5rem;">
     <div class="row ">
       <!-- Title and Descripiton -->
-        <div class="container col-10">
+        <div class="container col-11 col-sm-10 col-md-9 col-lg-8 col-xl-8">
               <div class="text-center">
-                <h2 class="mb-5 fw-bold topic-color" data-aos="fade-up" style="margin-top: 5rem;">
-                  AVISOS
+                <h2 class="mb-5 fw-bold topic-color">
+                  Avisos
                 </h2>
               </div>
               <div class="row mt-5" data-aos="fade-up">
                   {% for warning in event.warnings.all %}
                   <div class="col-sm-12 mb-3">
-                    <div class="card border-card">
-                      <div class="card-body">
-                        <h5 class="card-title border-bottom border-dark-subtle topic-color">{{ warning.title }}</h5>
+                    <div class="card border-card text-end">
+                      <div class="card-body text-start px-4 pt-5 pb-1">
+                        <h5 class="card-title topic-color">{{ warning.title }}</h5>
+                        <hr class="border border-4 border-primary my-2 rounded-pill" width="80">
                         <p class="card-text"><small class="text-body-secondary">{{ warning.content }}</small></p>
-                        <p class="card-text border-top"><small class="text-body-terciary">Postado em: {{ warning.created_date }}</small></p>
                       </div>
+                      <p class="card-text m-4"><small class="text-body-terciary">{{ warning.created_date }}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="ms-2" style="color: #273273;" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
+                        </small></p>
                     </div>
                   </div>
                   {% endfor %}
@@ -186,27 +130,37 @@
 
           <!-- INPUT NAME -->
           <div class="input-group mb-3">
-            <span class="input-group-text"><i class="fa-solid fa-user"></i></span>  
+            <span class="input-group-text bg-light-light">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" style="color: #131A40;" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </span>  
             <input class="form-control" type="text" name="full_name" placeholder="Nome Completo" maxlength="100" required="" id="id_full_name" value="{{ form.full_name.value|default:'' }}">
         </div>
         <!-- INPUT EMAIL -->
         <div class="input-group mb-3">
-            <span class="input-group-text"><i class="fa-solid fa-user"></i></span>  
+            <span class="input-group-text bg-light-light">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" style="color: #131A40;" viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5l-8-5V6l8 5l8-5v2z"/></svg>
+            </span>  
             <input class="form-control" type="text" name="email" placeholder="Email" maxlength="70" required="" id="id_email" value="{{ form.email.value|default:'' }}">
         </div>
         <!-- INPUT SOCIAL NETWORK -->
         <div class="input-group mb-3">
-            <span class="input-group-text"><i class="fa-brands fa-instagram"></i></span>
+            <span class="input-group-text bg-light-light">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" style="color: #131A40;" viewBox="0 0 24 24"><path fill="currentColor" d="M20.947 8.305a6.53 6.53 0 0 0-.419-2.216a4.61 4.61 0 0 0-2.633-2.633a6.606 6.606 0 0 0-2.186-.42c-.962-.043-1.267-.055-3.709-.055s-2.755 0-3.71.055a6.606 6.606 0 0 0-2.185.42a4.607 4.607 0 0 0-2.633 2.633a6.554 6.554 0 0 0-.419 2.185c-.043.963-.056 1.268-.056 3.71s0 2.754.056 3.71c.015.748.156 1.486.419 2.187a4.61 4.61 0 0 0 2.634 2.632a6.584 6.584 0 0 0 2.185.45c.963.043 1.268.056 3.71.056s2.755 0 3.71-.056a6.59 6.59 0 0 0 2.186-.419a4.615 4.615 0 0 0 2.633-2.633c.263-.7.404-1.438.419-2.187c.043-.962.056-1.267.056-3.71c-.002-2.442-.002-2.752-.058-3.709zm-8.953 8.297c-2.554 0-4.623-2.069-4.623-4.623s2.069-4.623 4.623-4.623a4.623 4.623 0 0 1 0 9.246zm4.807-8.339a1.077 1.077 0 0 1-1.078-1.078a1.077 1.077 0 1 1 2.155 0c0 .596-.482 1.078-1.077 1.078z"/><circle cx="11.994" cy="11.979" r="3.003" fill="currentColor"/></svg>
+            </span>
             <input class="form-control" type="text" name="social_network" placeholder="Instagram" maxlength="30" id="id_social_network" value="{{ form.social_network.value|default:'' }}">
         </div>
         <!-- INPUT DATE OF BIRTH -->
         <div class="input-group mb-3 dp-container">
-            <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>   
+            <span class="input-group-text bg-light-light">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="color: #131A40;" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
+            </span>   
             <input placeholder="Data de nascimento" required="" class="datepicker form-control" type="text" name="date_of_birth" value="{{ form.date_of_birth.value|default:'' }}" id="datepicker">
         </div>
         <!-- INPUT RG -->
         <div class="input-group mb-3">
-            <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>  
+            <span class="input-group-text bg-light-light">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" style="color: #131A40;" viewBox="0 0 24 24"><path fill="currentColor" d="M18 11c.7 0 1.37.1 2 .29V10c0-1.1-.9-2-2-2h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h6.26A6.995 6.995 0 0 1 18 11zM8.9 6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2H8.9V6z"/><path fill="currentColor" d="M18 13c-2.76 0-5 2.24-5 5s2.24 5 5 5s5-2.24 5-5s-2.24-5-5-5zm0 2c.83 0 1.5.67 1.5 1.5S18.83 18 18 18s-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5zm0 6c-1.03 0-1.94-.52-2.48-1.32c.73-.42 1.57-.68 2.48-.68s1.75.26 2.48.68c-.54.8-1.45 1.32-2.48 1.32z"/></svg>
+            </span>  
             <input class="form-control" inputmode="numeric" type="text" name="rg" placeholder="RG" maxlength="10" required="" id="id_rg" value="{{ form.rg.value|default:'' }}" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
         </div>
         
@@ -238,7 +192,7 @@
       <input  type="hidden" name="event" value="{{ event.id }}" id="event">
 
       <div class="d-grid">
-        <button class="btn btn-dark mt-2" type="submit">Concluir Inscrição</button>
+        <button id="btn-form" class="btn btn-dark mt-2" type="submit">Concluir Inscrição</button>
       </div>
       </form>
     </div>
@@ -251,12 +205,16 @@
 
         <!-- INPUT NAME -->
         <div class="input-group mb-3">
-            <span class="input-group-text"><i class="fa-solid fa-user"></i></span>  
-            <input class="form-control" type="text" name="full_name" placeholder="Nome Completo" maxlength="100" required="" id="id_full_name" value="{{ form.full_name.value|default:'' }}">
+            <span class="input-group-text bg-light-light">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" style="color: #131A40;" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </span>  
+            <input class="form-control" type="text" name="full_name" placeholder="Nome" maxlength="100" required="" id="id_full_name" value="{{ form.full_name.value|default:'' }}">
         </div>
         <!-- INPUT EMAIL -->
         <div class="input-group mb-3">
-            <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>  
+            <span class="input-group-text bg-light-light">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" style="color: #131A40;" viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5l-8-5V6l8 5l8-5v2z"/></svg>
+            </span>  
             <input class="form-control" type="text" name="email" placeholder="Email" maxlength="70" required="" id="id_email" value="{{ form.email.value|default:'' }}">
         </div>
         <div>
@@ -274,7 +232,7 @@
           </div>
         </div>
       <div class="d-grid">
-        <button class="btn btn-dark mt-2" type="submit">Concluir Inscrição</button>
+        <button id="btn-form" class="btn btn-dark mt-2" type="submit">Concluir Inscrição</button>
       </div>
       </form>
 
@@ -323,5 +281,28 @@
     });
   });
 </script>
+
+<script>
+  const btnForm = document.getElementById('btn-form')
+  const spinnerWrapper = document.getElementById('loading-spinner');
+
+  btnForm.addEventListener('click', () =>{
+      spinnerWrapper.classList.remove('d-none');
+      spinnerWrapper.classList.add('spinner-wrapper');
+      console.log("funciona");
+
+      window.addEventListener('load', ()=>{
+          spinnerWrapper.style.opacity = '0';      
+          console.log("deu load");
+          
+          setTimeout(() =>{
+            spinnerWrapper.classList.add('d-none');
+          }, 200);  
+      });
+      
+
+  });
+</script>
+
 
 {%endblock%}

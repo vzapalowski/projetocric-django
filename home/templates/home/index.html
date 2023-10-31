@@ -6,21 +6,19 @@
 
 {%block 'content'%}
 
-<style>
-  .banner-item-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-</style>
+<div class="container-fluid p-0">
+  <div class="bg-image-top-page"></div>
 
-<div class="bg-image-h" data-aos="fade-up"></div>
-    <h2 class="mt-5 mb-5 fw-bold topic-color text-center">Mapa das Rotas</h2>
-    <div id="map" class="mt-3 border border-dark border-start-0 border-end-0 border-1" style="height: 30rem;"> <!-- Mapa --> </div>
+  <div class="d-flex justify-content-center mt-5">
+    <h2 class="mt-5 mb-5 fw-semibold text-center mx-4"> Conheça o Nosso Mapa de Rotas</h2>
+  </div>
 </div>
 
-<div class="container-fluid text-center mt-5 mb-5">
-  
+<!-- Mapa --> 
+<div class="container-fluid d-flex p-0">
+  <div id="map" class="border border-dark border-start-0 border-end-0 border-1 w-100" style="height: 30rem;"></div>
+  <!-- <div class="w-25 bg-primary-blue" style="height: 30rem;"></div> -->
+</div>
   <!-- {% comment %} INFO POINTS {% endcomment %} -->
   <div class="container mt-5">
     <div class="row justify-content-center flex-wrap">
@@ -41,74 +39,148 @@
         </div>
     </div> 
   </div>
-
-  <!-- {% comment %} Municipios {% endcomment %} -->
-  <div class="container mt-5">
-    <h2 class="mb-5 fw-bold topic-color" id="cities" style="margin-top: 3.4rem;">Municipios da Região Carbonífera</h2>
-    <div class="row g-2 banner-container">
-      
-      {% for city in homes %}
-        {% if city.city.active %}
-          <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="cities-container d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" style="
-            background-image: url('{{ city.city.banner_image.url }}');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;">
-          {% else %}
-            <a class="cities-container d-flex col-xl col-sm-12 h-banner align-items-center justify-content-center nav-link py-3" type="button" style="
-            background-image: url('{{ city.city.banner_image.url }}');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            " data-bs-toggle="modal" data-bs-target="#emBreve" >
-          {% endif %}
-            <!-- Responsividade para Desktop -->
-            <div class="banner-item-container">
-              <img class="d-none d-xl-block" src="{% static 'cities/icons/cycling.svg' %}" alt="">
-              <div class="middle-content">
-                {% for letter in city.city.name %}
-                  <span class="d-none d-xl-block city-name-banner">{{ letter }}</span>
-                {% endfor %}
-              </div>
-              <img class="d-none d-xl-block" src="{% static 'cities/icons/plus.svg' %}" alt="">
-              <!-- Responsividade para Mobile -->
-              <div class="d-flex justify-content-between align-items-center" >
-                <div class="d-inline d-xl-none b-item-mobie">
-                  <img src="{% static 'cities/icons/cycling.svg'%}">
-                  <span class="city-name-banner">{{ city.city.name }}</span>
-                  <img class="" src="{% static 'cities/icons/plus.svg'%}">
-                </div>
-              </div>
-            </div>          
-          </a>
-      {% endfor %}
-      <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Conteúdo Indisponível</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Obrigado pelo seu interesse! Estamos trabalhando arduamente para trazer o conteúdo que você procura. Em breve, estará disponível para você aproveitar. Agradecemos sua paciência e prometemos que valerá a pena esperar. Fique atento para mais atualizações em breve!
+  <!-- MENU DO MAPA -->
+  <!-- <div class="btn-open-menu btn">
+    Filtragem de Rotas
+    <svg
+     xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.25 5.61C6.57 8.59 10 13 10 13v5c0 1.1.9 2 2 2s2-.9 2-2v-5s3.43-4.41 5.75-7.39c.51-.66.04-1.61-.8-1.61H5.04c-.83 0-1.3.95-.79 1.61z"/>
+    </svg>
+  
+  </div> -->
+  <!-- <div class="position-relative top-0">
+    <div class="map-menu hidden position-absolute top-0 end-0 rounded col-12 col-sm-9 col-md-8 col-lg-6 col-xl-6 pb-4">
+      <div class="d-flex justify-content-end bg-primary-blue rounded-top" style="cursor: default;">
+        <button class="btn-menu btn-close-menu w-25 border border-0 bg-transparent">
+          <svg
+           xmlns="http://www.w3.org/2000/svg" class="text-white" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="d-grid gap-2 col-8 mx-auto mb-2">
+        <button class="btn btn-dark btn-menu btn-remove-points my-2">Ativar/desativar pontos</button>
+      </div>
+      <button class="btn btn-menu btn-open-route-filter" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRotas" aria-expanded="false" aria-controls="collapseExample">
+        Rotas disponíveis
+        <svg
+         xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m7 10l5 5l5-5H7z"/>
+        </svg>
+      </button>
+      <div class="collapse" id="collapseRotas">
+        <div class="card card-body shadow-none">
+          <div class="check-boxes-container hidden" id="routeCheckboxes">
+            
           </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <hr class="w-75">
+      </div>
+      <button class="btn btn-menu btn-open-points-filter" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePontos" aria-expanded="false" aria-controls="collapseExample">
+        Pontos de apoio
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m7 10l5 5l5-5H7z"/></svg>
+      </button>
+      <div class="collapse" id="collapsePontos">
+        <div class="card card-body shadow-none">
+          <div class="check-boxes-container hidden" id="pointsCheckboxes">
+            
+            {% for category in categories_points %}
+              <div class="check-box-container">
+                <input type="checkbox" class="p-cb-iptn" data-category="{{ category.name }}">
+                <span>{{ category.name }}</span>
+              </div>  
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div> -->
+
+
+<div class="container-fluid text-center mt-5 mb-0 p-0">
+
+  <div class="container-fluid bg-cities p-0 mt-5">
+    <div id="banner-cities" class="container">
+      <h3 class="mb-5 fw-normal text-white" id="cities" style="padding-top: 5rem;">Municipios da Região Carbonífera</h3>
+      <div class="row g-2 banner-container">  
+        {% for city in homes %}
+          {% if city.city.active %}
+            <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="cities-container d-flex col-xl h-banner align-items-center justify-content-center nav-link py-3" style="
+              background-image: url('{{ city.city.banner_image.url }}');
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: cover;">
+            {% else %}
+              <a class="cities-container d-flex col-xl h-banner align-items-center justify-content-center nav-link py-3" type="button" style="
+              background-image: url('{{ city.city.banner_image.url }}');
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: cover;
+              " data-bs-toggle="modal" data-bs-target="#emBreve" >
+            {% endif %}
+              <!-- Responsividade para Desktop -->
+              <div class="banner-item-container">
+                <img class="d-none d-xl-block" src="{% static 'cities/icons/cycling.svg' %}" alt="">
+                <div class="middle-content">
+                  {% for letter in city.city.name %}
+                    <span class="d-none d-xl-block city-name-banner">{{ letter }}</span>
+                  {% endfor %}
+                </div>
+                <img class="d-none d-xl-block" src="{% static 'cities/icons/plus.svg' %}" alt="">
+              </div>          
+            </a>
+  
+        {% endfor %}
+      </div>
+    </div>
+    <div class="container" id="banner-cities-mobile">
+      <h3 class="mb-5 fw-normal text-white" id="cities" style="padding-top: 5rem;">Municipios da Região Carbonífera</h3>
+      <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-2">
+        {% for city in homes %}
+          <div class="col">
+            {% if city.city.active %}
+            <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="cities-container d-flex col-xl h-banner rounded align-items-center justify-content-center nav-link py-3" style="
+                background-image: url('{{ city.city.banner_image.url }}');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                height: 10rem;">
+              {% else %}
+            <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="cities-container d-flex col-xl h-banner rounded align-items-center justify-content-center nav-link py-3" style="
+                background-image: url('{{ city.city.banner_image.url }}');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                height: 10rem;" data-bs-toggle="modal" data-bs-target="#emBreve">
+              {% endif %}
+                <span class="city-name-banner">
+                  {{city.city.name}}
+                </span> 
+              </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Conteúdo Indisponível</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Obrigado pelo seu interesse! Estamos trabalhando arduamente para trazer o conteúdo que você procura. Em breve, estará disponível para você aproveitar. Agradecemos sua paciência e prometemos que valerá a pena esperar. Fique atento para mais atualizações em breve!
+        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+  
 
-  <div class="container">
-    <hr style="margin-top: 5rem;">
-  </div>
-
-  <!-- {% comment %} Eventos {% endcomment %} -->
   <div class="container">
     <h2 class="mt-5 mb-5 fw-bold topic-color" id="events">Eventos</h2>
-    <!-- Events Cards For Mobile -->
     <div class="d-block d-sm-none">
       <div class="row row-cols-1 row-cols-md-2 g-4">
         {% for event in events %}
@@ -288,69 +360,14 @@
         {% endfor %}
       </div>
     </div>
-
-    <!-- {% for event in events %}
-      <div class="col-sm-12 col-lg-12 mt-4">
-        <div class="card mb-4 mb-md-0">
-          <div class="card-body">  
-            <img src="{% static 'images/images-cities/charqueadas.jpg'%}" class="post-user w-100 rounded-top" alt="...">
-              <h4 class="mb-2 mt-3 fw-medium p-3 topic-color-light text-white rounded">{{ event.name }}</h4>
-              <div class="row mx-2">
-                <div class="col-sm-4 text-start">
-                  <p class="mt-4 mb-1 fs-5">
-                    <span class="fw-bolder">
-                      Local onde irá ocorrer: 
-                    </span> {{ event.location }}
-                  </p>
-                  <p class="mt-4 mb-1" style="font-size: 18px;">
-                    <span class="fw-bolder">
-                      Data:
-                    </span> {{ event.date }}
-                  </p>   
-                </div>
-                <div class="col-sm-4 text-start">
-                  <p class="mt-4 mb-1" style="font-size: 18px;">
-                    <span class="fw-bolder">
-                    Quantidade de Trajetos: 
-                  </span> {{ event.number_of_routes }}
-                  </p>  
-                  <p class="mt-4 mb-1" style="font-size: 18px;">
-                    <span class="fw-bolder">
-                      Quilometragem do Trajeto:
-                    </span> None
-                  </p>   
-                </div>
-                <div class="col-sm-4 text-start">
-                  <p class="mt-4 mb-1" style="font-size: 18px;">
-                    <span class="fw-bolder">
-                    Situação: 
-                  </span> {{ event.status }}
-                  </p>  
-                  <p class="mt-4 mb-1" style="font-size: 18px;">
-                    <span class="fw-bolder">
-                      Participantes:
-                    </span> {{ event.participants }}
-                  </p>   
-                </div>
-              </div>
-              <a href="{% url 'events:event' pk=event.id %}" type="button" class="btn btn-outline-dark w-100 mt-3 btn-secondary-cric fs-5">Vizualizar Evento</a>
-            </div>
-          </div>
-      </div>
-    {% endfor %} -->
   </div>
 
-  <div class="container">
-    <hr style="margin-top: 5rem;">
-  </div>
-
-  <!-- {% comment %} Manual {% endcomment %} -->
   <div>
-    <h2 class="mb-5 fw-bold topic-color" id="manual" style="margin-top: 7rem;">Manual</h2>
+    <h2 class="mb-5 fw-bold pb-5" id="manual" style="margin-top: 7rem;">Manual do Ciclista</h2>
     <div class="conteudo">
-      <div class="rule1">
+      <div class="rule1 mt-3">
         <div class="img-rule1" data-aos="fade-up"></div>
-        <div class="divisor" data-aos="fade-down"></div>
+        <!-- <div class="divisor" data-aos="fade-down"></div> -->
         <div class="text-rule1 text-dark" data-aos="fade-up">
           <span>
             Para garantir a prevenção de acidentes e manter o percurso em bom estado, seja consciente e jogue seu lixo nos pontos de apoio ao longo do trajeto. Ao fazer isso, você colabora com o meio ambiente e contribui para a manutenção e limpeza do percurso.
@@ -359,9 +376,9 @@
         <div class="divisor-mobile"></div>
       </div>
     <!-------------------------->
-      <div class="rule2">
+      <div class="rule2 mt-3">
         <div class="img-rule2" data-aos="fade-up"></div>
-        <div class="divisor" data-aos="fade-down"></div>
+        <!-- <div class="divisor" data-aos="fade-down"></div> -->
         <div class="text-rule2 text-dark" data-aos="fade-up">
           <span>
             Sua segurança é uma de nossas principais prioridades enquanto você está rodando e conhecendo a região. Para colaborar, é muito importante que você utilize os equipamentos de segurança necessários, como capacete, luzes de sinalização, lanterna e água.
@@ -370,9 +387,9 @@
         <div class="divisor-mobile"></div>
       </div>
     <!-------------------------->
-      <div class="rule3">
+      <div class="rule3 mt-3">
         <div class="img-rule3" data-aos="fade-up"></div>
-        <div class="divisor" data-aos="fade-down"></div>
+        <!-- <div class="divisor" data-aos="fade-down"></div> -->
         <div class="text-rule3 text-dark" data-aos="fade-up">
           <span>            
             Independentemente de ser da região ou não, ao percorrer a rota, certamente você deseja aproveitar ao máximo, certo? Nesse sentido, tenha consciência de escolher um horário adequado para você e para seus equipamentos de segurança, conforme descrito no informe anterior.
@@ -381,9 +398,9 @@
         <div class="divisor-mobile"></div>
       </div>
     <!-------------------------->
-      <div class="rule4">
+      <div class="rule4 mt-3">
         <div class="img-rule4" data-aos="fade-up"></div>
-        <div class="divisor" data-aos="fade-down"></div>
+        <!-- <div class="divisor" data-aos="fade-down"></div> -->
         <div class="text-rule4 text-dark" data-aos="fade-up">
           <span>
             Antes de visitar a Rota Ciclística da Região Imperial Carbonífera, certifique-se de que as condições climáticas na região estejam favoráveis e adequadas ao seu estilo de pedalada. Além disso, tenha em mente a sua segurança durante o turismo em nossa região.
@@ -393,9 +410,8 @@
     </div>  
   </div>
 
-  <!-- {% comment %} Sobre {% endcomment %} -->
-  <div>
-    <h2 class="mt-5 mb-5 fw-bold topic-color" id="about">Sobre o Projeto</h2>
+  <div class="container-fluid bg-light-light py-5">
+    <h2 class="mt-5 mb-5 fw-bold" id="about">Quem nós somos?</h2>
     <div class="conteudo">
       <div class="rule1">
         <div class="logo-if" data-aos="fade-up"></div>
@@ -435,5 +451,28 @@
 
 <script src="{% static 'js/home/homefx.js' %}" async></script>
 <script src="{% static 'js/home/data.js'%}" type="module" async></script>
-<script src="{% static 'js/map/Polyline.encoded.js'%}"></script>
+<script src="{% static 'js/home/map_menu.js' %}" type="module" async></script>
+
+<script>
+  const containerCitiesDesktop = document.getElementById('banner-cities'); 
+  const containerCitiesMobile = document.getElementById('banner-cities-mobile');
+
+  function responsiveCities(e) {
+    if (e.matches) {
+      containerCitiesDesktop.classList.add('d-none');
+      containerCitiesMobile.classList.remove('d-none');
+      containerCitiesMobile.classList.add('d-block');
+    } else {
+      containerCitiesMobile.classList.add('d-none');
+      containerCitiesDesktop.classList.remove('d-none');
+    }
+  }
+
+  const mmObj = window.matchMedia("(max-width: 1199px)");
+
+  responsiveCities(mmObj);
+
+  mmObj.addListener(responsiveCities);
+</script>
+
 {%endblock%}

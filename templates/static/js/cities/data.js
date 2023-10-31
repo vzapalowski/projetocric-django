@@ -6,17 +6,18 @@ const url_api = Urls.cities + cityId;
 
 let arr = []
 
+export const map = new Map();
 fetch(url_api)
 .then(res => res.json())
 .then(data => {
-
-    let map = new Map();
-    map.setMap('map', {scrollWheelZoom: false}, data.coordinates.lat, data.coordinates.lng, data.zoom);
-    data.routes.forEach((e) => {
-        arr.push(e)
-    })
-
-    map.addRoutes(arr, 0)
+    map.setMap('map', {
+        scrollWheelZoom: false,
+        doubleClickZoom: false
+    }, data.coordinates.lat, data.coordinates.lng, data.zoom);
+    
+    map.addRoutes(data.routes);
     map.addPoints(data.points)
-    map.writeRoutes(arr);
+    map.togglePointsLayer();
+    map.createRouteCheckboxes(data.routes);
+    map.filterPointsByCategory();
 })

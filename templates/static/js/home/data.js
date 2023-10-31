@@ -6,13 +6,13 @@ export const map = new Map();
 fetch(Urls.home_cities)
   .then(res => res.json())
   .then(data => {
-    let southWest = L.latLng(-30.140440, -51.493143);
-    let northEast = L.latLng(-29.769673, -52.224405);
-    let bounds = L.latLngBounds(southWest, northEast);
+    // let southWest = L.latLng(-30.140440, -51.493143);
+    // let northEast = L.latLng(-29.769673, -52.224405);
+    // let bounds = L.latLngBounds(southWest, northEast);
     map.setMap('map', {
       scrollWheelZoom: false,
       doubleClickZoom: false
-    }, data[0]['coordinates'].lat, data[0]['coordinates'].lng, 10, bounds);
+    }, data[0]['coordinates'].lat, data[0]['coordinates'].lng, 10);
 
     
     map.addRoutes(data[0].routes);

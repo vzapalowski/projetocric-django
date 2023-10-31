@@ -10,6 +10,17 @@
     z-index: 1;
 }
 
+.bg-image-info-point{
+    background-image: url(../images/top-page/img-top-event-1.jpg);
+    background-size: cover;
+    width: 100%;
+    height: 20rem;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .background-blue{
     background-color: var(--primary-color);
 }

@@ -247,7 +247,7 @@ div nav div form .fw-blue {
 
 .btn-secondary-cric{
   color: var(--secondary-color) !important;
-  background-color: var(--primary-dark) !important;
+  /* background-color: var(--secondary-light) !important; */
   border: 1px solid var(--secondary-color) !important;
 }
 
@@ -347,12 +347,14 @@ div nav div form .fw-blue {
 
 @media (min-width: 1025px) {
 
-  .bg-image-h{
+  .bg-image-top-page{
     background-image: url(../images/top-page/img-top-page-2.jpg);
-    background-color: #aab7dd;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    height: 45rem;
+    background-size: cover;
+    width: 100%;
+    height: 45rem; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }    
   .divisor {
     width: 1px;
@@ -531,12 +533,14 @@ div nav div form .fw-blue {
     border-left: 1px solid #273273;
   }
 
-  .bg-image-h{
+  .bg-image-top-page{
     background-image: url(../images/top-page/img-top-page-2.jpg);
-    background-color: #aab7dd;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    height: 33rem;
+    background-size: cover;
+    width: 100%;
+    height: 33rem; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }  
 
  /*Pagina Manual*/
@@ -784,12 +788,14 @@ div nav div form .fw-blue {
     /* padding-block: 1rem; */
   }
 
-  .bg-image-h{
+  .bg-image-top-page{
     background-image: url(../images/top-page/img-top-page-2.jpg);
-    background-color: #aab7dd;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    height: 26rem;
+    background-size: cover;
+    width: 100%;
+    height: 26rem; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }  
 }
 
@@ -808,12 +814,14 @@ div nav div form .fw-blue {
     display: none;
   }
 
-  .bg-image-h{
+  .bg-image-top-page{
     background-image: url(../images/top-page/img-top-page-2.jpg);
-    background-color: #aab7dd;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    height: 24rem;
+    background-size: cover;
+    width: 100%;
+    height: 24rem; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }  
 
  /*Pagina Manual*/
@@ -986,12 +994,14 @@ div nav div form .fw-blue {
 }
 
 @media (max-width : 780px) {
-  .bg-image-h{
+  .bg-image-top-page{
     background-image: url(../images/top-page/img-top-page-2.jpg);
-    background-color: #aab7dd;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    height: 21rem;
+    background-size: cover;
+    width: 100%;
+    height: 21rem; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .banner-adjust{
@@ -1031,12 +1041,14 @@ div nav div form .fw-blue {
     display: none;
   }
 
-  .bg-image-h{
+  .bg-image-top-page{
     /* background-image: url(../images/top-page/img-top-page-2.jpg); */
-    background-color: #aab7dd;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    height: 15rem;
+    background-size: cover;
+    width: 100%;
+    height: 15rem; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }  
 
  /*Pagina Manual*/
@@ -1204,12 +1216,14 @@ div nav div form .fw-blue {
   .divisor {
     display: none;
   }
-  .bg-image-h{
+  .bg-image-top-page{
     background-image: url(../images/top-page/img-top-page-2.jpg);
-    background-color: #aab7dd;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    height: 14rem;
+    background-size: cover;
+    width: 100%;
+    height: 14rem; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }  
    /*Pagina Manual*/
 

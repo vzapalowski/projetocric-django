@@ -6,10 +6,12 @@
 
 {%block 'content'%}
 
-<div class="bg-image-h"></div>
+<div class="container-fluid p-0">
+  <div class="bg-image-top-page"></div>
 
-<div class="d-flex justify-content-center mt-5">
-  <h2 class="mt-5 mb-5 fw-semibold text-center mx-4"> Conheça o Nosso Mapa de Rotas</h2>
+  <div class="d-flex justify-content-center mt-5">
+    <h2 class="mt-5 mb-5 fw-semibold text-center mx-4"> Conheça o Nosso Mapa de Rotas</h2>
+  </div>
 </div>
 
 <!-- Mapa --> 
@@ -128,45 +130,51 @@
             </a>
   
         {% endfor %}
-        <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Conteúdo Indisponível</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                Obrigado pelo seu interesse! Estamos trabalhando arduamente para trazer o conteúdo que você procura. Em breve, estará disponível para você aproveitar. Agradecemos sua paciência e prometemos que valerá a pena esperar. Fique atento para mais atualizações em breve!
-            </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-
     </div>
     <div class="container" id="banner-cities-mobile">
       <h3 class="mb-5 fw-normal text-white" id="cities" style="padding-top: 5rem;">Municipios da Região Carbonífera</h3>
       <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-2">
         {% for city in homes %}
-        <div class="col">
-          <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="cities-container d-flex col-xl h-banner rounded align-items-center justify-content-center nav-link py-3" style="
-              background-image: url('{{ city.city.banner_image.url }}');
-              background-repeat: no-repeat;
-              background-position: center;
-              background-size: cover;
-              height: 10rem;">
-              <span class="city-name-banner">
-                {{city.city.name}}
-              </span> 
-            </a>
-        </div>
+          <div class="col">
+            {% if city.city.active %}
+            <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="cities-container d-flex col-xl h-banner rounded align-items-center justify-content-center nav-link py-3" style="
+                background-image: url('{{ city.city.banner_image.url }}');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                height: 10rem;">
+              {% else %}
+            <a href="{% url 'cities:city_detail' pk=city.city.id %}" class="cities-container d-flex col-xl h-banner rounded align-items-center justify-content-center nav-link py-3" style="
+                background-image: url('{{ city.city.banner_image.url }}');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                height: 10rem;" data-bs-toggle="modal" data-bs-target="#emBreve">
+              {% endif %}
+                <span class="city-name-banner">
+                  {{city.city.name}}
+                </span> 
+              </a>
+          </div>
         {% endfor %}
       </div>
-
-      
+    </div>
+    <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Conteúdo Indisponível</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Obrigado pelo seu interesse! Estamos trabalhando arduamente para trazer o conteúdo que você procura. Em breve, estará disponível para você aproveitar. Agradecemos sua paciência e prometemos que valerá a pena esperar. Fique atento para mais atualizações em breve!
+        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   
@@ -453,23 +461,6 @@
   responsiveCities(mmObj);
 
   mmObj.addListener(responsiveCities);
-
-  // const menu = document.querySelector('.map-menu');
-  // function responsiveMenu(e) {
-  //   if (e.matches) {
-  //     menu.classList.remove('top-0', 'end-0');
-  //     menu.classList.add('top-100', 'start-0', 'translate-middle');
-  //   } else {
-  //     menu.classList.add('top-0', 'end-0');
-  //     menu.classList.remove('top-100', 'start-0', 'translate-middle');
-  //   }
-  // }
-
-  // const resolution = window.matchMedia("(max-width: 575px)");
-
-  // responsiveMenu(resolution);
-
-  // resolution.addListener(responsiveMenu);
 </script>
 
 {%endblock%}

@@ -4,11 +4,13 @@
 {%block 'content'%}
 
 <div class="bg-image d-flex col justify-content-center align-items-center" style="
-  background-image: url('../../media/{{ city.banner_image }}');
+ background-color: antiquewhite;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   ">
+ <!-- background-image: url('../../media/{{ city.banner_image }}'); -->
+
 <!-- <div class="bg-image d-flex col justify-content-center align-items-center"> -->
   <div class="darker-overlay"></div>
 </div>
@@ -19,7 +21,7 @@
   </div>
 </div>
 
-<div id="map" class="border border-dark border-start-0 border-end-0 border-1 w-100" style="height: 30rem;"></div>
+<div class="border border-dark border-start-0 border-end-0 border-1 w-100 bg-light-light" style="height: 30rem;"></div>
 <!-- Mapa --> 
   <!-- MENU DO MAPA -->
   <!-- <div class="btn-open-menu"></div>
@@ -52,28 +54,26 @@
 
 
 
-<div class="container-fluid m-0 background-blue p-5">
+<div class="container-fluid mx-0 background-blue px-4 py-4">
   <div class="title text-center">
     <h2 class="mb-5 fw-normal text-white py-5">Conheça nossa cidade</h2>
   </div>
-
-  {% for image, title, text, is_even in images %}
-      <div class="card mb-5">
-        <div class="row g-0">
-          <div class="col-md-6 bg-light-light">
-            <div class="bg-image-info-point" style="background-image: url({{image}});">
-            </div>
+    {% for image, title, text, is_even in images %}
+    <div class="card mb-5">
+      <div class="row g-0">
+        <div class="col-12 col-md-5 bg-light-light">
+          <div class="bg-image-info-point" style="background-image: url({{image}});">
           </div>
-          <div class="col-md-6">
-            <div class="card-body">
-              <h5 class="card-title">{{title}}</h5>
-              <p class="card-text">{{text}}</p>
-              <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#emBreve">Ver no Mapa</button>            
-            </div>
+        </div>
+        <div class="col-12 col-md-7">
+          <div class="card-body">
+              <h3 class="card-title text-center mb-3 py-3">{{title}}</h3>
+              <p class="card-text px-4 py-3 text-justify">{{text}}</p>
           </div>
         </div>
       </div>
-  {% endfor %}
+    </div>
+{% endfor %}
 
   <div class="modal fade" id="emBreve" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">

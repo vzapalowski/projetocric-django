@@ -25,7 +25,9 @@ class HomeData(generics.ListAPIView):
                         'id_route': route.id_route,
                         'polyline': route.polyline,
                     }
-                    routes.append(route_data)
+                    if route_data not in routes:
+                        routes.append(route_data)
+                        
                 for point in city_points:
                     point_data = {
                     'id': point.id,

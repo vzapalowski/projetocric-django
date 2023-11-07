@@ -196,8 +196,8 @@ export class Map {
     routes.forEach((route) => {
       const checkboxHTML = `
         <div class="check-box-container">
-          <input type="checkbox" class="r-cb-iptn" data-route="${route.id_route}">
-          <span>${route.name}</span>
+          <input id="route-${route.id}" type="checkbox" class="r-cb-iptn" data-route="${route.id_route}">
+          <span class="form-check-label">${route.name}</span>
         </div>
       `;
       document.querySelector('#routeCheckboxes').insertAdjacentHTML('beforeend', checkboxHTML);

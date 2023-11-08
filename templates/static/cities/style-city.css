@@ -58,4 +58,7 @@
     .city-name {
         display: none;
     }
+    .adjust-top-page{
+        margin-top: 4rem;
+    }
 }

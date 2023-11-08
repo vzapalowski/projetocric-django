@@ -46,7 +46,9 @@ def enrollment(request, event_id):
     if request.method == 'POST':
         form = EnrollmentForm(request.POST)
         if form.is_valid():
-            # send_email("John Doe")
+            full_name = form.cleaned_data['full_name']  
+            email = form.cleaned_data['email']  
+            # send_email(email, full_name, event)
             form.save()
             messages.success(request, 'Cadastro feito com Sucesso!')
 

@@ -15,7 +15,7 @@ import pdfkit
 import tempfile
 import os
 
-from event.models import Event
+from event.models import Event, Enrollment
 from event.models import EnrollmentForm, EnrollmentFormType2
 from event.models.enrollment import Bond
 from event.models.how_knew import HowKnew
@@ -180,3 +180,11 @@ def generate_certificate(name, event):
     os.rmdir(temp_dir)
 
     return pdf_content
+
+def delete_enrollment(request, enrollment_id):
+    enrollment = Enrollment.objects.get(id=enrollment_id)
+    if request.user == enrollment.user:
+        enrollment.delete()
+        return redirect('users:profile')
+    else:
+        return redirect('users:profile')

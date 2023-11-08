@@ -121,13 +121,11 @@
             {% endif %}
               <!-- Responsividade para Desktop -->
               <div class="banner-item-container">
-                <img class="d-none d-xl-block" src="{% static 'cities/icons/cycling.svg' %}" alt="">
                 <div class="middle-content">
                   {% for letter in city.city.name %}
                     <span class="d-none d-xl-block city-name-banner">{{ letter }}</span>
                   {% endfor %}
                 </div>
-                <img class="d-none d-xl-block" src="{% static 'cities/icons/plus.svg' %}" alt="">
               </div>          
             </a>
   

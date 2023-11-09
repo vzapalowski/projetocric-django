@@ -12,8 +12,10 @@
   </div>
 </div>
 
-{% if event.banner_image %}
+{% if event.banner_image and event.id != 3 %}
   <div style="background-image: url('/media/{{ event.banner_image }}');" class="bg-image"></div>
+{% elif event.id == 3 %}
+<div style="background-image: url('/media/{{ event.banner_image }}');" class="bg-image adjust-bg-img"></div>
 {% else %}
   <div class="bg-image"></div>
 {% endif %}
@@ -21,8 +23,8 @@
 <div class="container-fluid text-center p-0">
   <div class="row me-0">
     <div class="container col-10">
-      <h2 class="title-event"  data-aos="fade-up">{{ event.name }}</h2>
-      <p class="description-event fs-5 mt-5"  data-aos="fade-up">
+      <h2 class="title-event">{{ event.name }}</h2>
+      <p class="description-event fs-5 mt-5">
         {{ event.description }}
       </p>
     </div>

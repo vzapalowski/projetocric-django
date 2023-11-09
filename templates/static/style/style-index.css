@@ -351,7 +351,8 @@ div nav div form .fw-blue {
     background-image: url(../images/top-page/img-top-page-2.jpg);
     background-size: cover;
     width: 100%;
-    height: 45rem; 
+    background-position: 0% 95%;
+    height: 39rem; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -698,19 +699,20 @@ div nav div form .fw-blue {
     /* background-size: 3.5rem; */
   }
 }
-@media (max-width: 1081px) {
 
-}
+/* @media (min-width: 968px) {
+  .bg-image-top-page{
+    background-position: 62% 0%;
+  }
+} */
 
-@media (max-width: 992px) { 
+/* @media (max-width: 992px) { 
   .btn-view-points {
     width: 50% !important;
   }
-}
+} */
 
 @media (max-width: 968px) {
-  /* MUNICIPIOS */
-
   .banner-adjust{
     background-position: center center;
     background-size: 300px 200px;
@@ -1020,7 +1022,6 @@ div nav div form .fw-blue {
   }
 }
 
-
 @media (max-width: 575px) {
   .btn-view-points {
     width: 95% !important;
@@ -1044,6 +1045,7 @@ div nav div form .fw-blue {
   .bg-image-top-page{
     /* background-image: url(../images/top-page/img-top-page-2.jpg); */
     background-size: cover;
+    background-position: 40% 86%;
     width: 100%;
     height: 15rem; 
     display: flex;
@@ -1219,6 +1221,7 @@ div nav div form .fw-blue {
   .bg-image-top-page{
     background-image: url(../images/top-page/img-top-page-2.jpg);
     background-size: cover;
+    background-position: 40% 2%;
     width: 100%;
     height: 14rem; 
     display: flex;

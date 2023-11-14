@@ -18,29 +18,30 @@
 <div class="container-fluid p-0">
   <div class="row row-cols-sm-2 row-m justify-content-center">
     <div id="map" class="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9" style="height: 30rem;"></div>
-    <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 bg-light-gray h-filter text-center">
+    <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 bg-light-gray p-0 h-filter text-center">
       <div class="p-3 pb-4">
-        <h3 class="mt-2">Filtragem</h3>
+        <h4 class="mt-2 fw-bold topic-color">Filtrar Mapa</h4>
         <button class="btn btn-dark btn-menu btn-remove-points my-2">Ativar/desativar pontos</button>
-        <button class="btn btn-menu btn-open-route-filter" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRotas" aria-expanded="false" aria-controls="collapseRotas">
+        <button class="btn btn-menu btn-open-route-filter" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRotas" aria-expanded="false" aria-controls="collapseRotas" style="font-size: 18px;">
           Rotas disponíveis
           <svg
            xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m7 10l5 5l5-5H7z"/>
           </svg>
         </button>
-        <div class="collapse" id="collapseRotas">
-          <div class="card card-body shadow-none">
-            <div class="check-boxes-container hidden p-0" id="routeCheckboxes">
+        <div class="collapse text-justify" id="collapseRotas">
+          <div class="card card-body shadow-none mx-0 px-2 py-1 mt-2">
+            <div data-bs-spy="scroll" class="check-boxes-container my-2 hidden p-0 scrollspy-example" id="routeCheckboxes" data-bs-root-margin="20px 0px -40%" data-bs-smooth-scroll="true" tabindex="0">
               <!-- routes -->
             </div>
           </div>
         </div>
-        <button class="btn btn-menu btn-open-points-filter" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePontos" aria-expanded="false" aria-controls="collapseExample">
+        <hr class="my-1">
+        <button class="btn btn-menu btn-open-points-filter" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePontos" aria-expanded="false" aria-controls="collapseExample" style="font-size: 18px;">
           Pontos de apoio
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m7 10l5 5l5-5H7z"/></svg>
         </button>
         <div class="collapse" id="collapsePontos">
-          <div class="card card-body shadow-none">
+          <div class="card card-body shadow-none mx-0 px-2 py-1 mt-2">
             <div class="check-boxes-container hidden" id="pointsCheckboxes">
               <!-- points -->
               {% for category in categories_points %}

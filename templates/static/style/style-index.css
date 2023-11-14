@@ -100,9 +100,10 @@ div nav div form .fw-blue {
 
 .check-boxes-container {
   width: 100%;
-  max-height: 50%;
+  /* max-height: 50%;*/
+  height: 6rem;
   padding: 10px;
-  display: grid;
+  display: block;
   grid-template-columns: auto auto;
   overflow-y: auto;
 }
@@ -809,6 +810,10 @@ div nav div form .fw-blue {
 
 @media (max-width: 860px) {
 
+  .fs-filter{
+    font-size: 15px;
+  }
+
   /* Nova NavBar */
 
   div nav div .m-nav{
@@ -1003,7 +1008,6 @@ div nav div form .fw-blue {
   }
   .h-filter{
     height: max-content;
-    margin-top: 0.8rem;
   }
 }
 
@@ -1037,6 +1041,10 @@ div nav div form .fw-blue {
 @media (max-width: 575px) {
   .btn-view-points {
     width: 95% !important;
+  }
+
+  .fs-filter{
+    font-size: 15px;
   }
 
   /* MUNICIPIOS */

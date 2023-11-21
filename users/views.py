@@ -4,7 +4,7 @@ from django.core.validators import validate_email
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone 
-from event.models import Enrollment, Bond
+from event.models import Enrollment, EnrollmentType2, Bond
 from datetime import datetime
 from .models import PersonalData
 from django.http import JsonResponse
@@ -97,8 +97,13 @@ def logout(request):
 def profile(request):
     user = User.objects.get(id=request.session.get('user_id'))
     enrollments = Enrollment.objects.filter(user=user)
+    enrollments2 = EnrollmentType2.objects.filter(user=user)
 
-    return render(request,'users/profile.html', {'user': user, 'enrollments': enrollments})
+    return render(request,'users/profile.html', {
+        'user': user, 
+        'enrollments': enrollments,
+        'enrollments_type2': enrollments2
+        })
 
 @login_required(login_url='users:login')
 def edit_user(request, user_id):

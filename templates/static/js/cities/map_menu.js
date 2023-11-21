@@ -4,14 +4,6 @@ const menu = document.querySelector('.map-menu');
 const routeCheckboxes = document.querySelector('#routeCheckboxes');
 const pointsCheckboxes = document.querySelector('#pointsCheckboxes');
 
-document.querySelector('.btn-close-menu').addEventListener('click', () => {
-    menu.classList.add('hidden');
-});
-
-document.querySelector('.btn-open-menu').addEventListener('click', () => {
-    menu.classList.remove('hidden');
-});
-
 document.querySelector('.btn-open-route-filter').addEventListener('click', () => {
     if (routeCheckboxes.classList.contains('hidden')) {
         map.hideAllRoutes();

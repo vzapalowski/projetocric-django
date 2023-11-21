@@ -811,7 +811,7 @@ div nav div form .fw-blue {
 @media (max-width: 860px) {
 
   .fs-filter{
-    font-size: 15px;
+    font-size: 15 px;
   }
 
   /* Nova NavBar */

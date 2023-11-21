@@ -168,6 +168,7 @@ def upload_image(request):
             uploaded_image_name = f"profile_picture_{user.username}_{timezone.now().strftime('%Y%m%d%H%M%S')}.jpg"
 
             buffer = BytesIO()
+            img = img.convert('RGB')
             img.save(buffer, format='JPEG')  
             buffer.seek(0)
             processed_image = SimpleUploadedFile(

@@ -37,7 +37,11 @@
     .card {
         margin: 0 0 0 0;
         max-width: 40rem;
+        border-radius: 0px 0px 15px 15px !important;
+
     }
+
+
 
     .card-image-container {
         display: flex;
@@ -50,7 +54,11 @@
     }
 
     .card-image {
-        border-radius: 0.375rem;
+        border-radius: 0.375rem 0.375rem 0rem 0rem;
+    }
+
+    .rounded-end {
+        border-bottom-right-radius: 0px !important;
     }
 }
 

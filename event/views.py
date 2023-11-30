@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.detail import DetailView
 from django.contrib import messages
-from django.http import FileResponse
+from django.http import FileResponse, HttpResponse
 from django.shortcuts import get_object_or_404
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -17,7 +17,7 @@ import os
 import datetime
 # import locale
 
-from event.models import Event
+from event.models import Event, Enrollment, EnrollmentType2
 from event.models import EnrollmentForm, EnrollmentFormType2
 from event.models.enrollment import Bond
 from event.models.how_knew import HowKnew
@@ -48,7 +48,9 @@ def enrollment(request, event_id):
     if request.method == 'POST':
         form = EnrollmentForm(request.POST)
         if form.is_valid():
-            # send_email("John Doe")
+            full_name = form.cleaned_data['full_name']  
+            email = form.cleaned_data['email']  
+            # send_email(email, full_name, event)
             form.save()
             messages.success(request, 'Cadastro feito com Sucesso!')
 
@@ -184,3 +186,30 @@ def generate_certificate(name, event):
     os.rmdir(temp_dir)
 
     return pdf_content
+
+def get_certificate(request, enrollment_id):
+    enrollment = get_object_or_404(EnrollmentType2, id=enrollment_id)
+
+    certificate_content = generate_certificate(enrollment.full_name, enrollment.event)
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="certificate_{enrollment.user.username}.pdf"'
+    response.write(certificate_content)
+
+    return response
+
+def delete_enrollment(request, enrollment_id):
+    enrollment = Enrollment.objects.get(id=enrollment_id)
+    if request.user == enrollment.user:
+        enrollment.delete()
+        return redirect('users:profile')
+    else:
+        return redirect('users:profile')
+
+def delete_enrollment_type2(request, enrollment_id):
+    enrollment = EnrollmentType2.objects.get(id=enrollment_id)
+    if request.user == enrollment.user:
+        enrollment.delete()
+        return redirect('users:profile')
+    else:
+        return redirect('users:profile')

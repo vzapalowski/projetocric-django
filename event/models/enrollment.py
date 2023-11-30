@@ -21,6 +21,7 @@ class Enrollment(models.Model):
     how_knew = models.ForeignKey(HowKnew, on_delete=models.CASCADE, verbose_name='Como soube do evento?')
     route_path = models.ForeignKey(RoutePath, on_delete=models.CASCADE, verbose_name='Nome do Trajeto')
     event = models.ForeignKey(Event, on_delete=models.CASCADE, verbose_name='Evento')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Usuário')
 
     def __str__(self):
         return self.full_name

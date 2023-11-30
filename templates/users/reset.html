@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Recuperar senha</title>
     <link rel="icon" href="{% static 'images/logos/rotacric-alternative.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'users/login-register.css'%}">
     <link
@@ -17,20 +17,50 @@
 <body>
     <div class="conteiner-fluid d-flex h-100">
         <div class="col col-sm-12 col-md-6 col-lg-4 d-flex align-items-center justify-content-center bg-light-light">
-            <form id="frm-login" method="POST" action="{% url 'users:login' %}" class="w-75">
-              {% csrf_token %}
-              <h1 class="text-center text-primary-color fw-bolder mb-5">Fazer login</h1>
-                <div class="mb-3">
-                  <input type="text" name="email" placeholder="Usuário ou email" class="form-control p-3 rounded-pill px-4 border-0" id="exampleInputEmail1" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                  <input type="password" name="password" placeholder="Senha" class="form-control p-3 rounded-pill px-4 border-0" id="exampleInputPassword1">
+            <form id="frm-login" method="POST" class="w-75">
+            {% csrf_token %}
+
+            {% if validlink %}
+
+              <h1 class="text-center text-primary-color fw-bolder mb-5">Recuperar senha</h1>
+                <p class="text-center mb-5">
+                    Digite sua nova senha abaixo
+                </p>
+                <div class="mb-1">
+                    <input type="password" name="new_password1" autocomplete="new-password" required="" id="id_new_password1" class="form-control p-3 rounded-pill px-4 border-0 mb-4" placeholder="Nova senha" required>
+
+                    <input type="password" name="new_password2" autocomplete="new-password" required="" id="id_new_password2" class="form-control p-3 rounded-pill px-4 border-0 mb-4" placeholder="Confirmar nova senha" required>
+                    
+                    {% if form.errors %}
+                        {% for field in form %}
+
+                            {% for error in field.errors %}
+                                    {{field.label}}: {{ error|escape }}
+                            {% endfor %}
+
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="d-grid gap-2">
-                  <button type="submit" class="btn btn-cric btn-lg mt-4 rounded-pill py-2">Entrar</button>
+                  <button type="submit" class="btn btn-cric btn-lg mt-4 rounded-pill py-2">Mudar senha</button>
                 </div>
-                <div class="form-text text-center text-dark mt-4"><a href="/reset_password" class="d-block text-dark fw-semibold">Esqueci minha senha</a></div>
-                <div class="form-text text-center text-dark mt-4">Não possui uma conta? <a href="{% url 'users:register' %}" class="d-block text-dark fw-semibold">Cadastre-se</a></div>
+
+                <ul class="mt-5">
+                    <li class="mt-1">Sua senha não pode ser muito parecida com o resto das suas informações pessoais.</li>
+                    <li class="mt-1">Sua senha precisa conter pelo menos 8 caracteres.</li>
+                    <li class="mt-1">Sua senha não pode ser uma senha comumente utilizada.</li>
+                    <li class="mt-1">Sua senha não pode ser inteiramente numérica.</li>
+                </ul>
+            
+            {% else %}
+                
+                <h1 class="text-center text-primary-color fw-bolder mb-5">Redefinição de senha sem sucesso</h1>
+                <p class="text-center mb-5">
+                    O link para a recuperação de senha era inválido, possivelmente porque já foi utilizado. Por favor, solicite uma nova recuperação de senha.
+                </p>
+
+            {% endif %}
+
                 <div class="d-block d-md-none">
                   <div class="d-flex justify-content-center mt-4">
                     <a class="bg-white rounded-circle btn-return text-dark" href="{% url 'home:home' %}">
@@ -38,21 +68,10 @@
                     </a>
                   </div>
                 </div>
-              </form>
-              <div class="container position-fixed start-50 translate-middle message-container" style="top: 93vh">
-                {% if messages %}
-                <ul class="col-11 col-sm-8 ps-0 adjust-message">
-                  {% for message in messages %}
-                  <li {% if message.tags %} class="{{ message.tags }}-message card message"{% endif %}>
-                  <p class="card-body mb-0">
-                    {{ message }}
-                  </p>
-                  </li>
-                  {% endfor %}
-                </ul>
-                {% endif %}
-              </div>
+              
+            </form>
         </div>
+
         <div class="d-none d-md-block col-md-6 col-lg-8 bg-img">
           <div class="d-flex justify-content-end mt-4 me-5">
             <a class="bg-white rounded-circle btn-return text-dark" href="{% url 'home:home' %}">

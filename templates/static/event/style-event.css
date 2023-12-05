@@ -4,6 +4,10 @@
     background-size: cover;
 }
 
+.btn-routes{
+    background-color: #273273;
+}
+
 .overlay {
     position: absolute;
     top: 0;
@@ -69,6 +73,7 @@
 
 .bg-cric{
     background-color: #273273;
+    color: aliceblue;
 }
 
 .carousel-inner {

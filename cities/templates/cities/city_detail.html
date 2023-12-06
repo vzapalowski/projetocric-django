@@ -22,7 +22,9 @@
   </div>
 </div>
 
- <div class="row row-cols-sm-2 row-m justify-content-center">
+<!-- Mapa --> 
+<div class="container-fluid">
+  <div class="row row-cols-sm-2 row-m justify-content-center">
     <div id="map" class="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9" style="height: 30rem;"></div>
     <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 bg-light-gray p-0 h-filter text-center">
       <div class="p-3 pb-4">
@@ -62,8 +64,9 @@
       </div>
     </div>
   </div>
+</div>
 
-<div class="container-fluid mx-0 background-blue px-4 py-4">
+<div class="container-fluid mx-0 background-blue px-5 px-adjust py-4">
   <div class="title text-center">
     <h2 class="mb-5 fw-normal text-white py-5">Conheça nossa cidade</h2>
   </div>
@@ -72,23 +75,23 @@
   <div class="mb-5 mt-5" data-aos="fade-up">
     <div class="row col-mobile-order">
       {% if is_even %}
-        <div class="col-md-8 col-lg-8 even-card card-container mt-0">
-          <div class="card" style="height: 100%;">
+        <div class="col-md-8 col-lg-8 even-card card-container mt-0 p-0">
+          <div class="card ms-0" style="height: 100%;">
             <div class="card-body">
               <h3 class="card-title mt-3">{{ title }}</h3>
               <p class="card-text">{{ text }}</p>
             </div>
           </div>
         </div>
-        <div class="col-md-4 col-lg-4 card-image-container">
+        <div class="col-md-4 col-lg-4 card-image-container p-0">
           <img src="{{ image }}" class="img-fluid rounded-end card-image">
         </div>
       {% else %}
-        <div class="col-md-4 col-lg-4 card-image-container">
+        <div class="col-md-4 col-lg-4 card-image-container p-0">
           <img src="{{ image }}" class="img-fluid rounded-start card-image">
         </div>
-        <div class="col-md-8 col-lg-8 odd-card card-container mt-0">
-          <div class="card" style="height: 100%;">
+        <div class="col-md-8 col-lg-8 odd-card card-container mt-0 p-0">
+          <div class="card me-0" style="height: 100%;">
             <div class="card-body">
               <h3 class="card-title mt-3">{{ title }}</h3>
               <p class="card-text">{{ text }}</p>

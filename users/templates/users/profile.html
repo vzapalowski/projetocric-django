@@ -1,21 +1,7 @@
 {%extends 'base.html'%}
 {% load static %}
 
-{% block 'navigation' %}
-  <li class="nav-item" data-bs-dismiss="offcanvas">
-    <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="{% url 'users:logout' %}"><i class="fa-solid fa-right-from-bracket me-2"></i> Sair</a>
-  </li>
-{% endblock %}
-
-{% block 'navigation-mobile' %}
-  <li class="nav-item" data-bs-dismiss="offcanvas">
-    <a class="nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="{% url 'users:logout' %}"><i class="fa-solid fa-right-from-bracket me-2"></i> Sair</a>
-  </li>    
-{% endblock %}
-
 {%block 'content'%}
-
-<div class="bg-image-profile d-flex"></div>
 
 <div id="image-preview-container">
   <img src="" alt="Image Preview" class="image-preview" id="image-preview">

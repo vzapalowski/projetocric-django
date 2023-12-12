@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Informações</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'users/register.css'%}">
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+    crossorigin="anonymous">
+
+    <!-- DATEPICKER -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"></head>
+<body>
+    <div class="bg-top-image"></div>
+    <div class="container mb-5">
+  
+        <form id="enrollment-form" method="POST" action="{% url 'users:edit_user' user.id %}"
+        class="col col-lg-5 col-md-8 col-sm-11 col-xs-12 bg-primary p-5 position-absolute" style="top: 20%;">
+        {% csrf_token %}
+  
+            <h1 class="topic-color">Atualizar informações pessoais</h1>
+
+            <!-- Input Username -->
+            <div class="input-group input-group-lg mt-4">
+              <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-solid fa-user icon-cric"></i></span>
+              <input type="text" name="username" placeholder="Nome de Usuario" maxlength="100" required="" id="id_full_name" value="{{ user.username }}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            </div>
+
+            <!-- Input Nome -->
+            <div class="input-group input-group-lg mt-4">
+                <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-solid fa-user icon-cric"></i></span>
+                <input type="text" name="name" placeholder="Nome" maxlength="100" required="" id="id_full_name" value="{{ user.first_name}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            </div>
+
+            <!-- Input Sobrenome -->
+            <div class="input-group input-group-lg mt-4">
+              <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-solid fa-user icon-cric"></i></span>
+              <input type="text" name="last_name" placeholder="Sobrenome" maxlength="100" required="" id="id_full_name" value="{{ user.last_name }}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            </div>
+            
+            <!-- Input Email -->
+            <input  type="hidden" name="email" placeholder="Email" maxlength="30" required="" id="id_email" value="{{ user.email }}" class="form-control" placeholder="Email" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+
+            <!-- Input RG -->
+            <div class="input-group input-group-lg mt-4">
+              <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-solid fa-address-card icon-cric"></i></span>
+              <input type="text" inputmode="numeric" name="rg" placeholder="RG" maxlength="10" required="" id="id_rg" value="{{ user.personaldata.rg }}" placeholder="Rede Social" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            </div>
+
+            <!-- Input Data de Nascimento -->
+            <div class="input-group input-group-lg mt-4 dp-container">
+              <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-solid fa-calendar-days icon-cric"></i></span>
+              <input id="datepicker" type="text" name="date_of_birth" value="{{ user.personaldata.date_of_birth|date:'d/m/Y' }}" placeholder="Data de Nascimento">
+            </div>
+            
+            <!-- Input Rede Social -->
+            <div class="input-group input-group-lg mt-4">
+              <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa-solid fa-hashtag icon-cric"></i></span>
+              <input type="text" name="social_network" placeholder="Instagram" maxlength="30" id="id_social_network" value="{{ user.personaldata.social_network }}" placeholder="Rede Social">
+            </div>
+
+            <!-- Select Bond Choice -->
+            <select class="form-select mt-4" name="bond_choice" required id="id_bond_choice">
+              <option value="" disabled>Sobre Você</option>
+              {% for bond_obj in bond %}
+                <option value="{{ bond_obj.id }}" {% if bond_obj.id == user.personaldata.bond_choice.id %}selected{% endif %}>{{ bond_obj }}</option>
+              {% endfor %}
+            </select>
+
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-cric btn-lg mt-4 rounded-pill">Atualizar</button>
+            </div>
+          </form>
+    </div>
+
+    <div class="container position-fixed start-50 translate-middle message-container" style="top: 93vh">
+      {% if messages %}
+      <ul class="col-11 col-sm-8 ps-0 adjust-message">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}-message card message"{% endif %}>
+        <p class="card-body mb-0">
+          {{ message }}
+        </p>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+
+    <footer class="text-white pt-5 pb-4">
+
+        <div class="container text-center text-md-left">
+    
+          <div class="row text-center text-md-left">
+    
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+              <img class="img-fluid img-cric" src="{% static 'images/logos/4.png'%}" alt="..." style="border-radius: 15rem;">
+            </div>
+    
+            <div class="col-md-6 col-lg-8 col-xl-5 mx-auto mt-3">
+              <!-- <h5 class="text-uppercase mb-4 font-weight-bold" style="color:#a5a5a5;"></h5> -->
+              <p style="font-size: 0.98rem;">
+                O projeto ROTACRIC é um oferecimento da Assossiação dos Municípios da Região Carbnífera (ASMURC) juntamente com o Conselho Regional de Desenvolvimento (COREDE) e a Prefeitura Municipal de General Câmara, em parceria com o Instituto Federal (IFSUL) Câmpus Charqueadas.
+              </p>
+            </div>
+    
+    
+            <div class="col-md-4 col-lg-2 mx-auto mt-3">
+              <img class="img-fluid img-cric mb-5" src="{% static 'images/arms/brasao.png'%}" alt="...">
+  
+            </div>
+            <hr class="mb-4">
+    
+            <div class="col-md-7 col-lg-8">
+              <p>Copyright @2023 Todos os direitos revervados pela:
+                <a href="#" style="text-decoration: none;">
+                  <strong style="color: #686868;">ROTACRIC</strong>
+                </a>
+              </p>
+            </div>
+    
+            <div class="col-md-5 col-lg-4">
+              <div class="text-center text-md-right">
+                <ul class="list-unstyled list-inline">
+                  <li class="list-inline-item">
+                    <a href="#" class="btn-floating btn-sm text-white">
+                      <i class="fas fa-envelope fs-3"></i> 
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#" class="btn-floating btn-sm text-white">
+                      <i class="fab fa-instagram fs-3"></i> 
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#" class="btn-floating text-white" style="height: 5rem;">
+                      <i class="fab fa-github fs-3"></i> 
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+           </div>
+          </div>        
+      </footer>
+    <script src="{% static 'js/users/message_fx.js' %}" async></script>
+    
+    <script 
+    src="https://kit.fontawesome.com/d97d3ca1f3.js" 
+    crossorigin="anonymous"
+    ></script>
+    
+    <!-- DATAPICKER -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        $('#datepicker').datepicker({
+          format: 'dd/mm/yyyy',
+          clearButton: true,
+          autoclose: true,
+          container: '.dp-container',
+          endDate: '0d'
+        });
+      });
+    </script>
+</body>
+</html>

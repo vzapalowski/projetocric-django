@@ -107,3 +107,9 @@ html, body {
     margin-bottom: 5rem;
   }
 }
+
+
+/*Adjust edit user*/
+#datepicker{
+  font-size: 1rem !important;
+}

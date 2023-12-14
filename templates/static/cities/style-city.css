@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+
+.font-name-city{
+    font-family: 'Archivo Black', sans-serif !important;
+    font-size: 2.5rem;
+    color: rgb(255, 255, 255);
+    -webkit-text-stroke: 0.8px #000000;
+    text-decoration: none;
+  }
 
 .darker-overlay {
     background-color: black;

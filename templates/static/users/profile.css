@@ -109,6 +109,10 @@ section{
     cursor: pointer;
 }
 
+#datepicker{
+    font-size: 1rem !important;
+  }
+
 @media (min-width: 1500px) {
 
     .bg-image-profile{
@@ -136,10 +140,18 @@ section{
     }
 }
 
+@media (max-width: 767px) {
+    .mt-card-mobile{
+        margin-top: 3rem !important;
+    }
+}
+
+
 @media (max-width: 576px) {
     .bg-image-profile{
         height: 17rem;
     }
+
 }
 
 @media (max-width: 375px) {

@@ -15,14 +15,10 @@
     <div class="container py-5">
       <div class="row">
         <div class="col-lg-4">
-          <div class="card mb-4">
+          <div class="card mt-card-mobile mb-4">
             <div class="card-body text-center card-user">
               
               <div class="image-container position-relative d-flex justify-content-center align-items-center">
-                <label for="file-upload" class="text-center btn-alter d-flex justify-content-center align-items-center">
-                  Alterar
-                </label>
-                <input type="file" id="file-upload" style="display: none;" accept="image/*" onchange="previewImage(event)">
                 {% if user.personaldata.profile_picture %}
                   <img src="/media/{{ user.personaldata.profile_picture }}" alt="foto do Usuario" class="rounded-circle img-fluid profile-pic">
                 {% else %}
@@ -31,8 +27,6 @@
                 </div>
               
               <h5 class="my-3">{{ user.username }}</h5>
-              <!-- <p class="text-muted mb-1">alguma coisa</p> -->
-              <!-- <p class="text-muted mb-4">alguma coisa</p> -->
               <div class="d-flex justify-content-center mb-2">
                 <a href="{% url 'users:edit_user' user.id %}" type="button" class="btn btn-outline-dark ms-1">Editar informações pessoais</a>
               </div>
@@ -174,10 +168,6 @@
     </div>
   </section>  
 
-  <script>
-    const userId = '{{ user.id }}';
-    const uploadUrl = "{% url 'users:upload_image' %}"
-  </script>
   <script src="{% static 'js/users/profile.js' %}" async></script>
   
   {%endblock%}

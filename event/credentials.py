@@ -1,2 +1,2 @@
 EMAIL = 'ch-coex-rotacric@ifsul.edu.br'
-PASSWORD = 'pjbh yztu tjpm tynr'
+PASSWORD = 'cvfp qheq inbw giqj'

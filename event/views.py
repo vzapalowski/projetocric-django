@@ -17,8 +17,8 @@ import os
 import datetime
 # import locale
 
-from event.models import Event, Enrollment, EnrollmentType2
-from event.models import EnrollmentForm, EnrollmentFormType2
+from event.models import Event, Enrollment, EnrollmentType2, Enrollment3PasseioCiclistico
+from event.models import EnrollmentForm, EnrollmentFormType2, enrollment3PasseioIfsulForm
 from event.models.enrollment import Bond
 from event.models.how_knew import HowKnew
 from event.models.route_path import RoutePath
@@ -36,6 +36,7 @@ class EventView(DetailView):
         context['event'] = event
         context['form'] = lambda: EnrollmentForm(self.request.POST) if self.request.method == 'POST' else EnrollmentForm()
         context['form_2'] = lambda: EnrollmentFormType2(self.request.POST) if self.request.method == 'POST' else EnrollmentFormType2()
+        context['form_3'] = lambda : enrollment3PasseioIfsulForm(self.request.POST) if self.request.method == 'POST' else enrollment3PasseioIfsulForm()
         context['bond'] = Bond.objects.all()
         context['howKnew'] = HowKnew.objects.all()
         context['routePath'] = RoutePath.objects.all()
@@ -50,7 +51,7 @@ def enrollment(request, event_id):
         if form.is_valid():
             full_name = form.cleaned_data['full_name']  
             email = form.cleaned_data['email']  
-            send_email(email, full_name, event)
+            # send_email(email, full_name, event)
             form.save()
             messages.success(request, 'Cadastro feito com Sucesso!')
 
@@ -81,7 +82,7 @@ def enrollment2(request, event_id):
         if form.is_valid():
             full_name = form.cleaned_data['full_name']  
             email = form.cleaned_data['email']  
-            send_email(email, full_name, event)
+            # send_email(email, full_name, event)
             messages.success(request, 'Cadastro feito com Sucesso!')
 
         else:
@@ -101,6 +102,33 @@ def enrollment2(request, event_id):
     
     return render(request, 'events/index.html', context)
 
+def enrollment3(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    if request.method == 'POST':
+        form = enrollment3PasseioIfsulForm(request.POST, request.FILES)
+        if form.is_valid():
+            full_name = form.cleaned_data['full_name']  
+            email = form.cleaned_data['email']  
+            send_email(email, full_name, event)
+            form.save()
+            messages.success(request, 'Cadastro feito com Sucesso!')
+
+        else:
+            error_message = "\n".join(
+                f"{str(form.fields[field_name].label)}: {error}"
+                for field_name, error_list in form.errors.items()
+                for error in error_list
+            )
+            messages.error(request, error_message)
+    else:
+        form = enrollment3PasseioIfsulForm()
+    
+    context = {
+        'event': event,
+        'form_2': form
+    }
+    
+    return render(request, 'events/index.html', context)
 
 def download_pdf(request, event_id):
     event = get_object_or_404(Event, id=event_id)
@@ -208,6 +236,14 @@ def delete_enrollment(request, enrollment_id):
 
 def delete_enrollment_type2(request, enrollment_id):
     enrollment = EnrollmentType2.objects.get(id=enrollment_id)
+    if request.user == enrollment.user:
+        enrollment.delete()
+        return redirect('users:profile')
+    else:
+        return redirect('users:profile')
+    
+def delete_enrollment_type3(request, enrollment_id):
+    enrollment = enrollment3PasseioIfsulForm.objects.get(id=enrollment_id)
     if request.user == enrollment.user:
         enrollment.delete()
         return redirect('users:profile')

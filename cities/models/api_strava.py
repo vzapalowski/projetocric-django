@@ -23,3 +23,9 @@ class Api:
         param = {'per_page': 200, 'page': 1}
         my_dataset = requests.get(self.__route_url+id_route, headers=header, params=param).json()
         return my_dataset['map']['summary_polyline']
+    
+    def get_distance(self, id_route):
+        header = {'Authorization': 'Bearer ' + self.get_access_token()}
+        param = {'per_page': 200, 'page': 1}
+        my_dataset = requests.get(self.__route_url+id_route, headers=header, params=param).json()
+        return my_dataset['distance']

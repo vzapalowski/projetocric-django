@@ -9,3 +9,5 @@ from .enrollmentform import *
 from .enrollment_type2 import *
 from .form_type2 import *
 from .extra_route_info import *
+from .enrollment_3_passeio_ifsul import *
+from .enrollment_3_passeio_ifsul_form import *

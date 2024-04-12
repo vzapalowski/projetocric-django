@@ -7,6 +7,7 @@ class Route(models.Model):
     color = ColorField(default="#FF0000", verbose_name="Cor da rota")
     id_route = models.CharField(max_length=50, unique=True, verbose_name='Id da rota')
     polyline = models.CharField(max_length=5000,blank=True, null=True, verbose_name='Marcação')
+    distance = models.CharField(max_length=500, blank=True, null=True, verbose_name='Distância')
     active = models.BooleanField(default=False, verbose_name='Ativa')
 
     def __str__(self) -> str:

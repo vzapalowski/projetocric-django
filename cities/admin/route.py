@@ -3,9 +3,9 @@ from cities.models import Route
 
 
 class RouteAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'id_route', 'active', 'polyline')
-    list_display_links = ('id', 'name', 'id_route', 'polyline')
-    readonly_fields = ('polyline',)
+    list_display = ('id', 'name', 'id_route', 'active', 'polyline', 'distance')
+    list_display_links = ('id', 'name', 'id_route', 'polyline', 'distance')
+    readonly_fields = ('polyline', 'distance')
 
 
 admin.site.register(Route, RouteAdmin)

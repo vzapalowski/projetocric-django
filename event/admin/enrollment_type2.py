@@ -1,7 +1,6 @@
 from django.contrib import admin
 from event.models import EnrollmentFormType2, EnrollmentType2
 
-
 class EnrollmentType2Admin(admin.ModelAdmin):
     form = EnrollmentFormType2
     list_display = ('full_name', 'email', 'event')

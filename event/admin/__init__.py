@@ -8,3 +8,4 @@ from .anchor_points import *
 from .warning import *
 from .enrollment_type2 import *
 from .extra_route_info import *
+from .enrollment_3_passeio_ifsul import *

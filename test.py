@@ -1,4 +1,5 @@
 import requests
+import json
 
 
 class Api:
@@ -22,10 +23,9 @@ class Api:
         header = {'Authorization': 'Bearer ' + self.get_access_token()}
         param = {'per_page': 200, 'page': 1}
         my_dataset = requests.get(self.__route_url+id_route, headers=header, params=param).json()
-        return my_dataset['map']['summary_polyline']
+        return my_dataset
     
-    def get_distance(self, id_route):
-        header = {'Authorization': 'Bearer ' + self.get_access_token()}
-        param = {'per_page': 200, 'page': 1}
-        my_dataset = requests.get(self.__route_url+id_route, headers=header, params=param).json()
-        return my_dataset['distance']
+    
+api = Api()
+request = api.get_route('3095420358879812006')
+print(f"{request['distance']/1000:.2f}")

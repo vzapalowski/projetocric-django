@@ -3,14 +3,9 @@ from event.models.how_knew import HowKnew
 from event.models.route_path import RoutePath
 from event.models.event import Event
 from django.contrib.auth.models import User
+from .enrollment import Bond
 
-class Bond(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Vínculo')
-
-    def __str__(self):
-        return self.name
-    
-class Enrollment(models.Model):
+class Enrollment3PasseioCiclistico(models.Model):
     full_name = models.CharField(max_length=100, verbose_name='Nome Completo')
     email = models.CharField(max_length=70, verbose_name='Email para contato')
     social_network = models.CharField(max_length=30, verbose_name='Instagram', null=True, blank=True)
@@ -24,4 +19,3 @@ class Enrollment(models.Model):
 
     def __str__(self):
         return self.full_name
-    

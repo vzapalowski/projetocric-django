@@ -13,6 +13,7 @@ class Event(models.Model):
     FORM_TYPE_CHOICES = (
         ('Type-1', 'Type-1'),
         ('Type-2', 'Type-2'),
+        ('Type-3', 'Type-3')
     )
 
     name = models.CharField(max_length=50, verbose_name='Nome do Evento')

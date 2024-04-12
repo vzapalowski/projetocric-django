@@ -4,11 +4,33 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+/* Text-Family - Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif !important;
+  }
+
+body{
+    background-color: #E1EBFF !important;
+}
+
 .bg-image-profile{
     background-image: url(../../static/images/top-page/img-nature.png);
     background-repeat: no-repeat;
     background-size: 100%;
     height: 30rem;
+}
+
+section{
+    background-color: #E1EBFF !important;
 }
 
 .post-user{
@@ -87,6 +109,10 @@
     cursor: pointer;
 }
 
+#datepicker{
+    font-size: 1rem !important;
+  }
+
 @media (min-width: 1500px) {
 
     .bg-image-profile{
@@ -114,10 +140,18 @@
     }
 }
 
+@media (max-width: 767px) {
+    .mt-card-mobile{
+        margin-top: 3rem !important;
+    }
+}
+
+
 @media (max-width: 576px) {
     .bg-image-profile{
         height: 17rem;
     }
+
 }
 
 @media (max-width: 375px) {

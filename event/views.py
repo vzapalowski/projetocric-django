@@ -50,7 +50,7 @@ def enrollment(request, event_id):
         if form.is_valid():
             full_name = form.cleaned_data['full_name']  
             email = form.cleaned_data['email']  
-            # send_email(email, full_name, event)
+            send_email(email, full_name, event)
             form.save()
             messages.success(request, 'Cadastro feito com Sucesso!')
 

@@ -188,7 +188,7 @@
       <input  type="hidden" name="event" value="{{ event.id }}" id="event">
 
       <!-- USER ID -->
-      <input type="hidden" name="user" value="{{ user.id }}" id="user">
+      <input type="hidden" name="user" value="{{ user.id|default:'1' }}" id="user">
 
       <div class="d-grid">
         <button id="btn-form" class="btn btn-dark mt-2" type="submit">Concluir Inscrição</button>
@@ -203,7 +203,7 @@
         <input  type="hidden" name="event" value="{{ event.id }}" id="event">
 
         <!-- USER ID -->
-        <input type="hidden" name="user" value="{{ user.id }}" id="user">
+        <input type="hidden" name="user" value="{{ user.id|default:'1' }}" id="user">
 
         <!-- INPUT NAME -->
         <div class="input-group mb-3">

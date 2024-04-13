@@ -300,7 +300,9 @@
       <select class="form-select mb-3" name="route_path" id="id_route_path" required>
           <option value selected disabled>Caminho da Rota</option>
           {% for routePath in routePath %}
-              <option value="{{ routePath.id }}">{{ routePath.time }}</option>
+            <!-- {% if event.form_type == 'Type-1' %} -->
+              <option value="{{ routePath.id }}">{{ routePath.active }}</option>
+              <!-- {% endif %}  -->
           {% endfor %}
       </select>
 

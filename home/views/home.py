@@ -6,6 +6,8 @@ from cities.models import Category
 from event.models import Event
 from event.models import Enrollment, EnrollmentType2, Enrollment3PasseioCiclistico
 
+from operator import attrgetter
+
 
 class PostHome(ListView):
     template_name = 'home/index.html'
@@ -18,7 +20,8 @@ class PostHome(ListView):
         context = super().get_context_data(**kwargs)
         context['homes'] = CityManager.objects.all()
         context['categories_points'] = Category.objects.all()
-        events = Event.objects.all()
+        # events = Event.objects.all()
+        events = Event.objects.order_by('status')
     
         for event in events:
             event.number_of_routes = event.routes_data.count()

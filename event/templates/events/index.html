@@ -8,7 +8,7 @@
 
 {% if event.banner_image and event.id != 3 %}
   <div style="background-image: url('/media/{{ event.banner_image }}');" class="bg-image"></div>
-{% elif event.id == 3 %}
+{% elif event.id == 4 or event.id == 3 %}
 <div style="background-image: url('/media/{{ event.banner_image }}');" class="bg-image adjust-bg-img"></div>
 {% else %}
   <div class="bg-image"></div>

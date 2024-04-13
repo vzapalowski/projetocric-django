@@ -14,6 +14,15 @@ def insert_polyline(sender, instance, **kwargs):
         instance.polyline = polyline
     except KeyError:
         instance.polyline = None
+        
+@receiver(pre_save, sender=Route)
+def insert_distance(sender, instance, **kwards):
+    api = Api()
+    try:
+        distance = api.get_distance(instance.id_route)
+        instance.distance = f'{distance/1000:.2f}'
+    except KeyError:
+        instance.distance = None
 
 @receiver(pre_save, sender=City)
 def change_name_banner_image(sender, instance, **kwargs):

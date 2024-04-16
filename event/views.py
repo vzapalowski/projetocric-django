@@ -8,6 +8,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 from jinja2 import Environment, FileSystemLoader
 
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+
 import ssl
 import smtplib
 import jinja2
@@ -105,14 +108,32 @@ def enrollment2(request, event_id):
 def enrollment3(request, event_id):
     event = Event.objects.get(pk=event_id)
     if request.method == 'POST':
+        email = request.POST.get('email')
         form = enrollment3PasseioIfsulForm(request.POST, request.FILES)
+        
+        try:
+            validate_email(email)
+        except ValidationError:
+            messages.error(request, 'O email fornecido não é válido.')
+            context = {
+                'event': event,
+                'form_3': form,
+                'bond': Bond.objects.all(),
+                'howKnew': HowKnew.objects.all(),
+                'routePath': RoutePath.objects.all(),
+                'events': Event.objects.all()
+            }
+            
+            return render(request, 'events/index.html', context)
+        
+        
         if form.is_valid():
             full_name = form.cleaned_data['full_name']  
             email = form.cleaned_data['email']  
             send_email(email, full_name, event)
             form.save()
             messages.success(request, 'Cadastro feito com Sucesso!')
-
+            return redirect('events:event', pk=event_id)
         else:
             error_message = "\n".join(
                 f"{str(form.fields[field_name].label)}: {error}"
@@ -120,15 +141,17 @@ def enrollment3(request, event_id):
                 for error in error_list
             )
             messages.error(request, error_message)
-    else:
-        form = enrollment3PasseioIfsulForm()
-    
-    context = {
-        'event': event,
-        'form_2': form
-    }
-    
-    return render(request, 'events/index.html', context)
+            
+            context = {
+                'event': event,
+                'form_3': form,
+                'bond': Bond.objects.all(),
+                'howKnew': HowKnew.objects.all(),
+                'routePath': RoutePath.objects.all(),
+                'events': Event.objects.all()
+            }
+            return render(request, 'events/index.html', context)
+    return redirect('events:event', pk=event_id)
 
 def download_pdf(request, event_id):
     event = get_object_or_404(Event, id=event_id)

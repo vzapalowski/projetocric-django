@@ -110,14 +110,17 @@ def enrollment3(request, event_id):
     if request.method == 'POST':
         email = request.POST.get('email')
         form = enrollment3PasseioIfsulForm(request.POST, request.FILES)
+        mutable_form = form.data.copy()
         
         try:
             validate_email(email)
         except ValidationError:
             messages.error(request, 'O email fornecido não é válido.')
+            mutable_form['email'] = ''
+            modified_form = enrollment3PasseioIfsulForm(mutable_form, request.FILES)
             context = {
                 'event': event,
-                'form_3': form,
+                'form': modified_form,
                 'bond': Bond.objects.all(),
                 'howKnew': HowKnew.objects.all(),
                 'routePath': RoutePath.objects.all(),

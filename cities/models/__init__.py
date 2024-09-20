@@ -4,6 +4,7 @@ from .api_strava import Api
 from .anchor_point import AnchorPoint
 from .address_point import Address
 from .category_point import Category
+from .segment import Segment
 
 # from .points import *
 # from .points.category import *

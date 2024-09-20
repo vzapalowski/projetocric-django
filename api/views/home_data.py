@@ -18,12 +18,30 @@ class HomeData(generics.ListAPIView):
                 city_routes = city.routes.all()
                 city_points = city.points.all()
                 for route in city_routes:
+                    visible_segments = route.segments.filter(visible=True)
                     route_data = {
                         'id': route.id,
                         'name': route.name,
                         'color': route.color,
                         'id_route': route.id_route,
                         'polyline': route.polyline,
+                        'segments': [
+                            {
+                                'id': segment.id, 
+                                'name': segment.name, 
+                                'visible': segment.visible,
+                                'city': segment.city,
+                                'state': segment.state,
+                                'country': segment.country,
+                                'distance': segment.distance,
+                                'total_elevation_gain': segment.total_elevation_gain,
+                                'average_grade': segment.average_grade,
+                                'elevation_low': segment.elevation_low,
+                                'elevation_high': segment.elevation_high,
+                                'effort_count': segment.effort_count,
+                                'athlete_count': segment.athlete_count,
+                                'polyline': segment.polyline
+                            } for segment in visible_segments]
                     }
                     if route_data not in routes:
                         routes.append(route_data)

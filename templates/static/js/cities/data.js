@@ -20,4 +20,8 @@ fetch(url_api)
     map.togglePointsLayer();
     map.createRouteCheckboxes(data.routes);
     map.filterPointsByCategory();
+
+    data.routes.forEach(route => {
+        map.addSegments(route.id_route);
+    });
 })

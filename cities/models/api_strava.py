@@ -12,6 +12,7 @@ class Api:
         }
         self.__auth_url = 'https://www.strava.com/oauth/token'
         self.__route_url = 'https://www.strava.com/api/v3/routes/'
+        self.__segment_url = 'https://www.strava.com/api/v3/segments/'
     
     def get_access_token(self): 
         res = requests.post(self.__auth_url, data=self.__user_data, verify=False)
@@ -23,6 +24,18 @@ class Api:
         param = {'per_page': 200, 'page': 1}
         my_dataset = requests.get(self.__route_url+id_route, headers=header, params=param).json()
         return my_dataset['map']['summary_polyline']
+    
+    def get_segments(self, id_route):
+        header = {'Authorization': 'Bearer ' + self.get_access_token()}
+        param = {'per_page': 200, 'page': 1}
+        my_dataset = requests.get(self.__route_url+id_route, headers=header, params=param).json()
+        return my_dataset['segments']
+    
+    def get_segment(self, id_segment):
+        header = {'Authorization': 'Bearer ' + self.get_access_token()}
+        param = {'per_page': 200, 'page': 1}
+        my_dataset = requests.get(f'{self.__segment_url}{id_segment}', headers=header, params=param).json()
+        return my_dataset
     
     def get_distance(self, id_route):
         header = {'Authorization': 'Bearer ' + self.get_access_token()}

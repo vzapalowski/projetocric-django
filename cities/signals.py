@@ -3,7 +3,7 @@ from django.dispatch import receiver
 
 from .models.api_strava import Api
 
-from .models import Route, City, Category
+from .models import Route, City, Category, Segment
 from projetocric.utilities import replace
 
 @receiver(pre_save, sender=Route)
@@ -16,11 +16,35 @@ def insert_polyline(sender, instance, **kwargs):
         instance.polyline = None
         
 @receiver(pre_save, sender=Route)
-def insert_distance(sender, instance, **kwards):
+def insert_distance_and_segments(sender, instance, **kwargs):
     api = Api()
     try:
         distance = api.get_distance(instance.id_route)
         instance.distance = f'{distance/1000:.2f}'
+
+        segments = api.get_segments(instance.id_route)
+
+        Segment.objects.filter(route=instance).delete()
+
+        for seg in segments:
+            segment = api.get_segment(seg['id'])
+            Segment.objects.update_or_create(
+                id=segment['id'], 
+                name=segment['name'],
+                city = segment['city'] if segment['city'] is not None else 'Não Informada',
+                state = segment['state'] if segment['state'] is not None else 'Não Informado',
+                country = segment['country'] if segment['country'] is not None else 'Não Informado',
+                distance = f"{segment['distance'] / 1000:.2f}" if segment['distance'] is not None else 'Não Informada',
+                total_elevation_gain = segment['total_elevation_gain'] if segment['total_elevation_gain'] is not None else 'Não Informado',
+                average_grade = segment['average_grade'] if segment['average_grade'] is not None else 'Não Informada',
+                elevation_low = segment['elevation_low'] if segment['elevation_low'] is not None else 'Não Informada',
+                elevation_high = segment['elevation_high'] if segment['elevation_high'] is not None else 'Não Informada',
+                polyline = segment['map']['polyline'] if segment['map']['polyline'] is not None else 'Não Informada',
+                effort_count = segment['effort_count'] if segment['effort_count'] is not None else 'Não Informadas',
+                athlete_count = segment['athlete_count'] if segment['athlete_count'] is not None else 'Não Informada',
+                route=instance  
+            )
+
     except KeyError:
         instance.distance = None
 

@@ -1,5 +1,4 @@
 export class Map {
-
   constructor() {
     this.map = null;
     this.bounds = null; 
@@ -73,173 +72,237 @@ export class Map {
     });
   }
 
-  addPoints(points) {
-    points.forEach(({ coordinates, name, category, image, address, business_hours, phone }) => {
-      const iconUrl = category?.image ?? '/default-icon.png';
+  async addSegments(routeId) {
+    const segments = await this.fetchRoute(routeId);
 
-      const newIcon = new L.Icon({
-        iconUrl,
-        iconSize: [30, 40],
-        iconAnchor: [5, 30],
-        popupAnchor: [10, -20]
-      });
+    for (const segment of segments) {
+      const segmentData = await this.fetchSegment(segment.id);
+      const segmentCoordinates = L.Polyline.fromEncoded(segmentData.map.polyline).getLatLngs();
 
-      const popupContent = `
-        <h1>${name}</h1>
-        ${image ? `<img src=${image}>` : `<p>Foto não informada</p>`}
-        <p>Endereço: ${address.street_name}, ${address.number}, ${address.neighborhood}</p>
-        <p>Horário de atendimento: ${business_hours}</p>
-        <p>Contato: ${phone}</p>
-      `;
+      const segmentPolyline = this.createPolyline(segmentCoordinates, 'green', 3);
+      const hoverAreaSegment = this.createPolyline(segmentCoordinates, 'transparent', 15, 1, true);
 
-      const marker = L.marker([coordinates.lat, coordinates.lng], { icon: newIcon });
-
-      marker.options.category = category.name;
-      
-      marker.bindPopup(popupContent, {
-        maxWidth: 150,
-        keepInView: true,
-        className: 'markerPopup'
-      }).addTo(this.pointLayerGroup);
-    });
-    this.map.addLayer(this.pointLayerGroup);
-  }
-
-  togglePointsLayer() {
-    document.querySelector('.btn-remove-points').addEventListener('click', () => {
-      if (this.map.hasLayer(this.pointLayerGroup)) {
-        this.hideAllPoints();
-      } else {
-        this.showAllPoints();
-      }
-    });
-  }
-
-  hideAllPoints() {
-    this.map.removeLayer(this.pointLayerGroup);
-  }
-
-  showAllPoints() {
-    this.map.addLayer(this.pointLayerGroup);
-  }
-
-  writeRoutes(routes) {
-    var btns = document.querySelectorAll('.btnOpacity');
-    var currentRoute = null;
-  
-    btns.forEach((button) => {
-      button.addEventListener('click', () => {
-        var routeId = button.getAttribute('data-route');
-        var selectedRoute = this.getRouteById(routes, routeId);
-  
-        if (selectedRoute) {
-          if (currentRoute) {
-            this.updateOpacity(currentRoute, 0);
-            currentRoute.button.style.backgroundColor = '';
-          }
-  
-          this.updateOpacity(selectedRoute, 1);
-          currentRoute = selectedRoute;
-          button.style.backgroundColor = selectedRoute.color; 
-          currentRoute.button = button; 
-        }
-      });
-    });
-  }
-  
-  getRouteById(routes, routeId) {
-    return routes.find((route) => route.id_route === routeId);
-  }
-  
-  updateOpacity(route, opacityValue) {
-    if (route.polylineLayer) {
-      this.map.removeLayer(route.polylineLayer);
+      this.handleSegmentPopup(hoverAreaSegment, segment, segmentData);
     }
-  
-    var coordinates = L.Polyline.fromEncoded(route.polyline).getLatLngs();
-    route.polylineLayer = L.polyline(coordinates, {
-      color: route.color,
-      weight: 3,
-      opacity: opacityValue,
-      lineJoin: "round"
-    });
-
-    this.map.addLayer(route.polylineLayer);
   }
+
+  async fetchRoute(routeId) {
+    const url = `https://www.strava.com/api/v3/routes/${routeId}`;
+    const headers = { 'Authorization': 'Bearer e30a4c48454de623997982e8866300fd882e0f66' };
+    const data = await this.fetchData(url, headers);
+    return data.segments;
+  }
+
+  async fetchSegment(segmentId) {
+    const url = `https://www.strava.com/api/v3/segments/${segmentId}`;
+    const headers = { 'Authorization': 'Bearer e30a4c48454de623997982e8866300fd882e0f66' };
+    return await this.fetchData(url, headers);
+  }
+
+  async fetchData(url, headers = {}) {
+    const response = await fetch(url, { headers });
+    return response.json();
+  }
+
+  createPolyline(coordinates, color, weight, opacity = 1, interactive = true) {
+    return L.polyline(coordinates, {
+      color,
+      weight,
+      opacity,
+      lineJoin: "round",
+      interactive
+    }).addTo(this.map);
+  }
+
+  handleSegmentPopup(hoverArea, segment, segmentData) {
+    let openPopup = null;
+
+    const showPopup = (event) => {
+      if (!openPopup) {
+        openPopup = L.popup()
+          .setLatLng(event.latlng)
+          .setContent(`ID do segmento: ${segment.id}<br>Athlete Count: ${segmentData.athlete_count}`)
+          .openOn(this.map);
+      }
+    };
+
+    const closePopup = () => {
+      if (openPopup) {
+        this.map.closePopup(openPopup);
+        openPopup = null;
+      }
+    };
+
+    hoverArea.on('mouseover', showPopup);
+    hoverArea.on('mouseout', closePopup);
+  }
+
+  addPoints(points) {
+      points.forEach(({ coordinates, name, category, image, address, business_hours, phone }) => {
+        const iconUrl = category?.image ?? '/default-icon.png';
   
+        const newIcon = new L.Icon({
+          iconUrl,
+          iconSize: [30, 40],
+          iconAnchor: [5, 30],
+          popupAnchor: [10, -20]
+        });
   
-  addPointsEvent(points) {
-    points.forEach(({ coordinates, title, iconUrl}) => {
-
-      const newIcon = new L.Icon({
-        iconUrl,
-        iconSize: [50, 25],
-        iconAnchor: [5, 30],
-        popupAnchor: [10, -20]
-      });
-
-      const popupContent = `
-        <h1>${title}</h1>
-      `;
-
-      L.marker([coordinates.lat, coordinates.lng], { icon: newIcon })
-        .bindPopup(popupContent, {
+        const popupContent = `
+          <h1>${name}</h1>
+          ${image ? `<img src=${image}>` : `<p>Foto não informada</p>`}
+          <p>Endereço: ${address.street_name}, ${address.number}, ${address.neighborhood}</p>
+          <p>Horário de atendimento: ${business_hours}</p>
+          <p>Contato: ${phone}</p>
+        `;
+  
+        const marker = L.marker([coordinates.lat, coordinates.lng], { icon: newIcon });
+  
+        marker.options.category = category.name;
+        
+        marker.bindPopup(popupContent, {
           maxWidth: 150,
           keepInView: true,
           className: 'markerPopup'
-        })
-        .addTo(this.map);
-    });
-  }
-
-  createRouteCheckboxes(routes) {
-    routes.forEach((route) => {
-      const checkboxHTML = `
-        <div class="check-box-container d-block">
-          <input id="route-${route.id}" type="checkbox" class="r-cb-iptn" data-route="${route.id_route}">
-          <span class="form-check-label fs-filter">${route.name}</span>
-        </div>
-      `;
-      document.querySelector('#routeCheckboxes').insertAdjacentHTML('beforeend', checkboxHTML);
-    });
-
-    document.querySelectorAll('.r-cb-iptn').forEach(checkbox => {
-      checkbox.addEventListener('change', () => {
-        var routeId = checkbox.getAttribute('data-route');
-        var checked = checkbox.checked;
-
-        var route = this.getRouteById(routes, routeId);
-        if (route) {
-          if (checked) {
-            this.updateOpacity(route, 1);
-          } else {
-            this.updateOpacity(route, 0);
-          }
+        }).addTo(this.pointLayerGroup);
+      });
+      this.map.addLayer(this.pointLayerGroup);
+    }
+  
+    togglePointsLayer() {
+      document.querySelector('.btn-remove-points').addEventListener('click', () => {
+        if (this.map.hasLayer(this.pointLayerGroup)) {
+          this.hideAllPoints();
+        } else {
+          this.showAllPoints();
         }
       });
-    });
-  }
-
-  filterPointsByCategory() {
-    const checkboxes = document.querySelectorAll('.p-cb-iptn');
+    }
+  
+    hideAllPoints() {
+      this.map.removeLayer(this.pointLayerGroup);
+    }
+  
+    showAllPoints() {
+      this.map.addLayer(this.pointLayerGroup);
+    }
+  
+    writeRoutes(routes) {
+      var btns = document.querySelectorAll('.btnOpacity');
+      var currentRoute = null;
     
-    checkboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', () => {
-        const category = checkbox.getAttribute('data-category');
-        const markers = this.pointLayerGroup.getLayers();
-
-        markers.forEach(marker => {
-          const markerCategory = marker.options.category; 
-          if (markerCategory === category) {
-            if (checkbox.checked) {
-              marker.addTo(this.map);
+      btns.forEach((button) => {
+        button.addEventListener('click', () => {
+          var routeId = button.getAttribute('data-route');
+          var selectedRoute = this.getRouteById(routes, routeId);
+    
+          if (selectedRoute) {
+            if (currentRoute) {
+              this.updateOpacity(currentRoute, 0);
+              currentRoute.button.style.backgroundColor = '';
+            }
+    
+            this.updateOpacity(selectedRoute, 1);
+            currentRoute = selectedRoute;
+            button.style.backgroundColor = selectedRoute.color; 
+            currentRoute.button = button; 
+          }
+        });
+      });
+    }
+    
+    getRouteById(routes, routeId) {
+      return routes.find((route) => route.id_route === routeId);
+    }
+    
+    updateOpacity(route, opacityValue) {
+      if (route.polylineLayer) {
+        this.map.removeLayer(route.polylineLayer);
+      }
+    
+      var coordinates = L.Polyline.fromEncoded(route.polyline).getLatLngs();
+      route.polylineLayer = L.polyline(coordinates, {
+        color: route.color,
+        weight: 3,
+        opacity: opacityValue,
+        lineJoin: "round"
+      });
+  
+      this.map.addLayer(route.polylineLayer);
+    }
+    
+    
+    addPointsEvent(points) {
+      points.forEach(({ coordinates, title, iconUrl}) => {
+  
+        const newIcon = new L.Icon({
+          iconUrl,
+          iconSize: [50, 25],
+          iconAnchor: [5, 30],
+          popupAnchor: [10, -20]
+        });
+  
+        const popupContent = `
+          <h1>${title}</h1>
+        `;
+  
+        L.marker([coordinates.lat, coordinates.lng], { icon: newIcon })
+          .bindPopup(popupContent, {
+            maxWidth: 150,
+            keepInView: true,
+            className: 'markerPopup'
+          })
+          .addTo(this.map);
+      });
+    }
+  
+    createRouteCheckboxes(routes) {
+      routes.forEach((route) => {
+        const checkboxHTML = `
+          <div class="check-box-container d-block">
+            <input id="route-${route.id}" type="checkbox" class="r-cb-iptn" data-route="${route.id_route}">
+            <span class="form-check-label fs-filter">${route.name}</span>
+          </div>
+        `;
+        document.querySelector('#routeCheckboxes').insertAdjacentHTML('beforeend', checkboxHTML);
+      });
+  
+      document.querySelectorAll('.r-cb-iptn').forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+          var routeId = checkbox.getAttribute('data-route');
+          var checked = checkbox.checked;
+  
+          var route = this.getRouteById(routes, routeId);
+          if (route) {
+            if (checked) {
+              this.updateOpacity(route, 1);
             } else {
-              this.map.removeLayer(marker);
+              this.updateOpacity(route, 0);
             }
           }
         });
       });
-    });
-  }
+    }
   
+    filterPointsByCategory() {
+      const checkboxes = document.querySelectorAll('.p-cb-iptn');
+      
+      checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+          const category = checkbox.getAttribute('data-category');
+          const markers = this.pointLayerGroup.getLayers();
+  
+          markers.forEach(marker => {
+            const markerCategory = marker.options.category; 
+            if (markerCategory === category) {
+              if (checkbox.checked) {
+                marker.addTo(this.map);
+              } else {
+                this.map.removeLayer(marker);
+              }
+            }
+          });
+        });
+      });
+    }
 }

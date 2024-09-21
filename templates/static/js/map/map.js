@@ -72,31 +72,15 @@ export class Map {
     });
   }
 
-  async addSegments(routeId) {
-    const segments = await this.fetchRoute(routeId);
-
+  async addSegments(segments) {
     for (const segment of segments) {
-      const segmentData = await this.fetchSegment(segment.id);
-      const segmentCoordinates = L.Polyline.fromEncoded(segmentData.map.polyline).getLatLngs();
+      const segmentCoordinates = L.Polyline.fromEncoded(segment.polyline).getLatLngs();
 
       const segmentPolyline = this.createPolyline(segmentCoordinates, 'green', 3);
       const hoverAreaSegment = this.createPolyline(segmentCoordinates, 'transparent', 15, 1, true);
 
-      this.handleSegmentPopup(hoverAreaSegment, segment, segmentData);
+      this.handleSegmentPopup(hoverAreaSegment, segment);
     }
-  }
-
-  async fetchRoute(routeId) {
-    const url = `https://www.strava.com/api/v3/routes/${routeId}`;
-    const headers = { 'Authorization': 'Bearer e30a4c48454de623997982e8866300fd882e0f66' };
-    const data = await this.fetchData(url, headers);
-    return data.segments;
-  }
-
-  async fetchSegment(segmentId) {
-    const url = `https://www.strava.com/api/v3/segments/${segmentId}`;
-    const headers = { 'Authorization': 'Bearer e30a4c48454de623997982e8866300fd882e0f66' };
-    return await this.fetchData(url, headers);
   }
 
   async fetchData(url, headers = {}) {
@@ -114,14 +98,14 @@ export class Map {
     }).addTo(this.map);
   }
 
-  handleSegmentPopup(hoverArea, segment, segmentData) {
+  handleSegmentPopup(hoverArea, segment) {
     let openPopup = null;
 
     const showPopup = (event) => {
       if (!openPopup) {
         openPopup = L.popup()
           .setLatLng(event.latlng)
-          .setContent(`ID do segmento: ${segment.id}<br>Athlete Count: ${segmentData.athlete_count}`)
+          .setContent(`ID do segmento: ${segment.id}<br>Athlete Count: ${segment.athlete_count}`)
           .openOn(this.map);
       }
     };

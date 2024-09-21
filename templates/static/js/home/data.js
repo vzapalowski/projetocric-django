@@ -18,7 +18,7 @@ fetch(Urls.home_cities)
     map.filterPointsByCategory();
 
     data[0].routes.forEach(route => {
-      map.addSegments(route.id_route);
+      map.addSegments(route.segments);
     });
   });
 

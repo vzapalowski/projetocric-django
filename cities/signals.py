@@ -1,4 +1,4 @@
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 
 from .models.api_strava import Api
@@ -14,20 +14,26 @@ def insert_polyline(sender, instance, **kwargs):
         instance.polyline = polyline
     except KeyError:
         instance.polyline = None
-        
+
 @receiver(pre_save, sender=Route)
-def insert_distance_and_segments(sender, instance, **kwargs):
+def insert_distance(sender, instance, **kargs):
     api = Api()
     try:
         distance = api.get_distance(instance.id_route)
-        instance.distance = f'{distance/1000:.2f}'
-
+        instance.distance = f'{distance / 1000:.2f}'
+    except KeyError:
+        instance.distance = None
+        
+@receiver(post_save, sender=Route)
+def insert_segments(sender, instance, created, **kwargs):
+    api = Api()
+    try:
+        # # Obtém os segmentos da rota
         segments = api.get_segments(instance.id_route)
-
-        Segment.objects.filter(route=instance).delete()
-
+        
+        # # Insere ou atualiza os segmentos da rota
         for seg in segments:
-            segment = api.get_segment(seg['id'])
+            segment  = api.get_segment(seg['id'])
             Segment.objects.update_or_create(
                 id=segment['id'], 
                 name=segment['name'],
@@ -46,7 +52,8 @@ def insert_distance_and_segments(sender, instance, **kwargs):
             )
 
     except KeyError:
-        instance.distance = None
+        instance.segments = None
+
 
 @receiver(pre_save, sender=City)
 def change_name_banner_image(sender, instance, **kwargs):

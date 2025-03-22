@@ -21,7 +21,7 @@ import datetime
 # import locale
 
 from event.models import Event, Enrollment, EnrollmentType2, Enrollment3PasseioCiclistico
-from event.models import EnrollmentForm, EnrollmentFormType2, enrollment3PasseioIfsulForm
+from event.models import EnrollmentForm, EnrollmentFormType2, enrollment3PasseioIfsulForm, enrollment4PasseioIfsulForm
 from event.models.enrollment import Bond
 from event.models.how_knew import HowKnew
 from event.models.route_path import RoutePath
@@ -184,7 +184,7 @@ def enrollment4(request, event_id):
         if form.is_valid():
             full_name = form.cleaned_data['full_name']  
             email = form.cleaned_data['email']  
-            send_email(email, full_name, event)
+            # send_email(email, full_name, event)
             form.save()
             messages.success(request, 'Cadastro feito com Sucesso!')
             return redirect('events:event', pk=event_id)
@@ -321,6 +321,14 @@ def delete_enrollment_type2(request, enrollment_id):
     
 def delete_enrollment_type3(request, enrollment_id):
     enrollment = enrollment3PasseioIfsulForm.objects.get(id=enrollment_id)
+    if request.user == enrollment.user:
+        enrollment.delete()
+        return redirect('users:profile')
+    else:
+        return redirect('users:profile')
+    
+def delete_enrollment_type4(request, enrollment_id):
+    enrollment = enrollment4PasseioIfsulForm.objects.get(id=enrollment_id)
     if request.user == enrollment.user:
         enrollment.delete()
         return redirect('users:profile')

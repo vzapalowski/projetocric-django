@@ -185,7 +185,14 @@ def enrollment4(request, event_id):
         if form.is_valid():
             full_name = form.cleaned_data['full_name']  
             email = form.cleaned_data['email']  
-            send_email(email, full_name, event)
+            
+            try:
+                send_email(email, full_name, event)
+            except Exception as e:
+                messages.error(request, f"Ocorreu um erro ao enviar o e-mail: {str(e)}")
+                return redirect('events:event', pk=event_id)
+            
+            
             form.save()
             messages.success(request, 'Cadastro feito com Sucesso!')
             return redirect('events:event', pk=event_id)
@@ -223,7 +230,7 @@ def send_email(email, name, event):
     email_receiver = email
 
     subject = f'Confirmação de Inscrição no Evento {event.name}'
-
+    
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template('/event/templates/events/email/mail.html')
 

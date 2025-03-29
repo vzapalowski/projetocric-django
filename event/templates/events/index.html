@@ -242,7 +242,7 @@
 
       {% elif event.form_type == 'Type-3' %}
 
-      <form class="container-fluid container-sm container-lg-cric bg-light px-3 py-5 mt-5 rounded" id="enrollment-form" method="POST" action="{% url 'events:enrollment4' event_id=event.id %}">
+      <form class="container-fluid container-sm container-lg-cric bg-light px-3 py-5 mt-5 rounded" id="enrollment-form" method="POST" action="{% url 'events:enrollment3' event_id=event.id %}">
         {% csrf_token %}
 
           <!-- INPUT NAME -->

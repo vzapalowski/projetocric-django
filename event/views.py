@@ -159,52 +159,53 @@ def enrollment3(request, event_id):
 def enrollment4(request, event_id):
     event = Event.objects.get(pk=event_id)
     if request.method == 'POST':
-        email = request.POST.get('email')
-        form = enrollment4PasseioIfsulForm(request.POST, request.FILES)
-        mutable_form = form.data.copy()
+        # email = request.POST.get('email')
+        # form = enrollment4PasseioIfsulForm(request.POST, request.FILES)
+        # mutable_form = form.data.copy()
         
-        try:
-            validate_email(email)
-        except ValidationError:
-            messages.error(request, 'O email fornecido não é válido.')
-            mutable_form['email'] = ''
-            modified_form = enrollment4PasseioIfsulForm(mutable_form, request.FILES)
-            context = {
-                'event': event,
-                'form': modified_form,
-                'bond': Bond.objects.all(),
-                'howKnew': HowKnew.objects.all(),
-                'routePath': RoutePath.objects.all(),
-                'events': Event.objects.all()
-            }
+        # try:
+        #     validate_email(email)
+        # except ValidationError:
+        #     messages.error(request, 'O email fornecido não é válido.')
+        #     mutable_form['email'] = ''
+        #     modified_form = enrollment4PasseioIfsulForm(mutable_form, request.FILES)
+        #     context = {
+        #         'event': event,
+        #         'form': modified_form,
+        #         'bond': Bond.objects.all(),
+        #         'howKnew': HowKnew.objects.all(),
+        #         'routePath': RoutePath.objects.all(),
+        #         'events': Event.objects.all()
+        #     }
             
-            return render(request, 'events/index.html', context)
+        #     return render(request, 'events/index.html', context)
         
         
-        if form.is_valid():
-            full_name = form.cleaned_data['full_name']  
-            email = form.cleaned_data['email']  
-            # send_email(email, full_name, event)
-            form.save()
-            messages.success(request, 'Cadastro feito com Sucesso!')
-            return redirect('events:event', pk=event_id)
-        else:
-            error_message = "\n".join(
-                f"{str(form.fields[field_name].label)}: {error}"
-                for field_name, error_list in form.errors.items()
-                for error in error_list
-            )
-            messages.error(request, error_message)
+        # if form.is_valid():
+        #     full_name = form.cleaned_data['full_name']  
+        #     email = form.cleaned_data['email']  
+        #     # send_email(email, full_name, event)
+        #     form.save()
+        #     messages.success(request, 'Cadastro feito com Sucesso!')
+        #     return redirect('events:event', pk=event_id)
+        # else:
+        #     error_message = "\n".join(
+        #         f"{str(form.fields[field_name].label)}: {error}"
+        #         for field_name, error_list in form.errors.items()
+        #         for error in error_list
+        #     )
+        #     messages.error(request, error_message)
             
-            context = {
-                'event': event,
-                'form': form,
-                'bond': Bond.objects.all(),
-                'howKnew': HowKnew.objects.all(),
-                'routePath': RoutePath.objects.all(),
-                'events': Event.objects.all()
-            }
-            return render(request, 'events/index.html', context)
+        #     context = {
+        #         'event': event,
+        #         'form': form,
+        #         'bond': Bond.objects.all(),
+        #         'howKnew': HowKnew.objects.all(),
+        #         'routePath': RoutePath.objects.all(),
+        #         'events': Event.objects.all()
+        #     }
+            # return render(request, 'events/index.html', context)
+        return render(request, 'events/index.html')
     return redirect('events:event', pk=event_id)
 
 def download_pdf(request, event_id):

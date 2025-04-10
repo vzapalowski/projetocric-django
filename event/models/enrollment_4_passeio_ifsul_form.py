@@ -17,5 +17,5 @@ class enrollment4PasseioIfsulForm(forms.ModelForm):
         model = Enrollment4PasseioCiclistico
         fields = '__all__'
 
-    def clean_rg(self):
-        return validate_field(self, Enrollment4PasseioCiclistico, 'rg', 'Este RG já foi cadastrado!')
+    # def clean_rg(self):
+    #     return validate_field(self, Enrollment4PasseioCiclistico, 'rg', 'Este RG já foi cadastrado!')

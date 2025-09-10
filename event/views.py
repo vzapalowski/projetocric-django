@@ -21,7 +21,7 @@ import datetime
 # import locale
 
 from event.models import Event, Enrollment, EnrollmentType2, Enrollment3PasseioCiclistico
-from event.models import EnrollmentForm, EnrollmentFormType2, enrollment3PasseioIfsulForm
+from event.models import EnrollmentForm, EnrollmentFormType2, enrollment3PasseioIfsulForm, enrollment4PasseioIfsulForm
 from event.models.enrollment import Bond
 from event.models.how_knew import HowKnew
 from event.models.route_path import RoutePath
@@ -156,6 +156,65 @@ def enrollment3(request, event_id):
             return render(request, 'events/index.html', context)
     return redirect('events:event', pk=event_id)
 
+def enrollment4(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        form = enrollment4PasseioIfsulForm(request.POST, request.FILES)
+        mutable_form = form.data.copy()
+        
+        try:
+            validate_email(email)
+        except ValidationError:
+            messages.error(request, 'O email fornecido não é válido.')
+            mutable_form['email'] = ''
+            modified_form = enrollment4PasseioIfsulForm(mutable_form, request.FILES)
+            context = {
+                'event': event,
+                'form': modified_form,
+                'bond': Bond.objects.all(),
+                'howKnew': HowKnew.objects.all(),
+                'routePath': RoutePath.objects.all(),
+                'events': Event.objects.all()
+            }
+            
+            return render(request, 'events/index.html', context)
+        except Exception as e:
+            messages.error(request, f"Ocorreu um erro: {str(e)}")
+        
+        if form.is_valid():
+            full_name = form.cleaned_data['full_name']  
+            email = form.cleaned_data['email']  
+            
+            try:
+                send_email(email, full_name, event)
+            except Exception as e:
+                messages.error(request, f"Ocorreu um erro ao enviar o e-mail: {str(e)}")
+                return redirect('events:event', pk=event_id)
+            
+            
+            form.save()
+            messages.success(request, 'Cadastro feito com Sucesso!')
+            return redirect('events:event', pk=event_id)
+        else:
+            error_message = "\n".join(
+                f"{str(form.fields[field_name].label)}: {error}"
+                for field_name, error_list in form.errors.items()
+                for error in error_list
+            )
+            messages.error(request, error_message)
+            
+            context = {
+                'event': event,
+                'form': form,
+                'bond': Bond.objects.all(),
+                'howKnew': HowKnew.objects.all(),
+                'routePath': RoutePath.objects.all(),
+                'events': Event.objects.all()
+            }
+            return render(request, 'events/index.html', context)
+    return redirect('events:event', pk=event_id)
+
 def download_pdf(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     if event.pdf_file:
@@ -171,7 +230,7 @@ def send_email(email, name, event):
     email_receiver = email
 
     subject = f'Confirmação de Inscrição no Evento {event.name}'
-
+    
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template('/event/templates/events/email/mail.html')
 
@@ -270,6 +329,14 @@ def delete_enrollment_type2(request, enrollment_id):
     
 def delete_enrollment_type3(request, enrollment_id):
     enrollment = enrollment3PasseioIfsulForm.objects.get(id=enrollment_id)
+    if request.user == enrollment.user:
+        enrollment.delete()
+        return redirect('users:profile')
+    else:
+        return redirect('users:profile')
+    
+def delete_enrollment_type4(request, enrollment_id):
+    enrollment = enrollment4PasseioIfsulForm.objects.get(id=enrollment_id)
     if request.user == enrollment.user:
         enrollment.delete()
         return redirect('users:profile')

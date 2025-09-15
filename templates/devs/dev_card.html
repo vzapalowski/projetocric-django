@@ -1,0 +1,52 @@
+{% load static %}
+
+<div class="col">
+    <div class="card text-center">
+        <img src="{% static image_url %}" class="card-img-top rounded-circle card-img-circle mx-auto mt-3" alt="{{ name }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ name }}</h5>
+            <p class="card-text">{{ role }}</p>
+            <div class="d-flex justify-content-center">
+                {% if linkedin %}
+                <div class="p-2">
+                    <a href="{{ linkedin }}" target="_blank">
+                        {% include "components/icons/linkedin.svg" %}
+                    </a>
+                </div>
+                {% endif %}
+
+                {% if instagram %}
+                <div class="p-2">
+                    <a href="{{ instagram }}" target="_blank">
+                        {% include "components/icons/instagram.svg" %}
+                    </a>
+                </div>
+                {% endif %}
+
+                {% if github %}
+                <div class="p-2">
+                    <a href="{{ github }}" target="_blank">
+                        {% include "components/icons/github.svg" %}
+                    </a>
+                </div>
+                {% endif %}
+
+                {% if facebook %}
+                <div class="p-2">
+                    <a href="{{ facebook }}" target="_blank">
+                        {% include "components/icons/facebook.svg" %}
+                    </a>
+                </div>
+                {% endif %}
+
+                {% if website %}
+                <div class="p-2">
+                    <a href="{{ website }}" target="_blank">
+                        {% include "components/icons/link.svg" %}
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

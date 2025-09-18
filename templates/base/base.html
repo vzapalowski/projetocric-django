@@ -18,6 +18,8 @@
 
   <link rel="icon" href="{% static 'images/logos/rotacric-alternative.png' %}" type="image/png">
 
+  <link rel="stylesheet" href="{% static 'style/global.css' %}">
+
   <link rel="stylesheet" href="{% static 'style/style-route.css' %}">
 
 
@@ -113,9 +115,21 @@ crossorigin=""
 
 </head>
 <body class="background">
-    {% include 'base/desktop/desktop.html#navigation' %}
 
-    {% include 'base/mobile/mobile.html#navigation' %}
+      <!-- Desktop -->
+    {% if user.is_authenticated %}
+        {% include 'base/header/desktop/authenticated.html' %}
+    {% else %}
+        {% include 'base/header/desktop/guest.html' %}
+    {% endif %}
+
+    <!-- Mobile -->
+    {% if user.is_authenticated %}
+        {% include 'base/header/mobile/authenticated.html' %}
+    {% else %}
+        {% include 'base/header/mobile/guest.html' %}
+    {% endif %}
+
 
     {%block 'content'%}{%endblock%}
 

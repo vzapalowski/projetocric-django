@@ -1,0 +1,56 @@
+{% load static %}
+
+<div class="container-fluid d-none d-md-block text-center nav-bar-container p-0 font-cric">
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <a href="{% url 'home:home' %}" class="m-nav">
+        <img class="img-fluid" width="70" height="70" src="{% static 'images/logos/rotacric-subtitle-sem-fundo.png' %}" alt="Logo RotaCric">
+      </a>
+
+      <div class="d-flex align-items-center ms-auto">
+        <ul class="navbar-nav flex-row me-3">
+          <li class="nav-item"><a href="#events" class="nav-link btn-hover-cric px-4 py-2 mx-1">Eventos</a></li>
+          <li class="nav-item"><a href="#cities" class="nav-link btn-hover-cric px-4 py-2 mx-1">Municípios</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link btn-hover-cric px-4 py-2 mx-1">Quem Somos?</a></li>
+          <li class="nav-item"><a href="{% url 'home:devs' %}" class="nav-link btn-hover-cric px-4 py-2 mx-1">Desenvolvedores</a></li>
+        </ul>
+
+        <div class="dropdown">
+          <a class="d-flex align-items-center text-decoration-none dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            {% if user.profile.image %}
+              <img src="{{ user.profile.image.url }}" alt="Avatar" width="40" height="40" class="rounded-circle me-2">
+            {% else %}
+              <div class="user-initials me-2">
+                {{ user.get_full_name|default:user.username|slice:":1"|upper }}{% if user.get_full_name %}{{ user.get_full_name|slice:"1:2"|upper }}{% endif %}
+              </div>
+            {% endif %}
+            <span class="fw-semibold">{{ user.username }}</span>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
+            <li class="px-3 py-2 d-flex align-items-center">
+              {% if user.profile.image %}
+                <img src="{{ user.profile.image.url }}" alt="Avatar" width="50" height="50" class="rounded-circle me-2">
+              {% else %}
+                <div class="user-initials me-2" style="width:50px; height:50px; font-size:1.2rem;">
+                {{ user.get_full_name|default:user.username|slice:":1"|upper }}{% if user.get_full_name %}{{ user.get_full_name|slice:"1:2"|upper }}{% endif %}
+                </div>
+              {% endif %}
+              <div>
+                <div class="fw-bold">{{ user.get_full_name|default:user.username }}</div>
+                <div class="text-muted small">{{ user.email }}</div>
+              </div>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'users:profile' %}">Meu Perfil</a></li>
+            <li>
+              <a class="dropdown-item text-danger d-flex align-items-center" href="{% url 'users:logout' %}">
+                Sair
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>

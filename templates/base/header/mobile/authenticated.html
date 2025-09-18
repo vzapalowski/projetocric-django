@@ -1,0 +1,115 @@
+{% load partials %}
+{% load static %}
+
+{% partialdef navigation %}
+
+<div class="container-fluid d-block d-md-none text-center nav-bar-container p-0 font-cric">
+  <nav class="navbar bg-body-tertiary fixed-top border-bottom border-secondary-subtle">
+    <div class="container-fluid">
+      <!-- Logo -->
+      <a href="{% url 'home:home' %}" class="m-nav">
+        <img class="img-fluid" width="60" height="60" src="{% static 'images/logos/rotacric-sem-fundo.png' %}" alt="Logo RotaCric">
+      </a>
+
+      <!-- Botão hamburguer -->
+      <button id="btn-open" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" style="box-shadow: none;">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Offcanvas -->
+      <div class="offcanvas offcanvas-end offcanvas-cric" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Rota<span class="topic-color fw-bold">Cric</span></h5>
+          <button type="button" class="btn-close" id="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body">
+          <ul class="navbar-nav d-flex justify-content-evenly text-start flex-grow-1 pe-3 gap-1">
+
+            <!-- Links principais -->
+            <li class="nav-item" data-bs-dismiss="offcanvas">
+              <a class="d-flex align-items-center nav-link btn-hover-cric px-4 text-primary-emphasis" href="{% url 'home:home' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" class="me-1" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z"/>
+                </svg>
+                Home
+              </a>
+            </li>
+
+            <li class="nav-item" data-bs-dismiss="offcanvas">
+              <a class="d-flex align-items-center nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#events">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" class="me-1" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/>
+                </svg>
+                Eventos
+              </a>
+            </li>
+
+            <li class="nav-item" data-bs-dismiss="offcanvas">
+              <a class="d-flex align-items-center nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#cities">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" class="me-1" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M15 11V5l-3-3l-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z"/>
+                </svg>
+                Municípios
+              </a>
+            </li>
+
+            <li class="nav-item" data-bs-dismiss="offcanvas">
+              <a class="d-flex align-items-center nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#manual">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" class="me-1" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M21 5c-1.11-.35-2.33-.5-3.5-.5c-1.95 0-4.05.4-5.5 1.5c-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5c.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5c1.35-.85 3.8-1.5 5.5-1.5c1.65 0 3.35.3 4.75 1.05c.1.05.15.05.25.05c.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5c-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5c1.2 0 2.4.15 3.5.5v11.5z"/>
+                  <path fill="currentColor" d="M17.5 10.5c.88 0 1.73.09 2.5.26V9.24c-.79-.15-1.64-.24-2.5-.24c-1.7 0-3.24.29-4.5.83v1.66c1.13-.64 2.7-.99 4.5-.99zM13 12.49v1.66c1.13-.64 2.7-.99 4.5-.99c.88 0 1.73.09 2.5.26V11.9c-.79-.15-1.64-.24-2.5-.24c-1.7 0-3.24.3-4.5.83zm4.5 1.84c-1.7 0-3.24.29-4.5.83v1.66c1.13-.64 2.7-.99 4.5-.99c.88 0 1.73.09 2.5.26v-1.52c-.79-.16-1.64-.24-2.5-.24z"/>
+                </svg>
+                Manual
+              </a>
+            </li>
+
+            <li class="nav-item" data-bs-dismiss="offcanvas">
+              <a class="d-flex align-items-center nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="#about">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" class="me-1" viewBox="0 0 512 512">
+                  <path fill="currentColor" d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42s-42-18.804-42-42s18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"/>
+                </svg>
+                Sobre
+              </a>
+            </li>
+
+            <li class="nav-item" data-bs-dismiss="offcanvas">
+              <a class="d-flex align-items-center nav-link btn-hover-cric px-4 text-primary-emphasis page-nav-item" href="{% url 'home:devs' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" class="me-1" viewBox="0 0 512 512">
+                  <path fill="currentColor" d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42s-42-18.804-42-42s18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"/>
+                </svg>
+                Desenvolvedores
+              </a>
+            </li>
+
+            <!-- Usuário autenticado -->
+            <li class="nav-item mt-3" data-bs-dismiss="offcanvas">
+              <div class="d-flex align-items-center px-3 py-2">
+                {% if user.profile.image %}
+                  <img src="{{ user.profile.image.url }}" alt="Avatar" width="50" height="50" class="rounded-circle me-2">
+                {% else %}
+                  <div class="user-initials me-2 d-flex justify-content-center align-items-center" style="width:50px; height:50px; font-size:1.2rem; border-radius:50%; background-color:#273273; color:#fff;">
+                    {{ user.get_full_name|default:user.username|slice:":1"|upper }}{% if user.get_full_name %}{{ user.get_full_name|slice:"1:2"|upper }}{% endif %}
+                  </div>
+                {% endif %}
+                <div>
+                  <div class="fw-bold">{{ user.get_full_name|default:user.username }}</div>
+                  <div class="text-muted small">{{ user.email }}</div>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item" data-bs-dismiss="offcanvas">
+              <a class="nav-link btn-hover-cric px-4 text-primary-emphasis" href="{% url 'users:profile' %}">Perfil</a>
+            </li>
+            <li class="nav-item" data-bs-dismiss="offcanvas">
+              <a class="nav-link btn-hover-cric px-4 text-danger" href="{% url 'users:logout' %}">Sair</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+{% endpartialdef navigation %}

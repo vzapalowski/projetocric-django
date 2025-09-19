@@ -1,0 +1,56 @@
+.user-initials {
+  width: 40px;
+  height: 40px;
+  background-color: #273273;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+/* ---------- Mensagens ---------- */
+
+.toast-message {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    min-width: 250px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.toast-message.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast-message.hide {
+    opacity: 0;
+    transform: translateX(100%); 
+}
+
+.toast-message.success { background-color: #4CAF50; } 
+.toast-message.error { background-color: #F44336; }   
+.toast-message.info { background-color: #2196F3; }
+.toast-message.warning { background-color: #FF9800; }
+
+.toast-title {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.toast-text {
+    flex: 1;
+}

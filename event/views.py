@@ -27,7 +27,6 @@ from event.models.how_knew import HowKnew
 from event.models.route_path import RoutePath
 from event.credentials import *
 
-
 class EventView(DetailView):
     model = Event
     template_name = 'events/index.html'
@@ -285,7 +284,7 @@ def generate_certificate(name, event):
 
     template_loader = jinja2.FileSystemLoader('.')
     template_env = jinja2.Environment(loader=template_loader)
-    html_template = 'event/templates/events/certificate.html'
+    html_template = 'templates/events/certificate.html'
     template = template_env.get_template(html_template)
     output_text = template.render(context)
 

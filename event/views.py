@@ -27,7 +27,6 @@ from event.models.how_knew import HowKnew
 from event.models.route_path import RoutePath
 from event.credentials import *
 
-
 class EventView(DetailView):
     model = Event
     template_name = 'events/index.html'
@@ -232,7 +231,7 @@ def send_email(email, name, event):
     subject = f'Confirmação de Inscrição no Evento {event.name}'
     
     env = Environment(loader=FileSystemLoader('.'))
-    template = env.get_template('/event/templates/events/email/mail.html')
+    template = env.get_template('templates/events/email/mail.html')
 
     template_params = {'name': name,'event': event.name}
 
@@ -285,7 +284,7 @@ def generate_certificate(name, event):
 
     template_loader = jinja2.FileSystemLoader('.')
     template_env = jinja2.Environment(loader=template_loader)
-    html_template = 'event/templates/events/certificate.html'
+    html_template = 'templates/events/certificate.html'
     template = template_env.get_template(html_template)
     output_text = template.render(context)
 

@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif !important;
+}
+
+html, body {
+  background-color: #F1F1F1;
+}
+
+.bg-light-light {
+  background-color: #F1F1F1;
+}
+
+/* ---------- Botões ---------- */
+.btn-return {
+  padding: 1rem !important;
+}
+
+.btn-cric {
+  background-color: #273273 !important;
+  color: #fff !important;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: 0.4s ease-in-out !important;
+}
+
+.btn-cric:hover {
+  background-color: #2B2F4D !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(39, 50, 115, 0.3);
+}
+
+/* ---------- Background Imagem ---------- */
+.bg-img {
+  background-image: url(../images/top-page/unsplash-img-moutain-bike.avif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* ---------- Cores ---------- */
+.text-primary-color {
+  color: #273273;
+}
+
+/* ---------- Inputs ---------- */
+#frm-login input {
+  font-size: 1rem;
+  border-radius: 50px;
+  border: 1px solid #ddd;
+  transition: 0.3s;
+}
+
+#frm-login input:focus {
+  border-color: #273273;
+  box-shadow: 0 0 0 0.25rem rgba(39, 50, 115, 0.2);
+}
+
+/* ---------- Logo ---------- */
+.img-logo {
+  height: 8rem;
+  width: 8rem;
+}
+
+/* ---------- Links ---------- */
+a {
+  transition: 0.3s ease-in-out;
+}
+
+a:hover {
+  color: #273273 !important;
+  text-decoration: underline !important;
+}
+
+/* ---------- Responsividade ---------- */
+@media (max-width: 900px) {
+  .adjust-register-img {
+    background-position: 32% 0% !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #frm-register,
+  #frm-login {
+    padding-top: 5rem;
+  }
+  .btn-return {
+    margin-bottom: 5rem;
+  }
+}

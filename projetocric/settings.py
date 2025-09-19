@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'multiupload',
     'colorfield',
+    "template_partials",
 ]
 
 MIDDLEWARE = [

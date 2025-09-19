@@ -231,7 +231,7 @@ def send_email(email, name, event):
     subject = f'Confirmação de Inscrição no Evento {event.name}'
     
     env = Environment(loader=FileSystemLoader('.'))
-    template = env.get_template('/event/templates/events/email/mail.html')
+    template = env.get_template('templates/events/email/mail.html')
 
     template_params = {'name': name,'event': event.name}
 

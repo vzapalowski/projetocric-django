@@ -1,0 +1,42 @@
+{% load static %}
+
+<form class="container-fluid container-sm container-lg-cric bg-light px-3 py-5 mt-5 rounded" id="enrollment-form" method="POST" action="{% url 'events:enrollment2' event_id=event.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- EVENT ID -->
+        <input  type="hidden" name="event" value="{{ event.id }}" id="event">
+
+        <!-- USER ID -->
+        <input type="hidden" name="user" value="{{ user.id|default:'1' }}" id="user">
+
+        <!-- INPUT NAME -->
+        <div class="input-group mb-3">
+            <span class="input-group-text bg-light-light">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" style="color: #131A40;" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </span>
+            <input class="form-control" type="text" name="full_name" placeholder="Nome" maxlength="100" required="" id="id_full_name" value="{{ form.full_name.value|default:'' }}">
+        </div>
+        <!-- INPUT EMAIL -->
+        <div class="input-group mb-3">
+            <span class="input-group-text bg-light-light">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" style="color: #131A40;" viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5l-8-5V6l8 5l8-5v2z"/></svg>
+            </span>
+            <input class="form-control" type="text" name="email" placeholder="Email" maxlength="70" required="" id="id_email" value="{{ form.email.value|default:'' }}">
+        </div>
+        <div>
+          <p style="text-align: justify;">
+            Baixe o formulário de inscrição <a href="{% url 'events:download_pdf' event_id=event.id %}" target="_blank">clicando aqui.</a> <b>Imprima e mande uma foto do formulário preenchido.</b>
+          </p>
+        </div>
+        <!-- INPUT FORM PIC -->
+        <div class="input-group mb-3 justify-content-center">
+
+
+          <div class="mb-3">
+            <label for="formFileMultiple" class="form-label mt-3 tex"  for="iptn-file">Após preencher, envie o arquivo abaixo:</label>
+            <input class="form-control mt-2" type="file" id="iptn-file" name="term_file" accept=".pdf, .jpeg, .jpg, .png" multiple>
+          </div>
+        </div>
+      <div class="d-grid">
+        <button id="btn-form" class="btn btn-dark mt-2" type="submit">Concluir Inscrição</button>
+      </div>
+      </form>

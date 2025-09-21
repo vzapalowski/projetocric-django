@@ -1,6 +1,10 @@
 {%extends 'base/base.html' %}
 {% load static %}
 
+{% block 'styles' %}
+  <link rel="stylesheet" href="{% static 'style/style-profile.css' %}">
+{% endblock %}
+
 {%block 'content'%}
 
 <div id="image-preview-container">
@@ -119,12 +123,14 @@
               </div>
               <div class="col-sm-4">
                 <select class="form-select p-2 px-4 border-0 bg-body-secondary" name="bond_choice" required
-                  id="id_bond_choice">
-                  <option value="" disabled>Sobre Você</option>
-                  {% for bond_obj in bond %}
-                  <option value="{{ bond_obj.id }}" {% if bond_obj.id==user.personaldata.bond_choice.id %}selected{%
-                    endif %}>{{ bond_obj }}</option>
-                  {% endfor %}
+                        id="id_bond_choice">
+                    <option value="" disabled>Sobre Você</option>
+                    {% for bond_obj in bond %}
+                        <option value="{{ bond_obj.id }}"
+                            {% if bond_obj.id == user.personaldata.bond_choice.id %}selected{% endif %}>
+                            {{ bond_obj }}
+                        </option>
+                    {% endfor %}
                 </select>
               </div>
             </div>

@@ -26,15 +26,8 @@
               <label for="file-upload" class="text-center btn-alter d-flex justify-content-center align-items-center">
                 Alterar
               </label>
-              <input type="file" id="file-upload" style="display: none;" accept="image/*"
-                onchange="previewImage(event)">
-              {% if user.personaldata.profile_picture %}
-              <img src="/media/{{ user.personaldata.profile_picture }}" alt="foto do Usuario"
-                class="rounded-circle img-fluid profile-pic">
-              {% else %}
-              <img src="{% static 'images/prof_pic_default.jpg' %}" alt="foto do Usuario"
-                class="rounded-circle img-fluid profile-pic">
-              {% endif %}
+              <input type="file" id="file-upload" style="display: none;" accept="image/*"onchange="previewImage(event)">
+              {% include "components/user_avatar.html" with user=user size=150 class="img-fluid profile-pic" %}
             </div>
           </div>
         </div>

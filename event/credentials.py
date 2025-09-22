@@ -1,2 +1,4 @@
-EMAIL = 'ch-coex-rotacric@ifsul.edu.br'
-PASSWORD = 'azid ttxi ohan woqa'
+from decouple import config
+
+EMAIL = config('EMAIL_HOST_USER')
+PASSWORD = config('EMAIL_HOST_PASSWORD')

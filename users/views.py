@@ -168,7 +168,7 @@ def upload_image(request):
 
             img = img.crop((left, top, right, bottom))
 
-            img = img.resize((200, 200), PILImage.ANTIALIAS)
+            img = img.resize((200, 200), PILImage.Resampling.LANCZOS)
 
             uploaded_image_name = f"profile_picture_{user.username}_{timezone.now().strftime('%Y%m%d%H%M%S')}.jpg"
 

@@ -1,14 +1,14 @@
 .markerPopup h1 {
     font-size: 14px;
     /* text-align: center; */
-  }
+}
 
-  .markerPopup p {
+.markerPopup p {
     font-size: 12px;
     font-weight: 600;
-  }
+}
 
-  .markerPopup img {
+.markerPopup img {
     width: 150px;
     height: auto;
-  }
+}

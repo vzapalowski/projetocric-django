@@ -1,11 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
-
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
   font-family: 'Inter', sans-serif !important;
 }
 
@@ -20,20 +13,6 @@ html, body {
 /* ---------- Botões ---------- */
 .btn-return {
   padding: 1rem !important;
-}
-
-.btn-cric {
-  background-color: #273273 !important;
-  color: #fff !important;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: 0.4s ease-in-out !important;
-}
-
-.btn-cric:hover {
-  background-color: #2B2F4D !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(39, 50, 115, 0.3);
 }
 
 /* ---------- Background Imagem ---------- */

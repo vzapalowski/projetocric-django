@@ -1,12 +1,4 @@
 
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
-
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
-/* Text-Family - Inter */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
-
 /*!
  * Bootstrap  v5.3.0 (https://getbootstrap.com/)
  * Copyright 2011-2023 The Bootstrap Authors
@@ -14,9 +6,6 @@
  */
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
   font-family: 'Inter', sans-serif !important;
 }
 
@@ -152,35 +141,6 @@ div nav div form .fw-blue {
 
 .divisor-warning{
   border: 5px solid var(--primary-color);
-}
-
-/* FAB */
-.fab-container {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  height: fit-content;
-  width: fit-content;
-  z-index: 9999;
-  border-radius: 100%;
-  border: none;
-}
-.offcanvas-cric{
-    width: 215px !important;
-}
-
-#fab-button {
-  border: 2px solid var(--secondary-dark);
-  background-color: var(--secondary-dark);
-  height: 4rem;
-  width: 4rem;
-  border-radius: 100%;
-  transition: 0.5s;
-}
-
-#fab-button:hover{
-  background-color: var(--primary-color);
-  transition: 0.5s;
 }
 
 /* NAVIGATION */

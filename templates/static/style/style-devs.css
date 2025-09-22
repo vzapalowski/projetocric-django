@@ -36,6 +36,34 @@
     font-size: 1rem!important;
 }
 
+{#  Final  ? #}
+{#
+.p-2:hover{
+    transition: .3s;
+
+    background: #d3d3d3;
+    border-radius: 100%;
+}
+#}
+
+.p-2{
+    position: relative;
+}
+
+.p-2::after{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;      /* distância da linha até o elemento */
+    left: 10%;
+    background-color: black;
+    transition: width 0.3s;
+}
+
+.p-2:hover::after {
+  width: 80%;
+}
 
 body {
     background: #e1ebff !important;

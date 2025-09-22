@@ -9,9 +9,18 @@
 
       <div class="d-flex align-items-center ms-auto">
         <ul class="navbar-nav flex-row me-3">
-          <li class="nav-item"><a href="#events" class="nav-link btn-hover-cric px-4 py-2 mx-1">Eventos</a></li>
-          <li class="nav-item"><a href="#cities" class="nav-link btn-hover-cric px-4 py-2 mx-1">Municípios</a></li>
-          <li class="nav-item"><a href="#about" class="nav-link btn-hover-cric px-4 py-2 mx-1">Quem Somos?</a></li>
+
+          <!-- !!! Lembrar de transformar essa Url um uma nomeada-->
+          {% if request.path == '/devs'%}
+            <li class="nav-item"><a href="/#events" class="nav-link btn-hover-cric px-4 py-2 mx-1">Eventos</a></li>
+            <li class="nav-item"><a href="/#cities" class="nav-link btn-hover-cric px-4 py-2 mx-1">Municípios</a></li>
+            <li class="nav-item"><a href="/#about" class="nav-link btn-hover-cric px-4 py-2 mx-1">Quem Somos?</a></li>
+          {% else %}
+            <li class="nav-item"><a href="#events" class="nav-link btn-hover-cric px-4 py-2 mx-1">Eventos</a></li>
+            <li class="nav-item"><a href="#cities" class="nav-link btn-hover-cric px-4 py-2 mx-1">Municípios</a></li>
+            <li class="nav-item"><a href="#about" class="nav-link btn-hover-cric px-4 py-2 mx-1">Quem Somos?</a></li>
+          {% endif %}
+
           <li class="nav-item"><a href="{% url 'home:devs' %}" class="nav-link btn-hover-cric px-4 py-2 mx-1">Desenvolvedores</a></li>
         </ul>
 

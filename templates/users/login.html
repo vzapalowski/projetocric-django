@@ -36,29 +36,42 @@
                 {% csrf_token %}
 
                 <div class="mb-3">
-                    <input type="text" name="email" class="form-control" placeholder="Usuário ou Email">
+                    <input type="text" name="email" class="form-control rounded-0 shadow-none py-3 px-4"
+                        placeholder="Usuário ou Email">
                 </div>
                 <div class="mb-3">
-                    <input type="password" name="password" class="form-control" placeholder="Senha">
+                    <input type="password" name="password" class="form-control rounded-0 shadow-none py-3 px-4"
+                        placeholder="Senha">
                 </div>
-                <button type="submit" class="btn btn-outline-dark w-100" style="height: 45px;">Entrar</button>
+                <button type="submit" class="btn-cric w-100" style="height: 45px;">Entrar</button>
                 <div class="text-end mt-2">
                     <a href="/reset_password">Esqueci minha senha</a>
                 </div>
             </form>
 
             <!-- Botões Sociais -->
-            <div class="mt-4 d-flex gap-4">
-                <button class="btn btn-outline-danger social-btn">
-                    <i class="bi bi-google"></i> Entrar com Google
+            <div class="mt-4 d-flex gap-3">
+
+                <!-- Google -->
+                <button
+                    class="btn w-100 btn-danger d-flex align-items-center justify-content-center rounded-3 p-2 social-btn gap-2">
+                    {% include "components/icons/google.svg" %} Entrar com o Google
                 </button>
-                <button class="btn btn-outline-primary social-btn">
-                    <i class="bi bi-facebook"></i> Entrar com Facebook
+
+                <!-- Facebook -->
+                <button
+                    class="btn w-100 btn-primary d-flex align-items-center justify-content-center rounded-3 p-2 social-btn gap-2">
+                    {% include "components/icons/facebook.svg" %} Entrar com o Facebook
                 </button>
-                <button class="btn btn-outline-secondary social-btn">
-                    <i class="bi bi-building"></i> Entrar com SUAP
+
+                <!-- SUAP -->
+                <button
+                    class="btn w-100 btn-secondary d-flex align-items-center justify-content-center rounded-3 p-2 social-btn">
+                    Entrar com o SUAP
                 </button>
+
             </div>
+
         </div>
     </div>
 

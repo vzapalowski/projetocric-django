@@ -23,13 +23,7 @@
           <div class="card-body text-center card-user">
 
             <div class="image-container position-relative d-flex justify-content-center align-items-center">
-              {% if user.personaldata.profile_picture %}
-              <img src="/media/{{ user.personaldata.profile_picture }}" alt="foto do Usuario"
-                class="rounded-circle img-fluid profile-pic">
-              {% else %}
-              <img src="{% static 'images/prof_pic_default.jpg' %}" alt="foto do Usuario"
-                class="rounded-circle img-fluid profile-pic">
-              {% endif %}
+              {% include "components/user_avatar.html" with user=user size=150 class="img-fluid profile-pic" %}
             </div>
 
             <h5 class="my-3">{{ user.username }}</h5>

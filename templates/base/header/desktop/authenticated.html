@@ -16,26 +16,14 @@
         </ul>
 
         <div class="dropdown">
-          <a class="d-flex align-items-center text-decoration-none dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            {% if user.profile.image %}
-              <img src="{{ user.profile.image.url }}" alt="Avatar" width="40" height="40" class="rounded-circle me-2">
-            {% else %}
-              <div class="user-initials me-2">
-                {{ user.get_full_name|default:user.username|slice:":1"|upper }}{% if user.get_full_name %}{{ user.get_full_name|slice:"1:2"|upper }}{% endif %}
-              </div>
-            {% endif %}
-            <span class="fw-semibold">{{ user.username }}</span>
+          <a class="d-flex align-items-center text-decoration-none" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="fw-semibold me-2 dropdown-toggle">{{ user.username }}</span>
+            {% include "components/user_avatar.html" with user=user size=40 %}
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
             <li class="px-3 py-2 d-flex align-items-center">
-              {% if user.profile.image %}
-                <img src="{{ user.profile.image.url }}" alt="Avatar" width="50" height="50" class="rounded-circle me-2">
-              {% else %}
-                <div class="user-initials me-2" style="width:50px; height:50px; font-size:1.2rem;">
-                {{ user.get_full_name|default:user.username|slice:":1"|upper }}{% if user.get_full_name %}{{ user.get_full_name|slice:"1:2"|upper }}{% endif %}
-                </div>
-              {% endif %}
+              {% include "components/user_avatar.html" with user=user size=50 class="me-2" %}
               <div>
                 <div class="fw-bold">{{ user.get_full_name|default:user.username }}</div>
                 <div class="text-muted small">{{ user.email }}</div>

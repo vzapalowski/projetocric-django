@@ -1,0 +1,39 @@
+name: CI/CD - Rotacric
+
+on:
+  push:
+    branches:
+      - main
+      - dev-2024
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout do repositório
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2️⃣ Conectar no servidor via SSH e rodar deploy
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: 22
+          script: |
+            cd /home/rotacric/rotacric-app
+
+            # Build e deploy do docker-compose
+            docker compose pull
+            docker compose build web
+            docker compose up -d
+
+            # (Opcional) Atualizar Nginx
+            docker exec reverse-proxy nginx -s reload
+
+            # (Opcional) Inicializar banco se necessário
+            # docker exec database mysql -u root -protacric -D rotacric -e "source /dump-2025.sql;"
+

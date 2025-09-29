@@ -1,4 +1,5 @@
-const url_python = 'http://127.0.0.1:8000/api/routes/'
+
+const url_python = window.env.ENVIRONMENT_URL + '/api/routes/'
     fetch(url_python)
     .then(res => res.json())
     .then(rotas => {

@@ -1,13 +1,20 @@
+version: "3.9"
+
+volumes:
+  mysql_data:
+  admin_static:
+
+networks:
+  rotacric:
+
 services:
   # Website (Imagem própria)
   web:
-    # Substituição do build externo para o build integrado
-    #image: rotacric:latest
     build: .
     container_name: rotacric
     restart: always
     volumes:
-      - rotacric_files:/rotacric
+      - ./app/media:/rotacric/media
       - admin_static:/usr/local/lib/python3.10/site-packages/django/contrib/admin/static/admin/
     depends_on:
       db:
@@ -15,26 +22,28 @@ services:
     env_file:
       - .env
     networks:
-      rotacric:
+      - rotacric
+
   # Database (MySQL Long-Term-Support)
-  db:
-    image: mysql:lts
-    container_name: database
-    restart: always
-    volumes:
-      - mysql_data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: rotacric
-      MYSQL_USER: rotacric
-      MYSQL_PASSWORD: rotacric
-      MYSQL_DATABASE: rotacric
-    networks:
-      rotacric:
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+db:
+  image: mysql:lts
+  container_name: database
+  restart: always
+  volumes:
+    - mysql_data:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    MYSQL_USER: ${DB_USER}
+    MYSQL_PASSWORD: ${DB_PASSWORD}
+    MYSQL_DATABASE: ${DB_NAME}
+  networks:
+    - rotacric
+  healthcheck:
+    test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
+    interval: 30s
+    timeout: 10s
+    retries: 5
+
   # Reverse Proxy
   nginx:
     image: nginx:stable
@@ -43,8 +52,11 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./certs/:/certs/
-      - rotacric_files:/rotacric
+      # Mapeia a mesma pasta de mídia do Django para servir uploads
+      - ./app/media:/rotacric/media
       - admin_static:/usr/local/lib/python3.10/site-packages/django/contrib/admin/static/admin/
     ports:
       - "80:80"
       - "443:443"
+    networks:
+      - rotacric

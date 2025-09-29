@@ -9,7 +9,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       # 1️⃣ Checkout do repositório
       - name: Checkout code
@@ -24,16 +23,22 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
           script: |
-            cd /home/rotacric/rotacric-app
+            cd /home/rotacric/rotacric-app || exit
 
-            # Build e deploy do docker-compose
-            docker compose pull
-            docker compose build web
-            docker compose up -d
+            # Puxar código mais recente
+            git reset --hard
+            git pull origin $GITHUB_REF_NAME
 
-            # (Opcional) Atualizar Nginx
-            docker exec reverse-proxy nginx -s reload
+            # Verifica se Docker está instalado e instala se necessário
+            if ! command -v docker &> /dev/null; then
+              echo "Docker não encontrado. Instalando..."
+              apt update
+              apt install -y ca-certificates curl gnupg lsb-release
+              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | tee /etc/apt/trusted.gpg.d/docker.asc
+              add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+              apt update
+              apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+            fi
 
-            # (Opcional) Inicializar banco se necessário
-            # docker exec database mysql -u root -protacric -D rotacric -e "source /dump-2025.sql;"
-
+            # Build e deploy com Docker Compose (web e db apenas)
+            docker compose up -d --build web db

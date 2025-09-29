@@ -14,8 +14,8 @@ ENV MYSQLCLIENT_CFLAGS="-I/usr/include/mysql"
 ENV MYSQLCLIENT_LDFLAGS="-L/usr/lib/x86_64-linux-gnu -lmysqlclient"
 
 # Copiar apenas o necessário
-COPY requirements.txt /rotacric/
-COPY app/ /rotacric/app/
+COPY requirements.txt /rotacric/rotacric-app/
+COPY app/ /rotacric/rotacric-app/app/
 
 # Ajustar URLs JS se necessário (opcional)
 RUN sed -i 's|http://127.0.0.1:8000|https://rota-cric.charqueadas.ifsul.edu.br|g' /rotacric/templates/static/js/helpers/urls.js && \

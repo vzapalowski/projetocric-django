@@ -23,11 +23,18 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
           script: |
+            mkdir -p /home/rotacric/rotacric-app
             cd /home/rotacric/rotacric-app || exit
 
-            # Puxar código mais recente
-            git reset --hard
-            git pull origin $GITHUB_REF_NAME
+            # Se já existe repositório git, atualiza. Se não, clona.
+            if [ -d ".git" ]; then
+              echo "Repositório já existe, atualizando..."
+              git reset --hard
+              git pull origin "$GITHUB_REF_NAME"
+            else
+              echo "Repositório não encontrado, clonando..."
+              git clone -b "$GITHUB_REF_NAME" https://github.com/vzapalowski/projetocric-django.git .
+            fi
 
             # Verifica se Docker está instalado e instala se necessário
             if ! command -v docker &> /dev/null; then

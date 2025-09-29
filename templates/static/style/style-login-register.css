@@ -6,14 +6,27 @@ html, body {
   background-color: #F1F1F1;
 }
 
-.bg-light-light {
-  background-color: #F1F1F1;
+.bg-padrao {
+  background-color: #E1EBFF;
 }
 
 /* ---------- Botões ---------- */
 .btn-return {
   padding: 1rem !important;
 }
+
+/* register-senha */
+.btn-lg{
+  background-color: #434d86 !important;
+  color: rgb(178, 171, 219) !important;
+}
+
+.btn-lg:hover{
+  background-color: #2B2F4D !important;
+  color: #fff !important;
+}
+
+
 
 /* ---------- Background Imagem ---------- */
 .bg-img {
@@ -28,7 +41,7 @@ html, body {
   color: #273273;
 }
 
-/* ---------- Inputs ---------- */
+/* ---------- Inputs login ---------- */
 #frm-login input {
   font-size: 1rem;
   border-radius: 50px;
@@ -39,6 +52,14 @@ html, body {
 #frm-login input:focus {
   border-color: #273273;
   box-shadow: 0 0 0 0.25rem rgba(39, 50, 115, 0.2);
+}
+
+/* register */
+
+.mb-3 input{
+  background-color: #e8f0fe;
+
+  border: 1px solid #dee2e6 !important;
 }
 
 /* ---------- Logo ---------- */
@@ -58,6 +79,12 @@ a:hover {
 }
 
 /* ---------- Responsividade ---------- */
+@media (min-width: 1200px) {
+  .adjust-register-img {
+    background-position: 32% 20% !important;
+  }
+}
+
 @media (max-width: 900px) {
   .adjust-register-img {
     background-position: 32% 0% !important;
@@ -65,8 +92,7 @@ a:hover {
 }
 
 @media (max-width: 767px) {
-  #frm-register,
-  #frm-login {
+  #frm-register, #frm-login {
     padding-top: 5rem;
   }
   .btn-return {

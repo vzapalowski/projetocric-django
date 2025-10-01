@@ -17,10 +17,6 @@ ENV MYSQLCLIENT_LDFLAGS="-L/usr/lib/x86_64-linux-gnu -lmysqlclient"
 COPY requirements.txt /rotacric/rotacric-app/
 COPY app/ /rotacric/rotacric-app/app/
 
-# Ajustar URLs JS se necessário (opcional)
-RUN sed -i 's|http://127.0.0.1:8000|https://rota-cric.charqueadas.ifsul.edu.br|g' /rotacric/templates/static/js/helpers/urls.js && \
-    sed -i 's|http://127.0.0.1:8000|https://rota-cric.charqueadas.ifsul.edu.br|g' /rotacric/templates/static/js/routes/map.js
-
 # Instalar dependências Python
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install gunicorn

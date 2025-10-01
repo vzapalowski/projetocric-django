@@ -6,6 +6,7 @@ volumes:
 
 networks:
   rotacric:
+    external: true
 
 services:
   # Website (Imagem própria)
@@ -25,24 +26,24 @@ services:
       - rotacric
 
   # Database (MySQL Long-Term-Support)
-db:
-  image: mysql:lts
-  container_name: database
-  restart: always
-  volumes:
-    - mysql_data:/var/lib/mysql
-  environment:
-    MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-    MYSQL_USER: ${DB_USER}
-    MYSQL_PASSWORD: ${DB_PASSWORD}
-    MYSQL_DATABASE: ${DB_NAME}
-  networks:
-    - rotacric
-  healthcheck:
-    test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
-    interval: 30s
-    timeout: 10s
-    retries: 5
+  db:
+    image: mysql:lts
+    container_name: database
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    networks:
+      - rotacric
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   # Reverse Proxy
   nginx:
@@ -60,3 +61,21 @@ db:
       - "443:443"
     networks:
       - rotacric
+    depends_on:
+      - web
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Watchtower (atualiza as imagens no docker)
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock 
+    environment:
+      WATCHTOWER_CLEANUP: "true"  # Automatically remove old images
+      WATCHTOWER_POLL_INTERVAL: "300"  # Check for updates every 5 minutes

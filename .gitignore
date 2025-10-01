@@ -4,7 +4,7 @@
 *.pyc
 _pycache_
 db.sqlite3
-media
+#media
 
 key_git
 key_git.pub
@@ -140,4 +140,4 @@ GitHub.sublime-settings
 .history
 
 # server settings
-projetocric/settings.py
+#projetocric/settings.py

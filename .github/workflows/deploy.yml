@@ -4,13 +4,12 @@ on:
   push:
     branches:
       - main
-      - dev-2024
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # 1️⃣ Checkout do repositório
+      # 1️⃣ Checkout do repositório (só para o Actions saber o que foi alterado)
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -23,29 +22,12 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
           script: |
-            mkdir -p /home/rotacric/rotacric-app
             cd /home/rotacric/rotacric-app || exit
 
-            # Se já existe repositório git, atualiza. Se não, clona.
-            if [ -d ".git" ]; then
-              echo "Repositório já existe, atualizando..."
-              git reset --hard
-              git pull origin "$GITHUB_REF_NAME"
-            else
-              echo "Repositório não encontrado, clonando..."
-              git clone -b "$GITHUB_REF_NAME" https://github.com/vzapalowski/projetocric-django.git .
-            fi
+            echo "Atualizando repositório..."
+            git fetch origin
+            git reset --hard origin/main
 
-            # Verifica se Docker está instalado e instala se necessário
-            if ! command -v docker &> /dev/null; then
-              echo "Docker não encontrado. Instalando..."
-              apt update
-              apt install -y ca-certificates curl gnupg lsb-release
-              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | tee /etc/apt/trusted.gpg.d/docker.asc
-              add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-              apt update
-              apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
-            fi
-
-            # Build e deploy com Docker Compose (web e db apenas)
-            docker compose up -d --build web db
+            echo "Subindo containers..."
+            docker compose pull
+            docker compose up -d --build

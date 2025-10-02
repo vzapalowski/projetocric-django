@@ -1,0 +1,125 @@
+
+#main-content-devs {
+    padding-bottom: 1rem;
+}
+
+.card {
+    border: none;
+}
+
+#teste {
+
+    margin-top: 10rem;
+    width: 100vw!important;
+    height: 100vh!important;
+
+    background: #e1ebff;
+}
+
+.card-img-circle {
+    width: 250px!important;
+    height: 250px!important;
+
+    border-radius: 100%!important;
+    background: #ffffff!important;
+    box-shadow:  6px 6px 25px #d9d9d9,
+                 -6px -6px 25px #ffffff!important;
+}
+
+.card-title {
+    color: #333!important;
+    font-size: 1.2rem!important;
+}
+
+.card-text {
+    color: #777!important;
+    font-size: 1rem!important;
+}
+
+{#  Final  ? #}
+{#
+.p-2:hover{
+    transition: .3s;
+
+    background: #d3d3d3;
+    border-radius: 100%;
+}
+#}
+
+.p-2{
+    position: relative;
+}
+
+.p-2::after{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;      /* distância da linha até o elemento */
+    left: 10%;
+    background-color: black;
+    transition: width 0.3s;
+}
+
+.p-2:hover::after {
+  width: 80%;
+}
+
+body {
+    background: #e1ebff !important;
+}
+
+.main-title-devs {
+    color: #212529 !important;
+    padding: 0;
+    margin: 48px 0px;
+}
+
+@media (min-width:750px) and (max-width: 1399px) {
+    .card-img-circle {
+        width: 150px!important;
+        height: 150px!important;
+    
+        border-radius: 100%!important;
+        background: #ffffff;
+        box-shadow:  4px 4px 20px #d9d9d9,
+                     -4px -4px 20px #ffffff!important;
+    }
+
+    .card-title {
+        color: #333!important;
+        font-size: 0.9rem!important;
+    }
+
+    .card-text {
+        color: #777!important;
+        font-size: 0.7rem!important;
+    }
+}
+
+@media(max-width:750px) {
+    .card-img-circle {
+        width: 180px!important;
+        height: 180px!important;
+    
+        border-radius: 100%!important;
+        background: #ffffff!important;
+        box-shadow:  4px 4px 20px #d9d9d9,
+                     -4px -4px 20px #ffffff!important;
+    }
+}
+
+@media (max-width: 767px) {
+    .card {
+        border-radius: .25rem!important;  
+    }
+
+    .card-group {
+        flex-direction: column!important;
+    }
+
+    #main-content-devs {
+        padding-top: 6rem!important;
+    }
+}
+

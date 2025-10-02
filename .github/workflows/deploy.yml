@@ -22,7 +22,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
           script: |
-            cd /home/rotacric/rotacric-app || exit
+            cd /home/rotacric/projetocric-django || exit
 
             echo "Atualizando repositório..."
             git fetch origin

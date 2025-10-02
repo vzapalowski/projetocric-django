@@ -1,0 +1,33 @@
+name: CI/CD - Rotacric
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1️⃣ Checkout do repositório (só para o Actions saber o que foi alterado)
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2️⃣ Conectar no servidor via SSH e rodar deploy
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: 22
+          script: |
+            cd /home/rotacric/rotacric-app || exit
+
+            echo "Atualizando repositório..."
+            git fetch origin
+            git reset --hard origin/main
+
+            echo "Subindo containers..."
+            docker compose pull
+            docker compose up -d --build

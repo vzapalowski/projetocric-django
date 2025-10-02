@@ -1,0 +1,167 @@
+{%extends 'base/base.html' %}
+{% load static %}
+
+{% block 'styles' %}
+  <link rel="stylesheet" href="{% static 'style/style-profile.css' %}">
+{% endblock %}
+
+{%block 'content'%}
+
+<div id="image-preview-container">
+  <img src="" alt="Image Preview" class="image-preview" id="image-preview">
+  <div class="btn-group">
+    <button class="btn btn-outline-dark" style="color: white !important;" onclick="cancelPreview()">Cancelar</button>
+    <button class="btn btn-dark" onclick="savePreview()">Salvar</button>
+  </div>
+</div>
+
+<section>
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4 mt-card-mobile">
+          <div class="card-body text-center card-user">
+            <h5 class="mt-0 mb-4">Editar foto de perfil</h5>
+            <div class="image-container position-relative d-flex justify-content-center align-items-center">
+              <label for="file-upload" class="text-center btn-alter d-flex justify-content-center align-items-center">
+                Alterar
+              </label>
+              <input type="file" id="file-upload" style="display: none;" accept="image/*"onchange="previewImage(event)">
+              {% include "components/user_avatar.html" with user=user size=150 class="img-fluid profile-pic" %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <form id="enrollment-form" method="POST" action="{% url 'users:edit_user' user.id %}" class="card-body">
+            {% csrf_token %}
+            <div class="row align-items-center">
+              <div class="col-sm-3">
+                <p class="mb-0">Nome de usuário</p>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" name="username" placeholder="Nome de Usuario" maxlength="100" required=""
+                  id="id_full_name" value="{{ user.username }}"
+                  class="form-control mb-0 bg-body-secondary p-2 border-0 rounded">
+              </div>
+            </div>
+            <hr>
+            <div class="row align-items-center">
+              <div class="col-sm-3">
+                <p class="mb-0">Primeiro nome</p>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" name="name" placeholder="Nome" maxlength="100" required="" id="id_full_name"
+                  value="{{ user.first_name}}" class="form-control mb-0 bg-body-secondary p-2 border-0 rounded">
+              </div>
+            </div>
+            <hr>
+            <div class="row align-items-center">
+              <div class="col-sm-3">
+                <p class="mb-0">Sobrenome</p>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" name="last_name" placeholder="Sobrenome" maxlength="100" required=""
+                  id="id_full_name" value="{{ user.last_name }}"
+                  class="form-control mb-0 bg-body-secondary p-2 border-0 rounded">
+              </div>
+            </div>
+            <input type="hidden" name="email" placeholder="Email" maxlength="30" required="" id="id_email"
+              value="{{ user.email }}" class="form-control" placeholder="Email">
+            <hr>
+            <div class="row align-items-center">
+              <div class="col-sm-3">
+                <p class="mb-0">Rede Social</p>
+              </div>
+              <div class="col-sm-9">
+                <div class="input-group input-group-md mb-0 dp-container">
+                  <span class="input-group-text" id="inputGroup-sizing-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
+                      <path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480v58q0 59-40.5 100.5T740-280q-35 0-66-15t-52-43q-29 29-65.5 43.5T480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480v58q0 26 17 44t43 18q26 0 43-18t17-44v-58q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93h200v80H480Zm0-280q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Z"/>
+                    </svg>
+                  </span>
+                    <input 
+                      type="text" name="social_network" placeholder="@exemplo" maxlength="30" id="id_social_network"
+                      value="{{ user.personaldata.social_network|default:'' }}"
+                      class="form-control p-2 px-4 border-0 bg-body-secondary"
+                    >
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row align-items-center">
+              <div class="col-sm-3">
+                <p class="mb-0">Data de Nascimento</p>
+              </div>
+              <div class="col-sm-9">
+                <div class="input-group input-group-md mb-0 dp-container">
+                  <span class="input-group-text" id="inputGroup-sizing-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z" />
+                    </svg>
+                  </span>
+                  <input 
+                    id="datepicker" type="text" class="form-control p-2 px-4 border-0 bg-body-secondary"
+                    name="date_of_birth" value="{{ user.personaldata.date_of_birth|date:'d/m/Y' }}"
+                    placeholder="Data de Nascimento"
+                    >
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row align-items-center">
+              <div class="col-sm-3">
+                <p class="mb-0">RG</p>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" inputmode="numeric" name="rg" placeholder="RG" maxlength="12" required
+                  id="id_rg"
+                  value="{{ user.personaldata.rg|default:'' }}"
+                  class="form-control mb-0 bg-body-secondary p-2 border-0 rounded"
+                >
+              </div>
+            </div>
+            <hr>
+            <div class="row align-items-center">
+              <div class="col-sm-3">
+                <p class="mb-0">Identificação</p>
+              </div>
+              <div class="col-sm-4">
+                <select class="form-select p-2 px-4 border-0 bg-body-secondary" name="bond_choice" required
+                        id="id_bond_choice">
+                    <option value="" disabled>Sobre Você</option>
+                    {% for bond_obj in bond %}
+                        <option value="{{ bond_obj.id }}"
+                            {% if bond_obj.id == user.personaldata.bond_choice.id %}selected{% endif %}>
+                            {{ bond_obj }}
+                        </option>
+                    {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="row justify-content-center flex-wrap mt-4">
+              <div class="col-6 col-md-5 col-lg-5 col-xl-5 mb-3">
+                <a href="{% url 'users:profile' %}"
+                  class="btn text-white btn-secondary btnOpacity mt-2 p-3 px-5 w-100 h-100">Cancelar</a>
+              </div>
+              <div class="col-6 col-md-5 col-lg-5 col-xl-5 mb-3">
+                <button type="submit"
+                  class="btn btn-outline-dark btn-secondary text-white btn-routes btnOpacity mt-2 p-3 px-5 w-100 h-100">Atualizar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const userId = '{{ user.id }}';
+  const uploadUrl = "{% url 'users:upload_image' %}"
+</script>
+<script src="{% static 'js/users/edit_user.js' %}" async></script>
+<script src="{% static 'js/users/profile.js' %}" async></script>
+
+{%endblock%}

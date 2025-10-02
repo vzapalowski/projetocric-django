@@ -1,0 +1,179 @@
+{%extends 'base/base.html' %}
+{% load static %}
+
+{% block 'styles' %}
+<link rel="stylesheet" href="{% static 'style/style-event.css' %}">
+{% endblock %}
+
+{% block 'navigation' %}
+{% endblock %}
+
+{%block 'content'%}
+
+{% if event.banner_image and event.id != 3 %}
+<div style="background-image: url('/media/{{ event.banner_image }}');" class="bg-image"></div>
+{% elif event.id == 4 or event.id == 3 %}
+<div style="background-image: url('/media/{{ event.banner_image }}');" class="bg-image adjust-bg-img"></div>
+{% else %}
+<div class="bg-image"></div>
+{% endif %}
+
+<div class="container-fluid text-center p-0">
+  <div class="row me-0">
+    <div class="container col-10">
+      <h2 class="title-event" data-aos="fade-up">{{ event.name }}</h2>
+      <p class="description-event fs-5 mt-5" data-aos="fade-up">
+        {{ event.description }}{% if event.pdf_file %} Acesse o regulamento <a
+          href="{% url 'events:download_pdf' event_id=event.id %}" target="_blank">clicando aqui.</a>{% endif %}
+      </p>
+    </div>
+  </div>
+  <div class="container overflow-hidden mt-5">
+    <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 gx-5 gy-5 justify-content-center">
+      {% for e in event.routes_data.all %}
+      <div class="col" data-aos="fade-up">
+        <div class="text-start py-4 px-3 rounded bg-primary-blue text-white" style="height: 14rem;">
+          <h5 class="px-4">{{ e }}</h5>
+          <p class="card-text px-4 mt-2"><small class="text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="color: white;" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z" />
+                <circle cx="12" cy="9" r="2.5" fill="currentColor" />
+              </svg>
+              {{ e.departure_location}}
+            </small></p>
+          <p class="card-text px-5">Concentração: {{e.concentration}}</p>
+          <p class="card-text px-5">Saída: {{e.time}}</p>
+          <p class="card-text px-5">Distância: {{ e.route.distance }} Km</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Images -->
+  <div class="container-fluid mt-5 bg-primary-blue" style="background-color: #131A40;">
+
+    <div class="swiper mySwiper swiper-coverflow swiper-3d swiper-initialized swiper-horizontal swiper-watch-progress">
+      <div class="swiper-wrapper" id="swiper-wrapper-bc68103f7d29e4d42" aria-live="polite"
+        style="cursor: grab; transition-duration: 0ms; transform: translate3d(-843px, 0px, 0px); transition-delay: 0ms;">
+        {% for image in event.images.all %}
+        <div class="swiper-slide" role="group" aria-label="1 / 9"
+          style="transition-duration: 0ms; transform: translate3d(0px, 0px, -300px) rotateX(0deg) rotateY(150deg) scale(1); z-index: -2;">
+          <img src="{{ image.image.url }}">
+          <div class="swiper-slide-shadow-left swiper-slide-shadow-coverflow"
+            style="opacity: 3; transition-duration: 0ms;"></div>
+          <div class="swiper-slide-shadow-right swiper-slide-shadow-coverflow"
+            style="opacity: 0; transition-duration: 0ms;"></div>
+        </div>
+        {% endfor %}
+
+      </div>
+      <div class="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal">
+        <span class="swiper-pagination-bullet swiper-pagination-bullet-active" aria-current="true"></span>
+      </div>
+      <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Mapa de Rotas do Evento -->
+{% include 'cities/map-content.html' %}
+
+
+{% if event.warnings.all %}
+<div class="container-fluid text-center bg-light-light pb-5" style="padding-top: 5rem;">
+  <div class="row ">
+    <!-- Title and Descripiton -->
+    <div class="container col-11 col-sm-10 col-md-9 col-lg-8 col-xl-8">
+      <div class="text-center">
+        <h2 class="mb-5 fw-bold topic-color">
+          Avisos
+        </h2>
+      </div>
+      <div class="row mt-5" data-aos="fade-up">
+        {% for warning in event.warnings.all %}
+        <div class="col-sm-12 mb-3">
+          <div class="card border-card text-end">
+            <div class="card-body text-start px-4 pt-5 pb-1">
+              <h5 class="card-title topic-color">{{ warning.title }}</h5>
+              <hr class="border border-4 border-primary my-2 rounded-pill" width="80">
+              <p class="card-text"><small class="text-body-secondary">{{ warning.content }}</small></p>
+            </div>
+            <p class="card-text m-4"><small class="text-body-terciary">{{ warning.created_date }}
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="ms-2" style="color: #273273;"
+                  viewBox="0 0 24 24">
+                  <path fill="currentColor"
+                    d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z" />
+                </svg>
+              </small></p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Formulario -->
+{% if event.status == 'Em andamento' %}
+<div class="mx-auto mb-5">
+  <h2 class="title-event text-center mx-4" id="form-h2">Formulário para Inscrição ao Evento</h2>
+  {% if event.form_type == 'Type-1' %}
+    {% include 'events/forms/form-type-1.html' %}
+  {% elif event.form_type == 'Type-2' %}
+    {% include 'events/forms/form-type-2.html' %}
+  {% elif event.form_type == 'Type-3' %}
+    {% include 'events/forms/form-type-3.html' %}
+  {% elif event.form_type == 'Type-4' %}
+    {% include 'events/forms/form-type-3.html' %}
+  {% endif %}
+</div>
+
+{% endif %}
+<!-- MESSAGE CARD -->
+<div
+  class="container d-flex align-items-center justify-content-center position-fixed start-50 translate-middle message-container "
+  style="top: 93vh">
+  {% if messages %}
+  <ul class="col-11 col-sm-8 ps-0 adjust-message">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}-message card message" {% endif %}>
+      <p class="card-body mb-0 text-center">
+        {{ message }}
+      </p>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+
+<script src="{% static 'js/components/message_fx.js' %}" async></script>
+<script src="{% static 'js/events/data.js' %}" type="module" async></script>
+<script src="{% static 'js/map/Polyline.encoded.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script src="{% static 'js/events/slider.js' %}"></script>
+
+
+
+<script>
+  const loginUrl = "{% url 'users:login' %}";
+</script>
+
+<script src="{% static 'js/events/formprotect.js' %}" async></script>
+
+<script type="text/javascript">
+  $(function () {
+    $('#datepicker').datepicker({
+      format: 'dd/mm/yyyy',
+      clearButton: true,
+      autoclose: true,
+      container: '.dp-container',
+      endDate: '0d'
+    });
+  });
+</script>
+
+{%endblock%}

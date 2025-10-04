@@ -111,15 +111,29 @@ def logout(request):
 
 @login_required(login_url='users:login')
 def profile(request):
-    user = User.objects.get(id=request.session.get('user_id'))
-    enrollments = Enrollment.objects.filter(user=user)
-    enrollments2 = EnrollmentType2.objects.filter(user=user)
+    try:
+        user = request.user
+        
+        if not user.is_authenticated:
+            messages.error(request, 'Usuário não autenticado.')
+            return redirect('users:login')
+            
+        enrollments = Enrollment.objects.filter(user=user)
+        enrollments2 = EnrollmentType2.objects.filter(user=user)
 
-    return render(request,'users/profile.html', {
-        'user': user, 
-        'enrollments': enrollments,
-        'enrollments_type2': enrollments2
+        return render(request, 'users/profile.html', {
+            'user': user, 
+            'enrollments': enrollments,
+            'enrollments_type2': enrollments2
         })
+        
+    except User.DoesNotExist:
+        messages.error(request, 'Sessão expirada. Faça login novamente.')
+        return redirect('users:login')
+    except Exception as e:
+        print(f"Erro no profile: {e}")
+        messages.error(request, 'Erro ao carregar perfil.')
+        return redirect('users:login')
 
 @login_required(login_url='users:login')
 def edit_user(request, user_id):

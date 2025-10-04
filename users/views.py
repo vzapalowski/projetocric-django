@@ -14,7 +14,6 @@ from io import BytesIO
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 
-
 def register(request):
     if request.session.get('user_id'):
         return redirect('users:profile')
@@ -72,22 +71,39 @@ def login(request):
     if request.method != 'POST':
         return render(request, 'users/login.html')
     
-    email_or_username = request.POST.get('email')
-    password = request.POST.get('password')
+    email_or_username = request.POST.get('email', '').strip()
+    password = request.POST.get('password', '').strip()
 
-    user = auth.authenticate(request, email=email_or_username, password=password)
-
-    if not user:
-        user = auth.authenticate(request, username=email_or_username, password=password)
-
-    if not user:
-        messages.error(request, 'Senha ou email inválido')
+    errors = []
+    
+    if not email_or_username:
+        errors.append('O campo email/usuário é obrigatório.')
+    
+    if not password:
+        errors.append('O campo senha é obrigatório.')
+    
+    if errors:
+        for error in errors:
+            messages.error(request, error)
         return render(request, 'users/login.html')
-    else:
+
+    try:
+        if '@' in email_or_username:
+            user = auth.authenticate(request, email=email_or_username, password=password)
+        else:
+            user = auth.authenticate(request, username=email_or_username, password=password)
+
+        if not user:
+            messages.error(request, 'Credenciais inválidas. Verifique seu email/usuário e senha.')
+            return render(request, 'users/login.html')
+        
         auth.login(request, user)
         request.session['user_id'] = user.id
-
         return redirect('users:profile')
+            
+    except Exception as e:
+        messages.error(request, 'Erro no sistema. Tente novamente.')
+        return render(request, 'users/login.html')
 
 def logout(request):
     auth.logout(request)

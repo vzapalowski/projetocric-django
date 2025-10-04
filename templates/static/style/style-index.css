@@ -313,8 +313,18 @@ div nav div form .fw-blue {
   }
 }
 
-@media (min-width: 1025px) {
+@media (max-width: 1100px){
+  /* header*/
+  .m-nav{
+    margin-left: 7.5dvw !important;
+  }
 
+  .navbar-nav{
+    margin-right: 8px !important;
+  }
+}
+
+@media (min-width: 1025px) {
   .bg-image-top-page{
     background-image: url(../images/top-page/img-top-page-2.jpg);
     background-size: cover;
@@ -324,7 +334,8 @@ div nav div form .fw-blue {
     display: flex;
     align-items: center;
     justify-content: center;
-}    
+  }    
+
   .divisor {
     width: 1px;
     height: 16rem;
@@ -494,6 +505,11 @@ div nav div form .fw-blue {
 /* LAPTOP */
 
 @media (max-width: 1024px) {
+  
+  .navbar-nav .nav-item a{
+    padding: .5rem 1rem !important;
+  }
+
   .divisor {
     /* margin-top: 1rem; */
     width: 1px;
@@ -683,6 +699,14 @@ div nav div form .fw-blue {
 } */
 
 @media (max-width: 968px) {
+  .m-nav{
+    margin-left: 2dvw !important;
+  }
+
+  .navbar-nav .nav-item a{
+    padding: .5rem .5rem !important;
+  }
+
   .banner-adjust{
     background-position: center center;
     background-size: 300px 200px;
@@ -774,6 +798,17 @@ div nav div form .fw-blue {
 /* TALBLET */
 
 @media (max-width: 860px) {
+  .m-nav{
+    margin-left: 0dvw !important;
+  }
+
+  .navbar-nav .nav-item a{
+    padding: .5rem .28rem !important;
+  }
+
+  .btn-secondary-cric{
+    margin-left: .5rem !important;
+  }
 
   .fs-filter{
     font-size: 15 px;

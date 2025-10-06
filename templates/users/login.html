@@ -27,6 +27,9 @@
 
         <!-- Painel Direito -->
         <div class="col-md-8 right-panel vh-100 d-flex flex-column justify-content-center align-items-left">
+            <a href="{% url 'home:home' %}" class="m-3 m-nav align-self-center">
+                <img class="img-fluid" width="120" height="120" src="{% static 'images/logos/rotacric-subtitle-sem-fundo.png' %}" alt="Logo RotaCric">
+            </a>
             <h2 class="mb-3 fw-medium text-center">Bem-vindo de volta</h2>
             <p class="text-center text-muted">Entre para continuar sua jornada</p>
 
@@ -42,14 +45,14 @@
                     <input type="password" name="password" class="form-control rounded-0 shadow-none py-3 px-4"
                         placeholder="Senha">
                 </div>
-                <button type="submit" class="btn-cric w-100" style="height: 45px;">Entrar</button>
+                <button type="submit" class="btn btn-cric btn-lg rounded-pill py-2 w-100">Entrar</button>
                 <div class="text-end mt-2">
                     <!-- <a href="/" class="mt-3 text-primary-color text-decoration-none fw-medium">Esqueceu a senha?</a> -->
                 </div>
             </form>
 
             <!-- Botões Sociais -->
-        
+
             <!-- <div class="d-flex align-items-center my-4">
                 <hr class="flex-grow-1">
                 <span class="mx-3 text-muted small">ou continue com</span>
@@ -83,7 +86,8 @@
                 </div>
             </div> -->
 
-            <p class="mt-3 text-center text-muted">Não tem uma conta? <a href="{% url 'users:register' %}" class="text-primary-color text-decoration-none fw-semibold">Cadastre-se gratuitamente</a></p>
+            <p class="mt-3 text-center text-muted">Não tem uma conta? <a href="{% url 'users:register' %}"
+                    class="text-primary-color text-decoration-none fw-semibold">Cadastre-se gratuitamente</a></p>
         </div>
     </div>
 

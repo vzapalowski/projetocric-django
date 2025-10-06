@@ -55,6 +55,12 @@
     padding: 8rem;
 }
 
+@media (max-width: 1390px) {
+  .right-panel .img-fluid {
+    margin: 0 0 20% 0;
+  }
+}
+
 /* ---------- Botões sociais ---------- */
 .social-btn {
   width: 48px;

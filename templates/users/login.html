@@ -18,25 +18,22 @@
     <div class="container-fluid vh-100 d-flex justify-content-center align-items-center p-0">
         <!-- Painel Esquerdo -->
         <div class="col-md-4 left-panel vh-100 d-flex flex-column justify-content-center align-items-center p-2" id="adjust-line">
-
+          <a href="{% url 'home:home' %}" class="bg-white rounded-circle p-4 m-nav align-self-center">
+            <img class="img-fluid" width="150" height="150" src="{% static 'images/logos/rotacric-subtitle-sem-fundo.png' %}" alt="Logo RotaCric">
+          </a>
         </div>
 
         <!-- Painel Direito -->
         <div class="col-md-8 right-panel vh-100 d-flex flex-column justify-content-center align-items-left">
-            <a href="{% url 'home:home' %}" class="m-nav align-self-center">
-                <img class="img-fluid" width="150" height="150"
-                    src="{% static 'images/logos/rotacric-subtitle-sem-fundo.png' %}" alt="Logo RotaCric">
-            </a>
             <h2 class="mb-3 fw-medium">Bem-vindo de volta!</h2>
-            <p>Não tem uma conta? <a href="{% url 'users:register' %}">Crie sua conta</a>. É rápido!</p>
+            <p>Não tem uma conta? <a href="{% url 'users:register' %}" class="text-dark fw-semibold">Crie sua conta</a>. É rápido!</p>
 
             <!-- Formulário -->
             <form id="frm-login" method="POST" action="{% url 'users:login' %}">
                 {% csrf_token %}
 
                 <div class="mb-3">
-                    <input type="text" name="email" class="form-control rounded-0 shadow-none py-3 px-4"
-                        placeholder="Usuário ou Email">
+                    <input type="text" name="email" class="form-control rounded-0 shadow-none py-3 px-4" placeholder="Usuário ou Email">
                 </div>
                 <div class="mb-3">
                     <input type="password" name="password" class="form-control rounded-0 shadow-none py-3 px-4"
@@ -44,7 +41,7 @@
                 </div>
                 <button type="submit" class="btn-cric w-100" style="height: 45px;">Entrar</button>
                 <div class="text-end mt-2">
-                    <a href="/reset_password">Esqueci minha senha</a>
+                    <a href="/reset_password" class="text-dark fw-semibold">Esqueci minha senha</a>
                 </div>
             </form>
 

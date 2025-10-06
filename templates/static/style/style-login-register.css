@@ -1,11 +1,3 @@
-* {
-  font-family: 'Inter', sans-serif !important;
-}
-
-html, body {
-  background-color: #F1F1F1;
-}
-
 .bg-padrao {
   background-color: #E1EBFF;
 }
@@ -14,88 +6,106 @@ html, body {
 .btn-return {
   padding: 1rem !important;
 }
-
-/* register-senha */
-.btn-lg{
-  background-color: #434d86 !important;
-  color: rgb(178, 171, 219) !important;
+.left-panel {
+    position: relative;
+    background: url(../images/top-page/img-top-page-2.jpg) right no-repeat;
+    background-position: 80% 0%;
+    background-size: cover;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
 }
 
-.btn-lg:hover{
-  background-color: #2B2F4D !important;
-  color: #fff !important;
+.left-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 1;
+}
+
+.left-panel > * {
+    position: relative;
+    z-index: 2;
 }
 
 
-
-/* ---------- Background Imagem ---------- */
-.bg-img {
-  background-image: url(../images/top-page/unsplash-img-moutain-bike.avif);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+.left-panel h2 {
+    font-weight: bold;
 }
 
-/* ---------- Cores ---------- */
-.text-primary-color {
-  color: #273273;
+.left-panel p {
+    margin: 15px 0;
 }
 
-/* ---------- Inputs login ---------- */
-#frm-login input {
-  font-size: 1rem;
-  border-radius: 50px;
-  border: 1px solid #ddd;
+.left-panel .btn {
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border: none;
+}
+
+.right-panel {
+    background: #E1EBFF;
+    padding: 5rem;
+}
+
+.social-btn {
+  width: 48px;
+  height: 100%;
+  padding: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.social-btn svg {
+  width: 22px;
+  height: 22px;
+  fill: #fff;
+}
+
+.social-btn:hover {
+  opacity: 0.85;
+}
+
+
+/* ---------- Inputs ---------- */
+#frm-register input, #frm-register button {
   transition: 0.3s;
+  border-radius: 0.5rem !important;
 }
 
-#frm-login input:focus {
+#frm-register input:focus {
   border-color: #273273;
+
+  /* isso nao "ativado" falta o !important, APAGAR??*/
   box-shadow: 0 0 0 0.25rem rgba(39, 50, 115, 0.2);
 }
 
-/* register */
+/* ---------- tela ajust ---------- */
 
-.mb-3 input{
-  background-color: #e8f0fe;
-
-  border: 1px solid #dee2e6 !important;
-}
-
-/* ---------- Logo ---------- */
-.img-logo {
-  height: 8rem;
-  width: 8rem;
-}
-
-/* ---------- Links ---------- */
-a {
-  transition: 0.3s ease-in-out;
-}
-
-a:hover {
-  color: #273273 !important;
-  text-decoration: underline !important;
-}
-
-/* ---------- Responsividade ---------- */
-@media (min-width: 1200px) {
-  .adjust-register-img {
-    background-position: 32% 20% !important;
-  }
-}
-
-@media (max-width: 900px) {
-  .adjust-register-img {
-    background-position: 32% 0% !important;
+@media (max-width: 1390px) {
+  .right-panel .img-fluid{
+    margin: 0 0 20% 0;
   }
 }
 
 @media (max-width: 767px) {
-  #frm-register, #frm-login {
-    padding-top: 5rem;
+  .left-panel{
+    background-image: none;
+    display: none;
+    position: relative;
+    padding: 0px;
   }
-  .btn-return {
-    margin-bottom: 5rem;
+
+  /* --- só consegui arrumar a linha branca que fica criando um id --- */
+  #adjust-line{
+    padding: 0px !important;
+  }
+
+  .left-panel::before{
+    display: none;
   }
 }

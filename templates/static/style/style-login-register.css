@@ -52,7 +52,7 @@
 /* ---------- Painel direito ---------- */
 .right-panel {
     background: #E1EBFF;
-    padding: 8rem;
+    padding: 5rem;
 }
 
 @media (max-width: 1390px) {

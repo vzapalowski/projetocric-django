@@ -8,7 +8,7 @@
     <title>Entrar</title>
     <link rel="icon" href="{% static 'images/logos/rotacric-alternative.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'style/global.css'%}">
-    <link rel="stylesheet" href="{% static 'style/style-login.css'%}">
+    <link rel="stylesheet" href="{% static 'style/style-login-register.css'%}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
@@ -17,23 +17,26 @@
 
     <div class="container-fluid vh-100 d-flex justify-content-center align-items-center p-0">
         <!-- Painel Esquerdo -->
-        <div class="col-md-4 left-panel vh-100 d-flex flex-column justify-content-center align-items-center p-2" id="adjust-line">
-          <a href="{% url 'home:home' %}" class="bg-white rounded-circle p-4 m-nav align-self-center">
-            <img class="img-fluid" width="150" height="150" src="{% static 'images/logos/rotacric-subtitle-sem-fundo.png' %}" alt="Logo RotaCric">
-          </a>
+        <div class="left-panel d-md-flex col-md-4 vh-100 flex-column justify-content-center align-items-center p-2"
+            id="adjust-line">
+            <a href="{% url 'home:home' %}" class="bg-white rounded-circle p-4 m-nav align-self-center">
+                <img class="img-fluid" width="150" height="150"
+                    src="{% static 'images/logos/rotacric-subtitle-sem-fundo.png' %}" alt="Logo RotaCric">
+            </a>
         </div>
 
         <!-- Painel Direito -->
         <div class="col-md-8 right-panel vh-100 d-flex flex-column justify-content-center align-items-left">
-            <h2 class="mb-3 fw-medium">Bem-vindo de volta!</h2>
-            <p>Não tem uma conta? <a href="{% url 'users:register' %}" class="text-dark fw-semibold">Crie sua conta</a>. É rápido!</p>
+            <h2 class="mb-3 fw-medium text-center">Bem-vindo de volta</h2>
+            <p class="text-center text-muted">Entre para continuar sua jornada</p>
 
             <!-- Formulário -->
             <form id="frm-login" method="POST" action="{% url 'users:login' %}">
                 {% csrf_token %}
 
                 <div class="mb-3">
-                    <input type="text" name="email" class="form-control rounded-0 shadow-none py-3 px-4" placeholder="Usuário ou Email">
+                    <input type="text" name="email" class="form-control rounded-0 shadow-none py-3 px-4"
+                        placeholder="Usuário ou Email">
                 </div>
                 <div class="mb-3">
                     <input type="password" name="password" class="form-control rounded-0 shadow-none py-3 px-4"
@@ -41,30 +44,46 @@
                 </div>
                 <button type="submit" class="btn-cric w-100" style="height: 45px;">Entrar</button>
                 <div class="text-end mt-2">
-                    <a href="/reset_password" class="text-dark fw-semibold">Esqueci minha senha</a>
+                    <a href="/reset_password" class="mt-3 text-primary-color text-decoration-none fw-medium">Esqueceu a senha?</a>
                 </div>
             </form>
 
             <!-- Botões Sociais -->
-            <!-- <div class="mt-4 d-flex gap-3">
+        
+            <!-- <div class="d-flex align-items-center my-4">
+                <hr class="flex-grow-1">
+                <span class="mx-3 text-muted small">ou continue com</span>
+                <hr class="flex-grow-1">
+            </div>
 
-                <button
-                    class="btn w-100 btn-danger d-flex align-items-center justify-content-center rounded-3 p-2 social-btn gap-2">
-                    {% include "components/icons/google.svg" %} Entrar com o Google
-                </button>
-
-                <button
-                    class="btn w-100 btn-primary d-flex align-items-center justify-content-center rounded-3 p-2 social-btn gap-2">
-                    {% include "components/icons/facebook.svg" %} Entrar com o Facebook
-                </button>
-
-                <button
-                    class="btn w-100 btn-secondary d-flex align-items-center justify-content-center rounded-3 p-2 social-btn">
-                    Entrar com o SUAP
-                </button>
-
+            <div class="mb-3 row g-3">
+                <div class="col-6">
+                    <button
+                        class="social-btn w-100 d-flex align-items-center justify-content-center rounded-3 p-2 gap-2">
+                        {% include "components/icons/google.svg" %} Google
+                    </button>
+                </div>
+                <div class="col-6">
+                    <button
+                        class="social-btn w-100 d-flex align-items-center justify-content-center rounded-3 p-2 gap-2">
+                        {% include "components/icons/facebook.svg" %} Facebook
+                    </button>
+                </div>
+                <div class="col-6">
+                    <button
+                        class="social-btn w-100 d-flex align-items-center justify-content-center rounded-3 p-2 gap-2">
+                        Strava
+                    </button>
+                </div>
+                <div class="col-6">
+                    <button
+                        class="social-btn w-100 d-flex align-items-center justify-content-center rounded-3 p-2 gap-2">
+                        SUAP
+                    </button>
+                </div>
             </div> -->
 
+            <p class="mt-3 text-center text-muted">Não tem uma conta? <a href="{% url 'users:register' %}" class="text-primary-color text-decoration-none fw-semibold">Cadastre-se gratuitamente</a></p>
         </div>
     </div>
 

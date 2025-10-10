@@ -16,3 +16,59 @@
 .text-primary-color {
   color: #273273;
 }
+
+.offcanvas-header-position{
+  display: flex;
+  margin: 0;
+}
+
+.cric-side-infos{
+  text-align: left;
+}
+
+.cric-side-fullname{
+  font-weight: bold;
+}
+
+.cric-side-email{
+  width: 40%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+
+  color: #424451;
+}
+
+.cric-side-body{
+  display: flex;
+  align-content: center;
+
+  height: 100%;  
+  padding: 0 0 0 1rem;
+}
+
+.cric-side-nav{
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-self: center;
+  padding: 0 0 .5rem 0;
+  margin: 0;
+  list-style: none;
+  text-align: start;
+}
+
+.cric-side-nav-item{
+}
+
+.cric-side-nav-item a{
+  padding: 0px !important;
+}
+
+#cric-side-bnt-exit{
+  margin-top: 1rem;
+  color: #fff !important;
+  padding: 0.2rem 0 !important;
+  text-align: center;
+  background: #db3545;
+}

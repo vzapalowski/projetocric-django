@@ -81,7 +81,7 @@ body{
   right: 2rem;
   height: fit-content;
   width: fit-content;
-  z-index: 9999;
+  z-index: 998; /* -1 para ficar atrás */
   border-radius: 100%;
   border: none;
 }

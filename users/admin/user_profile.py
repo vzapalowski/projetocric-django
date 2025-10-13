@@ -1,11 +1,11 @@
 from django.contrib import admin
-from users.models.personal_data import PersonalData
+from users.models.user_profile import UserProfile
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
 
-class PersonalDataInline(admin.StackedInline): 
-    model = PersonalData
+class UserProfileInline(admin.StackedInline): 
+    model = UserProfile
     can_delete = False
     verbose_name_plural = 'Informações Pessoais'
     
@@ -13,7 +13,7 @@ class PersonalDataInline(admin.StackedInline):
         return False
 
 class CustomUserAdmin(UserAdmin):
-    inlines = (PersonalDataInline,)
+    inlines = (UserProfileInline)
 
 admin.site.unregister(User) 
 admin.site.register(User, CustomUserAdmin)

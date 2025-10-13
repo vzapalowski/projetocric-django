@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
-from event.models.anchor_point import AnchorPoint
+from core.models.anchorpoint import Anchorpoint
 
 class AnchorPointEventSerializer(serializers.ModelSerializer):
     coordinates = serializers.SerializerMethodField()
     class Meta:
-        model = AnchorPoint
+        model = Anchorpoint
         fields = ('title', 'iconUrl', 'coordinates')
 
     def get_coordinates(self, obj):

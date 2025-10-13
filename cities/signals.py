@@ -2,8 +2,8 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
 from .models.api_strava import Api
-
-from .models import Route, City, Category
+from core.models import Route, AnchorpointCategory as Category
+from .models import City
 from projetocric.utilities import replace
 
 @receiver(pre_save, sender=Route)

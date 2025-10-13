@@ -1,16 +1,14 @@
 from rest_framework import serializers
 
-from cities.models import AnchorPoint
-from api.serializers.category_point import CategoryPointSerializer
-from api.serializers.address_point import AddressPointSerializer
+from core.models import Anchorpoint
+from api.serializers.anchorpoint_category import AnchorpointCategorySerializer
 
 class AnchorPointSerializer(serializers.ModelSerializer):
-    category = CategoryPointSerializer(many=False)
-    address = AddressPointSerializer(many=False)
+    category = AnchorpointCategorySerializer(many=False)
     coordinates = serializers.SerializerMethodField()
 
     class Meta:
-        model = AnchorPoint
+        model = Anchorpoint
         fields = ('id', 'name', 'image', 'business_hours', 'coordinates', 'category', 'phone', 'address')
 
     def get_coordinates(self, obj):

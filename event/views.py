@@ -20,11 +20,10 @@ import os
 import datetime
 # import locale
 
-from event.models import Event, Enrollment, EnrollmentType2, Enrollment3PasseioCiclistico
-from event.models import EnrollmentForm, EnrollmentFormType2, enrollment3PasseioIfsulForm, enrollment4PasseioIfsulForm
-from event.models.enrollment import Bond
-from event.models.how_knew import HowKnew
-from event.models.route_path import RoutePath
+from event.models import Event, Enrollment
+from event.models.event_bond import EventBond as Bond
+from event.models.event_howknew import EventHowknew as HowKnew
+from event.models.event_route import EventRoute as RoutePath
 from event.credentials import *
 
 class EventView(DetailView):

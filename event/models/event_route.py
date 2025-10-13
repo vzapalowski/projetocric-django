@@ -1,9 +1,8 @@
 from django.db import models
-from event.models import Event
 from core.models import Route
 
 class EventRoute(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey('event.Event', on_delete=models.CASCADE, related_name='event_routes')
     route = models.ForeignKey(Route, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, verbose_name='Nome do caminho')
     time = models.CharField(max_length=100, verbose_name='Horário de Saída')

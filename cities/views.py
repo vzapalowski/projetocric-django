@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
-from cities.models import City, Category
+from cities.models import City
+from core.models import AnchorpointCategory
 from event.models import Event
 
 

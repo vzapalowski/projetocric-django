@@ -1,10 +1,10 @@
 from rest_framework import serializers
 
-from event.models.route_path import RoutePath
+from event.models.event_route import EventRoute
 from .route import RouteSerializer
 
-class RoutePathSerializer(serializers.ModelSerializer):
+class EventRouteSerializer(serializers.ModelSerializer):
     route = RouteSerializer()
     class Meta:
-        model = RoutePath
+        model = EventRoute
         fields = ('id', 'name', 'route', 'time', 'departure_location', 'active')

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from cities.models import Route
+from core.models import Route
 
 class RouteSerializer(serializers.ModelSerializer):
     class Meta:

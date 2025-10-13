@@ -1,5 +1,6 @@
 from django.db import models
 from event.models.enrollment import Enrollment
+from event.models.event_form_field import EventFormField
 
 
 class EventFormResponse(models.Model):

@@ -221,6 +221,7 @@ class RouteAdminForm(forms.ModelForm):
         }
 
 
+# core/admin.py - Classe RouteAdmin completamente corrigida
 @admin.register(Route)
 class RouteAdmin(admin.ModelAdmin):
     form = RouteAdminForm
@@ -229,65 +230,66 @@ class RouteAdmin(admin.ModelAdmin):
         'external_strava_id', 
         'distance', 
         'active', 
-        'color_preview'
+        'get_color_preview'
     ]
     list_editable = ['active']
     list_filter = ['active']
     search_fields = ['name', 'external_strava_id']
-    readonly_fields = ['polyline_preview', 'created_at', 'updated_at']
+    
+    # CORREÇÃO: Apenas métodos callable ou nomes de campos reais
+    readonly_fields = ['get_polyline_preview', 'get_color_display']
+    
     fieldsets = (
         ('Informações Básicas', {
             'fields': (
                 'name',
                 'external_strava_id',
-                'active'
+                'active',
+                'distance',
+                'color',
+                'get_color_display',  # Método callable
             )
         }),
         ('Dados da Rota', {
             'fields': (
-                'distance',
-                'color',
-                'color_preview',
                 'polyline',
-                'polyline_preview'
+                'get_polyline_preview',  # Método callable
             )
+        }),
+        ('Metadados', {
+            'fields': (
+                'created_at',  # Campo real do modelo - será readonly automaticamente
+                'updated_at',  # Campo real do modelo - será readonly automaticamente
+            ),
+            'classes': ('collapse',)  # Opcional: colapsar esta seção
         })
     )
     
-    def color_preview(self, obj):
+    def get_color_preview(self, obj):
         """Preview da cor na lista"""
-        return format_html(
-            '<div style="background-color: {}; width: 20px; height: 20px; border-radius: 50%; border: 1px solid #ccc;"></div>',
-            obj.color
-        )
-    color_preview.short_description = 'Cor'
+        if obj.color:
+            return format_html(
+                '<div style="background-color: {}; width: 20px; height: 20px; border-radius: 50%; border: 1px solid #ccc;"></div>',
+                obj.color
+            )
+        return "-"
+    get_color_preview.short_description = 'Cor'
     
-    def polyline_preview(self, obj):
-        """Preview do polyline (primeiros caracteres)"""
+    def get_color_display(self, obj):
+        """Preview da cor para edição"""
+        return self.get_color_preview(obj)
+    get_color_display.short_description = 'Preview da Cor'
+    
+    def get_polyline_preview(self, obj):
+        """Preview do polyline para edição"""
         if obj.polyline:
             preview = obj.polyline[:100] + "..." if len(obj.polyline) > 100 else obj.polyline
             return format_html(
-                '<div style="background: #f5f5f5; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 12px;">{}</div>',
+                '<div style="background: #f5f5f5; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 12px; word-break: break-all;">{}</div>',
                 preview
             )
         return "Nenhum polyline definido"
-    polyline_preview.short_description = 'Preview do Polyline'
-    
-    # Ações personalizadas
-    actions = ['activate_routes', 'deactivate_routes']
-    
-    def activate_routes(self, request, queryset):
-        """Ativa as rotas selecionadas"""
-        updated = queryset.update(active=True)
-        self.message_user(request, f'{updated} rotas ativadas.')
-    activate_routes.short_description = "Ativar rotas selecionadas"
-    
-    def deactivate_routes(self, request, queryset):
-        """Desativa as rotas selecionadas"""
-        updated = queryset.update(active=False)
-        self.message_user(request, f'{updated} rotas desativadas.')
-    deactivate_routes.short_description = "Desativar rotas selecionadas"
-
+    get_polyline_preview.short_description = 'Preview do Polyline'
 
 # ===============================
 # CONFIGURAÇÕES GLOBAIS DO ADMIN

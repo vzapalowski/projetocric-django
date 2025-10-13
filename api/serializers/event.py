@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
 from event.models import Event
-from api.serializers.route_path import RoutePathSerializer
+from api.serializers.event_route import EventRouteSerializer
 from api.serializers.anchor_points_event import AnchorPointEventSerializer
 
 class EventSerializer(serializers.ModelSerializer):
-    routes_data = RoutePathSerializer(many=True, read_only=True)
+    routes_data = EventRouteSerializer(many=True, read_only=True)
     points = AnchorPointEventSerializer(many=True)
     coordinates = serializers.SerializerMethodField()
 

@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from event.models import Warning
 from event.models.event_route import EventRoute
+from event.models.event_form import EventForm
 from core.models.anchorpoint import Anchorpoint
 
 class Event(models.Model):
@@ -28,12 +29,11 @@ class Event(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Data de criação')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Data de atualização')
 
-    warning = models.ManyToManyField(Warning, blank=True, null=True, verbose_name='Avisos')
+    warning = models.ManyToManyField(Warning, blank=True, verbose_name='Avisos')
     participants = models.ManyToManyField(User, related_name='events', blank=True)
-    anchorpoint = models.ManyToManyField(Anchorpoint, blank=True, null=True, verbose_name='Pontos do Evento')
-    route = models.ManyToManyField(EventRoute, on_delete=models.SET_NULL, blank=True, null=True, verbose_name='Rotas do evento')
+    anchorpoint = models.ManyToManyField(Anchorpoint, blank=True, verbose_name='Pontos do Evento')
 
-    form = models.ForeignKey(EventForm, on_delete=models.SET_NULL, related_name='events', verbose_name='Formulário de inscrição')
+    form = models.ForeignKey(EventForm, on_delete=models.SET_NULL, null=True, blank=True,  related_name='event_forms', verbose_name='Formulário de inscrição')
 
     def __str__(self) -> str:
         return self.name

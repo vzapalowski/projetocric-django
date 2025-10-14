@@ -66,6 +66,9 @@
 }
 
 #cric-side-bnt-exit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 1rem;
   color: #fff !important;
   padding: 0.2rem 0 !important;

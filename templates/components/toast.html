@@ -1,0 +1,17 @@
+{% load static %}
+
+<!-- Mensagens -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 2000;">
+{% if messages %}
+{% for message in messages %}
+<div class="toast-message {{ message.tags }}">
+    <strong class="toast-title">
+    {% if message.tags == 'success' %}✔ Successo!
+    {% elif message.tags == 'error' %}❌ Erro!
+    {% endif %}
+    </strong>
+    <span class="toast-text">{{ message }}</span>
+</div>
+{% endfor %}
+{% endif %}
+</div>

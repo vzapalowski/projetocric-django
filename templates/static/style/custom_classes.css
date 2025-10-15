@@ -17,6 +17,24 @@
   color: #273273;
 }
 
+.btn-secondary-cric-bold{
+  font-weight: bold !important;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-left: 16px;
+}
+
+.btn-secondary-cric-normal{
+  font-weight: normal !important;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-left: 16px;
+}
+
+/* ---------- Side Menu ---------- */
+
 .offcanvas-header-position{
   display: flex;
   margin: 0;
@@ -58,12 +76,11 @@
   text-align: start;
 }
 
-.cric-side-nav-item{
-}
-
 .cric-side-nav-item a{
   padding: 0px !important;
 }
+
+/* ---------- Buttons ---------- */
 
 #cric-side-bnt-exit{
   display: flex;
@@ -74,4 +91,23 @@
   padding: 0.2rem 0 !important;
   text-align: center;
   background: #db3545;
+}
+
+.btn-cric-submit-lg{
+  border-radius: 0.5rem;
+  cursor: pointer;
+  padding: 0 .5rem;
+  width: 100%;
+  font-size: 1.25rem;
+  padding: 8px 12px;
+}
+
+/* ---------- Inputs ---------- */
+
+.cric-input-lg{
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgb(222, 226, 230);
+  width: 100%;
 }

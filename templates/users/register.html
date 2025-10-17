@@ -30,30 +30,30 @@
         {% csrf_token %}
         <div class="mb-3">
           <input type="text" name="username" placeholder="Nome de usuário"
-            class="form-control rounded-0 shadow-none py-3 px-4" id="exampleInputEmail1" aria-describedby="emailHelp">
+            class="cric-input-lg" id="exampleInputEmail1" aria-describedby="emailHelp">
         </div>
         <div class="mb-3 d-flex gap-3">
           <input type="text" name="first_name" placeholder="Primeiro nome"
-            class="form-control rounded-0 shadow-none py-3 px-4" id="exampleInputEmail1" aria-describedby="emailHelp">
+            class="cric-input-lg" id="exampleInputEmail1" aria-describedby="emailHelp">
           <input type="text" name="last_name" placeholder="Sobrenome"
-            class="form-control rounded-0 shadow-none py-3 px-4" id="exampleInputEmail1" aria-describedby="emailHelp">
+            class="cric-input-lg" id="exampleInputEmail1" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
         </div>
         <div class="mb-3">
-          <input type="text" name="email" placeholder="Seu email" class="form-control rounded-0 shadow-none py-3 px-4"
+          <input type="text" name="email" placeholder="Seu email" class="cric-input-lg"
             id="exampleInputEmail1" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
           <input type="password" name="password" placeholder="Senha"
-            class="form-control rounded-0 shadow-none py-3 px-4" id="exampleInputPassword1">
+            class="cric-input-lg" id="exampleInputPassword1">
         </div>
         <div class="mb-3">
           <input type="password" name="password_confirm" placeholder="Confirmar senha"
-            class="form-control rounded-0 shadow-none py-3 px-4" id="exampleInputPassword1">
+            class="cric-input-lg" id="exampleInputPassword1">
         </div>
         <div class="d-grid gap-2">
-          <button type="submit" class="btn btn-cric btn-lg mt-4 rounded-pill py-2">Criar conta</button>
+          <button type="submit" class="btn-cric btn-cric-submit-lg">Criar conta</button>
         </div>
         <div class="mt-3 text-center text-muted pt-2 d-flex gap-2">
           Já possui uma conta? <a href="{% url 'users:login' %}" class="text-primary-color text-decoration-none fw-semibold">Faça login</a>
@@ -63,22 +63,7 @@
   </div>
 
   <!-- Mensagens -->
-  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 2000;">
-    {% if messages %}
-    {% for message in messages %}
-    <div class="toast-message {{ message.tags }}">
-      <strong class="toast-title">
-        {% if message.tags == 'success' %}✔ Successo!
-        {% elif message.tags == 'error' %}❌ Erro!
-        {% endif %}
-      </strong>
-      <span class="toast-text">{{ message }}</span>
-    </div>
-    {% endfor %}
-    {% endif %}
-  </div>
-
-
+{% include "components/toast.html"%}
 </body>
 
 <script src="{% static 'js/components/message_fx.js' %}" async></script>

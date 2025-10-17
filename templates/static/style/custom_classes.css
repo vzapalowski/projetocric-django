@@ -16,3 +16,113 @@
 .text-primary-color {
   color: #273273;
 }
+
+.btn-secondary-cric-bold{
+  font-weight: bold !important;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-left: 16px;
+  border: 1px solid;
+  color: rgb(43, 47, 77);
+  transition: 0.15s;
+}
+
+.btn-secondary-cric-bold:hover{
+  color: #fff;
+  background-color: rgb(43, 47, 77);
+}
+
+.btn-secondary-cric-normal{
+  font-weight: normal !important;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-left: 16px;
+}
+
+/* ---------- Side Menu ---------- */
+
+.offcanvas-header-position{
+  display: flex;
+  margin: 0;
+}
+
+.cric-side-infos{
+  text-align: left;
+}
+
+.cric-side-fullname{
+  font-weight: bold;
+}
+
+.cric-side-email{
+  width: 40%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+
+  color: #424451;
+}
+
+.cric-side-body{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  height: 100%;  
+  padding: 0 0 0 1rem;
+}
+
+.cric-side-nav{
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-self: center;
+  padding: 0 0 .5rem 0;
+  margin: 0;
+  list-style: none;
+  text-align: start;
+}
+
+.cric-side-nav-item a{
+  padding: 0px !important;
+}
+
+/* ---------- Buttons ---------- */
+
+#cric-side-bnt-exit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  color: #fff !important;
+  padding: 0.2rem 0 !important;
+  text-align: center;
+  background: #db3545;
+}
+
+.btn-cric-submit-lg{
+  border-radius: 0.5rem;
+  cursor: pointer;
+  padding: 0 .5rem;
+  width: 100%;
+  font-size: 1.25rem;
+  padding: 8px 12px;
+  margin-top: 1.5rem;
+  font-weight: normal;
+}
+
+/* ---------- Inputs ---------- */
+
+.cric-input-lg{
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgb(222, 226, 230);
+  width: 100%;
+}
+
+.cric-input-lg:focus{
+  box-shadow: none !important;
+  outline: none;
+}

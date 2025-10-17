@@ -23,6 +23,14 @@
   padding: 6px 12px;
   border-radius: 6px;
   margin-left: 16px;
+  border: 1px solid;
+  color: rgb(43, 47, 77);
+  transition: 0.15s;
+}
+
+.btn-secondary-cric-bold:hover{
+  color: #fff;
+  background-color: rgb(43, 47, 77);
 }
 
 .btn-secondary-cric-normal{
@@ -58,14 +66,14 @@
 
 .cric-side-body{
   display: flex;
-  align-content: center;
-
+  flex-wrap: wrap;
+  align-content: start;
   height: 100%;  
   padding: 0 0 0 1rem;
 }
 
 .cric-side-nav{
-  height: 90%;
+  height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -100,6 +108,8 @@
   width: 100%;
   font-size: 1.25rem;
   padding: 8px 12px;
+  margin-top: 1.5rem;
+  font-weight: normal;
 }
 
 /* ---------- Inputs ---------- */
@@ -110,4 +120,9 @@
   border-radius: 8px;
   border: 1px solid rgb(222, 226, 230);
   width: 100%;
+}
+
+.cric-input-lg:focus{
+  box-shadow: none !important;
+  outline: none;
 }

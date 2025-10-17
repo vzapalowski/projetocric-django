@@ -795,7 +795,7 @@ div nav div form .fw-blue {
   }  
 }
 
-/* TALBLET */
+/* TABLET */
 
 @media (max-width: 860px) {
   .m-nav{
@@ -1017,6 +1017,15 @@ div nav div form .fw-blue {
 }
 
 @media (max-width: 767px) {
+  /* header*/
+  .m-nav{
+    margin-left: 7dvw !important;
+  }
+
+  #btn-open{
+    margin-right: 7dvw;
+  }
+
   .btn-view-points{
     width: 97% !important;
   }

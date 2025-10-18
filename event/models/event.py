@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-from event.models import Warning
 from event.models.event_route import EventRoute
 from event.models.event_form import EventForm
 from core.models.anchorpoint import Anchorpoint
@@ -29,7 +28,6 @@ class Event(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Data de criação')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Data de atualização')
 
-    warning = models.ManyToManyField(Warning, blank=True, verbose_name='Avisos')
     participants = models.ManyToManyField(User, related_name='events', blank=True)
     anchorpoint = models.ManyToManyField(Anchorpoint, blank=True, verbose_name='Pontos do Evento')
 

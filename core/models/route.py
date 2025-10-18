@@ -8,6 +8,7 @@ class Route(models.Model):
     color = ColorField(default="#FF0000", verbose_name="Cor da rota")
     distance = models.CharField(max_length=500, blank=True, null=True, verbose_name='Distância')
     active = models.BooleanField(default=False, verbose_name='Ativa')
+    is_event_route = models.BooleanField(default=False, verbose_name='É uma rota de evento?')
 
     def __str__(self) -> str:
         return self.name

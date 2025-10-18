@@ -1,7 +1,6 @@
 from django.db import models
 from core.models.anchorpoint_category import AnchorpointCategory
 
-
 class Anchorpoint(models.Model):
     PATH_IMAGES_ANCHOR_POINTS = 'cities/anchor_points/photos/%Y/%m/%d'
 
@@ -15,6 +14,13 @@ class Anchorpoint(models.Model):
     address = models.CharField(max_length=255, blank=True, null=True, verbose_name='Endereço')
     is_event_anchorpoint = models.BooleanField(default=False, verbose_name='É um ponto de apoio de evento?')
     active = models.BooleanField(default=False, verbose_name="Ativo")
+    city = models.ForeignKey(
+        "cities.City",
+        on_delete=models.CASCADE,
+        null=True,
+        related_name='anchorpoints',
+        verbose_name='Cidade'
+    )
 
     def __str__(self) -> str:
         return self.name

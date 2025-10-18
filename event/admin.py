@@ -31,11 +31,11 @@ class EventImageInline(admin.TabularInline):
     verbose_name = "Imagem do Evento"
     verbose_name_plural = "Imagens do Evento"
 
-class WarningInline(admin.TabularInline):
-    model = Event.warning.through
-    extra = 1
-    verbose_name = "Aviso"
-    verbose_name_plural = "Avisos"
+# class WarningInline(admin.TabularInline):
+#     model = Event.warning.through
+#     extra = 1
+#     verbose_name = "Aviso"
+#     verbose_name_plural = "Avisos"
 
 class AnchorpointInline(admin.TabularInline):
     model = Event.anchorpoint.through
@@ -88,7 +88,6 @@ class EventAdmin(admin.ModelAdmin):
     
     inlines = [
         EventImageInline,
-        WarningInline,
         AnchorpointInline,
         ParticipantsInline,
     ]

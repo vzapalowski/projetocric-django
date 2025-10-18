@@ -1,6 +1,5 @@
 from django.db import models
 
-from core.models.anchorpoint import Anchorpoint
 from core.models.route import Route
 
 class City(models.Model):
@@ -16,7 +15,6 @@ class City(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Data de atualização')
 
     route = models.ManyToManyField(Route, blank=True, verbose_name='Rotas')
-    anchorpoint = models.ManyToManyField(Anchorpoint, blank=True, verbose_name='Pontos de apoio')
 
     def __str__(self):
         return self.name

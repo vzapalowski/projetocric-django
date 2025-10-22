@@ -5,6 +5,15 @@ from .route import RouteSerializer
 
 class EventRouteSerializer(serializers.ModelSerializer):
     route = RouteSerializer()
+
     class Meta:
         model = EventRoute
-        fields = ('id', 'name', 'route', 'time', 'departure_location', 'active')
+        fields = (
+            'id', 
+            'route', 
+            'name', 
+            'time', 
+            'departure_location', 
+            'concentration'
+            'active'
+        )

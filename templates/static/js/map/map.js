@@ -1,8 +1,14 @@
+class Route {
+  id;
+  name;
+  external_strava_id;
+}
+
 export class Map {
 
   constructor() {
     this.map = null;
-    this.bounds = null; 
+    this.bounds = null;
     this.lastValidCenter = null;
     this.pointLayerGroup = L.layerGroup();
   }
@@ -20,14 +26,15 @@ export class Map {
   }
 
   getMap() {
-    return this.map; 
+    return this.map;
   }
 
-  startMap(){
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                  attribution:
-                    '&copy; <strong>ROTACRIC</strong>',
-    }).addTo(this.map);
+  startMap() {
+    L.tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        attribution: '&copy; <strong>ROTACRIC</strong>'
+      }).addTo(this.map);
 
     this.map.on('drag', () => {
       const currentCenter = this.map.getCenter();
@@ -42,18 +49,18 @@ export class Map {
     });
   }
 
-  addRoutes(routes, opacity=1) {
+  addRoutes(routes, opacity = 1) {
     routes.forEach(e => {
       var coordinates = L.Polyline.fromEncoded(
-      e.polyline
-    ).getLatLngs();
+        e.polyline
+      ).getLatLngs();
 
-    L.polyline(coordinates, {
-      color: e.color,
-      weight: 3,
-      opacity: opacity,
-      lineJoin: "round",
-    }).addTo(this.map);
+      L.polyline(coordinates, {
+        color: e.color,
+        weight: 3,
+        opacity: opacity,
+        lineJoin: "round",
+      }).addTo(this.map);
     })
   }
 
@@ -74,8 +81,8 @@ export class Map {
   }
 
   addPoints(points) {
-    points.forEach(({ coordinates, name, category, image, address, business_hours, phone }) => {
-      const iconUrl = category?.image ?? '/default-icon.png';
+    points.forEach(({ coordinates, name, anchorpoint_category, image, address, business_hours, phone }) => {
+      const iconUrl = anchorpoint_category?.icon_path ?? '/static/default-icon.png';
 
       const newIcon = new L.Icon({
         iconUrl,
@@ -87,15 +94,15 @@ export class Map {
       const popupContent = `
         <h1>${name}</h1>
         ${image ? `<img src=${image}>` : `<p>Foto não informada</p>`}
-        <p>Endereço: ${address.street_name}, ${address.number}, ${address.neighborhood}</p>
+        <p>Endereço: ${address}</p>
         <p>Horário de atendimento: ${business_hours}</p>
         <p>Contato: ${phone}</p>
       `;
 
       const marker = L.marker([coordinates.lat, coordinates.lng], { icon: newIcon });
 
-      marker.options.category = category.name;
-      
+      marker.options.category = anchorpoint_category.name;
+
       marker.bindPopup(popupContent, {
         maxWidth: 150,
         keepInView: true,
@@ -126,36 +133,36 @@ export class Map {
   writeRoutes(routes) {
     var btns = document.querySelectorAll('.btnOpacity');
     var currentRoute = null;
-  
+
     btns.forEach((button) => {
       button.addEventListener('click', () => {
         var routeId = button.getAttribute('data-route');
         var selectedRoute = this.getRouteById(routes, routeId);
-  
+
         if (selectedRoute) {
           if (currentRoute) {
             this.updateOpacity(currentRoute, 0);
             currentRoute.button.style.backgroundColor = '';
           }
-  
+
           this.updateOpacity(selectedRoute, 1);
           currentRoute = selectedRoute;
-          button.style.backgroundColor = selectedRoute.color; 
-          currentRoute.button = button; 
+          button.style.backgroundColor = selectedRoute.color;
+          currentRoute.button = button;
         }
       });
     });
   }
-  
+
   getRouteById(routes, routeId) {
-    return routes.find((route) => route.id_route === routeId);
+    return routes.find((route) => route.external_strava_id === routeId);
   }
-  
+
   updateOpacity(route, opacityValue) {
     if (route.polylineLayer) {
       this.map.removeLayer(route.polylineLayer);
     }
-  
+
     var coordinates = L.Polyline.fromEncoded(route.polyline).getLatLngs();
     route.polylineLayer = L.polyline(coordinates, {
       color: route.color,
@@ -166,10 +173,10 @@ export class Map {
 
     this.map.addLayer(route.polylineLayer);
   }
-  
-  
+
+
   addPointsEvent(points) {
-    points.forEach(({ coordinates, title, iconUrl}) => {
+    points.forEach(({ coordinates, title, iconUrl }) => {
 
       const newIcon = new L.Icon({
         iconUrl,
@@ -196,7 +203,7 @@ export class Map {
     routes.forEach((route) => {
       const checkboxHTML = `
         <div class="check-box-container d-block">
-          <input id="route-${route.id}" type="checkbox" class="r-cb-iptn" data-route="${route.id_route}">
+          <input id="route-${route.id}" type="checkbox" class="r-cb-iptn" data-route="${route.external_strava_id}">
           <span class="form-check-label fs-filter">${route.name}</span>
         </div>
       `;
@@ -222,14 +229,14 @@ export class Map {
 
   filterPointsByCategory() {
     const checkboxes = document.querySelectorAll('.p-cb-iptn');
-    
+
     checkboxes.forEach(checkbox => {
       checkbox.addEventListener('change', () => {
         const category = checkbox.getAttribute('data-category');
         const markers = this.pointLayerGroup.getLayers();
 
         markers.forEach(marker => {
-          const markerCategory = marker.options.category; 
+          const markerCategory = marker.options.category;
           if (markerCategory === category) {
             if (checkbox.checked) {
               marker.addTo(this.map);
@@ -241,5 +248,5 @@ export class Map {
       });
     });
   }
-  
+
 }

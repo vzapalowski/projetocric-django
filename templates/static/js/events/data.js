@@ -9,7 +9,6 @@ let arr = []
 fetch(url_api)
 .then(res => res.json())
 .then(data => {
-
     let map = new Map();
     map.setMap('map', {scrollWheelZoom: false}, data.coordinates.lat, data.coordinates.lng, data.zoom);
     data.routes_data.forEach((e) => {

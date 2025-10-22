@@ -15,18 +15,18 @@ class AnchorpointCategory(models.Model):
     @property
     def icon_path(self):
         """Retorna o caminho do ícone - busca em static primeiro, depois em media"""
-        static_path = f"images/map-pins/{self.icon_name}.png"
-        media_path = f"categories/icons/{self.icon_name}.png"
+        static_path = f"static/map-pins/{self.icon_name}.svg"
+        media_path = f"categories/icons/{self.icon_name}.svg"
         
         # Verifica se existe na pasta static (usando lógica de fallback)
         # Na prática, você sempre usará o caminho static
-        return f"images/map-pins/{self.icon_name}.png"
+        return f"static/map-pins/{self.icon_name}.svg"
 
     @property
     def icon_static_path(self):
         """Retorna o caminho completo para o arquivo estático"""
         from django.conf import settings
-        return os.path.join(settings.STATIC_ROOT, 'images', 'map-pins', f"{self.icon_name}.png")
+        return os.path.join(settings.STATIC_ROOT, 'static', 'map-pins', f"{self.icon_name}.svg")
 
     class Meta:
         db_table = 'anchorpoint_category'

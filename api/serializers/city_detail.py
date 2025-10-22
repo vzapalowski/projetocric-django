@@ -2,11 +2,11 @@ from rest_framework import serializers
 
 from cities.models import City
 from api.serializers import RouteSerializer
-from api.serializers.anchor_point import AnchorPointSerializer
+from api.serializers.anchorpoint import AnchorpointSerializer
 
 class CityDetailSerializer(serializers.ModelSerializer):
     routes = RouteSerializer(many=True)
-    points = AnchorPointSerializer(many=True)
+    points = AnchorpointSerializer(many=True)
 
     coordinates = serializers.SerializerMethodField()
 

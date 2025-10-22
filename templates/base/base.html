@@ -119,15 +119,16 @@
   </div>
 
   <script>
-    const homeUrl = "{% url 'home:home' %}";
-  </script>
-  <script src="{% static 'js/home/navbar.js' %}"></script>
-  <script>
-    AOS.init();
     window.env = {
       ENVIRONMENT_URL: "{{ ENVIRONMENT_URL|escapejs }}",
     };
+    AOS.init();
 
   </script>
+  <script>
+    const homeUrl = "{% url 'home:home' %}";
+  </script>
+  <script src="{% static 'js/home/navbar.js' %}"></script>
 </body>
+
 </html>

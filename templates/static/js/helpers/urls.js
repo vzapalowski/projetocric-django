@@ -1,8 +1,15 @@
 const ENVIRONMENT_URL = window.env.ENVIRONMENT_URL;
 
-export const Urls = {
-    cities: ENVIRONMENT_URL + '/api/cities/',
-    home_cities: ENVIRONMENT_URL + '/api/home_cities/',
-    events: ENVIRONMENT_URL + '/api/events/',
-    event_list: ENVIRONMENT_URL + '/api/event_list/'
+export const getEnvironmentURL = (path = "") => {
+    return "http://" + window.location.host + "/" + path;
 }
+
+export const Urls = {
+    environment: getEnvironmentURL(),
+    cities: getEnvironmentURL('api/cities/'),
+    home_cities: getEnvironmentURL('api/home_cities/'),
+    events: getEnvironmentURL('api/events/'),
+    event_list: getEnvironmentURL('api/event_list/')
+}
+
+

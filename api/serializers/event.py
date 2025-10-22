@@ -2,10 +2,12 @@ from rest_framework import serializers
 
 from event.models import Event
 from api.serializers.anchorpoint import AnchorpointSerializer
+from api.serializers.event_route import EventRouteSerializer
 
 class EventSerializer(serializers.ModelSerializer):
     anchorpoint = AnchorpointSerializer(many=True)
     coordinates = serializers.SerializerMethodField()
+    routes = EventRouteSerializer(many=True, read_only=True)
 
     class Meta:
         model = Event
@@ -19,6 +21,7 @@ class EventSerializer(serializers.ModelSerializer):
             'banner_image', 
             'zoom', 
             'anchorpoint',
+            'routes',
             'coordinates',
         )
 

@@ -10,17 +10,16 @@ from api.serializers.anchorpoint import AnchorpointSerializer
 class HomeData(APIView):
 
     def get(self, request):
-        query_cities = City.objects.filter(visible=True)
+        cities_list = City.objects.filter(visible=True)
         
         routes = []
             
-        # Buscar todos os anchorpoints das cidades visíveis de uma vez
-        anchorpoints = Anchorpoint.objects.filter(city__in=query_cities)
+        anchorpoints = Anchorpoint.objects.filter(city__in=cities_list, is_event_anchorpoint=False)
             
-        for city in query_cities:
-            city_routes = city.route.all()
-                
+        for city in cities_list:
+            city_routes = city.route.filter(is_event_route=False)
             for route in city_routes:
+
                 route_data = {
                     'id': route.id,
                     'name': route.name,

@@ -14,6 +14,6 @@ class EventRouteSerializer(serializers.ModelSerializer):
             'name', 
             'time', 
             'departure_location', 
-            'concentration'
+            'concentration',
             'active'
         )

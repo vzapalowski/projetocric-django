@@ -1,4 +1,4 @@
-import { Map } from "../map/map.js";
+import { RouteMapViewer } from "../map/RouteMapViewer.js";
 import { Urls } from "../helpers/urls.js";
 
 const cityId = window.location.href.split("/")[4];
@@ -6,14 +6,17 @@ const url_api = Urls.cities + cityId;
 
 let arr = []
 
-export const map = new Map();
+export const map = new RouteMapViewer();
 fetch(url_api)
 .then(res => res.json())
 .then(data => {
-    map.setMap('map', {
-        scrollWheelZoom: false,
-        doubleClickZoom: false
-    }, data.coordinates.lat, data.coordinates.lng, data.zoom);
+    map.setMap(
+    'map', 
+    { scrollWheelZoom: false, doubleClickZoom: false },
+    data.coordinates.lat, 
+    data.coordinates.lng, 
+    data.zoom
+);
     
     map.addRoutes(data.routes);
     map.addPoints(data.points)

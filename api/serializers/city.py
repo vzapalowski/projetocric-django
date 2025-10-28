@@ -1,11 +1,10 @@
 from rest_framework import serializers
 from cities.models import City
 from api.serializers import RouteSerializer
-from api.serializers.anchorpoint import AnchorpointSerializer
+from api.serializers import AnchorpointSerializer
 
 class CitySerializer(serializers.ModelSerializer):
     route = RouteSerializer(many=True, read_only=True)
-    # REMOVA ou CORRIJA a linha abaixo - anchorpoint não existe no modelo
     anchorpoint = AnchorpointSerializer(many=True)
     
     coordinates = serializers.SerializerMethodField()

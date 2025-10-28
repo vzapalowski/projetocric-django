@@ -1,5 +1,3 @@
-const ENVIRONMENT_URL = window.env.ENVIRONMENT_URL;
-
 export const getEnvironmentURL = (path = "") => {
     return "http://" + window.location.host + "/" + path;
 }
@@ -11,5 +9,3 @@ export const Urls = {
     events: getEnvironmentURL('api/events/'),
     event_list: getEnvironmentURL('api/event_list/')
 }
-
-

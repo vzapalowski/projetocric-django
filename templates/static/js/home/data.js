@@ -5,26 +5,18 @@ import { setMapFilters } from "./map_menu.js";
 export const map = new RouteMapViewer();
 
 try {
-
-  // Set de Localização manual para o mapa da home, poderia vir como um objeto da Api. Como é fixo não faz diferença.
-  const CARBO_REGION_MAP_OPTIONS = {
-    latitude: -29.9949289,
-    longitude: -51.8243548,
-    zoom: 10,
-  }
-
-
-  map.setMap(
-    'map',
-    { scrollWheelZoom: false, doubleClickZoom: false },
-    CARBO_REGION_MAP_OPTIONS.latitude,
-    CARBO_REGION_MAP_OPTIONS.longitude,
-    CARBO_REGION_MAP_OPTIONS.zoom
-  );
-
   fetch(Urls.home_cities)
     .then(res => res.json())
     .then(data => {
+
+      map.setMap(
+        'map',
+        { scrollWheelZoom: false, doubleClickZoom: false },
+        data.latitude,
+        data.longitude,
+        data.zoom
+      );
+
       map.addRoutes(data.routes);
       map.addPoints(data.points);
 

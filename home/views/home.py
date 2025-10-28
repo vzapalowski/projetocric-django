@@ -16,27 +16,17 @@ class PostHome(ListView):
     def get_queryset(self):
         return City.objects.filter(visible=True).select_related('home')
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['homes'] = CityManager.objects.all()
-    #     context['categories_points'] = Category.objects.all()
-    #     # events = Event.objects.all()
-    #     events = Event.objects.order_by('status')
-    
-    #     for event in events:
-    #         event.number_of_routes = event.routes_data.count()
-    #         event.participants = Enrollment.objects.filter(event=event).count()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['homes'] = CityManager.objects.all()
+        context['categories_points'] = AnchorpointCategory.objects.all()
+        events = Event.objects.order_by('status')
 
-    #         if not event.participants:
-    #             event.participants = EnrollmentType2.objects.filter(event=event).count()
-                
-    #             if not event.participants:
-    #                 event.participants = Enrollment3PasseioCiclistico.objects.filter(event=event).count()
-                    
-    #                 if not event.participants:
-    #                     event.participants = Enrollment4PasseioCiclistico.objects.filter(event=event).count()
-                
-    #     context['events'] = events
+        for event in events:
+            event.number_of_routes = event.routes.count()
+            event.participants_count = event.participants.count()
+        
+        context['events'] = events
     
-    #     return context
+        return context
     

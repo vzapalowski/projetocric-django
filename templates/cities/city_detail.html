@@ -1,65 +1,65 @@
-{%extends 'base/base.html' %}
+{% extends 'base/base.html' %}
 {% load static %}
 
 {% block 'styles' %}
   <link rel="stylesheet" href="{% static 'style/style-city.css' %}">
 {% endblock %}
 
-{%block 'content'%}
+{% block 'content' %}
 
 <div class="bg-image d-flex col justify-content-center align-items-center adjust-top-page" style="
- background-color: antiquewhite;
+  background-color: antiquewhite;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   height: 30rem;
-  background-image: url('../../media/{{ city.banner_image }}');
+  background-image: url('{{ city.banner_image.url }}');
   ">
 
   <div class="d-flex justify-content-center align-items-center">
-    <h1 class="text-white font-name-city" style="z-index: 9999;">{{city.name}}</h1>
+    <h1 class="text-white font-name-city" style="z-index: 9999;">{{ city.name }}</h1>
   </div>
 </div>
-<!-- {{ city.name }} -->
+
 <div class="container-fluid">
   <div class="title text-center">
     <h2 class="fw-semibold" style="margin-top: 7rem; margin-bottom: 7rem;">Rotas Disponíveis</h2>
   </div>
 </div>
+
 <div class="container-fluid">
-
   {% include 'cities/map-content.html' %}
-
 </div>
+
 <div class="container-fluid mx-0 background-blue px-5 px-adjust py-4">
   <div class="title text-center">
     <h2 class="mb-5 fw-normal text-white py-5">Conheça nossa cidade</h2>
   </div>
-  {% for image, title, text, is_even in images %}
-
+  
+  {% for image in images %}
   <div class="mb-5 mt-5" data-aos="fade-up">
     <div class="row col-mobile-order">
-      {% if is_even %}
+      {% if image.is_even %}
       <div class="col-md-8 col-lg-8 even-card card-container mt-0 p-0">
         <div class="card ms-0" style="height: 100%;">
           <div class="card-body">
-            <h3 class="card-title mt-3">{{ title }}</h3>
-            <p class="card-text">{{ text }}</p>
+            <h3 class="card-title mt-3">{{ image.title }}</h3>
+            <p class="card-text">{{ image.subtitle }}</p>
           </div>
         </div>
       </div>
       <div class="col-md-4 col-lg-4 card-image-container p-0">
-        <img src="{{ image }}" class="img-fluid rounded-end card-image">
+        <img src="{{ image.url }}" class="img-fluid rounded-end card-image" alt="{{ image.title }}">
       </div>
       {% else %}
       <div class="col-md-4 col-lg-4 card-image-container p-0">
-        <img src="{{ image }}" class="img-fluid rounded-start card-image">
+        <img src="{{ image.url }}" class="img-fluid rounded-start card-image" alt="{{ image.title }}">
       </div>
       <div class="col-md-8 col-lg-8 odd-card card-container mt-0 p-0">
         <div class="card me-0" style="height: 100%;">
           <div class="card-body">
-            <h3 class="card-title mt-3">{{ title }}</h3>
-            <p class="card-text">{{ text }}</p>
+            <h3 class="card-title mt-3">{{ image.title }}</h3>
+            <p class="card-text">{{ image.subtitle }}</p>
           </div>
         </div>
       </div>
@@ -67,10 +67,9 @@
     </div>
   </div>
   {% endfor %}
-
 </div>
 
 <script src="{% static 'js/cities/map_menu.js' %}" type="module" async></script>
 <script src="{% static 'js/cities/data.js' %}" type="module" async></script>
 
-{%endblock%}
+{% endblock %}

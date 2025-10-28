@@ -1,6 +1,4 @@
 from rest_framework import generics
-from api.serializers import HomeSerializer
-from home.models import Home
 from cities.models import City
 from core.models import Anchorpoint
 from rest_framework.views import APIView

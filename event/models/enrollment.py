@@ -1,5 +1,5 @@
 from django.db import models
-from core.models.route import Route
+from event.models import EventRoute
 from event.models.event import Event
 from django.contrib.auth.models import User
 
@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class Enrollment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    route = models.ForeignKey(Route, on_delete=models.CASCADE)
+    route = models.ForeignKey(EventRoute, on_delete=models.CASCADE)
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

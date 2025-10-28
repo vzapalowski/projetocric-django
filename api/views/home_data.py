@@ -32,6 +32,9 @@ class HomeData(APIView):
             
             
         data = {
+            'latitude': -29.9949289,
+            'longitude': -51.8243548,
+            'zoom': 10,
             'points': AnchorpointSerializer(anchorpoints, many=True).data,
             'routes': routes
         }

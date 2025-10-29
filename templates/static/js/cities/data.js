@@ -17,8 +17,10 @@ fetch(url_api)
     data.coordinates.lng, 
     data.zoom
 );
-    
-    map.addRoutes(data.routes);
+    if(data.routes){
+        data.routes = data.routes.filter(route => !route.is_event_route);
+        map.addRoutes(data.routes);
+    }
     map.addPoints(data.points)
     map.togglePointsLayer();
     map.createRouteCheckboxes(data.routes);

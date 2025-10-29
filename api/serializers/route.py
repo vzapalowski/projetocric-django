@@ -11,5 +11,6 @@ class RouteSerializer(serializers.ModelSerializer):
             'polyline',
             'distance',
             'color', 
+            'is_event_route', 
             'external_strava_id', 
         )

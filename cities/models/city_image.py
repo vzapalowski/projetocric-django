@@ -9,7 +9,7 @@ class CityImage(models.Model):
     subtitle = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return self.image.name
+        return self.image_path.name if self.image_path else "Sem imagem"
 
     class Meta:
         db_table = 'city_image'

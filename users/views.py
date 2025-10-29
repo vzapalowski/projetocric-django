@@ -119,12 +119,10 @@ def profile(request):
             return redirect('users:login')
             
         enrollments = Enrollment.objects.filter(user=user)
-        enrollments2 = EnrollmentType2.objects.filter(user=user)
 
         return render(request, 'users/profile.html', {
             'user': user, 
             'enrollments': enrollments,
-            'enrollments_type2': enrollments2
         })
         
     except User.DoesNotExist:

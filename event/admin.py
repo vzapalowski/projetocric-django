@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.utils.html import format_html
+from django.urls import reverse
+from django.utils.safestring import mark_safe
 from .models import (
     Warning, Event, EventRoute, EventImage, EventHowknew, 
     EventForm, EventFormField, EventFormResponse, EventBond, Enrollment
@@ -11,7 +13,6 @@ class WarningAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_at')
     list_filter = ('created_at',)
     search_fields = ('title', 'content')
-    date_hierarchy = 'created_at'
     
     fieldsets = (
         (None, {
@@ -19,23 +20,11 @@ class WarningAdmin(admin.ModelAdmin):
         }),
     )
 
-# class EventRouteInline(admin.TabularInline):
-#     model = Event.route.through
-#     extra = 1
-#     verbose_name = "Rota do Evento"
-#     verbose_name_plural = "Rotas do Evento"
-
 class EventImageInline(admin.TabularInline):
     model = EventImage
     extra = 1
     verbose_name = "Imagem do Evento"
     verbose_name_plural = "Imagens do Evento"
-
-# class WarningInline(admin.TabularInline):
-#     model = Event.warning.through
-#     extra = 1
-#     verbose_name = "Aviso"
-#     verbose_name_plural = "Avisos"
 
 class AnchorpointInline(admin.TabularInline):
     model = Event.anchorpoint.through
@@ -51,7 +40,7 @@ class ParticipantsInline(admin.TabularInline):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'date', 'status', 'location', 'created_at', 'banner_preview')
+    list_display = ('name', 'date', 'status', 'location', 'created_at', 'banner_preview', 'enrollments_count', 'form_responses_count')
     list_filter = ('status', 'date', 'created_at')
     search_fields = ('name', 'description', 'location')
     date_hierarchy = 'date'
@@ -97,6 +86,18 @@ class EventAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" width="50" height="50" style="object-fit: cover;" />', obj.banner_image.url)
         return "Sem imagem"
     banner_preview.short_description = 'Banner'
+    
+    def enrollments_count(self, obj):
+        count = obj.enrollment_set.count()
+        url = reverse('admin:event_enrollment_changelist') + f'?event__id__exact={obj.id}'
+        return format_html('<a href="{}">{}</a>', url, count)
+    enrollments_count.short_description = 'Inscrições'
+    
+    def form_responses_count(self, obj):
+        count = EventFormResponse.objects.filter(enrollment__event=obj).count()
+        url = reverse('admin:event_eventformresponse_changelist') + f'?enrollment__event__id__exact={obj.id}'
+        return format_html('<a href="{}">{}</a>', url, count)
+    form_responses_count.short_description = 'Respostas'
 
 @admin.register(EventRoute)
 class EventRouteAdmin(admin.ModelAdmin):
@@ -125,8 +126,8 @@ class EventImageAdmin(admin.ModelAdmin):
     search_fields = ('event__name',)
     
     def image_preview(self, obj):
-        if obj.image_path:
-            return format_html('<img src="{}" width="50" height="50" style="object-fit: cover;" />', obj.image_path.url)
+        if obj.image:  
+            return format_html('<img src="{}" width="50" height="50" style="object-fit: cover;" />', obj.image.url)
         return "Sem imagem"
     image_preview.short_description = 'Preview'
 
@@ -155,7 +156,7 @@ class EventFormFieldInline(admin.TabularInline):
 
 @admin.register(EventForm)
 class EventFormAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'fields_count')
+    list_display = ('name', 'description', 'fields_count', 'responses_count')
     search_fields = ('name', 'description')
     
     inlines = [EventFormFieldInline]
@@ -163,10 +164,16 @@ class EventFormAdmin(admin.ModelAdmin):
     def fields_count(self, obj):
         return obj.fields.count()
     fields_count.short_description = 'Nº de Campos'
+    
+    def responses_count(self, obj):
+        count = EventFormResponse.objects.filter(field__form=obj).count()
+        url = reverse('admin:event_eventformresponse_changelist') + f'?field__form__id__exact={obj.id}'
+        return format_html('<a href="{}">{}</a>', url, count)
+    responses_count.short_description = 'Respostas'
 
 @admin.register(EventFormField)
 class EventFormFieldAdmin(admin.ModelAdmin):
-    list_display = ('name', 'form', 'type', 'required', 'order')
+    list_display = ('name', 'form', 'type', 'required', 'order', 'responses_count')
     list_filter = ('type', 'required', 'form')
     search_fields = ('name', 'label', 'form__name')
     list_editable = ('order',)
@@ -184,25 +191,40 @@ class EventFormFieldAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
-
-@admin.register(EventFormResponse)
-class EventFormResponseAdmin(admin.ModelAdmin):
-    list_display = ('enrollment', 'field', 'value_preview')
-    list_filter = ('field__form', 'field')
-    search_fields = ('enrollment__user__username', 'enrollment__event__name', 'field__name', 'value')
     
-    def value_preview(self, obj):
-        if len(obj.value) > 50:
-            return f"{obj.value[:50]}..."
+    def responses_count(self, obj):
+        count = obj.eventformresponse_set.count()
+        url = reverse('admin:event_eventformresponse_changelist') + f'?field__id__exact={obj.id}'
+        return format_html('<a href="{}">{}</a>', url, count)
+    responses_count.short_description = 'Respostas'
+
+class EventFormResponseInline(admin.TabularInline):
+    model = EventFormResponse
+    extra = 0
+    readonly_fields = ('field_name', 'field_type', 'formatted_value')
+    fields = ('field_name', 'field_type', 'formatted_value')
+    can_delete = False
+    
+    def field_name(self, obj):
+        return obj.field.label or obj.field.name
+    field_name.short_description = 'Campo'
+    
+    def field_type(self, obj):
+        return obj.field.get_type_display()
+    field_type.short_description = 'Tipo'
+    
+    def formatted_value(self, obj):
         return obj.value
-    value_preview.short_description = 'Valor'
+    formatted_value.short_description = 'Resposta'
+    
+    def has_add_permission(self, request, obj=None):
+        return False
 
 @admin.register(Enrollment)
 class EnrollmentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'event', 'route', 'created_at')
+    list_display = ('user', 'event', 'route', 'created_at', 'form_responses_count')
     list_filter = ('event', 'route', 'created_at')
     search_fields = ('user__username', 'event__name', 'route__name')
-    date_hierarchy = 'created_at'
     readonly_fields = ('created_at', 'updated_at')
     
     fieldsets = (
@@ -218,3 +240,76 @@ class EnrollmentAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+    
+    inlines = [EventFormResponseInline]
+    
+    def form_responses_count(self, obj):
+        count = obj.responses.count()
+        if count > 0:
+            url = reverse('admin:event_eventformresponse_changelist') + f'?enrollment__id__exact={obj.id}'
+            return format_html('<a href="{}">{}</a>', url, count)
+        return count
+    form_responses_count.short_description = 'Respostas do Formulário'
+
+@admin.register(EventFormResponse)
+class EventFormResponseAdmin(admin.ModelAdmin):
+    list_display = ('enrollment_info', 'field_info', 'value_preview')
+    list_filter = ('field__form', 'enrollment__event', 'field')
+    search_fields = (
+        'enrollment__user__username', 
+        'enrollment__user__first_name', 
+        'enrollment__user__last_name',
+        'enrollment__event__name', 
+        'field__name', 
+        'value'
+    )
+    
+    fieldsets = (
+        (None, {
+            'fields': (
+                'enrollment', 'field', 'value'
+            )
+        }),
+        ('Metadados', {
+            'fields': (
+                'created_at', 'updated_at'
+            ),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def enrollment_info(self, obj):
+        url = reverse('admin:event_enrollment_change', args=[obj.enrollment.id])
+        return format_html(
+            '<a href="{}"><strong>{}</strong> - {}</a>', 
+            url, 
+            obj.enrollment.user.get_full_name() or obj.enrollment.user.username,
+            obj.enrollment.event.name
+        )
+    enrollment_info.short_description = 'Inscrição'
+    enrollment_info.admin_order_field = 'enrollment__user__first_name'
+    
+    def field_info(self, obj):
+        return f"{obj.field.form.name} - {obj.field.label or obj.field.name}"
+    field_info.short_description = 'Campo'
+    field_info.admin_order_field = 'field__form__name'
+    
+    def value_preview(self, obj):
+        if len(obj.value) > 100:
+            return f"{obj.value[:100]}..."
+        return obj.value
+    value_preview.short_description = 'Resposta'
+    
+    
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        return queryset.select_related(
+            'enrollment__user', 
+            'enrollment__event', 
+            'field__form'
+        ).order_by('enrollment', 'field__order')
+    
+    def get_readonly_fields(self, request, obj=None):
+        if obj:  # editing an existing object
+            return ('created_at', 'updated_at')
+        return ()

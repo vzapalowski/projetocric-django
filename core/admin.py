@@ -47,7 +47,7 @@ class AnchorpointCategoryAdmin(admin.ModelAdmin):
     def icon_preview(self, obj):
         """Preview pequeno para lista"""
         if obj.icon_name:
-            static_url = f"{settings.STATIC_URL}images/map-pins/{obj.icon_name}.png"
+            static_url = f"{settings.STATIC_URL}map-pins/{obj.icon_name}.svg"
             return format_html(
                 '<img src="{}" width="32" height="32" alt="{}" style="border: 1px solid #ccc; border-radius: 4px;">',
                 static_url, obj.icon_name
@@ -58,7 +58,7 @@ class AnchorpointCategoryAdmin(admin.ModelAdmin):
     def icon_preview_large(self, obj):
         """Preview grande para edição"""
         if obj.icon_name:
-            static_url = f"{settings.STATIC_URL}images/map-pins/{obj.icon_name}.png"
+            static_url = f"{settings.STATIC_URL}map-pins/{obj.icon_name}.svg"
             return format_html(
                 '''
                 <div style="text-align: center;">
@@ -74,7 +74,8 @@ class AnchorpointCategoryAdmin(admin.ModelAdmin):
     def icon_status(self, obj):
         """Mostra se o arquivo do ícone existe"""
         if obj.icon_name:
-            icon_path = os.path.join(settings.STATIC_ROOT, 'images', 'map-pins', f"{obj.icon_name}.png")
+            icon_path = os.path.join(settings.STATIC_ROOT, 'map-pins', f"{obj.icon_name}.svg")
+            print( icon_path )
             if os.path.exists(icon_path):
                 return format_html('<span style="color: green;">✅ Arquivo encontrado</span>')
             else:
@@ -236,7 +237,6 @@ class RouteAdmin(admin.ModelAdmin):
     list_filter = ['active']
     search_fields = ['name', 'external_strava_id']
     
-    # CORREÇÃO: Apenas métodos callable ou nomes de campos reais
     readonly_fields = ['get_polyline_preview', 'get_color_display']
     
     fieldsets = (
@@ -255,13 +255,6 @@ class RouteAdmin(admin.ModelAdmin):
                 'polyline',
                 'get_polyline_preview',  # Método callable
             )
-        }),
-        ('Metadados', {
-            'fields': (
-                'created_at',  # Campo real do modelo - será readonly automaticamente
-                'updated_at',  # Campo real do modelo - será readonly automaticamente
-            ),
-            'classes': ('collapse',)  # Opcional: colapsar esta seção
         })
     )
     
@@ -298,7 +291,6 @@ admin.site.site_header = 'Administração do Sistema de Mapas'
 admin.site.site_title = 'Sistema de Mapas'
 admin.site.index_title = 'Gerenciamento de Dados'
 
-# Se quiser agrupar os modelos em uma seção específica
 from django.contrib.admin import AdminSite
 
 class CustomAdminSite(AdminSite):
@@ -314,8 +306,8 @@ def get_app_list(self, request):
     app_dict = self._build_app_dict(request)
     
     app_ordering = {
-        'core': 1,
-        'auth': 2,
+        'auth': 1,
+        'core': 2,
     }
     
     app_list = sorted(app_dict.values(), key=lambda x: app_ordering.get(x['app_label'], 999))
@@ -332,5 +324,4 @@ def get_app_list(self, request):
     
     return app_list
 
-# Aplica a ordenação customizada
 admin.site.get_app_list = get_app_list.__get__(admin.site, AdminSite)

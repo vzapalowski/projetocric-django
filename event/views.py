@@ -7,7 +7,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 from jinja2 import Environment, FileSystemLoader
-
+from django.urls import reverse
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 
@@ -21,8 +21,7 @@ import datetime
 
 from event.credentials import *
 from django.views.generic.detail import DetailView
-from event.models import Event, Enrollment, EventBond, EventRoute, EventHowknew, Warning
-# from event.forms import EnrollmentForm, EnrollmentFormType2, enrollment3PasseioIfsulForm
+from event.models import Event, Enrollment, EventBond, EventRoute, EventHowknew, Warning, EventFormResponse
 
 class EventView(DetailView):
     model = Event
@@ -32,56 +31,116 @@ class EventView(DetailView):
         context = super().get_context_data(**kwargs)
         event = self.object
         
-        # # Forms
-        # if self.request.method == 'POST':
-        #     context['form'] = EnrollmentForm(self.request.POST)
-        #     context['form_2'] = EnrollmentFormType2(self.request.POST)
-        #     context['form_3'] = enrollment3PasseioIfsulForm(self.request.POST)
-        # else:
-        #     context['form'] = EnrollmentForm()
-        #     context['form_2'] = EnrollmentFormType2()
-        #     context['form_3'] = enrollment3PasseioIfsulForm()
+        # Obter campos do formulário dinâmico se existir
+        form_fields = []
+        if event.form:
+            form_fields = event.form.fields.all().order_by('order')
+            # Pré-processar opções para selects
+            for field in form_fields:
+                if field.type == 'select' and field.options:
+                    # Dividir as opções por vírgula e limpar espaços
+                    field.options_list = [opt.strip() for opt in field.options.split(',') if opt.strip()]
         
-        # Dados do evento
+        context['form_fields'] = form_fields
         context['bond'] = EventBond.objects.all()
         context['howKnew'] = EventHowknew.objects.all()
-
         context['events'] = Event.objects.all()
         context['event_routes'] = EventRoute.objects.filter(event=event, active=True)
         context['warnings'] = Warning.objects.filter(event=event)
         
         return context
 
-# def enrollment(request, event_id):
-#     event = Event.objects.get(pk=event_id)
-#     if request.method == 'POST':
-#         form = EnrollmentForm(request.POST)
-#         if form.is_valid():
-#             full_name = form.cleaned_data['full_name']  
-#             email = form.cleaned_data['email']  
-#             # send_email(email, full_name, event)
-#             form.save()
-#             messages.success(request, 'Cadastro feito com Sucesso!')
+def enrollment(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+    
+    if request.method == 'POST':
+        try:
+            # Verificar se o evento tem um formulário vinculado
+            if not event.form:
+                messages.error(request, 'Este evento não possui formulário de inscrição.')
+                return redirect('events:event', pk=event_id)
+            
+            # Obter todos os campos do formulário
+            form_fields = event.form.fields.all()
+            
+            # Validar campos obrigatórios do formulário dinâmico
+            missing_required_fields = []
+            for field in form_fields:
+                if field.required:
+                    field_value = request.POST.get(f'field_{field.id}')
+                    if not field_value:
+                        missing_required_fields.append(field.label)
+            
+            if missing_required_fields:
+                messages.error(request, f'Por favor, preencha os campos obrigatórios: {", ".join(missing_required_fields)}')
+                return redirect('events:event', pk=event_id)
+            
+            # Verificar se a rota existe e está ativa (se houver campo de rota)
+            route_path_id = request.POST.get('route_path')
+            route = None
+            if route_path_id:
+                try:
+                    route = EventRoute.objects.get(id=route_path_id, event=event, active=True)
+                except EventRoute.DoesNotExist:
+                    messages.error(request, 'Rota selecionada não está disponível.')
+                    return redirect('events:event', pk=event_id)
+            
+            # Criar enrollment (apenas com campos mínimos)
+            enrollment = Enrollment.objects.create(
+                user=request.user if request.user.is_authenticated else None,
+                event=event,
+                route=route,
+                # Não inclua campos fixos como full_name, email, etc.
+                # Esses dados virão dos campos dinâmicos
+            )
+            
+            # Processar TODOS os campos dinâmicos do formulário
+            for field in form_fields:
+                field_value = request.POST.get(f'field_{field.id}')
+                if field_value:  # Só cria resposta se houver valor
+                    EventFormResponse.objects.create(
+                        enrollment=enrollment,
+                        field=field,
+                        value=field_value
+                    )
+            
+            # Sucesso
+            messages.success(request, 'Inscrição realizada com sucesso!')
+            if request.user.is_authenticated:
+                event.participants.add(request.user)
+                event.save()
 
-#         else:
-#             error_message = "\n".join(
-#                 f"{str(form.fields[field_name].label)}: {error}"
-#                 for field_name, error_list in form.errors.items()
-#                 for error in error_list
-#             )
-#             messages.error(request, error_message)
-#     else:
-#         form = EnrollmentForm()
+            return redirect(reverse('events:enrollment_success') + f'?enrollment_id={enrollment.id}')
+            
+        except Exception as e:
+            messages.error(request, f'Erro ao processar inscrição: {str(e)}')
+            return redirect('events:event', pk=event_id)
     
-#     context = {
-#         'event': event,
-#         'form': form,
-#         'bond': Bond.objects.all(),
-#         'howKnew': HowKnew.objects.all(),
-#         'routePath': RoutePath.objects.all()
-#     }
+    # Se não for POST, redireciona para a página do evento
+    return redirect('events:event', pk=event_id)
+
+
+def enrollment_success(request):
+    enrollment_id = request.GET.get('enrollment_id')
+    if not enrollment_id:
+        # Handle error - no enrollment_id provided
+        return render(request, 'error.html', {'message': 'ID de inscrição não fornecido'})
     
-#     return render(request, 'events/index.html', context)
+    enrollment = get_object_or_404(Enrollment, id=enrollment_id)
+    context = {
+        'enrollment': enrollment,
+        'event': enrollment.event,
+    }
+    return render(request, 'events/enrollment_success.html', context)
+
+def delete_enrollment(request, enrollment_id):
+    enrollment = get_object_or_404(Enrollment, id=enrollment_id)
+    if request.user == enrollment.user or request.user.is_staff:
+        enrollment.delete()
+        messages.success(request, 'Inscrição cancelada com sucesso!')
+    else:
+        messages.error(request, 'Você não tem permissão para cancelar esta inscrição.')
+    return redirect('users:profile')
 
 # def enrollment2(request, event_id):
 #     event = Event.objects.get(pk=event_id)

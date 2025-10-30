@@ -215,7 +215,7 @@ class EventFormAdmin(admin.ModelAdmin):
     fields_count.short_description = 'Nº de Campos'
     
     def events_count(self, obj):
-        count = obj.event_set.count()
+        count = Event.objects.filter(form__id=obj.id).count()
         url = reverse('admin:event_event_changelist') + f'?form__id__exact={obj.id}'
         return format_html('<a href="{}">{}</a>', url, count)
     events_count.short_description = 'Eventos Vinculados'

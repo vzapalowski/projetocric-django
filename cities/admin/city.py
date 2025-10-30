@@ -1,5 +1,6 @@
 from django.contrib import admin
-from cities.models import Route, City, AnchorPoint
+from core.models import Route, Anchorpoint
+from cities.models import City
 from .city_form import CityAdminForm
 from cities.admin.city_image import CityImageAdmin
 

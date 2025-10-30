@@ -1,46 +1,40 @@
 from rest_framework import generics
-from api.serializers import HomeSerializer
-from home.models import Home
 from cities.models import City
+from core.models import Anchorpoint
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from api.serializers.anchorpoint import AnchorpointSerializer
 
+class HomeData(APIView):
 
-class HomeData(generics.ListAPIView):
-    queryset = Home.objects.all()
-    serializer_class = HomeSerializer
+    def get(self, request):
+        cities_list = City.objects.filter(visible=True)
+        
+        routes = []
+            
+        anchorpoints = Anchorpoint.objects.filter(city__in=cities_list, is_event_anchorpoint=False)
+            
+        for city in cities_list:
+            city_routes = city.route.filter(is_event_route=False)
+            for route in city_routes:
 
-    def get_queryset(self):
-        homes = super().get_queryset()
-        query_cities = City.objects.filter(visible=True)
-        for home in homes:
-            routes = []
-            points = []
-            for city in query_cities:
-                city_routes = city.routes.all()
-                city_points = city.points.all()
-                for route in city_routes:
-                    route_data = {
-                        'id': route.id,
-                        'name': route.name,
-                        'color': route.color,
-                        'id_route': route.id_route,
-                        'polyline': route.polyline,
-                    }
-                    if route_data not in routes:
-                        routes.append(route_data)
-                        
-                for point in city_points:
-                    point_data = {
-                    'id': point.id,
-                    'name': point.name,
-                    'image': point.image,
-                    'business_hours': point.business_hours,
-                    'lat': point.lat,
-                    'lng': point.lng,
-                    'category': point.category,
-                    'phone': point.phone,
-                    'address': point.address
-                    }
-                    points.append(point_data)
-            home.routes = routes
-            home.points = points
-        return homes
+                route_data = {
+                    'id': route.id,
+                    'name': route.name,
+                    'color': route.color,
+                    'external_strava_id': route.external_strava_id,
+                    'polyline': route.polyline,
+                }
+                if route_data not in routes:
+                    routes.append(route_data)
+            
+            
+        data = {
+            'latitude': -29.9949289,
+            'longitude': -51.8243548,
+            'zoom': 10,
+            'points': AnchorpointSerializer(anchorpoints, many=True).data,
+            'routes': routes
+        }
+
+        return Response(data)

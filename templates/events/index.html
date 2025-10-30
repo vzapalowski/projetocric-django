@@ -1,4 +1,4 @@
-{%extends 'base/base.html' %}
+{% extends 'base/base.html' %}
 {% load static %}
 
 {% block 'styles' %}
@@ -30,21 +30,21 @@
   </div>
   <div class="container overflow-hidden mt-5">
     <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 gx-5 gy-5 justify-content-center">
-      {% for e in event.routes_data.all %}
+      {% for route in event_routes %}
       <div class="col" data-aos="fade-up">
         <div class="text-start py-4 px-3 rounded bg-primary-blue text-white" style="height: 14rem;">
-          <h5 class="px-4">{{ e }}</h5>
+          <h5 class="px-4">{{ route.name }}</h5>
           <p class="card-text px-4 mt-2"><small class="text-white">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="color: white;" viewBox="0 0 24 24">
                 <path fill="currentColor"
                   d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z" />
                 <circle cx="12" cy="9" r="2.5" fill="currentColor" />
               </svg>
-              {{ e.departure_location}}
+              {{ route.departure_location }}
             </small></p>
-          <p class="card-text px-5">Concentração: {{e.concentration}}</p>
-          <p class="card-text px-5">Saída: {{e.time}}</p>
-          <p class="card-text px-5">Distância: {{ e.route.distance }} Km</p>
+          <p class="card-text px-5">Concentração: {{route.concentration}}</p>
+          <p class="card-text px-5">Saída: {{route.time}}</p>
+          <p class="card-text px-5">Distância: {{ route.route.distance }} Km</p>
         </div>
       </div>
       {% endfor %}
@@ -81,8 +81,7 @@
 <!-- Mapa de Rotas do Evento -->
 {% include 'cities/map-content.html' %}
 
-
-{% if event.warnings.all %}
+{% if warnings %}
 <div class="container-fluid text-center bg-light-light pb-5" style="padding-top: 5rem;">
   <div class="row ">
     <!-- Title and Descripiton -->
@@ -93,7 +92,7 @@
         </h2>
       </div>
       <div class="row mt-5" data-aos="fade-up">
-        {% for warning in event.warnings.all %}
+        {% for warning in warnings %}
         <div class="col-sm-12 mb-3">
           <div class="card border-card text-end">
             <div class="card-body text-start px-4 pt-5 pb-1">
@@ -120,18 +119,13 @@
 <!-- Formulario -->
 {% if event.status == 'Em andamento' %}
 <div class="mx-auto mb-5">
-  <h2 class="title-event text-center mx-4" id="form-h2">Formulário para Inscrição ao Evento</h2>
-  {% if event.form_type == 'Type-1' %}
-    {% include 'events/forms/form-type-1.html' %}
-  {% elif event.form_type == 'Type-2' %}
-    {% include 'events/forms/form-type-2.html' %}
-  {% elif event.form_type == 'Type-3' %}
-    {% include 'events/forms/form-type-3.html' %}
-  {% elif event.form_type == 'Type-4' %}
-    {% include 'events/forms/form-type-3.html' %}
-  {% endif %}
+    <h2 class="title-event text-center mx-4" id="form-h2">Formulário para Inscrição ao Evento</h2>
+    
+    {% if event.form %}
+        <!-- Formulário dinâmico baseado no EventForm vinculado -->
+        {% include 'events/dynamic_form.html' %}
+    {% endif %}
 </div>
-
 {% endif %}
 <!-- MESSAGE CARD -->
 <div

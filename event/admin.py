@@ -38,9 +38,23 @@ class ParticipantsInline(admin.TabularInline):
     verbose_name = "Participante"
     verbose_name_plural = "Participantes"
 
+class EventRouteInline(admin.TabularInline):
+    model = EventRoute
+    extra = 1
+    verbose_name = "Rota do Evento"
+    verbose_name_plural = "Rotas do Evento"
+    
+    fieldsets = (
+        (None, {
+            'fields': (
+                'route', 'name', 'active', 'time', 'concentration', 'departure_location'
+            )
+        }),
+    )
+
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'date', 'status', 'location', 'form_link', 'created_at', 'banner_preview', 'enrollments_count', 'form_responses_count')
+    list_display = ('name', 'date', 'status', 'location', 'form_link', 'created_at', 'banner_preview', 'enrollments_count', 'form_responses_count', 'routes_count')
     list_filter = ('status', 'date', 'created_at', 'form')
     search_fields = ('name', 'description', 'location', 'form__name')
     date_hierarchy = 'date'
@@ -76,6 +90,7 @@ class EventAdmin(admin.ModelAdmin):
     )
     
     inlines = [
+        EventRouteInline,
         EventImageInline,
         AnchorpointInline,
         ParticipantsInline,
@@ -125,6 +140,13 @@ class EventAdmin(admin.ModelAdmin):
         url = reverse('admin:event_eventformresponse_changelist') + f'?enrollment__event__id__exact={obj.id}'
         return format_html('<a href="{}">{}</a>', url, count)
     form_responses_count.short_description = 'Respostas'
+    
+    def routes_count(self, obj):
+        # Usando o related_name padrão do Django para ForeignKey
+        count = EventRoute.objects.filter(event=obj).count()
+        url = reverse('admin:event_eventroute_changelist') + f'?event__id__exact={obj.id}'
+        return format_html('<a href="{}">{} Rotas</a>', url, count)
+    routes_count.short_description = 'Rotas'
 
 @admin.register(EventRoute)
 class EventRouteAdmin(admin.ModelAdmin):

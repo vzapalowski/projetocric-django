@@ -40,16 +40,16 @@ class ParticipantsInline(admin.TabularInline):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'date', 'status', 'location', 'created_at', 'banner_preview', 'enrollments_count', 'form_responses_count')
-    list_filter = ('status', 'date', 'created_at')
-    search_fields = ('name', 'description', 'location')
+    list_display = ('name', 'date', 'status', 'location', 'form_link', 'created_at', 'banner_preview', 'enrollments_count', 'form_responses_count')
+    list_filter = ('status', 'date', 'created_at', 'form')
+    search_fields = ('name', 'description', 'location', 'form__name')
     date_hierarchy = 'date'
-    readonly_fields = ('created_at', 'updated_at')
+    readonly_fields = ('created_at', 'updated_at', 'form_preview')
     
     fieldsets = (
         ('Informações Básicas', {
             'fields': (
-                'name', 'description', 'form', 'status'
+                'name', 'description', 'form', 'form_preview', 'status'
             )
         }),
         ('Datas', {
@@ -86,6 +86,33 @@ class EventAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" width="50" height="50" style="object-fit: cover;" />', obj.banner_image.url)
         return "Sem imagem"
     banner_preview.short_description = 'Banner'
+    
+    def form_link(self, obj):
+        if obj.form:
+            url = reverse('admin:event_eventform_change', args=[obj.form.id])
+            return format_html('<a href="{}">{}</a>', url, obj.form.name)
+        return "Sem formulário"
+    form_link.short_description = 'Formulário Vinculado'
+    form_link.admin_order_field = 'form__name'
+    
+    def form_preview(self, obj):
+        if obj.form:
+            fields = obj.form.fields.all().order_by('order')
+            if fields:
+                html = '<h4>Campos do Formulário:</h4><ul style="margin-left: 20px;">'
+                for field in fields:
+                    required = " (Obrigatório)" if field.required else ""
+                    html += f'<li><strong>{field.label}</strong> - {field.get_type_display()}{required}</li>'
+                html += '</ul>'
+                
+                # Link para visualizar as respostas deste formulário no evento
+                responses_url = reverse('admin:event_eventformresponse_changelist') + f'?enrollment__event__id__exact={obj.id}'
+                html += f'<p><a href="{responses_url}" class="button">Ver Respostas deste Evento</a></p>'
+                
+                return format_html(html)
+            return "Formulário sem campos definidos"
+        return "Nenhum formulário vinculado"
+    form_preview.short_description = 'Prévia do Formulário'
     
     def enrollments_count(self, obj):
         count = obj.enrollment_set.count()
@@ -156,7 +183,7 @@ class EventFormFieldInline(admin.TabularInline):
 
 @admin.register(EventForm)
 class EventFormAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'fields_count', 'responses_count')
+    list_display = ('name', 'description', 'events_count', 'fields_count', 'responses_count')
     search_fields = ('name', 'description')
     
     inlines = [EventFormFieldInline]
@@ -164,6 +191,12 @@ class EventFormAdmin(admin.ModelAdmin):
     def fields_count(self, obj):
         return obj.fields.count()
     fields_count.short_description = 'Nº de Campos'
+    
+    def events_count(self, obj):
+        count = obj.event_set.count()
+        url = reverse('admin:event_event_changelist') + f'?form__id__exact={obj.id}'
+        return format_html('<a href="{}">{}</a>', url, count)
+    events_count.short_description = 'Eventos Vinculados'
     
     def responses_count(self, obj):
         count = EventFormResponse.objects.filter(field__form=obj).count()
@@ -299,7 +332,6 @@ class EventFormResponseAdmin(admin.ModelAdmin):
             return f"{obj.value[:100]}..."
         return obj.value
     value_preview.short_description = 'Resposta'
-    
     
     def get_queryset(self, request):
         queryset = super().get_queryset(request)

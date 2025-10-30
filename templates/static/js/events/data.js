@@ -1,21 +1,36 @@
-import { Map } from "../map/map.js";
+import { RouteMapViewer } from "../map/RouteMapViewer.js";
 import { Urls } from "../helpers/urls.js";
+import { setMapFilters } from "../home/map_menu.js";
 
 const eventId = window.location.href.split('/')[4];
 const url_api = Urls.events + eventId;
 
-let arr = []
+var event_routes = []
+
+var eventMap = new RouteMapViewer();
 
 fetch(url_api)
-.then(res => res.json())
-.then(data => {
+    .then(res => res.json())
+    .then(event => {
 
-    let map = new Map();
-    map.setMap('map', {scrollWheelZoom: false}, data.coordinates.lat, data.coordinates.lng, data.zoom);
-    data.routes_data.forEach((e) => {
-        arr.push(e.route)
+        eventMap.setMap('map',
+            { scrollWheelZoom: false },
+            event.coordinates.lat,
+            event.coordinates.lng,
+            event.zoom
+        );
+
+        event.routes.forEach((e) => {
+            event_routes.push(e.route)
+        })
+
+        eventMap.addRoutes(event_routes)
+        eventMap.addPoints(event.anchorpoint)
+
+        eventMap.togglePointsLayer();
+        eventMap.createRouteCheckboxes(event_routes);
+        eventMap.createPointCheckboxes(event.anchorpoint);
+        eventMap.filterPointsByCategory();
     })
-    map.addRoutes(arr, 0)
-    map.addPointsEvent(data.points)
-    map.writeRoutes(arr);
-})
+
+setMapFilters(eventMap)

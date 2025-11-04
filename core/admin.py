@@ -1,10 +1,13 @@
 # admin.py
-from django.contrib import admin
+from django.contrib import admin, messages
 from django import forms
 from django.utils.html import format_html
 from django.conf import settings
 import os
 from .models import AnchorpointCategory, Anchorpoint, Route
+from cities.models.api_strava import Api
+from core.services.strava_service import StravaService
+from django.core.exceptions import ValidationError
 
 
 # ===============================
@@ -217,10 +220,25 @@ class RouteAdminForm(forms.ModelForm):
         model = Route
         fields = '__all__'
         widgets = {
-            'polyline': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Polyline da rota...'}),
-            'distance': forms.TextInput(attrs={'placeholder': 'Ex: 15.2 km'}),
+            'distance': forms.TextInput(attrs={'placeholder': 'Ex: 15.2 km'})
         }
+        
+    def clean(self):
+        cleaned_data = super().clean()
+        external_strava_id = cleaned_data.get("external_strava_id")
 
+        if not external_strava_id:
+            return cleaned_data
+
+        api = Api()
+
+        try:
+            route_data = api.get_route(external_strava_id)
+            cleaned_data["polyline"] = route_data
+        except Exception as e:
+            raise forms.ValidationError(e)
+
+        return cleaned_data
 
 # core/admin.py - Classe RouteAdmin completamente corrigida
 @admin.register(Route)
@@ -237,7 +255,7 @@ class RouteAdmin(admin.ModelAdmin):
     list_filter = ['active']
     search_fields = ['name', 'external_strava_id']
     
-    readonly_fields = ['get_polyline_preview', 'get_color_display']
+    readonly_fields = ['get_polyline_preview', 'get_color_display', 'polyline']
     
     fieldsets = (
         ('Informações Básicas', {
@@ -283,6 +301,14 @@ class RouteAdmin(admin.ModelAdmin):
             )
         return "Nenhum polyline definido"
     get_polyline_preview.short_description = 'Preview do Polyline'
+    
+    def save_model(self, request, obj, form, change):
+        try:
+            StravaService.fetch_and_set_polyline(obj)
+        except Exception as e:
+            messages.warning(request, e)
+
+        super().save_model(request, obj, form, change)
 
 # ===============================
 # CONFIGURAÇÕES GLOBAIS DO ADMIN

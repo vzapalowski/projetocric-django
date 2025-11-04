@@ -22,7 +22,12 @@ class Api:
         header = {'Authorization': 'Bearer ' + self.get_access_token()}
         param = {'per_page': 200, 'page': 1}
         my_dataset = requests.get(self.__route_url+id_route, headers=header, params=param).json()
-        return my_dataset['map']['summary_polyline']
+        
+        try:
+            return my_dataset['map']['summary_polyline']
+        except KeyError as e:
+            raise KeyError(f"Rota {id_route} não encontrada na API do Strava")
+        
     
     def get_distance(self, id_route):
         header = {'Authorization': 'Bearer ' + self.get_access_token()}

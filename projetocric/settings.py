@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'cities.apps.CitiesConfig',
     'event.apps.EventConfig',
     'users.apps.UsersConfig',
+    'core.apps.CoreConfig',
     'rest_framework',
     'multiupload',
     'colorfield',

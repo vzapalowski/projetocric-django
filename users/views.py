@@ -4,9 +4,9 @@ from django.core.validators import validate_email
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone 
-from event.models import Enrollment, EnrollmentType2, Bond
+from event.models import Enrollment, EventBond as Bond
 from datetime import datetime
-from .models import PersonalData
+from .models import UserProfile as PersonalData
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from PIL import Image as PILImage
@@ -119,12 +119,10 @@ def profile(request):
             return redirect('users:login')
             
         enrollments = Enrollment.objects.filter(user=user)
-        enrollments2 = EnrollmentType2.objects.filter(user=user)
 
         return render(request, 'users/profile.html', {
             'user': user, 
             'enrollments': enrollments,
-            'enrollments_type2': enrollments2
         })
         
     except User.DoesNotExist:

@@ -1,8 +1,9 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import User
-from event.models.anchor_point import AnchorPoint
-from event.models.route_path import RoutePath
-
+from event.models.event_route import EventRoute
+from event.models.event_form import EventForm
+from core.models.anchorpoint import Anchorpoint
 
 class Event(models.Model):
     STATUS_CHOICES = (
@@ -10,29 +11,30 @@ class Event(models.Model):
         ('Finalizado', 'Finalizado'),
     )
 
-    FORM_TYPE_CHOICES = (
-        ('Type-1', 'Type-1'),
-        ('Type-2', 'Type-2'),
-        ('Type-3', 'Type-3')
-    )
 
-    name = models.CharField(max_length=50, verbose_name='Nome do Evento')
+    name = models.CharField(max_length=255, verbose_name='Nome do Evento')
     description = models.TextField(max_length=1000, verbose_name="Descrição do evento", null=True)
-    lat = models.CharField(max_length=20, null=True, blank=True, default='-29.95', verbose_name='Latitute de Mapa')
-    lng = models.CharField(max_length=20, null=True, blank=True, default='-51.64', verbose_name='Longitude do Mapa')
-    zoom = models.IntegerField(default=13, verbose_name='Zoom')
-    location = models.CharField(max_length=40, null=True, blank=True, verbose_name='Localidade')
-    banner_image = models.ImageField(upload_to='events/images/%Y/%m/%d', null=True, blank=True, verbose_name='Banner do evento')
-    date = models.DateField(verbose_name='Data do evento', null=True, blank=True)
-    secondary_date = models.DateField(verbose_name='Data secundária do evento', null=True, blank=True)
-    form_type = models.CharField(max_length=30, choices=FORM_TYPE_CHOICES, default='Type-1', verbose_name='Tipo de formulário')
+    date = models.DateField(blank=True, null=True, verbose_name='Data do evento')
+    
+    secondary_date = models.DateField(blank=True, null=True, verbose_name='Data secundária do evento')
+    
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True, verbose_name='Latitute')
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True, verbose_name='Longitude')
+    location = models.CharField(max_length=255, blank=True, null=True, verbose_name='Localidade')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Em andamento', verbose_name='Situação')
-    routes_data = models.ManyToManyField(RoutePath, blank=True, null=True, verbose_name='Rotas do Evento')
-    points = models.ManyToManyField(AnchorPoint, blank=True, null=True, verbose_name='Pontos do Evento')
-    warnings = models.ManyToManyField('event.Warning', blank=True, null=True, verbose_name='Avisos')
-    users = models.ManyToManyField(User, related_name='events', blank=True)
+    banner_image = models.ImageField(upload_to='events/images/%Y/%m/%d', null=True, blank=True, verbose_name='Banner do evento')
+    zoom = models.IntegerField(default=13, verbose_name='Zoom')
     pdf_file = models.FileField(upload_to='events/pdfs/%Y/%m/%d', null=True, blank=True, verbose_name='Termo de inscrição')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Data de criação')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Data de atualização')
+
+    participants = models.ManyToManyField(User, related_name='events', blank=True)
+    anchorpoint = models.ManyToManyField(Anchorpoint, blank=True, verbose_name='Pontos do Evento')
+
+    form = models.ForeignKey(EventForm, on_delete=models.SET_NULL, null=True, blank=True,  related_name='event_forms', verbose_name='Formulário de inscrição')
 
     def __str__(self) -> str:
         return self.name
-    
+
+    class Meta:
+        db_table = 'event'

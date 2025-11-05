@@ -1,1 +1,1 @@
-from .personal_data import *
+from .user_profile import *

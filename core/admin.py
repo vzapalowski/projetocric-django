@@ -1,11 +1,11 @@
 # admin.py
-from django.contrib import admin
+from django.contrib import admin, messages
 from django import forms
 from django.utils.html import format_html
 from django.conf import settings
 import os
 from .models import AnchorpointCategory, Anchorpoint, Route
-
+from core.forms import RouteForm
 
 # ===============================
 # ANCHORPOINT CATEGORY ADMIN
@@ -21,7 +21,6 @@ class AnchorpointCategoryAdminForm(forms.ModelForm):
         import re
         icon_name = re.sub(r'[^a-zA-Z0-9_-]', '', icon_name.lower())
         return icon_name
-
 
 @admin.register(AnchorpointCategory)
 class AnchorpointCategoryAdmin(admin.ModelAdmin):
@@ -208,36 +207,26 @@ class AnchorpointAdmin(admin.ModelAdmin):
         self.message_user(request, f'{updated} pontos de apoio desativados.')
     deactivate_selected.short_description = "Desativar pontos selecionados"
 
-
 # ===============================
 # ROUTE ADMIN
 # ===============================
-class RouteAdminForm(forms.ModelForm):
-    class Meta:
-        model = Route
-        fields = '__all__'
-        widgets = {
-            'polyline': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Polyline da rota...'}),
-            'distance': forms.TextInput(attrs={'placeholder': 'Ex: 15.2 km'}),
-        }
-
-
-# core/admin.py - Classe RouteAdmin completamente corrigida
 @admin.register(Route)
 class RouteAdmin(admin.ModelAdmin):
-    form = RouteAdminForm
+    form = RouteForm
+
     list_display = [
-        'name', 
-        'external_strava_id', 
-        'distance', 
-        'active', 
-        'get_color_preview'
+        'name',
+        'external_strava_id',
+        'distance',
+        'active',
+        'is_event_route',
+        'color_preview',
     ]
-    list_editable = ['active']
-    list_filter = ['active']
+
+    list_editable = ['active', 'is_event_route']
     search_fields = ['name', 'external_strava_id']
-    
-    readonly_fields = ['get_polyline_preview', 'get_color_display']
+    list_filter = ['active', 'is_event_route']
+    readonly_fields = ['polyline', 'distance']
     
     fieldsets = (
         ('Informações Básicas', {
@@ -245,44 +234,34 @@ class RouteAdmin(admin.ModelAdmin):
                 'name',
                 'external_strava_id',
                 'active',
-                'distance',
-                'color',
-                'get_color_display',  # Método callable
+                'is_event_route',
+                'color'
             )
         }),
         ('Dados da Rota', {
             'fields': (
-                'polyline',
-                'get_polyline_preview',  # Método callable
+                'distance',
+                'polyline'
             )
         })
     )
-    
-    def get_color_preview(self, obj):
-        """Preview da cor na lista"""
-        if obj.color:
-            return format_html(
-                '<div style="background-color: {}; width: 20px; height: 20px; border-radius: 50%; border: 1px solid #ccc;"></div>',
-                obj.color
-            )
-        return "-"
-    get_color_preview.short_description = 'Cor'
-    
-    def get_color_display(self, obj):
-        """Preview da cor para edição"""
-        return self.get_color_preview(obj)
-    get_color_display.short_description = 'Preview da Cor'
-    
-    def get_polyline_preview(self, obj):
-        """Preview do polyline para edição"""
-        if obj.polyline:
-            preview = obj.polyline[:100] + "..." if len(obj.polyline) > 100 else obj.polyline
-            return format_html(
-                '<div style="background: #f5f5f5; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 12px; word-break: break-all;">{}</div>',
-                preview
-            )
-        return "Nenhum polyline definido"
-    get_polyline_preview.short_description = 'Preview do Polyline'
+
+    # This is for save polyline and distance before save the route in database    
+    def save_model(self, request, obj, form, change):
+        # _stra_details is from route forms
+        details = getattr(form, "_strava_details", None)
+        if details:
+            obj.polyline = details["polyline"]
+            obj.distance = str(details["distance"])
+        super().save_model(request, obj, form, change)
+
+    def color_preview(self, obj):
+        return format_html(
+            '<div style="width: 20px; height: 20px; background: {}; border: 1px solid #000; border-radius: 50%;"></div>',
+            obj.color
+        )
+        
+    color_preview.short_description = "Cor"
 
 # ===============================
 # CONFIGURAÇÕES GLOBAIS DO ADMIN

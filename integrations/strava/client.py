@@ -5,14 +5,13 @@ from .config import StravaConfig
 from .exceptions import (
     StravaAuthenticationError,
     StravaRouteNotFoundError,
-    StravaAPIConnectionError
+    StravaAPIConnectionError,
+    StravaPolylineNotFoundError
 )
 
 class StravaClient:
     def __init__(self, config=None):
         self.config = config or StravaConfig.from_settings()
-        # This is for tests, i'am gonna change this after development
-        # self.config = config or StravaConfig.from_test()
         self._access_token = None
         self._expires_at = None
 
@@ -61,13 +60,13 @@ class StravaClient:
             data = self._request(f"/routes/{route_id}")
             return data
         except Exception:
-            raise StravaRouteNotFoundError(f"Rota {route_id} não encontrada")
+            raise StravaRouteNotFoundError(route_id)
 
     def get_route_polyline(self, route_id):
         data = self.get_route(route_id)
         polyline = data.get('map', {}).get('summary_polyline')
         if not polyline:
-            raise StravaRouteNotFoundError("Polyline não disponível")
+            raise StravaPolylineNotFoundError(route_id)
         return polyline
 
     def get_route_distance(self, route_id):
@@ -78,13 +77,13 @@ class StravaClient:
         return None
     
     def get_route_details(self, route_id):
-        data = self.get_route(route_id)  # já converte erros de rota inexistente
+        data = self.get_route(route_id)
 
         polyline = data.get('map', {}).get('summary_polyline')
         distance = f"{data.get('distance') / 1000:.2f}"
 
         if not polyline:
-            raise StravaRouteNotFoundError("Polyline não disponível")
+            raise StravaPolylineNotFoundError(route_id)
 
         distance = float(distance) if distance else None
 

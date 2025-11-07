@@ -15,11 +15,3 @@ class StravaConfig:
             getattr(settings, 'STRAVA_CLIENT_SECRET', ''),
             getattr(settings, 'STRAVA_REFRESH_TOKEN', '')
         )
-        
-    @classmethod
-    def from_test(cls):
-        return cls(
-            client_id="93689",
-            client_secret="05d5dd63dabb33ba2514308b74256983c3edb146",
-            refresh_token="e162d2a39fe9b35a1c4f1df5bda5157bcfbfd6ea"
-        )

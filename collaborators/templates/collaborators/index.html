@@ -1,0 +1,72 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block 'navigation' %}
+{% endblock %}
+
+{% block 'styles' %}
+    <link rel="stylesheet" href="{% static 'style/style-devs.css' %}">
+{% endblock %}
+
+{% block 'content' %}
+    <div class="container pb-5" id="main-content-devs">
+        <h1 class="text-center"><span class="badge main-title-devs">Equipe de Desenvolvimento</span></h1>
+
+        {% for c in colaboradores %}
+            {% if forloop.first %}<div class="row row-cols-1 row-cols-md-3 g-4">{% endif %}
+            <div class="col">
+                <div class="card text-center">
+                    <img src="{% static "images/devs/img/" %}{{c.picture}}" class="card-img-top rounded-circle card-img-circle mx-auto mt-3" alt="{{ c.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ c.name }}</h5>
+                        <p class="card-text">{{ c.position }}</p>
+                        <div class="d-flex justify-content-center">
+                            {% for u in c.urls.all %}
+                                <div class="p-2">
+                                    {% if u.url|contains:"github" %}
+                                        <a href="{{ u.url }}" target="_blank">
+                                            {% include "components/icons/github.svg" %}
+                                        </a>
+                                    
+                                    {% elif u.url|contains:"linkedin" %}
+                                        <a href="{{ u.url }}" target="_blank">
+                                            {% include "components/icons/linkedin.svg" %}
+                                        </a>
+
+                                    {% elif u.url|contains:"instagram" %}
+                                        <a href="{{ u.url }}" target="_blank">
+                                            {% include "components/icons/instagram.svg" %}
+                                        </a>
+                                    
+
+                                    {% elif u.url|contains:"facebook" %}
+                                        <a href="{{ u.url }}" target="_blank">
+                                            {% include "components/icons/facebook.svg" %}
+                                        </a>
+                                    
+
+                                    {% else %}
+                                        <a href="{{ u.url }}" target="_blank">
+                                            {% include "components/icons/link.svg" %}
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter > 5 %}
+                {% if forloop.counter == 6 %}
+                    </div> <!-- isso fecha a div da equipe de Desenvolvimento -->
+
+                    <h1 class="text-center"><span class="badge main-title-devs">Integrantes Antigos</span></h1>
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% endif %}
+
+            {% endif %}
+            {% if forloop.last %}</div>{% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

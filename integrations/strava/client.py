@@ -10,9 +10,9 @@ from .exceptions import (
 
 class StravaClient:
     def __init__(self, config=None):
-        # self.config = config or StravaConfig.from_settings()
+        self.config = config or StravaConfig.from_settings()
         # This is for tests, i'am gonna change this after development
-        self.config = config or StravaConfig.from_test()
+        # self.config = config or StravaConfig.from_test()
         self._access_token = None
         self._expires_at = None
 
@@ -76,3 +76,19 @@ class StravaClient:
         if dist is not None:
             return float(dist)
         return None
+    
+    def get_route_details(self, route_id):
+        data = self.get_route(route_id)  # já converte erros de rota inexistente
+
+        polyline = data.get('map', {}).get('summary_polyline')
+        distance = f"{data.get('distance') / 1000:.2f}"
+
+        if not polyline:
+            raise StravaRouteNotFoundError("Polyline não disponível")
+
+        distance = float(distance) if distance else None
+
+        return {
+            "polyline": polyline,
+            "distance": distance
+        }

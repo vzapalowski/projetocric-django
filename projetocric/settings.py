@@ -22,6 +22,12 @@ SECRET_KEY = config('SECRET_KEY', default='unsafe-secret-key')
 DEBUG = config('DEBUG', cast=bool, default=True)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv(), default='*')
 
+
+# Strava Api
+STRAVA_CLIENT_ID = config("STRAVA_CLIENT_ID", default="")
+STRAVA_CLIENT_SECRET = config("STRAVA_CLIENT_SECRET", default="")
+STRAVA_REFRESH_TOKEN = config("STRAVA_REFRESH_TOKEN", default="")
+
 CSRF_TRUSTED_ORIGINS = [
     'https://rota-cric.charqueadas.ifsul.edu.br',
     'http://rota-cric.charqueadas.ifsul.edu.br',

@@ -1,18 +1,20 @@
 from django.db import models
 from colorfield.fields import ColorField
-
+        
 class Route(models.Model):
-    external_strava_id = models.CharField(unique=True, max_length=50, verbose_name='ID Strava da rota')
-    name = models.CharField(max_length=255, blank=True, null=True, verbose_name='Nome')
-    polyline = models.TextField(max_length=5000, blank=True, null=True, verbose_name='Marcação no mapa')
-    color = ColorField(default="#FF0000", verbose_name="Cor da rota")
-    distance = models.CharField(max_length=500, blank=True, null=True, verbose_name='Distância')
-    active = models.BooleanField(default=False, verbose_name='Ativa')
-    is_event_route = models.BooleanField(default=False, verbose_name='É uma rota de evento?')
+    external_strava_id = models.CharField("ID Strava", max_length=50, unique=True)
+    name = models.CharField("Nome", max_length=255, unique=True)
+    color = ColorField("Cor da rota", default="#FF0000")
 
-    def __str__(self) -> str:
-        return self.name or f"Route {self.id or 'Novo'}"
+    polyline = models.TextField("Polyline", blank=True, null=True, editable=False)
+    distance = models.CharField("Distância(Km)", max_length=100, blank=True, null=True, editable=False)
 
+    active = models.BooleanField("Ativa", default=False)
+    is_event_route = models.BooleanField("Rota de evento", default=False)
+
+    def __str__(self):
+        return self.name
+    
     def get_routes(self):
         return Route.objects.all()
     
@@ -21,3 +23,4 @@ class Route(models.Model):
 
     class Meta:
         db_table = 'route'
+        ordering = ['name']

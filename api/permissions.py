@@ -1,7 +1,7 @@
 from rest_framework.permissions import BasePermission
 
 class HasApiAuthToken(BasePermission):
-    message = "Access denied: invalid or missing frontend token"
+    message = "Access denied: invalid or missing auth token"
     
     def has_permission(self, request, view):
         session_token = request.session.get("auth_token")

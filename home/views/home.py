@@ -4,12 +4,8 @@ from home.models import CityManager
 from cities.models import City
 from core.models import AnchorpointCategory
 from event.models import Event
-from event.models import Enrollment
-
-from operator import attrgetter
-
-
-class PostHome(ListView):
+from api.mixins import ApiTokenMixin
+class Home(ApiTokenMixin, ListView):
     template_name = 'home/index.html'
     model = City
 
@@ -27,6 +23,4 @@ class PostHome(ListView):
             event.participants_count = event.participants.count()
         
         context['events'] = events
-    
         return context
-    

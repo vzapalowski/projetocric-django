@@ -3,9 +3,10 @@ from django.views.generic.detail import DetailView
 from cities.models import City
 from core.models import AnchorpointCategory
 from event.models import Event
+from api.mixins import ApiTokenMixin
 
 
-class CityDetail(DetailView):
+class CityDetail(ApiTokenMixin ,DetailView):
     model = City
     template_name = 'cities/city_detail.html'
 

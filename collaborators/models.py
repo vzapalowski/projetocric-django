@@ -13,7 +13,6 @@ class URL(models.Model):
     collaborator = models.ForeignKey(Collaborators, on_delete=models.CASCADE, related_name='urls')
     url = models.URLField(max_length=600, blank=True)
 
-
 #popular o banco com os devs pelo seed
 @receiver(post_migrate)
 def seed_data(sender, **kwargs):

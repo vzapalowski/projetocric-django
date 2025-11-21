@@ -1,17 +1,16 @@
-from rest_framework import generics
 from cities.models import City
 from core.models import Anchorpoint
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.serializers.anchorpoint import AnchorpointSerializer
+from api.permissions import HasApiAuthToken
 
 class HomeData(APIView):
-
+    permission_classes = [HasApiAuthToken]
+    
     def get(self, request):
         cities_list = City.objects.filter(visible=True)
-        
         routes = []
-            
         anchorpoints = Anchorpoint.objects.filter(city__in=cities_list, is_event_anchorpoint=False)
             
         for city in cities_list:
@@ -28,7 +27,6 @@ class HomeData(APIView):
                 if route_data not in routes:
                     routes.append(route_data)
             
-            
         data = {
             'latitude': -29.9949289,
             'longitude': -51.8243548,
@@ -36,5 +34,4 @@ class HomeData(APIView):
             'points': AnchorpointSerializer(anchorpoints, many=True).data,
             'routes': routes
         }
-
         return Response(data)

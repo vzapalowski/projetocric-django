@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Página não encontrada </title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .container {
+        text-align: center;
+        background: white;
+        padding: 60px 40px;
+        border-radius: 15px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+      }
+
+      .error-code {
+        font-size: 120px;
+        font-weight: bold;
+        color: #667eea;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        font-size: 32px;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      p {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 30px;
+        line-height: 1.6;
+      }
+
+      .btn-home {
+        display: inline-block;
+        padding: 12px 30px;
+        background-color: #667eea;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: 2px solid #667eea;
+      }
+
+      .btn-home:hover {
+        background-color: #764ba2;
+        border-color: #764ba2;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+      }
+
+      .btn-home:active {
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="error-code"> 404 </div>
+      <h1>Oops! Página não encontrada</h1>
+      <p>
+        A página que você está procurando não existe ou foi removida do nosso
+        servidor.
+      </p>
+      <a href="/" class="btn-home">Voltar à página inicial</a>
+    </div>
+  </body>
+</html>

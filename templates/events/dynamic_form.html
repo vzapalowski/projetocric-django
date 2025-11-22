@@ -97,7 +97,7 @@
                     <option value="" selected disabled>Selecione {{ field.label }}</option>
                     {% if field.options %}
                         {% for option in field.options_list %}
-                            <option value="{{ option }}">{{ option }}</option>
+                            <option value="{{ option.value }}">{{ option.label }}</option>
                         {% endfor %}
                     {% endif %}
                 </select>

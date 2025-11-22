@@ -1,7 +1,7 @@
 import { RouteMapViewer } from "../map/RouteMapViewer.js";
 import { Urls } from "../helpers/urls.js";
 import { setMapFilters } from "./map_menu.js";
-import { ApiClient } from "../helpers/api.js";
+import { ApiClient } from "../helpers/apiClient.js";
 
 export const map = new RouteMapViewer();
 const api = new ApiClient();

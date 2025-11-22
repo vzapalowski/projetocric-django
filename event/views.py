@@ -135,12 +135,20 @@ def enrollment_success(request):
 
 def delete_enrollment(request, enrollment_id):
     enrollment = get_object_or_404(Enrollment, id=enrollment_id)
+
     if request.user == enrollment.user or request.user.is_staff:
+
+        if hasattr(enrollment.event, "participants"):
+            enrollment.event.participants.remove(request.user)
+
         enrollment.delete()
+
         messages.success(request, 'Inscrição cancelada com sucesso!')
     else:
         messages.error(request, 'Você não tem permissão para cancelar esta inscrição.')
+
     return redirect('users:profile')
+
 
 # def enrollment2(request, event_id):
 #     event = Event.objects.get(pk=event_id)

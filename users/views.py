@@ -35,9 +35,13 @@ def register(request):
     try:
         validate_email(email)
     except:
+        messages.error(request, 'Email inválido!')
+        return render(request, 'users/register.html')
+
+    if User.objects.filter(email=email).exists():
         messages.error(request, 'Email já cadastrado!')
         return render(request, 'users/register.html')
-    
+
     if password != password_confirm:
         messages.error(request, 'As senhas informadas são diferentes!')
         return render(request, 'users/register.html')

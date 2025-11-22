@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone 
 from event.models import Enrollment, EventBond as Bond
 from datetime import datetime
-from .models import UserProfile as PersonalData
+from .models import UserProfile
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from PIL import Image as PILImage
@@ -137,36 +137,36 @@ def profile(request):
 def edit_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
 
-    if request.session.get('user_id') != user_id:
+    if request.user.id != user_id:
         return redirect('users:profile')
 
     if request.method != 'POST':
         bond = Bond.objects.all()
-        return render(request, 'users/edit_user.html', {'user': user, 'bond': bond})
+        return render(request, 'users/edit_user.html', {
+            'user': user,
+            'bond': bond
+        })
 
-    if request.method == 'POST':
-        user.username = request.POST.get('username')
-        user.first_name = request.POST.get('name')
-        user.last_name = request.POST.get('last_name')
-        user.email = request.POST.get('email')
-        
-        if not hasattr(user, 'personaldata') or user.personaldata is None:
-            personal_data = PersonalData()
-            personal_data.user = user
-            personal_data.save()
-        
-        user.personaldata.social_network = request.POST.get('social_network')
-        user.personaldata.date_of_birth = datetime.strptime(request.POST.get('date_of_birth'), '%d/%m/%Y').date()
+    user.username = request.POST.get('username')
+    user.first_name = request.POST.get('name')
+    user.last_name = request.POST.get('last_name')
+    user.email = request.POST.get('email')
 
-        bond_choice_id = request.POST.get('bond_choice')
-        user.personaldata.bond_choice = get_object_or_404(Bond, id=bond_choice_id) 
+    profile, created = UserProfile.objects.get_or_create(user=user)
 
-        user.personaldata.rg = request.POST.get('rg')
-        
-        user.personaldata.save()
+    profile.social_network = request.POST.get('social_network')
 
-        user.save()
-        return redirect('users:profile')
+    date_input = request.POST.get('date_of_birth')
+    if date_input:
+        profile.birth_date = datetime.strptime(date_input, '%d/%m/%Y').date()
+
+    profile.document = request.POST.get('rg')
+
+    profile.save()
+    user.save()
+
+    return redirect('users:profile')
+
 
 @login_required(login_url='users:login')
 @csrf_exempt
@@ -178,12 +178,12 @@ def upload_image(request):
         if user_id and uploaded_image:
             user = User.objects.get(id=user_id)
 
-            if not hasattr(user, 'personaldata') or user.personaldata is None:
-                personal_data = PersonalData()
+            if not hasattr(user, 'userprofile') or user.userprofile is None:
+                personal_data = UserProfile()
                 personal_data.user = user
                 personal_data.save()
 
-            user_profile = user.personaldata
+            user_profile = user.userprofile
 
             img = PILImage.open(uploaded_image)
 

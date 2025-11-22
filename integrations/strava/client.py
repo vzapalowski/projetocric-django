@@ -77,6 +77,7 @@ class StravaClient:
         return None
     
     def get_route_details(self, route_id):
+        print(F"ROUTE ID: {route_id}")
         data = self.get_route(route_id)
 
         polyline = data.get('map', {}).get('summary_polyline')

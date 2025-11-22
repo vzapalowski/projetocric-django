@@ -47,6 +47,7 @@ class EventView(DetailView):
         context['events'] = Event.objects.all()
         context['event_routes'] = EventRoute.objects.filter(event=event, active=True)
         context['warnings'] = Warning.objects.filter(event=event)
+        context['user_is_subscribed'] = event.participants.filter(id=self.request.user.id).exists() if self.request.user.is_authenticated else False
         
         return context
 
@@ -118,7 +119,6 @@ def enrollment(request, event_id):
     
     # Se não for POST, redireciona para a página do evento
     return redirect('events:event', pk=event_id)
-
 
 def enrollment_success(request):
     enrollment_id = request.GET.get('enrollment_id')

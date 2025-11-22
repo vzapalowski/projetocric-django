@@ -12,6 +12,7 @@ urlpatterns = [
     path('usuarios/', include('users.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('api.urls')),
+    path('devs/', include('collaborators.urls')),
 
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name='users/reset_password.html',
     email_template_name='users/custom_password_reset_email.html'), name='reset_password'),

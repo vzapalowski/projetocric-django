@@ -1,10 +1,16 @@
-.btn-cric {
+input, button, a{
+  transition: .2s ease-out;
+}
+
+.btn-cric{
   background-color: #273273 !important;
   color: #fff !important;
   font-weight: 600;
   letter-spacing: 0.5px;
   transition: 100ms ease-in-out !important;
   border: 0;
+  text-decoration: none;
+  text-align: center;
 }
 
 .btn-cric:hover {
@@ -122,7 +128,17 @@
   width: 100%;
 }
 
+.cric-input-lg:hover{
+  background-color: hsl(220, 100%, 94%);
+}
+
+
+.cric-input-lg:hover{
+  background-color: rgb(218, 222, 226);
+}
+
 .cric-input-lg:focus{
   box-shadow: none !important;
   outline: none;
+  border-color: #273273;
 }

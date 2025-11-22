@@ -10,6 +10,7 @@ from jinja2 import Environment, FileSystemLoader
 from django.urls import reverse
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+import re
 
 import ssl
 import smtplib
@@ -27,19 +28,67 @@ class EventView(DetailView):
     model = Event
     template_name = 'events/index.html'
 
+    def find_option_model(self, code_name):
+
+        MODELS = [EventBond, EventHowknew]
+
+        for model in MODELS:
+            if model.objects.filter(code_name=code_name).exists():
+                return model
+
+        return None
+
+
+    def resolve_display_name(code_name):
+
+        MODELS = [EventBond, EventHowknew]
+
+        for model in MODELS:
+            item = model.objects.filter(code_name=code_name).first()
+            if item:
+                return item.name 
+
+        return code_name 
+
+        
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         event = self.object
         
-        # Obter campos do formulário dinâmico se existir
         form_fields = []
         if event.form:
             form_fields = event.form.fields.all().order_by('order')
-            # Pré-processar opções para selects
+
             for field in form_fields:
-                if field.type == 'select' and field.options:
-                    # Dividir as opções por vírgula e limpar espaços
-                    field.options_list = [opt.strip() for opt in field.options.split(',') if opt.strip()]
+
+                if field.type == "select":
+
+                    raw_list = [opt.strip() for opt in re.split(r'[;,]', field.options) if opt.strip()] if field.options else []
+
+                    field.options_list = []
+
+                    for opt in raw_list:
+
+                        model_class = self.find_option_model(opt)
+
+                        if model_class:
+                            try:
+                                item = model_class.objects.get(code_name=opt)
+                                field.options_list.append({
+                                    "value": item.code_name,
+                                    "label": item.name
+                                })
+                            except model_class.DoesNotExist:
+                                field.options_list.append({
+                                    "value": opt,
+                                    "label": opt
+                                })
+                        else:
+                            field.options_list.append({
+                                "value": opt,
+                                "label": opt
+                            })
+
         
         context['form_fields'] = form_fields
         context['bond'] = EventBond.objects.all()
@@ -148,7 +197,6 @@ def delete_enrollment(request, enrollment_id):
         messages.error(request, 'Você não tem permissão para cancelar esta inscrição.')
 
     return redirect('users:profile')
-
 
 # def enrollment2(request, event_id):
 #     event = Event.objects.get(pk=event_id)
@@ -332,85 +380,62 @@ def download_pdf(request, event_id):
 #         smtp.login(email_sender, email_password)
 #         smtp.sendmail(email_sender, email_receiver, em.as_string())
 
-# def generate_certificate(name, event):
-#     options = {
-#         'page-size': 'A4',
-#         'margin-top': '0',
-#         'margin-right': '0',
-#         'margin-bottom': '0',
-#         'margin-left': '0',
-#         'encoding': "UTF-8",
-#         'no-outline': None,
-#         'enable-local-file-access': True,
-#         'allow': ['images'],
-#         'user-style-sheet': 'http://rota-cric.charqueadas.ifsul.edu.br/static/event/style-certificate.css'
-#     }
+def generate_certificate(name, event):
+    options = {
+        'page-size': 'A4',
+        'margin-top': '0',
+        'margin-right': '0',
+        'margin-bottom': '0',
+        'margin-left': '0',
+        'encoding': "UTF-8",
+        'no-outline': None,
+        'enable-local-file-access': True,
+        'allow': ['images'],
+        'user-style-sheet': 'http://rota-cric.charqueadas.ifsul.edu.br/static/event/style-certificate.css'
+    }
 
-#     # locale.setlocale(locale.LC_TIME, 'pt_PT.utf8')
-#     current_date = datetime.date.today()
-#     formatted_date = current_date.strftime('%d/%m/%Y')
+    # locale.setlocale(locale.LC_TIME, 'pt_PT.utf8')
+    current_date = datetime.date.today()
+    formatted_date = current_date.strftime('%d/%m/%Y')
 
-#     context = {'name': name, 'event': event.name, 'date': formatted_date} 
+    context = {'name': name, 'event': event.name, 'date': formatted_date} 
 
-#     temp_dir = tempfile.mkdtemp()
-#     output_pdf = os.path.join(temp_dir, 'certificate.pdf')
+    temp_dir = tempfile.mkdtemp()
+    output_pdf = os.path.join(temp_dir, 'certificate.pdf')
 
-#     template_loader = jinja2.FileSystemLoader('.')
-#     template_env = jinja2.Environment(loader=template_loader)
-#     html_template = 'templates/events/certificate.html'
-#     template = template_env.get_template(html_template)
-#     output_text = template.render(context)
+    template_loader = jinja2.FileSystemLoader('.')
+    template_env = jinja2.Environment(loader=template_loader)
+    html_template = 'templates/events/certificate.html'
+    template = template_env.get_template(html_template)
+    output_text = template.render(context)
 
-#     config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
-#     pdfkit.from_string(output_text, output_pdf, configuration=config, options=options)
+    config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
+    pdfkit.from_string(output_text, output_pdf, configuration=config, options=options)
 
-#     with open(output_pdf, 'rb') as pdf_file:
-#         pdf_content = pdf_file.read()
+    with open(output_pdf, 'rb') as pdf_file:
+        pdf_content = pdf_file.read()
 
-#     os.remove(output_pdf)
-#     os.rmdir(temp_dir)
+    os.remove(output_pdf)
+    os.rmdir(temp_dir)
 
-#     return pdf_content
+    return pdf_content
 
-# def get_certificate(request, enrollment_id):
-#     enrollment = get_object_or_404(EnrollmentType2, id=enrollment_id)
+def get_certificate(request, enrollment_id):
+    enrollment = get_object_or_404(Enrollment, id=enrollment_id)
 
-#     certificate_content = generate_certificate(enrollment.full_name, enrollment.event)
+    event = enrollment.event
 
-#     response = HttpResponse(content_type='application/pdf')
-#     response['Content-Disposition'] = f'attachment; filename="certificate_{enrollment.user.username}.pdf"'
-#     response.write(certificate_content)
+    user_is_participant = (
+        request.user.is_authenticated
+        and event.participants.filter(id=request.user.id).exists()
+    )
 
-#     return response
+    certificate_content = generate_certificate(user_is_participant, event)
 
-# def delete_enrollment(request, enrollment_id):
-#     enrollment = Enrollment.objects.get(id=enrollment_id)
-#     if request.user == enrollment.user:
-#         enrollment.delete()
-#         return redirect('users:profile')
-#     else:
-#         return redirect('users:profile')
+    filename = f'certificate_{request.user.username}.pdf'
 
-# def delete_enrollment_type2(request, enrollment_id):
-#     enrollment = EnrollmentType2.objects.get(id=enrollment_id)
-#     if request.user == enrollment.user:
-#         enrollment.delete()
-#         return redirect('users:profile')
-#     else:
-#         return redirect('users:profile')
-    
-# def delete_enrollment_type3(request, enrollment_id):
-#     enrollment = enrollment3PasseioIfsulForm.objects.get(id=enrollment_id)
-#     if request.user == enrollment.user:
-#         enrollment.delete()
-#         return redirect('users:profile')
-#     else:
-#         return redirect('users:profile')
-    
-# def delete_enrollment_type4(request, enrollment_id):
-    # enrollment = enrollment4PasseioIfsulForm.objects.get(id=enrollment_id)
-    # if request.user == enrollment.user:
-    #     enrollment.delete()
-    #     return redirect('users:profile')
-    # else:
-    #     return redirect('users:profile')
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+    response.write(certificate_content)
+
+    return response

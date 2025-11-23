@@ -4,7 +4,7 @@ FROM python:3.10.15-bookworm
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Diret�rio de trabalho dentro do container
+# Diretório de trabalho dentro do container
 WORKDIR /rotacric
 
 # Instala dependências do sistema - CORRIGIDO
@@ -12,7 +12,7 @@ RUN apt update --allow-unauthenticated --allow-insecure-repositories && \
     apt install -y --allow-unauthenticated bash sed pkg-config gcc wkhtmltopdf && \
     rm -rf /var/lib/apt/lists/*
 
-# Vari�veis para MySQL (mysqlclient)
+# Variáveis para MySQL (mysqlclient)
 ENV MYSQLCLIENT_CFLAGS="-I/usr/include/mysql"
 ENV MYSQLCLIENT_LDFLAGS="-L/usr/lib/x86_64-linux-gnu -lmysqlclient"
 
@@ -25,7 +25,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copiar projeto completo
 COPY . .
 
-# Criar diretório para static coletado e midia
+# Criar diretório para static coletado e mídia
 RUN mkdir -p staticfiles media
 
 # Expor porta do Django

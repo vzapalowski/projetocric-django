@@ -11,7 +11,7 @@ class HomeData(APIView):
     def get(self, request):
         cities_list = City.objects.filter(visible=True)
         routes = []
-        anchorpoints = Anchorpoint.objects.filter(city__in=cities_list, is_event_anchorpoint=False)
+        anchorpoints = Anchorpoint.objects.filter( is_event_anchorpoint=False)
             
         for city in cities_list:
             city_routes = city.route.filter(is_event_route=False)

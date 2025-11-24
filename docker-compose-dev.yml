@@ -1,0 +1,79 @@
+version: "3.9"
+
+volumes:
+  mysql_data:
+  staticfiles:
+  mediafiles:
+  admin_static:
+
+networks:
+  rotacric:
+    external: false
+
+services:
+
+  web:
+    build: .
+    container_name: rotacric
+    restart: always
+    volumes:
+      - mediafiles:/rotacric/media
+      - staticfiles:/rotacric/staticfiles
+      - admin_static:/usr/local/lib/python3.10/site-packages/django/contrib/admin/static/admin/
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    networks:
+      - rotacric
+
+  db:
+    image: mysql:lts
+    container_name: database
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    networks:
+      - rotacric
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  nginx:
+    image: nginx:stable
+    container_name: reverse-proxy
+    restart: always
+    volumes:
+      - ./dev/nginx.conf:/etc/nginx/nginx.conf:ro 
+      - staticfiles:/rotacric/staticfiles
+      - mediafiles:/rotacric/media
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - rotacric
+    depends_on:
+      - web
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      WATCHTOWER_CLEANUP: "true"
+      WATCHTOWER_POLL_INTERVAL: "300"

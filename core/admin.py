@@ -120,7 +120,8 @@ class AnchorpointAdmin(admin.ModelAdmin):
         ('Informações Básicas', {
             'fields': (
                 'name', 
-                'anchorpoint_category', 
+                'anchorpoint_category',
+                'city', 
                 'active',
                 'is_event_anchorpoint'
             )

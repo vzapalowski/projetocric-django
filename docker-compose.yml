@@ -51,7 +51,7 @@ services:
     restart: always
     volumes:
       - /home/rotacric/nginx.conf:/etc/nginx/nginx.conf:ro
-      - /home/rotacric/certs:/certs/
+      - /home/rotacric/certs:/certs
       - ./media:/rotacric/media
       - ./templates/static:/rotacric/templates/static
       - admin_static:/usr/local/lib/python3.10/site-packages/django/contrib/admin/static/admin/

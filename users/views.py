@@ -13,6 +13,14 @@ from PIL import Image as PILImage
 from io import BytesIO
 from django.core.files.uploadedfile import SimpleUploadedFile
 
+from django.contrib.auth import views as auth_views
+from django.urls import reverse_lazy
+from django.conf import settings
+from django.core.mail import send_mail
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def register(request):
     if request.session.get('user_id'):
@@ -218,3 +226,44 @@ def upload_image(request):
             return JsonResponse({'message': 'Image uploaded successfully.'})
 
     return JsonResponse({'error': 'Invalid request.'}, status=400)
+
+
+class PasswordReset(auth_views.PasswordResetView):
+    template_name = 'users/reset_password.html'
+    email_template_name = 'users/custom_password_reset_email.html'
+    subject_template_name = 'users/custom_password_reset_subject.txt'
+    success_url = reverse_lazy('password_reset_done')
+    from_email = settings.DEFAULT_FROM_EMAIL
+
+    def form_valid(self, form):
+        email = form.cleaned_data.get('email')
+        logger.info(f"[PASSWORD RESET] Solicitação recebida para: {email}")
+        logger.info(f"[EMAIL CONFIG] Backend: {settings.EMAIL_BACKEND}")
+        logger.info(f"[EMAIL CONFIG] From: {self.from_email}")
+        print(f"\n{'='*60}")
+        print(f"[PASSWORD RESET] E-mail solicitado para: {email}")
+        print(f"[EMAIL BACKEND] {settings.EMAIL_BACKEND}")
+        print(f"{'='*60}\n")
+        
+        try:
+            result = super().form_valid(form)
+            logger.info(f"[PASSWORD RESET] E-mail enviado com sucesso para: {email}")
+            print(f"\n[SUCCESS] E-mail enviado para: {email}\n")
+            return result
+        except Exception as e:
+            logger.error(f"[PASSWORD RESET ERROR] {str(e)}")
+            print(f"\n[ERROR] {str(e)}\n")
+            raise
+
+
+class PasswordResetDone(auth_views.PasswordResetDoneView):
+    template_name = 'users/reset_password_sent.html'
+
+
+class PasswordResetConfirm(auth_views.PasswordResetConfirmView):
+    template_name = 'users/reset.html'
+    success_url = reverse_lazy('password_reset_complete')
+
+
+class PasswordResetComplete(auth_views.PasswordResetCompleteView):
+    template_name = 'users/reset_password_complete.html'

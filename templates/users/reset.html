@@ -1,90 +1,65 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recuperar senha</title>
+    <title>Redefinir senha</title>
     <link rel="icon" href="{% static 'images/logos/rotacric-alternative.png' %}" type="image/png">
-    <link rel="stylesheet" href="{% static 'style/login-register.css'%}">
-    <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-    crossorigin="anonymous"
-    >
+    <link rel="stylesheet" href="{% static 'style/style-login-register.css'%}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 <body>
-    <div class="conteiner-fluid d-flex h-100">
-        <div class="col col-sm-12 col-md-6 col-lg-4 d-flex align-items-center justify-content-center bg-light-light">
-            <form id="frm-login" method="POST" class="w-75">
-            {% csrf_token %}
-
-            {% if validlink %}
-
-              <h1 class="text-center text-primary-color fw-bolder mb-5">Recuperar senha</h1>
-                <p class="text-center mb-5">
-                    Digite sua nova senha abaixo
-                </p>
-                <div class="mb-1">
-                    <input type="password" name="new_password1" autocomplete="new-password" required="" id="id_new_password1" class="form-control p-3 rounded-pill px-4 border-0 mb-4" placeholder="Nova senha" required>
-
-                    <input type="password" name="new_password2" autocomplete="new-password" required="" id="id_new_password2" class="form-control p-3 rounded-pill px-4 border-0 mb-4" placeholder="Confirmar nova senha" required>
-                    
-                    {% if form.errors %}
-                        {% for field in form %}
-
-                            {% for error in field.errors %}
-                                    {{field.label}}: {{ error|escape }}
-                            {% endfor %}
-
-                        {% endfor %}
-                    {% endif %}
-                </div>
-                <div class="d-grid gap-2">
-                  <button type="submit" class="btn btn-cric btn-lg mt-4 rounded-pill py-2">Mudar senha</button>
-                </div>
-
-                <ul class="mt-5">
-                    <li class="mt-1">Sua senha não pode ser muito parecida com o resto das suas informações pessoais.</li>
-                    <li class="mt-1">Sua senha precisa conter pelo menos 8 caracteres.</li>
-                    <li class="mt-1">Sua senha não pode ser uma senha comumente utilizada.</li>
-                    <li class="mt-1">Sua senha não pode ser inteiramente numérica.</li>
-                </ul>
-            
-            {% else %}
-                
-                <h1 class="text-center text-primary-color fw-bolder mb-5">Redefinição de senha sem sucesso</h1>
-                <p class="text-center mb-5">
-                    O link para a recuperação de senha era inválido, possivelmente porque já foi utilizado. Por favor, solicite uma nova recuperação de senha.
-                </p>
-
-            {% endif %}
-
-                <div class="d-block d-md-none">
-                  <div class="d-flex justify-content-center mt-4">
-                    <a class="bg-white rounded-circle btn-return text-dark" href="{% url 'home:home' %}">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 16 9"><path fill="currentColor" d="M12.5 5h-9c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h9c.28 0 .5.22.5.5s-.22.5-.5.5Z"/><path fill="currentColor" d="M6 8.5a.47.47 0 0 1-.35-.15l-3.5-3.5c-.2-.2-.2-.51 0-.71L5.65.65c.2-.2.51-.2.71 0c.2.2.2.51 0 .71L3.21 4.51l3.15 3.15c.2.2.2.51 0 .71c-.1.1-.23.15-.35.15Z"/></svg>
-                    </a>
-                  </div>
-                </div>
-              
-            </form>
-        </div>
-
-        <div class="d-none d-md-block col-md-6 col-lg-8 bg-img">
-          <div class="d-flex justify-content-end mt-4 me-5">
-            <a class="bg-white rounded-circle btn-return text-dark" href="{% url 'home:home' %}">
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 16 9"><path fill="currentColor" d="M12.5 5h-9c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h9c.28 0 .5.22.5.5s-.22.5-.5.5Z"/><path fill="currentColor" d="M6 8.5a.47.47 0 0 1-.35-.15l-3.5-3.5c-.2-.2-.2-.51 0-.71L5.65.65c.2-.2.51-.2.71 0c.2.2.2.51 0 .71L3.21 4.51l3.15 3.15c.2.2.2.51 0 .71c-.1.1-.23.15-.35.15Z"/></svg>
-            </a>
-          </div>
-        </div>
+  <div class="container-fluid vh-100 d-flex p-0">
+    <div class="left-panel col-12 col-md-6 d-none d-md-flex align-items-center justify-content-center text-white">
+      <div class="px-5">
+        <img src="{% static 'images/logos/rotacric-alternative.png' %}" alt="Rotacric" class="mb-4" style="height:64px;">
+        <h2 class="fw-bold mb-3">Defina uma nova senha</h2>
+        <p class="lead mb-0">Segurança primeiro: crie uma senha forte para continuar.</p>
+      </div>
     </div>
 
-    <script src="{% static 'js/users/message_fx.js' %}" async></script>
+    <div class="right-panel col-12 col-md-6 d-flex align-items-center justify-content-center">
+      <div class="w-100" style="max-width:520px;">
+        {% if validlink %}
+          <h1 class="h4 fw-bold text-center mb-3">Nova senha</h1>
+          <p class="text-center text-muted mb-4">Preencha os campos abaixo.</p>
+          <form method="POST" class="needs-validation" novalidate id="frm-login">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label">Nova senha</label>
+              <input type="password" name="new_password1" autocomplete="new-password" class="form-control form-control-lg" required placeholder="Nova senha">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Confirmar nova senha</label>
+              <input type="password" name="new_password2" autocomplete="new-password" class="form-control form-control-lg" required placeholder="Repita a senha">
+            </div>
+            {% if form.errors %}
+              <div class="alert alert-warning small" role="alert">
+                {% for field in form %}
+                  {% for error in field.errors %}
+                    <div>{{ field.label }}: {{ error|escape }}</div>
+                  {% endfor %}
+                {% endfor %}
+              </div>
+            {% endif %}
+            <ul class="text-muted small ps-3 mb-3">
+              <li>Use ao menos 8 caracteres.</li>
+              <li>Evite informações pessoais.</li>
+              <li>Não use senhas comuns ou apenas números.</li>
+            </ul>
+            <button type="submit" class="btn btn-lg w-100 py-3">Salvar nova senha</button>
+          </form>
+        {% else %}
+          <h1 class="h4 fw-bold text-center mb-3">Link expirado ou inválido</h1>
+          <p class="text-center text-muted mb-4">Solicite novamente a recuperação de senha e use o novo link enviado.</p>
+          <a href="{% url 'reset_password' %}" class="btn btn-lg w-100 py-3">Solicitar novo link</a>
+        {% endif %}
+        <a href="{% url 'home:home' %}" class="btn btn-outline-secondary w-100 py-3 mt-2">Voltar</a>
+      </div>
+    </div>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
-    </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

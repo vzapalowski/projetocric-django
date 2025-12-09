@@ -115,6 +115,16 @@ EMAIL_PORT = config('EMAIL_PORT', cast=int, default=587)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool, default=True)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER or 'no-reply@rotacric.local')
+
+# Debug: apenas console se explicitamente solicitado ou se em DEBUG com credenciais vazias E nao houver override
+if DEBUG and EMAIL_BACKEND == 'django.core.mail.backends.smtp.EmailBackend' and (not EMAIL_HOST_USER or not EMAIL_HOST_PASSWORD):
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+print(f"\n[EMAIL CONFIG] Backend: {EMAIL_BACKEND}")
+print(f"[EMAIL CONFIG] Host: {EMAIL_HOST}")
+print(f"[EMAIL CONFIG] User: {EMAIL_HOST_USER}")
+print(f"[EMAIL CONFIG] From: {DEFAULT_FROM_EMAIL}\n")
 
 # Internationalization
 LANGUAGE_CODE = 'pt-BR'

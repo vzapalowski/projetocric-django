@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [v2.0.0] - Unreleased
 
+### Added
+
+- CI/CD Tests
+
 ### Changed
 
 - Lógica de rotas e pontos agora está no módulo "core"

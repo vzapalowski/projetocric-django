@@ -118,7 +118,11 @@ EMAIL_PORT = config('EMAIL_PORT', cast=int, default=587)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool, default=True)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER or 'no-reply@rotacric.local')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER or '')
+
+# Feature Flag: Enable/Disable email-dependent features (password reset, notifications, etc.)
+# Set to False in development if email is not configured
+FEATURE_EMAIL_ENABLED = config('FEATURE_EMAIL_ENABLED', cast=bool, default=bool(EMAIL_HOST_USER and EMAIL_HOST_PASSWORD))
 
 # Path to wkhtmltopdf executable. Set this in your .env when running on Windows
 # Example (Windows): WKHTMLTOPDF_CMD="C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe"

@@ -236,6 +236,12 @@ class PasswordReset(auth_views.PasswordResetView):
     success_url = reverse_lazy('password_reset_done')
     from_email = settings.DEFAULT_FROM_EMAIL
 
+    def dispatch(self, request, *args, **kwargs):
+        if not settings.FEATURE_EMAIL_ENABLED:
+            messages.error(request, 'O recurso de redefinição de senha por e-mail está desabilitado. Entre em contato com o administrador do sistema.')
+            return redirect('users:login')
+        return super().dispatch(request, *args, **kwargs)
+
     def form_valid(self, form):
         email = form.cleaned_data.get('email')
         logger.info(f"[PASSWORD RESET] Solicitação recebida para: {email}")

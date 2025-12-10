@@ -38,3 +38,24 @@ Aplicar migrações:
 ```bash
 python manage.py migrate
 ```
+
+---
+
+## 🔐 Configuração de Segurança - Feature Flags
+
+### FEATURE_EMAIL_ENABLED
+
+O sistema possui uma feature flag para controlar funcionalidades que dependem de email configurado (como redefinição de senha).
+
+**Configuração automática:** Se você não definir `FEATURE_EMAIL_ENABLED`, o sistema detectará automaticamente:
+- ✅ Habilitado se `EMAIL_HOST_USER` e `EMAIL_HOST_PASSWORD` estiverem configurados
+- ❌ Desabilitado caso contrário
+
+**Configuração manual no `.env`:**
+```bash
+FEATURE_EMAIL_ENABLED=False  # Desabilita reset de senha e notificações por email
+```
+
+**Funcionalidades afetadas:**
+- Reset de senha por email (`/reset_password/`)
+- Link "Esqueceu a senha?" na tela de login

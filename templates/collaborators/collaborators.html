@@ -1,0 +1,134 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block 'navigation' %}
+{% endblock %}
+
+{% block 'styles' %}
+    <link rel="stylesheet" href="{% static 'style/style-devs.css' %}">
+{% endblock %}
+
+{% block 'content' %}
+    <div class="container pb-5" id="main-content-devs">
+        <!-- Seção: Equipe Atual -->
+        <h1 class="text-center"><span class="badge main-title-devs">Equipe de Desenvolvimento</span></h1>
+
+        {% if current_collaborators %}
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for c in current_collaborators %}
+                <div class="col">
+                    <div class="card text-center">
+                        <div style="position: relative; display: flex; justify-content: center; align-items: center;">
+                            {% if c.picture %}
+                                <img src="{{c.picture.url}}" class="profile-img rounded-circle" alt="{{ c.name }}" onerror="document.querySelector('[data-fallback=current-{{ c.id }}]').classList.add('show'); this.style.display='none';">
+                            {% endif %}
+                            <div class="profile-fallback align-items-center justify-content-center rounded-circle" data-fallback="current-{{ c.id }}" {% if not c.picture %}style="display: flex;"{% endif %}>
+                                <i class="bi bi-person-fill" style="font-size: 4rem;"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ c.name }}</h5>
+                            <p class="card-text">{{ c.position }}</p>
+                            <div class="d-flex justify-content-center">
+                                {% for u in c.urls.all %}
+                                    <div class="p-2">
+                                        {% if u.url|contains:"github" %}
+                                            <a href="{{ u.url }}" target="_blank">
+                                                {% include "components/icons/github.svg" %}
+                                            </a>
+                                        
+                                        {% elif u.url|contains:"linkedin" %}
+                                            <a href="{{ u.url }}" target="_blank">
+                                                {% include "components/icons/linkedin.svg" %}
+                                            </a>
+
+                                        {% elif u.url|contains:"instagram" %}
+                                            <a href="{{ u.url }}" target="_blank">
+                                                {% include "components/icons/instagram.svg" %}
+                                            </a>
+                                        
+
+                                        {% elif u.url|contains:"facebook" %}
+                                            <a href="{{ u.url }}" target="_blank">
+                                                {% include "components/icons/facebook.svg" %}
+                                            </a>
+                                        
+
+                                        {% else %}
+                                            <a href="{{ u.url }}" target="_blank">
+                                                {% include "components/icons/link.svg" %}
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center text-muted mt-4">Nenhum colaborador atual no momento.</p>
+        {% endif %}
+
+        <!-- Seção: Integrantes Antigos -->
+        {% if former_collaborators %}
+        <h1 class="text-center mt-5"><span class="badge main-title-devs">Integrantes Antigos</span></h1>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for c in former_collaborators %}
+            <div class="col">
+                <div class="card text-center opacity-75">
+                    <div style="position: relative; display: flex; justify-content: center; align-items: center; padding-top: 1rem;">
+                        {% if c.picture %}
+                            <img src="{{c.picture.url}}" class="profile-img rounded-circle" alt="{{ c.name }}" style="opacity: 0.8;" onerror="document.querySelector('[data-fallback=former-{{ c.id }}]').classList.add('show'); this.style.display='none';">
+                        {% endif %}
+                        <div class="profile-fallback align-items-center justify-content-center rounded-circle" data-fallback="former-{{ c.id }}" style="opacity: 0.8;" {% if not c.picture %}style="display: flex; opacity: 0.8;"{% endif %}>
+                            <i class="bi bi-person-fill" style="font-size: 4rem;"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ c.name }}</h5>
+                        <p class="card-text">{{ c.position }}</p>
+                        <div class="d-flex justify-content-center">
+                            {% for u in c.urls.all %}
+                                <div class="p-2">
+                                    {% if u.url|contains:"github" %}
+                                        <a href="{{ u.url }}" target="_blank">
+                                            {% include "components/icons/github.svg" %}
+                                        </a>
+                                    
+                                    {% elif u.url|contains:"linkedin" %}
+                                        <a href="{{ u.url }}" target="_blank">
+                                            {% include "components/icons/linkedin.svg" %}
+                                        </a>
+
+                                    {% elif u.url|contains:"instagram" %}
+                                        <a href="{{ u.url }}" target="_blank">
+                                            {% include "components/icons/instagram.svg" %}
+                                        </a>
+                                    
+
+                                    {% elif u.url|contains:"facebook" %}
+                                        <a href="{{ u.url }}" target="_blank">
+                                            {% include "components/icons/facebook.svg" %}
+                                        </a>
+                                    
+
+                                    {% else %}
+                                        <a href="{{ u.url }}" target="_blank">
+                                            {% include "components/icons/link.svg" %}
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

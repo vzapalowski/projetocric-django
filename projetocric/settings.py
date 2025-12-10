@@ -22,6 +22,12 @@ SECRET_KEY = config('SECRET_KEY', default='unsafe-secret-key')
 DEBUG = config('DEBUG', cast=bool, default=True)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv(), default='*')
 
+
+# Strava Api
+STRAVA_CLIENT_ID = config("STRAVA_CLIENT_ID", default="")
+STRAVA_CLIENT_SECRET = config("STRAVA_CLIENT_SECRET", default="")
+STRAVA_REFRESH_TOKEN = config("STRAVA_REFRESH_TOKEN", default="")
+
 CSRF_TRUSTED_ORIGINS = [
     'https://rota-cric.charqueadas.ifsul.edu.br',
     'http://rota-cric.charqueadas.ifsul.edu.br',
@@ -39,10 +45,12 @@ INSTALLED_APPS = [
     'cities.apps.CitiesConfig',
     'event.apps.EventConfig',
     'users.apps.UsersConfig',
+    'core.apps.CoreConfig',
     'rest_framework',
     'multiupload',
     'colorfield',
     'template_partials',
+    'collaborators',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +68,9 @@ ROOT_URLCONF = 'projetocric.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+                os.path.join(BASE_DIR, 'templates'),
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -108,6 +118,16 @@ EMAIL_PORT = config('EMAIL_PORT', cast=int, default=587)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool, default=True)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER or '')
+
+# Feature Flag: Enable/Disable email-dependent features (password reset, notifications, etc.)
+# Set to False in development if email is not configured
+FEATURE_EMAIL_ENABLED = config('FEATURE_EMAIL_ENABLED', cast=bool, default=bool(EMAIL_HOST_USER and EMAIL_HOST_PASSWORD))
+
+# Path to wkhtmltopdf executable. Set this in your .env when running on Windows
+# Example (Windows): WKHTMLTOPDF_CMD="C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe"
+# If empty, the app will fallback to looking for `wkhtmltopdf` on PATH or /usr/bin/wkhtmltopdf.
+WKHTMLTOPDF_CMD = config('WKHTMLTOPDF_CMD', default='')
 
 # Internationalization
 LANGUAGE_CODE = 'pt-BR'

@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+
+
+{%block 'content'%}
+<div class="container w-100 h-75 my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h2 class="card-title text-success">Inscrição Realizada com Sucesso!</h2>
+                    <p class="card-text">Sua inscrição para <strong>{{ event.name }}</strong> foi realizada com sucesso.</p>
+                    
+                    <div class="mt-4">
+                        <a href="{% url 'events:event' event.id %}" class="btn btn-primary">
+                            Voltar para o Evento
+                        </a>
+                        <a href="{% url 'users:profile' %}" class="btn btn-outline-secondary">
+                            Ver Minhas Inscrições
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

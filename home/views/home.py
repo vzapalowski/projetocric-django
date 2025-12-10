@@ -2,14 +2,10 @@ from django.views.generic.list import ListView
 
 from home.models import CityManager
 from cities.models import City
-from cities.models import Category
+from core.models import AnchorpointCategory
 from event.models import Event
-from event.models import Enrollment, EnrollmentType2, Enrollment3PasseioCiclistico, Enrollment4PasseioCiclistico
-
-from operator import attrgetter
-
-
-class PostHome(ListView):
+from api.mixins import ApiTokenMixin
+class Home(ApiTokenMixin, ListView):
     template_name = 'home/index.html'
     model = City
 
@@ -19,24 +15,12 @@ class PostHome(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['homes'] = CityManager.objects.all()
-        context['categories_points'] = Category.objects.all()
-        # events = Event.objects.all()
+        context['categories_points'] = AnchorpointCategory.objects.all()
         events = Event.objects.order_by('status')
-    
-        for event in events:
-            event.number_of_routes = event.routes_data.count()
-            event.participants = Enrollment.objects.filter(event=event).count()
 
-            if not event.participants:
-                event.participants = EnrollmentType2.objects.filter(event=event).count()
-                
-                if not event.participants:
-                    event.participants = Enrollment3PasseioCiclistico.objects.filter(event=event).count()
-                    
-                    if not event.participants:
-                        event.participants = Enrollment4PasseioCiclistico.objects.filter(event=event).count()
-                
+        for event in events:
+            event.number_of_routes = event.routes.count()
+            event.participants_count = event.participants.count()
+        
         context['events'] = events
-    
         return context
-    

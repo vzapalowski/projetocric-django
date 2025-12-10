@@ -1,0 +1,73 @@
+{% load static %}
+
+{# Conteúdo compartilhado do header - recebe: is_mobile, user #}
+
+<nav class="navbar bg-body-tertiary {% if is_mobile %}border-bottom border-secondary-subtle{% endif %}">
+  <div class="container-fluid">
+    <!-- Logo -->
+    <a href="{% url 'home:home' %}" class="m-nav">
+      <img class="img-fluid" 
+           width="{% if is_mobile %}60{% else %}70{% endif %}" 
+           height="{% if is_mobile %}60{% else %}70{% endif %}" 
+           src="{% static 'images/logos/' %}{% if is_mobile %}rotacric-sem-fundo.png{% else %}rotacric-subtitle-sem-fundo.png{% endif %}" 
+           alt="Logo RotaCric">
+    </a>
+
+    {% if is_mobile %}
+      <!-- Botão hamburguer (mobile) -->
+      <button id="btn-open" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" 
+              data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" 
+              aria-label="Toggle navigation" style="box-shadow: none;">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    {% else %}
+      <!-- Menu Desktop -->
+      <div class="d-flex align-items-center ms-auto">
+        <ul class="navbar-nav flex-row me-3">
+          {% if request.path != '/' %}
+            <li class="nav-item"><a href="/#events" class="nav-link btn-hover-cric px-4 py-2 mx-1">Eventos</a></li>
+            <li class="nav-item"><a href="/#cities" class="nav-link btn-hover-cric px-4 py-2 mx-1">Municípios</a></li>
+            <li class="nav-item"><a href="/#about" class="nav-link btn-hover-cric px-4 py-2 mx-1">Quem Somos?</a></li>
+          {% else %}
+            <li class="nav-item"><a href="#events" class="nav-link btn-hover-cric px-4 py-2 mx-1">Eventos</a></li>
+            <li class="nav-item"><a href="#cities" class="nav-link btn-hover-cric px-4 py-2 mx-1">Municípios</a></li>
+            <li class="nav-item"><a href="#about" class="nav-link btn-hover-cric px-4 py-2 mx-1">Quem Somos?</a></li>
+          {% endif %}
+          <li class="nav-item"><a href="{% url 'collaborators:devs' %}" class="nav-link btn-hover-cric px-4 py-2 mx-1">Desenvolvedores</a></li>
+        </ul>
+
+        {% if user.is_authenticated %}
+          <!-- Dropdown de usuário -->
+          <div class="dropdown">
+            <a class="d-flex topic-color align-items-center text-decoration-none" href="#" 
+               id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="fw-semibold me-2 dropdown-toggle">{{ user.username }}</span>
+              {% include "components/user_avatar.html" with user=user size=40 %}
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
+              <li class="px-3 py-2 d-flex align-items-center">
+                {% include "components/user_avatar.html" with user=user size=50 class="me-2" %}
+                <div>
+                  <div class="fw-bold">{{ user.get_full_name|default:user.username }}</div>
+                  <div class="text-muted small">{{ user.email }}</div>
+                </div>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'users:profile' %}">Meu Perfil</a></li>
+              <li>
+                <a class="dropdown-item text-danger d-flex align-items-center" href="{% url 'users:logout' %}">
+                  Sair
+                </a>
+              </li>
+            </ul>
+          </div>
+        {% else %}
+          <!-- Botões de login/registro -->
+          <a href="{% url 'users:login' %}" class="btn-secondary-cric-bold">Entrar</a>
+          <a href="{% url 'users:register' %}" style="margin-left: 16px;" class="btn-secondary-cric-bold">Criar Conta</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</nav>

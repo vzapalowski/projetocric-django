@@ -1,76 +1,279 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificado de Inscrição</title>
-    <!-- <link rel="stylesheet" href="../../../templates/static/event/style-certificate.css"> -->
-    <link rel="stylesheet" href="http://rota-cric.charqueadas.ifsul.edu.br/static/style/style-certificate.css">
-</head>
-<body>
-    <header>
-        <div class="box-title">
-            <div class="rotacric">
-                <img class="logo-cric" src="http://rota-cric.charqueadas.ifsul.edu.br/static/images/certificate/logo-rota-cric.png" alt="">
-                <h1>Rota
-                    <span>
-                        CRIC
-                    </span>
-                </h1>
-            </div>
-            <img class="medalha" src="http://rota-cric.charqueadas.ifsul.edu.br/static/images/certificate/medalha.png" alt="">
-        </div>
-    </header>
-    <main>
-        <div class="certificado">
-            <img src="http://rota-cric.charqueadas.ifsul.edu.br/static/images/certificate/Pedal2025_logo.png" alt="">
-            <h1>CERTIFICADO DE INSCRIÇÃO</h1>
-            <p> O Rota Cicloturística da Região Imperial Carbonífera certifica que</p>
-            <h2>{{ name }}</h2>
-            <p class="p-2">está participando do evento <b>4º Passeio Ciclístico do IFSul Charqueadas</b>, que será
-            realizado nos dias 12 e 27 de Abril de 2025.</p>
-            <p class="p-3">Charqueadas, {{ date }}</p>
-        </div>
-    </main>
-    <!-- <footer>
-        <img src="http://rota-cric.charqueadas.ifsul.edu.br/static/images/certificate/prefeitura-1.jpeg" alt="">
-        <img src="http://rota-cric.charqueadas.ifsul.edu.br/static/images/certificate/prefeitura-2.jpeg" alt="">
-        <img src="http://rota-cric.charqueadas.ifsul.edu.br/static/images/certificate/prefeitura-3.jpeg" alt="">
-    </footer> -->
-</body>
-</html>
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/templates/static/event/style-certificate.css">
-</head>
-<body>
-    <header>
-        <div class="box-title">
-            <div class="rotacric">
-                <img class="logo-cric" src="/templates/static/images/certificate/4.png" alt="">
-                <h1>Rota
-                    <span>
-                        CRIC
-                    </span>
-                </h1>
-            </div>
-            <img class="medalha" src="/templates/static/images/certificate/medalha.png" alt="">
-        </div>
-    </header>
-    <main>
-        <div class="certificado">
-            <h1>CERTIFICADO DE PARTICIPAÇÃO</h1>
-            <p> O Rota Cicloturística da Região Imperial Carbonífera certifica que</p>
-            <h2>NOME COMPLETO</h2>
-            <p class="p-2">com CPF <b>1234567890</b> concluiu o evento <b>Nome do evento</b>, realizado
-            no data 00/00/0000, com carga horária de XX horas.</p>
-            <p class="p-3">Charqueadas, 1 de outubro de 2023</p>
-        </div>
+<!doctype html>
+<html lang="pt-BR">
 
-    </main>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Certificado de Inscrição</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+            }
+
+            .sheet {
+                page-break-after: always;
+            }
+        }
+
+        html,
+        body {
+            position: relative;
+            margin: 0;
+            padding: 0;
+
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #222;
+            overflow: hidden;
+        }
+
+        .sheet {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            box-sizing: border-box;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            overflow: hidden;
+        }
+
+        .certificate-box {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            background: #fff;
+            border: 3px solid #0b5b8a;
+            padding: 16mm;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .certificate-box::before {
+            content: '';
+            position: absolute;
+            top: 15mm;
+            left: 15mm;
+            right: 15mm;
+            bottom: 15mm;
+            border: 1px solid #e0e0e0;
+            pointer-events: none
+        }
+
+        header.cert-header {
+            margin-bottom: 8mm;
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .left-cell {
+            vertical-align: middle;
+            width: 70%;
+        }
+
+        .right-cell {
+            vertical-align: middle;
+            text-align: right;
+        }
+
+        .brand-table {
+            border-collapse: collapse;
+        }
+
+        .brand-logo,
+        .brand-text-cell {
+            vertical-align: middle;
+        }
+
+        .logo {
+            height: 96px;
+        }
+
+        .brand-text {
+            font-size: 28px;
+            line-height: 1.1;
+            margin-left: 10px;
+        }
+
+        .medal {
+            height: 90px;
+            opacity: 0.95;
+        }
+
+        .decorative-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37 20%, #d4af37 80%, transparent);
+            margin: 6mm 0
+        }
+
+        .title {
+            text-align: center;
+            margin: 8mm 0
+        }
+
+        .title h1 {
+            font-size: 36pt;
+            letter-spacing: 8px;
+            margin: 0;
+            color: #0b5b8a;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1)
+        }
+
+        .title p.lead {
+            margin: 8px 0 0 0;
+            font-size: 13pt;
+            color: #555;
+            font-style: italic
+        }
+
+        .recipient {
+            text-align: center;
+            margin: 10mm 0
+        }
+
+        .recipient .label {
+            font-size: 11pt;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600
+        }
+
+        .recipient .name {
+            font-size: 38pt;
+            font-weight: 700;
+            margin: 8px 0;
+            color: #1a1a1a;
+            text-decoration: underline;
+            text-decoration-color: #d4af37;
+            text-decoration-thickness: 3px;
+            text-underline-offset: 8px
+        }
+
+        .recipient .event {
+            font-size: 14pt;
+            margin-top: 8px;
+            color: #333;
+            font-weight: 500
+        }
+
+        .certification {
+            margin: 10mm 0;
+            text-align: center;
+            color: #444;
+            font-size: 12pt;
+            line-height: 1.6;
+            margin-left: auto;
+            margin-right: auto
+        }
+
+        .footer-section {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 6mm
+        }
+
+        .date-location {
+            text-align: center;
+            font-size: 12pt;
+            color: #555;
+            font-style: italic
+        }
+
+        .system-note {
+            text-align: center;
+            font-size: 9pt;
+            color: #888;
+            padding-top: 4mm;
+            border-top: 1px solid #ddd
+        }
+
+        img {
+            max-width: 100%;
+            height: auto
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sheet">
+        <div class="certificate-box">
+            <header class="cert-header">
+                <table class="header-table">
+                    <tr>
+                        <!-- COLUNA ESQUERDA: logo + texto -->
+                        <td class="left-cell">
+
+                            <table class="brand-table">
+                                <tr>
+                                    <td class="brand-logo">
+                                        <img class="logo"
+                                            src="http://rota-cric.charqueadas.ifsul.edu.br/static/images/logos/rotacric-subtitle-sem-fundo.png"
+                                            alt="Rota CRIC">
+                                    </td>
+
+                                    <td class="brand-text-cell">
+                                        <div class="brand-text">
+                                            <strong>Rota CRIC</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+
+                        <td class="right-cell">
+                            <img class="medal"
+                                src="http://rota-cric.charqueadas.ifsul.edu.br/static/images/certificate/medalha.png"
+                                alt="Medalha">
+                        </td>
+                    </tr>
+                </table>
+            </header>
+
+
+
+            <div class="decorative-line"></div>
+
+            <section class="title">
+                <h1>CERTIFICADO</h1>
+                <p class="lead">de Inscrição e Conclusão</p>
+            </section>
+
+            <section class="recipient">
+                <div class="label">Certificamos que</div>
+                <div class="name">{{ name }}</div>
+                <div class="event">concluiu com êxito o <strong>{{ event }}</strong></div>
+            </section>
+
+            <div class="decorative-line"></div>
+
+            <section class="certification">
+                <p>O participante esteve inscrito e concluiu o evento realizado em <strong>{{ date }}</strong>, com
+                    carga horária de <strong>4 horas</strong>, promovido pela Rota Cicloturística da Região Imperial
+                    Carbonífera.</p>
+            </section>
+
+            <div class="footer-section">
+                <div class="date-location">Charqueadas, {{ date }}</div>
+                <div class="system-note">Emitido eletronicamente pelo sistema Rota CRIC</div>
+            </div>
+        </div>
+    </div>
 </body>
-</html> -->
+
+</html>

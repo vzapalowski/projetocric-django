@@ -6,10 +6,10 @@
 {%block 'content'%}
 
 <div class="container-fluid p-0">
-  <div class="bg-image-top-page"></div>
+  {% comment %} <div class="bg-image-top-page"></div> {% endcomment %}
 
   <div class="d-flex justify-content-center mt-5">
-    <h2 class="mt-2 mb-5 fw-semibold text-center mx-4"> Conheça o Nosso Mapa de Rotas</h2>
+    <h2 class="mt-2 mb-5 fw-semibold text-center mt-5"> Conheça o Nosso Mapa de Rotas</h2>
   </div>
 </div>
 
@@ -172,6 +172,8 @@
     </div>
   </div>
 </div>
+
+{% include 'helpers/auth_config.html' %}
 
 <script src="{% static 'js/home/homefx.js' %}" async></script>
 <script src="{% static 'js/home/data.js' %}" type="module" async></script>

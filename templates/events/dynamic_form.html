@@ -1,0 +1,411 @@
+{% load static %}
+
+{% if user_is_subscribed %}
+    <div class="card border-success shadow-lg mb-4 mx-auto" style="max-width: 600px; margin-top: 50px;">
+        <div class="card-header bg-primary-blue text-white text-center py-3">    
+            <h3 class="mb-0 fw-bold">Inscrição Confirmada!</h3>
+        </div>
+        
+        <div class="card-body p-4">
+            <p class="text-center text-muted mb-4 fs-5">
+                Você já está inscrito neste evento.
+            </p>
+    
+            
+            <div class="d-flex gap-3 justify-content-center flex-wrap">            
+                <a href="{% url 'users:profile' %}" class="btn-secondary-cric-bold btn-cric d-flex align-items-center gap-2" style="padding: 0.75rem 1rem; text-align: center;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Ver Minhas Inscrições
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% else %}
+
+<form class="container-fluid container-sm container-lg-cric bg-light px-3 py-5 mt-5 rounded" 
+      id="enrollment-form" 
+      method="POST" 
+      action="{% url 'events:enrollment' event_id=event.id %}"
+      data-user-email="{% if user.is_authenticated %}{{ user.email }}{% endif %}"
+      data-user-authenticated="{% if user.is_authenticated %}true{% else %}false{% endif %}">
+    {% csrf_token %}
+
+
+{% if not request.user.is_authenticated %}
+<div class="alert alert-warning p-4 shadow-sm border-3 border-warning rounded-3 text-center" role="alert" style="font-size: 1.2rem;">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="currentColor"/>
+    </svg><br>
+    <strong>Atenção!</strong><br><br>
+    Para se inscrever no evento, você precisa ter uma conta.
+</div>
+
+<div class="d-flex justify-content-center gap-3 my-4">
+    <a href="{% url 'users:login' %}" 
+    style="padding: 1rem 1rem; text-align: center;"
+    class="btn-secondary-cric-bold">
+        Fazer Login
+    </a>
+    <a href="{% url 'users:register' %}" 
+    style="padding: 1rem 1rem; text-align: center;"
+    class="btn-secondary-cric-bold btn-cric">
+        Criar Conta
+    </a>
+</div>
+{% endif %}
+
+    <!-- CAMPOS DINÂMICOS DO FORMULÁRIO -->
+    {% for field in form_fields %}
+        <div class="mb-3">
+            <label for="field_{{ field.id }}" class="form-label fw-bold">
+                {{ field.label }}{% if field.required %} *{% endif %}
+            </label>
+            
+            {% if field.type == "text" %}
+                <input type="text" 
+                       class="form-control" 
+                       id="field_{{ field.id }}" 
+                       name="field_{{ field.id }}" 
+                       {% if field.required %}required{% endif %}
+                       placeholder="{{ field.label }}"
+                       {% if field.validation %}pattern="{{ field.validation }}"{% endif %}>
+
+            {% elif field.type == "number" %}
+                <input type="number" 
+                       class="form-control" 
+                       id="field_{{ field.id }}" 
+                       name="field_{{ field.id }}" 
+                       {% if field.required %}required{% endif %}
+                       placeholder="{{ field.label }}"
+                       {% if field.validation %}min="{{ field.validation }}"{% endif %}>
+
+            {% elif field.type == "date" %}
+                <input type="date" 
+                       class="form-control" 
+                       id="field_{{ field.id }}" 
+                       name="field_{{ field.id }}" 
+                       {% if field.required %}required{% endif %}>
+
+            {% elif field.type == "select" %}
+                <select class="form-select" 
+                        id="field_{{ field.id }}" 
+                        name="field_{{ field.id }}" 
+                        {% if field.required %}required{% endif %}>
+                    <option value="" selected disabled>Selecione {{ field.label }}</option>
+                    {% if field.options %}
+                        {% for option in field.options_list %}
+                            <option value="{{ option.value }}">{{ option.label }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+
+            {% elif field.type == "file" %}
+                <input type="file" 
+                       class="form-control" 
+                       id="field_{{ field.id }}" 
+                       name="field_{{ field.id }}" 
+                       {% if field.required %}required{% endif %}
+                       accept="{% if field.validation %}{{ field.validation }}{% else %}*/*{% endif %}">
+
+            {% elif field.type == "boolean" %}
+                <div class="form-check">
+                    <input class="form-check-input" 
+                           type="checkbox" 
+                           id="field_{{ field.id }}" 
+                           name="field_{{ field.id }}"
+                           value="sim"
+                           {% if field.required %}required{% endif %}>
+                    <label class="form-check-label" for="field_{{ field.id }}">
+                        {{ field.label }}
+                    </label>
+                </div>
+
+            {% elif field.type == "textarea" %}
+                <textarea class="form-control" 
+                          id="field_{{ field.id }}" 
+                          name="field_{{ field.id }}" 
+                          {% if field.required %}required{% endif %}
+                          placeholder="{{ field.label }}"
+                          rows="4"></textarea>
+
+            {% elif field.type == "email" %}
+                <input type="email" 
+                       class="form-control" 
+                       id="field_{{ field.id }}" 
+                       name="field_{{ field.id }}" 
+                       {% if field.required %}required{% endif %}
+                       placeholder="{{ field.label }}">
+
+            {% elif field.type == "tel" %}
+                <input type="tel" 
+                       class="form-control" 
+                       id="field_{{ field.id }}" 
+                       name="field_{{ field.id }}" 
+                       {% if field.required %}required{% endif %}
+                       placeholder="{{ field.label }}"
+                       pattern="[0-9]{10,11}">
+
+            {% elif field.type == "url" %}
+                <input type="url" 
+                       class="form-control" 
+                       id="field_{{ field.id }}" 
+                       name="field_{{ field.id }}" 
+                       {% if field.required %}required{% endif %}
+                       placeholder="{{ field.label }}">
+
+            {% endif %}
+            
+            {% if field.validation and field.type != "file" and field.type != "select" %}
+                <div class="form-text text-muted">
+                    <small>{{ field.validation }}</small>
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <!-- SELECT ROUTE PATH -->
+    <select class="form-select mb-3" name="route_path" id="id_route_path" required>
+        <option value="" selected disabled>Selecione sua rota *</option>
+        {% for routePath in event_routes %}
+            <option value="{{ routePath.id }}">{{ routePath.name }} - {{ routePath.departure_location }}</option>
+        {% endfor %}
+    </select>
+
+    <!-- Campos hidden -->
+    <input type="hidden" name="event" value="{{ event.id }}" id="event">
+    {% if user.is_authenticated %}
+        <input type="hidden" name="user" value="{{ user.id }}" id="user">
+    {% endif %}
+
+    <!-- Mensagens de alerta -->
+    {% if messages %}
+        <div class="mb-3">
+            {% for message in messages %}
+                <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="d-grid">
+        <button id="btn-form" class="btn btn-dark mt-2" type="submit">
+            <span id="btn-text">Concluir Inscrição</span>
+            <div id="btn-spinner" class="spinner-border spinner-border-sm d-none" role="status">
+                <span class="visually-hidden">Carregando...</span>
+            </div>
+        </button>
+    </div>
+
+    <p class="text-muted mt-3 small">
+        <small>* Campos obrigatórios</small>
+    </p>
+</form>
+
+    {% if not request.user.is_authenticated %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const form = document.getElementById('enrollment-form');
+                const inputs = form.querySelectorAll('input, select, textarea, button');
+                inputs.forEach(el => {
+                    if (el.type !== 'button') el.setAttribute('disabled', true);
+                });
+            });
+        </script>
+    {% endif %}
+
+{% endif %}
+
+
+
+
+<!-- JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('enrollment-form');
+    const submitBtn = document.getElementById('btn-form');
+    const btnText = document.getElementById('btn-text');
+    const btnSpinner = document.getElementById('btn-spinner');
+    
+    // Preencher dados do usuário se estiver logado
+    const isAuthenticated = form.getAttribute('data-user-authenticated') === 'true';
+    const userEmail = form.getAttribute('data-user-email');
+    
+    if (isAuthenticated && userEmail && userEmail !== 'None') {
+        const emailInput = document.getElementById('id_email');
+        if (emailInput) {
+            emailInput.value = userEmail;
+        }
+    }
+    
+    // Validação do formulário
+    form.addEventListener('submit', function(e) {
+        // Validar campos obrigatórios antes de enviar
+        const requiredFields = form.querySelectorAll('[required]');
+        let isValid = true;
+        
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                isValid = false;
+                field.classList.add('is-invalid');
+                
+                // Adicionar mensagem de erro
+                let errorDiv = field.parentNode.querySelector('.invalid-feedback');
+                if (!errorDiv) {
+                    errorDiv = document.createElement('div');
+                    errorDiv.className = 'invalid-feedback';
+                    errorDiv.textContent = 'Este campo é obrigatório.';
+                    field.parentNode.appendChild(errorDiv);
+                }
+            } else {
+                field.classList.remove('is-invalid');
+                const errorDiv = field.parentNode.querySelector('.invalid-feedback');
+                if (errorDiv) {
+                    errorDiv.remove();
+                }
+            }
+        });
+        
+        if (!isValid) {
+            e.preventDefault();
+            // Scroll para o primeiro campo com erro
+            const firstError = form.querySelector('.is-invalid');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return;
+        }
+        
+        // Mostrar loading
+        btnText.textContent = 'Processando...';
+        btnSpinner.classList.remove('d-none');
+        submitBtn.disabled = true;
+    });
+    
+    // Validação de RG (apenas números)
+    const rgInput = document.getElementById('id_rg');
+    if (rgInput) {
+        rgInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    }
+    
+    // Validação de data (não permitir datas futuras)
+    const dateInput = document.getElementById('datepicker');
+    if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('max', today);
+        
+        // Adicionar validação visual
+        dateInput.addEventListener('change', function() {
+            if (this.value > today) {
+                this.classList.add('is-invalid');
+                let errorDiv = this.parentNode.querySelector('.invalid-feedback');
+                if (!errorDiv) {
+                    errorDiv = document.createElement('div');
+                    errorDiv.className = 'invalid-feedback';
+                    errorDiv.textContent = 'Data de nascimento não pode ser futura.';
+                    this.parentNode.appendChild(errorDiv);
+                }
+            } else {
+                this.classList.remove('is-invalid');
+                const errorDiv = this.parentNode.querySelector('.invalid-feedback');
+                if (errorDiv) {
+                    errorDiv.remove();
+                }
+            }
+        });
+    }
+    
+    // Remover classes de erro quando o usuário começar a digitar
+    const inputs = form.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            this.classList.remove('is-invalid');
+            const errorDiv = this.parentNode.querySelector('.invalid-feedback');
+            if (errorDiv) {
+                errorDiv.remove();
+            }
+        });
+    });
+    
+    // Processar selects dinâmicos que não foram pré-processados
+    document.querySelectorAll('select[id^="field_"]').forEach(select => {
+        if (select.options.length <= 1) {
+            // Se não tem opções, tentar processar via data attribute
+            const fieldId = select.id.replace('field_', '');
+            const optionsData = select.getAttribute('data-options');
+            if (optionsData) {
+                const options = optionsData.split(',').map(opt => opt.trim()).filter(opt => opt);
+                options.forEach(option => {
+                    const optionElement = document.createElement('option');
+                    optionElement.value = option;
+                    optionElement.textContent = option;
+                    select.appendChild(optionElement);
+                });
+            }
+        }
+    });
+});
+</script>
+
+<style>
+.form-label {
+    color: #131A40;
+    font-weight: 600;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #131A40;
+    box-shadow: 0 0 0 0.2rem rgba(19, 26, 64, 0.25);
+}
+
+.btn-dark {
+    background-color: #131A40;
+    border-color: #131A40;
+}
+
+.btn-dark:hover {
+    background-color: #0d122b;
+    border-color: #0d122b;
+}
+
+.alert {
+    border-radius: 8px;
+}
+
+.bg-light-light {
+    background-color: #f8f9fa !important;
+}
+
+.is-invalid {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
+
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545;
+}
+
+.form-check-input.is-invalid {
+    border-color: #dc3545;
+}
+
+.form-check-input.is-invalid:checked {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+</style>

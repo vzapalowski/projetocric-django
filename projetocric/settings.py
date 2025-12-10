@@ -117,10 +117,7 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER or 'no-reply@rotacric.local')
 
-# Debug: apenas console se explicitamente solicitado ou se em DEBUG com credenciais vazias E nao houver override
-if DEBUG and EMAIL_BACKEND == 'django.core.mail.backends.smtp.EmailBackend' and (not EMAIL_HOST_USER or not EMAIL_HOST_PASSWORD):
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
+# Email backend must be explicitly set via environment variable. No automatic fallback to console backend.
 print(f"\n[EMAIL CONFIG] Backend: {EMAIL_BACKEND}")
 print(f"[EMAIL CONFIG] Host: {EMAIL_HOST}")
 print(f"[EMAIL CONFIG] User: {EMAIL_HOST_USER}")

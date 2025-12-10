@@ -145,7 +145,28 @@ div nav div form .fw-blue {
 /* NAVIGATION */
 
 .nav-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 9999;
+  background-color: var(--neutral-white);
+  transition: box-shadow 0.3s ease;
+}
+
+.nav-bar-container.scrolled {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Adiciona padding ao body para compensar o header fixo */
+body {
+  padding-top: 86px; /* Altura aproximada do header desktop */
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-top: 76px; /* Altura aproximada do header mobile */
+  }
 }
 
 .navbar {

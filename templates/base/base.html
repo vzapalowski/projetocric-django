@@ -91,19 +91,16 @@
 
 <body class="background">
 
-  <!-- Desktop -->
-  {% if user.is_authenticated %}
-  {% include 'base/header/desktop/authenticated.html' %}
-  {% else %}
-  {% include 'base/header/desktop/guest.html' %}
-  {% endif %}
+  <!-- Desktop Header -->
+  <div class="container-fluid d-none d-md-block text-center nav-bar-container p-0 font-cric px-3">
+    {% include 'base/header/header_content.html' with is_mobile=False %}
+  </div>
 
-  <!-- Mobile -->
-  {% if user.is_authenticated %}
-  {% include 'base/header/mobile/authenticated.html' %}
-  {% else %}
-  {% include 'base/header/mobile/guest.html' %}
-  {% endif %}
+  <!-- Mobile Header -->
+  <div class="container-fluid d-block d-md-none text-center nav-bar-container p-0 font-cric">
+    {% include 'base/header/header_content.html' with is_mobile=True %}
+    {% include 'base/header/mobile_sidebar.html' %}
+  </div>
 
 
   {%block 'content'%}{%endblock%}
@@ -129,6 +126,18 @@
     const homeUrl = "{% url 'home:home' %}";
   </script>
   <script src="{% static 'js/home/navbar.js' %}"></script>
+  
+  <!-- Script para adicionar sombra no header ao fazer scroll -->
+  <script>
+    window.addEventListener('scroll', function() {
+      const navBar = document.querySelector('.nav-bar-container');
+      if (window.scrollY > 10) {
+        navBar.classList.add('scrolled');
+      } else {
+        navBar.classList.remove('scrolled');
+      }
+    });
+  </script>
 </body>
 
 </html>

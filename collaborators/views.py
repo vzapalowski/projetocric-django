@@ -4,5 +4,9 @@ from .models import Collaborators
 # Create your views here.
 
 def collaborators_list(request):
-    collaborators = Collaborators.objects.all()
-    return render(request, 'collaborators/collaborators.html', {'collaborators': collaborators})
+    current_collaborators = Collaborators.objects.filter(is_current=True)
+    former_collaborators = Collaborators.objects.filter(is_current=False)
+    return render(request, 'collaborators/collaborators.html', {
+        'current_collaborators': current_collaborators,
+        'former_collaborators': former_collaborators
+    })

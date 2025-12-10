@@ -28,12 +28,12 @@
           <form method="POST" class="needs-validation" novalidate id="frm-login">
             {% csrf_token %}
             <div class="mb-3">
-              <label class="form-label">Nova senha</label>
-              <input type="password" name="new_password1" autocomplete="new-password" class="form-control form-control-lg" required placeholder="Nova senha">
+              <label class="form-label" for="new_password1">Nova senha</label>
+              <input type="password" id="new_password1" name="new_password1" autocomplete="new-password" class="form-control form-control-lg" required placeholder="Nova senha">
             </div>
             <div class="mb-3">
-              <label class="form-label">Confirmar nova senha</label>
-              <input type="password" name="new_password2" autocomplete="new-password" class="form-control form-control-lg" required placeholder="Repita a senha">
+              <label class="form-label" for="new_password2">Confirmar nova senha</label>
+              <input type="password" id="new_password2" name="new_password2" autocomplete="new-password" class="form-control form-control-lg" required placeholder="Repita a senha">
             </div>
             {% if form.errors %}
               <div class="alert alert-warning small" role="alert">

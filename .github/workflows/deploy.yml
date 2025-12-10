@@ -13,6 +13,7 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: root
+          MYSQL_ROOT_HOST: "%"
           MYSQL_DATABASE: rotacric
           MYSQL_USER: rotacric
           MYSQL_PASSWORD: rotacric
@@ -61,8 +62,8 @@ jobs:
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
           DB_NAME: rotacric
-          DB_USER: rotacric
-          DB_PASSWORD: rotacric
+          DB_USER: root
+          DB_PASSWORD: root
           DB_ROOT_PASSWORD: root
         run: pytest -v
 

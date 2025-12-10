@@ -37,5 +37,9 @@ certifi==2025.8.3
 urllib3==2.5.0
 asgiref==3.9.1
 
+# Tests
+pytest==9.0.1
+pytest-django==4.11.1
+
 # Production / Deployment
 gunicorn==23.0.0

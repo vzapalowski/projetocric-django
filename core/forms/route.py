@@ -29,11 +29,21 @@ class RouteForm(forms.ModelForm):
         if not polyline:
             raise forms.ValidationError("A rota existe no Strava, mas não foi possível encontrar polyline")
 
-        # atribui no cleaned_data
         cleaned["polyline"] = polyline
         cleaned["distance"] = data.get("distance")
 
-        # guarda para usar no save_model
         self._strava_details = data
 
         return cleaned
+    
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+
+        if hasattr(self, "_strava_details"):
+            instance.polyline = self._strava_details.get("polyline")
+            instance.distance = str(self._strava_details.get("distance"))
+
+        if commit:
+            instance.save()
+
+        return instance

@@ -5,22 +5,22 @@ from api.serializers import AnchorpointSerializer
 
 class CitySerializer(serializers.ModelSerializer):
     route = RouteSerializer(many=True, read_only=True)
-    anchorpoint = AnchorpointSerializer(many=True)
-    
+    anchorpoints = AnchorpointSerializer(many=True, read_only=True)
+
     coordinates = serializers.SerializerMethodField()
-    
+
     class Meta:
         model = City
         fields = (
-            'id', 
-            'name', 
-            'banner_image', 
-            'coordinates', 
-            'zoom', 
+            'id',
+            'name',
+            'banner_image',
+            'coordinates',
+            'zoom',
             'active',
             'visible',
             'route',
-            'anchorpoints' 
+            'anchorpoints',
         )
 
     def get_coordinates(self, obj):

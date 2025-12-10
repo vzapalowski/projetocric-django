@@ -10,6 +10,7 @@ from jinja2 import Environment, FileSystemLoader
 from django.urls import reverse
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+import re
 
 import ssl
 import smtplib
@@ -17,7 +18,10 @@ import jinja2
 import pdfkit
 import tempfile
 import os
+import sys
+import shutil
 import datetime
+from django.conf import settings
 
 from event.credentials import *
 from django.views.generic.detail import DetailView
@@ -27,19 +31,67 @@ class EventView(DetailView):
     model = Event
     template_name = 'events/index.html'
 
+    def find_option_model(self, code_name):
+
+        MODELS = [EventBond, EventHowknew]
+
+        for model in MODELS:
+            if model.objects.filter(code_name=code_name).exists():
+                return model
+
+        return None
+
+
+    def resolve_display_name(code_name):
+
+        MODELS = [EventBond, EventHowknew]
+
+        for model in MODELS:
+            item = model.objects.filter(code_name=code_name).first()
+            if item:
+                return item.name 
+
+        return code_name 
+
+        
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         event = self.object
         
-        # Obter campos do formulário dinâmico se existir
         form_fields = []
         if event.form:
             form_fields = event.form.fields.all().order_by('order')
-            # Pré-processar opções para selects
+
             for field in form_fields:
-                if field.type == 'select' and field.options:
-                    # Dividir as opções por vírgula e limpar espaços
-                    field.options_list = [opt.strip() for opt in field.options.split(',') if opt.strip()]
+
+                if field.type == "select":
+
+                    raw_list = [opt.strip() for opt in re.split(r'[;,]', field.options) if opt.strip()] if field.options else []
+
+                    field.options_list = []
+
+                    for opt in raw_list:
+
+                        model_class = self.find_option_model(opt)
+
+                        if model_class:
+                            try:
+                                item = model_class.objects.get(code_name=opt)
+                                field.options_list.append({
+                                    "value": item.code_name,
+                                    "label": item.name
+                                })
+                            except model_class.DoesNotExist:
+                                field.options_list.append({
+                                    "value": opt,
+                                    "label": opt
+                                })
+                        else:
+                            field.options_list.append({
+                                "value": opt,
+                                "label": opt
+                            })
+
         
         context['form_fields'] = form_fields
         context['bond'] = EventBond.objects.all()
@@ -47,6 +99,7 @@ class EventView(DetailView):
         context['events'] = Event.objects.all()
         context['event_routes'] = EventRoute.objects.filter(event=event, active=True)
         context['warnings'] = Warning.objects.filter(event=event)
+        context['user_is_subscribed'] = event.participants.filter(id=self.request.user.id).exists() if self.request.user.is_authenticated else False
         
         return context
 
@@ -119,7 +172,6 @@ def enrollment(request, event_id):
     # Se não for POST, redireciona para a página do evento
     return redirect('events:event', pk=event_id)
 
-
 def enrollment_success(request):
     enrollment_id = request.GET.get('enrollment_id')
     if not enrollment_id:
@@ -135,11 +187,18 @@ def enrollment_success(request):
 
 def delete_enrollment(request, enrollment_id):
     enrollment = get_object_or_404(Enrollment, id=enrollment_id)
+
     if request.user == enrollment.user or request.user.is_staff:
+
+        if hasattr(enrollment.event, "participants"):
+            enrollment.event.participants.remove(request.user)
+
         enrollment.delete()
+
         messages.success(request, 'Inscrição cancelada com sucesso!')
     else:
         messages.error(request, 'Você não tem permissão para cancelar esta inscrição.')
+
     return redirect('users:profile')
 
 # def enrollment2(request, event_id):
@@ -324,85 +383,104 @@ def download_pdf(request, event_id):
 #         smtp.login(email_sender, email_password)
 #         smtp.sendmail(email_sender, email_receiver, em.as_string())
 
-# def generate_certificate(name, event):
-#     options = {
-#         'page-size': 'A4',
-#         'margin-top': '0',
-#         'margin-right': '0',
-#         'margin-bottom': '0',
-#         'margin-left': '0',
-#         'encoding': "UTF-8",
-#         'no-outline': None,
-#         'enable-local-file-access': True,
-#         'allow': ['images'],
-#         'user-style-sheet': 'http://rota-cric.charqueadas.ifsul.edu.br/static/event/style-certificate.css'
-#     }
+def generate_certificate(name, event):
+    options = {
+        'page-size': 'A4',
+        'orientation': 'Landscape',
+        'margin-top': '0.75in',
+        'margin-right': '0.75in',
+        'margin-bottom': '0.75in',
+        'margin-left': '0.75in',
+        'encoding': "UTF-8",
+        'no-outline': None,
+        'enable-local-file-access': True,
+        'allow': ['images'],
+    }
 
-#     # locale.setlocale(locale.LC_TIME, 'pt_PT.utf8')
-#     current_date = datetime.date.today()
-#     formatted_date = current_date.strftime('%d/%m/%Y')
+    # locale.setlocale(locale.LC_TIME, 'pt_PT.utf8')
+    current_date = datetime.date.today()
+    formatted_date = current_date.strftime('%d/%m/%Y')
 
-#     context = {'name': name, 'event': event.name, 'date': formatted_date} 
+    context = {'name': name, 'event': event.name, 'date': formatted_date}
 
-#     temp_dir = tempfile.mkdtemp()
-#     output_pdf = os.path.join(temp_dir, 'certificate.pdf')
+    temp_dir = tempfile.mkdtemp()
+    output_pdf = os.path.join(temp_dir, 'certificate.pdf')
 
-#     template_loader = jinja2.FileSystemLoader('.')
-#     template_env = jinja2.Environment(loader=template_loader)
-#     html_template = 'templates/events/certificate.html'
-#     template = template_env.get_template(html_template)
-#     output_text = template.render(context)
+    template_loader = jinja2.FileSystemLoader('.')
+    template_env = jinja2.Environment(loader=template_loader)
+    html_template = 'templates/events/certificate.html'
+    template = template_env.get_template(html_template)
+    output_text = template.render(context)
 
-#     config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
-#     pdfkit.from_string(output_text, output_pdf, configuration=config, options=options)
+    # Discover wkhtmltopdf executable:
+    # 1) Use WKHTMLTOPDF_CMD env var if provided
+    # 2) Fallback to PATH lookup via shutil.which
+    # 3) On Unix-like systems, try the common /usr/bin/wkhtmltopdf
+    # Prefer configuration from Django settings (loaded from .env via decouple)
+    wkhtmltopdf_cmd = getattr(settings, 'WKHTMLTOPDF_CMD', None) or shutil.which('wkhtmltopdf')
 
-#     with open(output_pdf, 'rb') as pdf_file:
-#         pdf_content = pdf_file.read()
+    if not wkhtmltopdf_cmd:
+        default_unix = '/usr/bin/wkhtmltopdf'
+        if os.path.exists(default_unix):
+            wkhtmltopdf_cmd = default_unix
 
-#     os.remove(output_pdf)
-#     os.rmdir(temp_dir)
+    if not wkhtmltopdf_cmd:
+        raise OSError(
+            "wkhtmltopdf executable not found. Configure WKHTMLTOPDF_CMD in settings/.env or add it to PATH."
+        )
 
-#     return pdf_content
+    config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_cmd)
+    try:
+        pdfkit.from_string(output_text, output_pdf, configuration=config, options=options)
+    except OSError as e:
+        raise OSError(f"Failed to run wkhtmltopdf at {wkhtmltopdf_cmd}: {e}")
 
-# def get_certificate(request, enrollment_id):
-#     enrollment = get_object_or_404(EnrollmentType2, id=enrollment_id)
+    with open(output_pdf, 'rb') as pdf_file:
+        pdf_content = pdf_file.read()
 
-#     certificate_content = generate_certificate(enrollment.full_name, enrollment.event)
+    os.remove(output_pdf)
+    os.rmdir(temp_dir)
 
-#     response = HttpResponse(content_type='application/pdf')
-#     response['Content-Disposition'] = f'attachment; filename="certificate_{enrollment.user.username}.pdf"'
-#     response.write(certificate_content)
+    return pdf_content
 
-#     return response
+def get_certificate(request, enrollment_id):
+    enrollment = get_object_or_404(Enrollment, id=enrollment_id)
 
-# def delete_enrollment(request, enrollment_id):
-#     enrollment = Enrollment.objects.get(id=enrollment_id)
-#     if request.user == enrollment.user:
-#         enrollment.delete()
-#         return redirect('users:profile')
-#     else:
-#         return redirect('users:profile')
+    event = enrollment.event
 
-# def delete_enrollment_type2(request, enrollment_id):
-#     enrollment = EnrollmentType2.objects.get(id=enrollment_id)
-#     if request.user == enrollment.user:
-#         enrollment.delete()
-#         return redirect('users:profile')
-#     else:
-#         return redirect('users:profile')
-    
-# def delete_enrollment_type3(request, enrollment_id):
-#     enrollment = enrollment3PasseioIfsulForm.objects.get(id=enrollment_id)
-#     if request.user == enrollment.user:
-#         enrollment.delete()
-#         return redirect('users:profile')
-#     else:
-#         return redirect('users:profile')
-    
-# def delete_enrollment_type4(request, enrollment_id):
-    # enrollment = enrollment4PasseioIfsulForm.objects.get(id=enrollment_id)
-    # if request.user == enrollment.user:
-    #     enrollment.delete()
-    #     return redirect('users:profile')
-    # else:
-    #     return redirect('users:profile')
+    user_is_participant = (
+        request.user.is_authenticated
+        and event.participants.filter(id=request.user.id).exists()
+    )
+
+    if user_is_participant:
+        user_name = request.user.get_full_name() or request.user.first_name or request.user.username
+        certificate_content = generate_certificate(user_name, event)
+        filename = f'Certificado De Participação de Evento - RotaCRIC - {user_name}.pdf'
+
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="{filename}"'
+        response.write(certificate_content)
+
+        return response
+
+
+def certificate_preview(request):
+    """DEBUG-only: render certificate HTML in browser without forcing download."""
+    if not settings.DEBUG:
+        return HttpResponse(status=404)
+
+    # Allow quick tweaks via query params during dev
+    name = request.GET.get('name') or 'Participante Teste'
+    event = request.GET.get('event') or 'Evento Exemplo'
+    date = request.GET.get('date') or datetime.date.today().strftime('%d/%m/%Y')
+    hours = request.GET.get('hours') or '4 horas'
+
+    context = {
+        'name': name,
+        'event': event,
+        'date': date,
+        'hours': hours,
+    }
+
+    return render(request, 'events/certificate.html', context)

@@ -2,16 +2,16 @@ from .models import Collaborators, URL
 
 def run():
     # Criação dos colaboradores
-    mateus = Collaborators.objects.create(picture='mateus.png', name='Mateus Peres', position='Front-End & UI Dev')
-    jeremias = Collaborators.objects.create(picture='jeremias.png', name='Jeremias Piontkoski', position='Back-End Dev & PMO')
-    vanius = Collaborators.objects.create(picture='vanius.png', name='Vanius Zapalowski', position='Orientador')
-    andre = Collaborators.objects.create(picture='del-mestre2.png', name='André del Mestre', position='Professor Adjunto')
-    rodrigo = Collaborators.objects.create(picture='rodrigo-baptista.png', name='Rodrigo Baptista', position='Apoiador do Projeto')
-    pedro_R = Collaborators.objects.create(picture='pedro.png', name='Pedro Rodrigues', position='Front-End Dev')
-    regis = Collaborators.objects.create(picture='regis.png', name='Regis Brasil', position='Front-End Dev')
-    marcelo = Collaborators.objects.create(picture='marcelo2.png', name='Marcelo Augusto', position='Back-End Dev')
-    pedro_A = Collaborators.objects.create(picture='pedro-ambrosini.png', name='Pedro Ambrosini', position='Front-End Dev')
-    gabriel = Collaborators.objects.create(picture='gabriel.png', name='Gabriel Umann', position='Front-End Dev')
+    mateus = Collaborators.objects.create(name='Mateus Peres', position='Front-End & UI Dev')
+    jeremias = Collaborators.objects.create(name='Jeremias Piontkoski', position='Back-End Dev & PMO')
+    vanius = Collaborators.objects.create(name='Vanius Zapalowski', position='Orientador')
+    andre = Collaborators.objects.create(name='André del Mestre', position='Professor Adjunto')
+    rodrigo = Collaborators.objects.create(name='Rodrigo Baptista', position='Apoiador do Projeto')
+    pedro_R = Collaborators.objects.create(name='Pedro Rodrigues', position='Front-End Dev')
+    regis = Collaborators.objects.create(name='Regis Brasil', position='Front-End Dev')
+    marcelo = Collaborators.objects.create(name='Marcelo Augusto', position='Back-End Dev')
+    pedro_A = Collaborators.objects.create(name='Pedro Ambrosini', position='Front-End Dev')
+    gabriel = Collaborators.objects.create(name='Gabriel Umann', position='Front-End Dev')
 
     # URLs de cada colaborador
     URL.objects.create(collaborator=mateus, url='https://www.linkedin.com/in/mateuspereslopes/')

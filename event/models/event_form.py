@@ -10,3 +10,5 @@ class EventForm(models.Model):
     
     class Meta:
         db_table = 'event_form'
+        verbose_name = 'Formulário de Evento'
+        verbose_name_plural = 'Formulários de Eventos'

@@ -16,3 +16,5 @@ class EventRoute(models.Model):
     class Meta:
         db_table = 'event_route'
         unique_together = (('event', 'route'),)
+        verbose_name = 'Rota de Evento'
+        verbose_name_plural = 'Rotas de Eventos'

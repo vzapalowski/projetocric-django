@@ -9,3 +9,5 @@ class EventHowknew(models.Model):
 
     class Meta:
         db_table = 'event_howknew'
+        verbose_name = 'Como Ficou Sabendo'
+        verbose_name_plural = 'Como Ficou Sabendo'

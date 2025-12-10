@@ -11,3 +11,5 @@ class EventImage(models.Model):
 
     class Meta:
         db_table = 'event_image'
+        verbose_name = 'Imagem de Evento'
+        verbose_name_plural = 'Imagens de Eventos'

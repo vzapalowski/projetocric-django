@@ -12,6 +12,8 @@ class Collaborators(models.Model):
 
     class Meta:
         ordering = ['-is_current', 'name']
+        verbose_name = 'Colaborador'
+        verbose_name_plural = 'Colaboradores'
 
     def __str__(self):
         status = "(Atual)" if self.is_current else "(Antigo)"

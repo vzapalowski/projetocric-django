@@ -9,3 +9,5 @@ class EventBond(models.Model):
 
     class Meta:
         db_table = 'event_bond'
+        verbose_name = 'Vínculo'
+        verbose_name_plural = 'Vínculos'

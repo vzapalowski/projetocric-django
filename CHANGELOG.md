@@ -1,9 +1,9 @@
 # CHANGELOG.md
 
-All notable changes to this project will be documented in this file.
+Todas as mudanças notáveis no projeto vão ser documentadas nesse arquivo.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+O formato é baseado no [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+e este projeto adere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [v2.0.0] - Unreleased
 
@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fluxo de redefinição de senha (Forgot Password Feature)
 - Geração de Certificado Padronizado com melhoria no layout.
 - URL de preview do certificado em modo de desenvolvimento.
+- CRUD para entidade colaboradores (agora os participantes do projeto podem ser adicionados pelo Django Admin)
 
 ### Changed
 

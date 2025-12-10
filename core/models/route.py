@@ -24,3 +24,5 @@ class Route(models.Model):
     class Meta:
         db_table = 'route'
         ordering = ['name']
+        verbose_name = 'Rota'
+        verbose_name_plural = 'Rotas'

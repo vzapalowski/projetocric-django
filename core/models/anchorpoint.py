@@ -30,3 +30,5 @@ class Anchorpoint(models.Model):
 
     class Meta:
         db_table = 'anchorpoint'
+        verbose_name = 'Ponto de Apoio'
+        verbose_name_plural = 'Pontos de Apoio'

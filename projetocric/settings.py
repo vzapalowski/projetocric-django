@@ -120,12 +120,6 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER or 'no-reply@rotacric.local')
 
-# Email backend must be explicitly set via environment variable. No automatic fallback to console backend.
-print(f"\n[EMAIL CONFIG] Backend: {EMAIL_BACKEND}")
-print(f"[EMAIL CONFIG] Host: {EMAIL_HOST}")
-print(f"[EMAIL CONFIG] User: {EMAIL_HOST_USER}")
-print(f"[EMAIL CONFIG] From: {DEFAULT_FROM_EMAIL}\n")
-
 # Path to wkhtmltopdf executable. Set this in your .env when running on Windows
 # Example (Windows): WKHTMLTOPDF_CMD="C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe"
 # If empty, the app will fallback to looking for `wkhtmltopdf` on PATH or /usr/bin/wkhtmltopdf.

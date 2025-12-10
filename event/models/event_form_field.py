@@ -25,3 +25,5 @@ class EventFormField(models.Model):
 
     class Meta:
         db_table = 'event_form_field'
+        verbose_name = 'Campo de Formulário'
+        verbose_name_plural = 'Campos de Formulários'

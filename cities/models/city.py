@@ -21,3 +21,5 @@ class City(models.Model):
 
     class Meta:
         db_table = 'city'
+        verbose_name = 'Cidade'
+        verbose_name_plural = 'Cidades'

@@ -38,3 +38,5 @@ class Event(models.Model):
 
     class Meta:
         db_table = 'event'
+        verbose_name = 'Evento'
+        verbose_name_plural = 'Eventos'

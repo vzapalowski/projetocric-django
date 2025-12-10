@@ -18,3 +18,5 @@ class Enrollment(models.Model):
     class Meta:
         db_table = 'event_enrollment'
         unique_together = ('event', 'user')
+        verbose_name = 'Inscrição'
+        verbose_name_plural = 'Inscrições'

@@ -13,3 +13,5 @@ class EventFormResponse(models.Model):
 
     class Meta:
         db_table = 'event_form_response'
+        verbose_name = 'Resposta de Formulário'
+        verbose_name_plural = 'Respostas de Formulários'

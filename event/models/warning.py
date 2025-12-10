@@ -13,3 +13,5 @@ class Warning(models.Model):
     
     class Meta:
         db_table = 'event_warning'
+        verbose_name = 'Aviso'
+        verbose_name_plural = 'Avisos'

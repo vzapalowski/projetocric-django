@@ -98,7 +98,7 @@
     <div>
       {% if enrollments %}
       <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="topic-color mb-0"><i class="bi bi-calendar-check"></i> Minhas Inscrições</h3>
+        <h3 class="topic-color mb-0">Minhas Inscrições</h3>
 
         <div class="d-flex align-items-center gap-3">
           <div class="text-muted">{{ enrollments|length }} evento(s)</div>
@@ -139,6 +139,14 @@
                     <div class="position-absolute top-0 end-0 m-2">
                       <span class="badge bg-success" style="background-color: #273273 !important;">Inscrito</span>
                     </div>
+                    <button type="button"
+                      class="position-absolute top-0 start-0 m-2 btn btn-sm btn-danger d-flex align-items-center justify-content-center"
+                      style="width: 32px; height: 32px; padding: 0; opacity: 0.85; border: none;"
+                      data-bs-toggle="modal"
+                      data-bs-target="#cancelModal{{ enrollment.id }}"
+                      title="Cancelar inscrição">
+                      <i class="bi bi-x-lg"></i>
+                    </button>
                   </div>
                   <div class="card-body d-flex flex-column" style="flex: 1; padding: 1.25rem;">
                     <h5 class="card-title topic-color fw-bold mb-2" style="font-size: 1.1rem;">
@@ -148,7 +156,7 @@
                       <div class="info-item mb-2 pb-2 border-bottom">
                         <p class="text-muted mb-1"
                           style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
-                          <i class="bi bi-geo-alt-fill" style="color: #273273;"></i> Local de Saída
+                          Local de Saída
                         </p>
                         <p class="mb-0" style="font-size: 0.95rem; color: #333;">
                           {{ enrollment.route.departure_location }}
@@ -157,7 +165,7 @@
                       <div class="info-item mb-2 pb-2 border-bottom">
                         <p class="text-muted mb-1"
                           style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
-                          <i class="bi bi-clock-fill" style="color: #273273;"></i> Início
+                          Início
                         </p>
                         <p class="mb-0" style="font-size: 0.95rem; color: #333;">
                           {{ enrollment.route.concentration }}
@@ -166,23 +174,23 @@
                       <div class="info-item">
                         <p class="text-muted mb-1"
                           style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
-                          <i class="bi bi-person-fill" style="color: #273273;"></i> Inscrição sob nome de
+                          Inscrição sob nome de
                         </p>
                         <p class="mb-0" style="font-size: 0.95rem; color: #333;">
                           {{ user.first_name }} {{ user.last_name }}
                         </p>
                       </div>
                     </div>
-                    <div class="d-grid gap-1 mt-2">
-                      <a href="{% url 'events:event' pk=enrollment.event.id %}" class="btn btn-outline-primary fw-600"
+                    <div class="mt-2">
+                      <a href="{% url 'events:event' pk=enrollment.event.id %}" class="btn btn-outline-primary fw-600 w-100 mb-2"
                         style="border-color: #273273; color: #273273; font-weight: 600; font-size: 0.9rem; padding: 0.6rem 1rem;">
                         <i class="bi bi-arrow-right"></i> Acompanhar Evento
                       </a>
-                      <a href="{% url 'events:delete_enrollment' enrollment_id=enrollment.id %}"
-                        class="btn btn-outline-danger fw-600"
-                        style="font-weight: 600; font-size: 0.9rem; padding: 0.6rem 1rem;"
-                        onclick="return confirm('Deseja realmente cancelar sua inscrição?');">
-                        <i class="bi bi-trash"></i> Cancelar Inscrição
+
+                      <a href="{% url 'events:get_certificate' enrollment_id=enrollment.id %}"
+                        class="btn btn-success fw-600 w-100"
+                        style="font-weight: 600; font-size: 0.9rem; padding: 0.6rem 1rem;">
+                        <i class="bi bi-download"></i> Emitir Certificado
                       </a>
                     </div>
                   </div>
@@ -217,6 +225,39 @@
     </div>
   </div>
 </section>
+
+<!-- Modal de confirmação de cancelamento -->
+{% for enrollment in enrollments %}
+<div class="modal fade" id="cancelModal{{ enrollment.id }}" tabindex="-1" aria-labelledby="cancelModalLabel{{ enrollment.id }}" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold" id="cancelModalLabel{{ enrollment.id }}">
+          <i class="bi bi-exclamation-triangle-fill text-warning"></i> Confirmar Cancelamento
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-2">Tem certeza que deseja cancelar sua inscrição no evento <strong>{{ enrollment.event.name }}</strong>?</p>
+        <div class="alert alert-warning d-flex align-items-start" role="alert">
+          <i class="bi bi-info-circle-fill me-2 mt-1"></i>
+          <div>
+            <strong>Atenção:</strong> Sua inscrição será cancelada permanentemente. Caso mude de ideia, será necessário realizar uma nova inscrição no evento.
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <i class="bi bi-arrow-left"></i> Voltar
+        </button>
+        <a href="{% url 'events:delete_enrollment' enrollment_id=enrollment.id %}" class="btn btn-danger">
+          <i class="bi bi-trash"></i> Sim, cancelar inscrição
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
 
 <script src="{% static 'js/users/profile.js' %}" async></script>
 

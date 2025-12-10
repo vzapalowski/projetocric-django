@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - CI/CD Tests
+- Fluxo de redefinição de senha (Forgot Password Feature)
+- Geração de Certificado Padronizado com melhoria no layout.
+- URL de preview do certificado em modo de desenvolvimento.
 
 ### Changed
 
@@ -19,6 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refatoração do módulo administrativo.  
 - Criação de eventos com rotas dedicadas. 
 - Módulo de inscrição e subscrição de eventos.  
+- Melhora no layout da visualização de eventos participados no perfil.
+- Melhora dos cards de eventos participados no perfil com botao de gerar certificado funcional e toast para confirmação de exclusão de inscrição em evento.
 
 ### Fixed
 

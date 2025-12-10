@@ -15,5 +15,6 @@ urlpatterns = [
     # path('<int:enrollment_id>/delete_enrollment_type2/', views.delete_enrollment_type2, name='delete_enrollment_type2'),
     # path('<int:enrollment_id>/delete_enrollment_type3/', views.delete_enrollment_type3, name='delete_enrollment_type3'),
     # path('<int:enrollment_id>/delete_enrollment_type4/', views.delete_enrollment_type4, name='delete_enrollment_type4'),
-    path('<int:enrollment_id>/get_certificate/', views.get_certificate, name='get_certificate')
+    path('<int:enrollment_id>/get_certificate/', views.get_certificate, name='get_certificate'),
+    path('dev/certificate-preview/', views.certificate_preview, name='certificate_preview'),
 ]

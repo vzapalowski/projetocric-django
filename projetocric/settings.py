@@ -123,6 +123,11 @@ print(f"[EMAIL CONFIG] Host: {EMAIL_HOST}")
 print(f"[EMAIL CONFIG] User: {EMAIL_HOST_USER}")
 print(f"[EMAIL CONFIG] From: {DEFAULT_FROM_EMAIL}\n")
 
+# Path to wkhtmltopdf executable. Set this in your .env when running on Windows
+# Example (Windows): WKHTMLTOPDF_CMD="C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe"
+# If empty, the app will fallback to looking for `wkhtmltopdf` on PATH or /usr/bin/wkhtmltopdf.
+WKHTMLTOPDF_CMD = config('WKHTMLTOPDF_CMD', default='')
+
 # Internationalization
 LANGUAGE_CODE = 'pt-BR'
 TIME_ZONE = 'America/Sao_Paulo'

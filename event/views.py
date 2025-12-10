@@ -18,7 +18,10 @@ import jinja2
 import pdfkit
 import tempfile
 import os
+import sys
+import shutil
 import datetime
+from django.conf import settings
 
 from event.credentials import *
 from django.views.generic.detail import DetailView
@@ -383,22 +386,22 @@ def download_pdf(request, event_id):
 def generate_certificate(name, event):
     options = {
         'page-size': 'A4',
-        'margin-top': '0',
-        'margin-right': '0',
-        'margin-bottom': '0',
-        'margin-left': '0',
+        'orientation': 'Landscape',
+        'margin-top': '0.75in',
+        'margin-right': '0.75in',
+        'margin-bottom': '0.75in',
+        'margin-left': '0.75in',
         'encoding': "UTF-8",
         'no-outline': None,
         'enable-local-file-access': True,
         'allow': ['images'],
-        'user-style-sheet': 'http://rota-cric.charqueadas.ifsul.edu.br/static/event/style-certificate.css'
     }
 
     # locale.setlocale(locale.LC_TIME, 'pt_PT.utf8')
     current_date = datetime.date.today()
     formatted_date = current_date.strftime('%d/%m/%Y')
 
-    context = {'name': name, 'event': event.name, 'date': formatted_date} 
+    context = {'name': name, 'event': event.name, 'date': formatted_date}
 
     temp_dir = tempfile.mkdtemp()
     output_pdf = os.path.join(temp_dir, 'certificate.pdf')
@@ -409,8 +412,28 @@ def generate_certificate(name, event):
     template = template_env.get_template(html_template)
     output_text = template.render(context)
 
-    config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
-    pdfkit.from_string(output_text, output_pdf, configuration=config, options=options)
+    # Discover wkhtmltopdf executable:
+    # 1) Use WKHTMLTOPDF_CMD env var if provided
+    # 2) Fallback to PATH lookup via shutil.which
+    # 3) On Unix-like systems, try the common /usr/bin/wkhtmltopdf
+    # Prefer configuration from Django settings (loaded from .env via decouple)
+    wkhtmltopdf_cmd = getattr(settings, 'WKHTMLTOPDF_CMD', None) or shutil.which('wkhtmltopdf')
+
+    if not wkhtmltopdf_cmd:
+        default_unix = '/usr/bin/wkhtmltopdf'
+        if os.path.exists(default_unix):
+            wkhtmltopdf_cmd = default_unix
+
+    if not wkhtmltopdf_cmd:
+        raise OSError(
+            "wkhtmltopdf executable not found. Configure WKHTMLTOPDF_CMD in settings/.env or add it to PATH."
+        )
+
+    config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_cmd)
+    try:
+        pdfkit.from_string(output_text, output_pdf, configuration=config, options=options)
+    except OSError as e:
+        raise OSError(f"Failed to run wkhtmltopdf at {wkhtmltopdf_cmd}: {e}")
 
     with open(output_pdf, 'rb') as pdf_file:
         pdf_content = pdf_file.read()
@@ -430,12 +453,34 @@ def get_certificate(request, enrollment_id):
         and event.participants.filter(id=request.user.id).exists()
     )
 
-    certificate_content = generate_certificate(user_is_participant, event)
+    if user_is_participant:
+        user_name = request.user.get_full_name() or request.user.first_name or request.user.username
+        certificate_content = generate_certificate(user_name, event)
+        filename = f'Certificado De Participação de Evento - RotaCRIC - {user_name}.pdf'
 
-    filename = f'certificate_{request.user.username}.pdf'
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="{filename}"'
+        response.write(certificate_content)
 
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="{filename}"'
-    response.write(certificate_content)
+        return response
 
-    return response
+
+def certificate_preview(request):
+    """DEBUG-only: render certificate HTML in browser without forcing download."""
+    if not settings.DEBUG:
+        return HttpResponse(status=404)
+
+    # Allow quick tweaks via query params during dev
+    name = request.GET.get('name') or 'Participante Teste'
+    event = request.GET.get('event') or 'Evento Exemplo'
+    date = request.GET.get('date') or datetime.date.today().strftime('%d/%m/%Y')
+    hours = request.GET.get('hours') or '4 horas'
+
+    context = {
+        'name': name,
+        'event': event,
+        'date': date,
+        'hours': hours,
+    }
+
+    return render(request, 'events/certificate.html', context)

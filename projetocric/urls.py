@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('cidades/', include('cities.urls')),
     path('eventos/', include('event.urls')),
+    path('events/', include('event.urls')),
     path('usuarios/', include('users.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('api.urls')),

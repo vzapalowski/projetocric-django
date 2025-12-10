@@ -41,7 +41,6 @@ div .bg-body-tertiary{
 }
 
 div nav div .m-nav{
-  margin-left: 7rem;
   transition: all 0.2s;
 }
 
@@ -151,6 +150,12 @@ div nav div form .fw-blue {
 
 .navbar {
     background-color:var(--neutral-white);
+}
+
+.navbar .logo {
+  margin: 1rem;
+  width: 70px;
+  height: 70px;
 }
 
 .logo-container:hover {

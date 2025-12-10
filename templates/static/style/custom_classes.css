@@ -1,10 +1,16 @@
-.btn-cric {
+input, button, a{
+  transition: .2s ease-out;
+}
+
+.btn-cric{
   background-color: #273273 !important;
   color: #fff !important;
   font-weight: 600;
   letter-spacing: 0.5px;
   transition: 100ms ease-in-out !important;
   border: 0;
+  text-decoration: none;
+  text-align: center;
 }
 
 .btn-cric:hover {
@@ -12,7 +18,6 @@
   box-shadow: 0 4px 12px rgba(39, 50, 115, 0.3);
 }
 
-/* ---------- Cores ---------- */
 .text-primary-color {
   color: #273273;
 }
@@ -38,6 +43,53 @@
   padding: 6px 12px;
   border-radius: 6px;
   margin-left: 16px;
+}
+
+#cric-side-bnt-exit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  color: #fff !important;
+  padding: 0.2rem 0 !important;
+  text-align: center;
+  background: #db3545;
+}
+
+.btn-cric-submit-lg{
+  border-radius: 0.5rem;
+  cursor: pointer;
+  padding: 0 .5rem;
+  width: 100%;
+  font-size: 1.25rem;
+  padding: 8px 12px;
+  margin-top: 1.5rem;
+  font-weight: normal;
+}
+
+/* ---------- Inputs ---------- */
+
+.cric-input-lg{
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgb(222, 226, 230);
+  width: 100%;
+}
+
+.cric-input-lg:hover{
+  background-color: hsl(220, 100%, 94%);
+}
+
+
+.cric-input-lg:hover{
+  background-color: rgb(218, 222, 226);
+}
+
+.cric-input-lg:focus{
+  box-shadow: none !important;
+  outline: none;
+  border-color: #273273;
 }
 
 /* ---------- Side Menu ---------- */
@@ -87,41 +139,8 @@
   padding: 0px !important;
 }
 
-/* ---------- Buttons ---------- */
+/* ---------- img footer ---------- */
 
-#cric-side-bnt-exit{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1rem;
-  color: #fff !important;
-  padding: 0.2rem 0 !important;
-  text-align: center;
-  background: #db3545;
-}
-
-.btn-cric-submit-lg{
-  border-radius: 0.5rem;
-  cursor: pointer;
-  padding: 0 .5rem;
-  width: 100%;
-  font-size: 1.25rem;
-  padding: 8px 12px;
-  margin-top: 1.5rem;
-  font-weight: normal;
-}
-
-/* ---------- Inputs ---------- */
-
-.cric-input-lg{
-  padding: 1rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid rgb(222, 226, 230);
-  width: 100%;
-}
-
-.cric-input-lg:focus{
-  box-shadow: none !important;
-  outline: none;
+.img-cric{
+  height: 196px !important;
 }

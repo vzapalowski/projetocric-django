@@ -13,6 +13,7 @@ urlpatterns = [
     path('usuarios/', include('users.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('api.urls')),
+    path('devs/', include('collaborators.urls')),
 
     path('reset_password/', user_views.PasswordReset.as_view(), name='reset_password'),
     path('reset_password_sent/', user_views.PasswordResetDone.as_view(), name='password_reset_done'),

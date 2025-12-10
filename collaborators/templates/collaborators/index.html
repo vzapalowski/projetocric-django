@@ -17,7 +17,7 @@
             {% if forloop.first %}<div class="row row-cols-1 row-cols-md-3 g-4">{% endif %}
             <div class="col">
                 <div class="card text-center">
-                    <img src="{% static "images/devs/img/" %}{{c.picture}}" class="card-img-top rounded-circle card-img-circle mx-auto mt-3" alt="{{ c.name }}">
+                    <img src="{{c.picture.url}}" class="card-img-top rounded-circle card-img-circle mx-auto mt-3" alt="{{ c.name }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ c.name }}</h5>
                         <p class="card-text">{{ c.position }}</p>

@@ -102,3 +102,11 @@ body{
   background-color: var(--primary-color);
   transition: 0.5s;
 }
+
+.img-fluid{
+  height: 70px !important;
+}
+
+.link-fluid{
+  margin-left: 7rem;
+}

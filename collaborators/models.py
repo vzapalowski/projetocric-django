@@ -5,7 +5,7 @@ from django.dispatch import receiver
 
 # faz uma table dos colabs
 class Collaborators(models.Model):
-    picture = models.CharField(max_length=255)
+    picture = models.ImageField(upload_to='Collaborators/')
     name = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
 

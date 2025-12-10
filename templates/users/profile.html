@@ -97,50 +97,104 @@
 
     <div>
       {% if enrollments %}
-      <h3 class="topic-color text-center mt-5">Inscrições</h3>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="topic-color mb-0"><i class="bi bi-calendar-check"></i> Minhas Inscrições</h3>
 
-      <div class="row">
-        {% for enrollment in enrollments %}
-        <div class="col-md-6 mt-3">
-          <div class="card mb-4 mb-md-0">
-            <div class="card-body">
-              <p class="mb-2 topic-color fs-5">{{ enrollment.event.name }}</p>
-
-              {% if enrollment.event.banner_image %}
-              <img src="{{ enrollment.event.banner_image.url }}" class="post-user w-100" alt="Banner do Evento">
-              {% else %}
-              <img src="{% static 'images/images-cities/charqueadas-trevo.jpeg' %}" class="post-user w-100"
-                alt="Imagem padrão">
-              {% endif %}
-
-              <p class="mt-3 mb-1 fs-6">
-                <span class="fw-bolder">Local:</span> {{ enrollment.route.departure_location }}
-              </p>
-
-              <p class="mt-3 mb-1 fs-6">
-                <span class="fw-bolder">Início do Evento:</span> {{ enrollment.route.concentration }}
-              </p>
-
-              <p class="mt-3 mb-1 fs-6">
-                <span class="fw-bolder">Nome do inscrito:</span> {{ user.first_name }}
-              </p>
-
-              <a href="{% url 'events:event' pk=enrollment.event.id %}" class="btn btn-outline-secondary w-100">
-                Acompanhar Evento
-              </a>
-
-              <a href="{% url 'events:get_certificate' enrollment_id=enrollment.id %}" type="button"
-                class="btn btn-outline-secondary w-100 mt-1">Gerar Certificado</a>
-
-
-              <a href="{% url 'events:delete_enrollment' enrollment_id=enrollment.id %}"
-                class="btn btn-outline-secondary w-100 mt-1">
-                Cancelar Inscrição
-              </a>
-            </div>
+        <div class="d-flex align-items-center gap-3">
+          <div class="text-muted">{{ enrollments|length }} evento(s)</div>
+          <div>
+            <button class="btn btn-sm btn-outline-secondary me-1" type="button" data-bs-target="#enrollmentsCarousel"
+              data-bs-slide="prev" aria-label="Anterior">
+              <i class="bi bi-chevron-left"></i>
+              Voltar
+            </button>
+            <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-target="#enrollmentsCarousel"
+              data-bs-slide="next" aria-label="Próximo">
+              <i class="bi bi-chevron-right"></i>
+              Próximo
+            </button>
           </div>
         </div>
-        {% endfor %}
+      </div>
+
+      <div id="enrollmentsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          {% for enrollment in enrollments %}
+          {% if forloop.first or forloop.counter0|divisibleby:2 %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <div class="row g-4 justify-content-left">
+              {% endif %}
+
+              <div class="col-md-6">
+                <div class="card enrollment-card h-100 shadow-sm border-0 overflow-hidden"
+                  style="transition: transform 0.2s, box-shadow 0.2s;">
+                  <div class="position-relative" style="height: 150px; overflow: hidden;">
+                    {% if enrollment.event.banner_image %}
+                    <img src="{{ enrollment.event.banner_image.url }}" class="w-100 h-100 object-fit-cover"
+                      alt="Banner do Evento" style="object-fit: cover;">
+                    {% else %}
+                    <img src="{% static 'images/images-cities/charqueadas-trevo.jpeg' %}"
+                      class="w-100 h-100 object-fit-cover" alt="Imagem padrão" style="object-fit: cover;">
+                    {% endif %}
+                    <div class="position-absolute top-0 end-0 m-2">
+                      <span class="badge bg-success" style="background-color: #273273 !important;">Inscrito</span>
+                    </div>
+                  </div>
+                  <div class="card-body d-flex flex-column" style="flex: 1; padding: 1.25rem;">
+                    <h5 class="card-title topic-color fw-bold mb-2" style="font-size: 1.1rem;">
+                      {{ enrollment.event.name }}
+                    </h5>
+                    <div class="enrollment-info mb-2" style="flex: 1;">
+                      <div class="info-item mb-2 pb-2 border-bottom">
+                        <p class="text-muted mb-1"
+                          style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                          <i class="bi bi-geo-alt-fill" style="color: #273273;"></i> Local de Saída
+                        </p>
+                        <p class="mb-0" style="font-size: 0.95rem; color: #333;">
+                          {{ enrollment.route.departure_location }}
+                        </p>
+                      </div>
+                      <div class="info-item mb-2 pb-2 border-bottom">
+                        <p class="text-muted mb-1"
+                          style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                          <i class="bi bi-clock-fill" style="color: #273273;"></i> Início
+                        </p>
+                        <p class="mb-0" style="font-size: 0.95rem; color: #333;">
+                          {{ enrollment.route.concentration }}
+                        </p>
+                      </div>
+                      <div class="info-item">
+                        <p class="text-muted mb-1"
+                          style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                          <i class="bi bi-person-fill" style="color: #273273;"></i> Inscrição sob nome de
+                        </p>
+                        <p class="mb-0" style="font-size: 0.95rem; color: #333;">
+                          {{ user.first_name }} {{ user.last_name }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="d-grid gap-1 mt-2">
+                      <a href="{% url 'events:event' pk=enrollment.event.id %}" class="btn btn-outline-primary fw-600"
+                        style="border-color: #273273; color: #273273; font-weight: 600; font-size: 0.9rem; padding: 0.6rem 1rem;">
+                        <i class="bi bi-arrow-right"></i> Acompanhar Evento
+                      </a>
+                      <a href="{% url 'events:delete_enrollment' enrollment_id=enrollment.id %}"
+                        class="btn btn-outline-danger fw-600"
+                        style="font-weight: 600; font-size: 0.9rem; padding: 0.6rem 1rem;"
+                        onclick="return confirm('Deseja realmente cancelar sua inscrição?');">
+                        <i class="bi bi-trash"></i> Cancelar Inscrição
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {% if forloop.counter|divisibleby:2 or forloop.last %}
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
       </div>
 
       {% else %}
@@ -158,7 +212,6 @@
         </a>
 
       </div>
-
 
       {% endif %}
     </div>

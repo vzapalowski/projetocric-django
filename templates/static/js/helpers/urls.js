@@ -1,5 +1,5 @@
 export const getEnvironmentURL = (path = "") => {
-    return "http://" + window.location.host + "/" + path;
+    return `${window.location.protocol}//${window.location.host }/${path}`;
 }
 
 export const Urls = {

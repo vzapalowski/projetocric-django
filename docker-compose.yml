@@ -27,7 +27,7 @@ services:
       - rotacric
 
   db:
-    image: mysql:lts
+    image: mysql:8.0
     container_name: database
     restart: always
     volumes:

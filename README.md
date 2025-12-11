@@ -9,7 +9,7 @@
 ---
 
 ## 📌 Versão do Projeto
-**Versão:** 1.1
+**Versão:** 2.0.0
 
 ---
 

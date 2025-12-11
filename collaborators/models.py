@@ -5,7 +5,7 @@ from django.dispatch import receiver
 
 # faz uma table dos colabs
 class Collaborators(models.Model):
-    picture = models.ImageField(upload_to='Collaborators/')
+    picture = models.ImageField(upload_to='Collaborators/', blank=True, null=True)
     name = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     is_current = models.BooleanField(default=True, verbose_name='Membro atual do projeto')

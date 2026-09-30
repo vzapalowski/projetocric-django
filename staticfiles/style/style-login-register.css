@@ -1,0 +1,116 @@
+/* ---------- Background ---------- */
+.bg-padrao {
+  background-color: #E1EBFF;
+}
+
+/* ---------- Botões ---------- */
+.btn-return {
+  padding: 1rem !important;
+}
+
+.left-panel {
+    position: relative;
+    background: url(../images/top-page/img-top-page-2.jpg) right no-repeat;
+    background-position: 80% 0%;
+    background-size: cover;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.left-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 1;
+}
+
+.left-panel > * {
+    position: relative;
+    z-index: 2;
+}
+
+.left-panel h2 {
+    font-weight: bold;
+}
+
+.left-panel p {
+    margin: 15px 0;
+}
+
+.left-panel .btn {
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border: none;
+}
+
+/* ---------- Painel direito ---------- */
+.right-panel {
+    background: #E1EBFF;
+    padding: 5rem;
+}
+
+@media (max-width: 1390px) {
+  .right-panel .img-fluid {
+    margin: 0 0 20% 0;
+  }
+}
+
+/* ---------- Botões sociais ---------- */
+.social-btn {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.social-btn svg {
+  width: 22px;
+  height: 22px;
+  fill: #fff;
+}
+
+.social-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+/* ---------- Inputs ---------- */
+#frm-login input, #frm-login button,
+#frm-register input, #frm-register button {
+  transition: 0.3s;
+  border-radius: 0.5rem !important;
+}
+
+#frm-login input:focus,
+#frm-register input:focus {
+  border-color: #273273;
+  box-shadow: 0 0 0 0.25rem rgba(39, 50, 115, 0.2);
+}
+
+/* ---------- Responsividade ---------- */
+@media (max-width: 768px) {
+  .left-panel {
+    display: none !important;
+  }
+
+  .left-panel::before {
+    display: none !important;
+  }
+
+  .right-panel {
+    flex: 1 1 100%;
+    max-width: 100%;
+    padding: 3rem;
+  }
+}

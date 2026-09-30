@@ -31,7 +31,8 @@ def test_home_data(api_client, auth_headers):
         latitude=-29.1,
         longitude=-51.2,
         anchorpoint_category=category,
-        image="img.jpg"
+        image="img.jpg",
+        active=True
     )
 
     response = api_client.get("/api/home_cities/", **auth_headers)

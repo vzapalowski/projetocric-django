@@ -32,4 +32,4 @@ RUN mkdir -p staticfiles media
 EXPOSE 8000
 
 # Comando final: coleta static e inicia Gunicorn
-CMD sh -c "python manage.py collectstatic --noinput && python manage.py migrate && gunicorn projetocric.wsgi:application --bind 0.0.0.0:8000"
+CMD sh -c "python manage.py collectstatic --noinput && python manage.py migrate --fake-initial && gunicorn projetocric.wsgi:application --bind 0.0.0.0:8000"
